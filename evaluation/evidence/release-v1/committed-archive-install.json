@@ -1,0 +1,18 @@
+{
+  "captured_at": "2026-10-28",
+  "source": "git archive of commit 5fe9296",
+  "source_workspace": "fresh temporary extraction",
+  "target_workspace": "fresh temporary git project",
+  "skills_cli": "1.7.4",
+  "commands": [
+    "npx --yes skills@1.7.4 add <archive-extraction> --list",
+    "npx --yes skills@1.7.4 add <archive-extraction> --agent codex --skill '*' --copy --yes",
+    "npx --yes skills@1.7.4 list --agent codex"
+  ],
+  "command_exit_codes": [0, 0, 0],
+  "skills_discovered": 7,
+  "skills_installed": 7,
+  "installed_files_checked_against_release_manifest": 86,
+  "hash_mismatches": [],
+  "isolation_limit": "Fresh source and target directories under the same macOS user profile; not a fresh OS account or container."
+}
