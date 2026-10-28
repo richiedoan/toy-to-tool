@@ -37,7 +37,7 @@ def prepare(destination, bootstrap=False):
         source.extractall(destination)
     # Explicit files only: no evaluator docs, hidden tests, run logs, or Git history.
     files = ['criteria/v1.json', 'schemas/catalog.schema.json', 'schemas/profile.schema.json',
-             'schemas/report.schema.json', 'scripts/audit.py', 'docs/method.md', 'requirements.txt',
+             'schemas/report.schema.json', 'scripts/audit.py', 'docs/method.md', 'docs/missing-access.md', 'docs/report-template.md', 'requirements.txt',
              '.agents/skills/functionality-data/SKILL.md',
              '.agents/skills/toy-to-tool-audit/references/missing-access.md']
     for name in files:

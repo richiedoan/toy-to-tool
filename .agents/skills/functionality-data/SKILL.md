@@ -5,7 +5,7 @@ description: Inspect and improve an application's real operations, persistence, 
 
 # Functionality & Data: Inspect → Improve → Recheck
 
-Use this repository's [evaluation method](../../../docs/method.md) and canonical [F01-F06 protocols](../../../criteria/v1.json). The engine root is three directories above this skill directory, independent of the target app directory. Keep conversation in the user's language and saved artifacts in English. This skill assesses only Functionality & Data; other groups are outside its claim.
+Use this repository's [evaluation method](../../../docs/method.md) and canonical [F01-F06 protocols](../../../criteria/v1.json). Use `references/engine` as the engine root when bundled; otherwise use the repository root three directories above this skill directory. Keep conversation in the user's language and saved artifacts in English. This skill assesses only Functionality & Data; other groups are outside its claim.
 
 Reuse known user goals and authority. Inspect project docs, code and existing tests first. Ask only questions changing expected behavior, applicability, user impact, access or permission. Record the three important tasks, actual successful outcomes, users/data, persistence boundaries and runtime. Missing business contracts remain unknown. Default to Essential and read-only recommendations unless existing instructions specify otherwise. Repeated-action checks begin at Standard; concurrency begins at Advanced. Do not silently omit a requested repetition/concurrency check because of a default level.
 
@@ -50,6 +50,8 @@ Validate both reports using the existing engine. Link every conclusion and prese
 
 ## Capability limits and evaluation hygiene
 
-If tools/access are missing, follow [the fallback guidance](../toy-to-tool-audit/references/missing-access.md). Continue independent checks and record the exact missing resource. Test execution failure is not automatically an app failure. Unit tests cannot establish browser persistence by themselves.
+If tools/access are missing, follow [the fallback guidance](../../../docs/missing-access.md). Continue independent checks and record the exact missing resource. Test execution failure is not automatically an app failure. Unit tests cannot establish browser persistence by themselves.
 
 When this skill is being evaluated, use only the supplied app requirements, allowed workspace and skill resources. Do not seek evaluator-only expected findings, hidden tests, prior before/after reports or reference fixes. Keep your own observations and change history. A manual walkthrough or one independent agent run can verify a workflow but does not establish that skills improve coding-agent effectiveness; that requires a separately designed comparison.
+
+For a separate installation, create artifacts in the target workspace and pass its absolute path as `--evidence-root` when validating reports. Use the bundled engine requirements with an available Python interpreter; no sibling skill is required.

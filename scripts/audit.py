@@ -120,7 +120,8 @@ def decide(evidence_sufficient, violates_requirement, authorized, measurable_ben
     return 'preserve'
 
 
-def validate_report(report, catalog):
+def validate_report(report, catalog, evidence_root=None):
+    evidence_root = Path(evidence_root).resolve() if evidence_root is not None else ROOT
     check_schema(report, 'report')
     selections = select(catalog, report['profile'], report['audit_level'], report.get('criterion_groups'))
     evidence_ids = unique(report['evidence'], 'evidence')
@@ -132,8 +133,8 @@ def validate_report(report, catalog):
             if location.scheme != 'https' or not location.netloc:
                 raise ValueError('Evidence remote locations must use HTTPS')
         else:
-            target = (ROOT / evidence['location']).resolve()
-            if ROOT not in target.parents or not target.is_file():
+            target = (evidence_root / evidence['location']).resolve()
+            if evidence_root not in target.parents or not target.is_file():
                 raise ValueError(f'Missing/unsafe local evidence: {evidence["id"]}')
     unique(report['findings'], 'finding')
     covered = set()
@@ -222,6 +223,7 @@ def main():
     parser.add_argument('--profile', type=Path, default=ROOT / 'examples/profile.json')
     parser.add_argument('--level', choices=LEVELS, default='Essential')
     parser.add_argument('--report', type=Path)
+    parser.add_argument('--evidence-root', type=Path, default=ROOT, help='Explicit allowed root for local report artifacts; defaults to the engine root.')
     parser.add_argument('--group', dest='groups', action='append', choices=list('FUASPO'),
                         help='Limit selection/template to this group; repeat for several groups.')
     args = parser.parse_args()
@@ -229,7 +231,7 @@ def main():
         catalog = validate_catalog(load(args.catalog))
         if args.command == 'validate':
             if args.report:
-                validate_report(load(args.report), catalog)
+                validate_report(load(args.report), catalog, evidence_root=args.evidence_root)
             print('Valid: 36 unique criteria; structure, levels and references checked.' +
                   (' Report structure, coverage and decisions checked.' if args.report else ''))
         else:
