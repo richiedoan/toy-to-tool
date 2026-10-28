@@ -1,0 +1,10 @@
+{
+  "archive_sha256": "ef052a1c36b91d52a53597a456351ad72f6b5a1b5920def64f73a001441c3c54",
+  "files": {
+    "README.md": "3b584a1596898d5fc272d18f4a28f8de76f3b11e2430cf36ac1240972599b175",
+    "app.js": "5a3f7bbf3118235dd392cc7825afdb66e44b2ad333799e3e9b75fd0ff1206da0",
+    "index.html": "616f7704e43569d5dda95ea9fdcd603e95b4dc4476869ec82ddb0edaba4b83ec",
+    "server.py": "b16174f16192c3f02b0167b50517448238bfb740aa9a3cb2ff75f8dd2b66b96b",
+    "style.css": "70af5abebb650c507b67807a6a5d16d61a32dad35157ed70d4075edb192fb501"
+  }
+}

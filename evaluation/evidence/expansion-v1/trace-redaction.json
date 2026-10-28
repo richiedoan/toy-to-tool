@@ -1,0 +1,106 @@
+[
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/after/desktop-approved.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/after/error-recovery.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/after/keyboard-focus-targets.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/after/layout-1440.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/after/layout-320.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/after/layout-390.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/after/layout-768.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/after/loading-empty-correction.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/after/local-filter-budget.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/after/repeat-refresh-resources.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/after/resize-text.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/after/text-contrast.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/before/desktop-approved.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/before/error-recovery.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/before/keyboard-focus-targets.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/before/layout-1440.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/before/layout-320.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/before/layout-390.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/before/layout-768.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/before/loading-empty-correction.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/before/local-filter-budget.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/before/repeat-refresh-resources.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/before/resize-text.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/dashboard/before/text-contrast.trace.zip",
+    "redacted_fields": 0
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/owner-notes/after/login-desktop-preserve.trace.zip",
+    "redacted_fields": 8
+  },
+  {
+    "artifact": "evaluation/evidence/expansion-v1/owner-notes/before/login-desktop-preserve.trace.zip",
+    "redacted_fields": 8
+  }
+]

@@ -1,0 +1,5 @@
+Fixed three defects: mobile layout constraints, failed-refresh data loss and blank feedback, and the deliberate 320ms filter delay.
+
+Saved read-only reports, hashes, patch, observations, and regression evidence in [audits/HANDOVER.md](/private/tmp/toy-dashboard-agent/audits/HANDOVER.md). Both reports passed shared validation; handler and source-preservation checks passed.
+
+Browser checks remain unexecuted: Chrome failed to launch, and sandbox restrictions blocked server binding. Layout, accessibility, and Chrome timing verification remain pending. Local timings are not field CWV. The protected README’s broken startup path is reported and unchanged.

@@ -1,0 +1,333 @@
+{
+  "captured_at": "2026-10-28T08:58:45.270Z",
+  "runtime": "v24.19.0",
+  "scope": "Real app.js executed in Node VM with minimal DOM and controlled fetch; no rendering, browser input-to-frame timing, keyboard, AT or leak proof.",
+  "initial": {
+    "status": "4 metrics shown.",
+    "disabled": false,
+    "rows": [
+      [
+        "Revenue",
+        "$24,500"
+      ],
+      [
+        "Orders",
+        "182"
+      ],
+      [
+        "Customers",
+        "96"
+      ],
+      [
+        "Conversion",
+        "4.2%"
+      ]
+    ]
+  },
+  "filters": [
+    {
+      "query": "REVen",
+      "status": "1 metrics shown.",
+      "disabled": false,
+      "rows": [
+        [
+          "Revenue",
+          "$24,500"
+        ]
+      ]
+    },
+    {
+      "query": "orders",
+      "status": "1 metrics shown.",
+      "disabled": false,
+      "rows": [
+        [
+          "Orders",
+          "182"
+        ]
+      ]
+    },
+    {
+      "query": "zzz",
+      "status": "No matching metrics. Clear the filter to see all metrics.",
+      "disabled": false,
+      "rows": []
+    },
+    {
+      "query": "",
+      "status": "4 metrics shown.",
+      "disabled": false,
+      "rows": [
+        [
+          "Revenue",
+          "$24,500"
+        ],
+        [
+          "Orders",
+          "182"
+        ],
+        [
+          "Customers",
+          "96"
+        ],
+        [
+          "Conversion",
+          "4.2%"
+        ]
+      ]
+    }
+  ],
+  "filterRequests": 0,
+  "synchronousHandlerSamplesMs": [
+    0.00591700000001083,
+    0.0029159999999990305,
+    0.0022499999999752163,
+    0.0010830000000225937,
+    0.0049999999999954525
+  ],
+  "timingLimit": "Five handler durations after warmup, diagnostic only. No requestAnimationFrame or Chrome; cannot establish README p95 budget.",
+  "faults": [
+    {
+      "fault": "503",
+      "status": "Unable to refresh metrics. Showing last successful data. Try Refresh data.",
+      "disabled": false,
+      "rows": [
+        [
+          "Revenue",
+          "$24,500"
+        ],
+        [
+          "Orders",
+          "182"
+        ],
+        [
+          "Customers",
+          "96"
+        ],
+        [
+          "Conversion",
+          "4.2%"
+        ]
+      ]
+    },
+    {
+      "fault": "retry",
+      "status": "4 metrics shown.",
+      "disabled": false,
+      "rows": [
+        [
+          "Revenue",
+          "$24,500"
+        ],
+        [
+          "Orders",
+          "182"
+        ],
+        [
+          "Customers",
+          "96"
+        ],
+        [
+          "Conversion",
+          "4.2%"
+        ]
+      ]
+    },
+    {
+      "fault": "offline",
+      "status": "Unable to refresh metrics. Showing last successful data. Try Refresh data.",
+      "disabled": false,
+      "rows": [
+        [
+          "Revenue",
+          "$24,500"
+        ],
+        [
+          "Orders",
+          "182"
+        ],
+        [
+          "Customers",
+          "96"
+        ],
+        [
+          "Conversion",
+          "4.2%"
+        ]
+      ]
+    },
+    {
+      "fault": "retry",
+      "status": "4 metrics shown.",
+      "disabled": false,
+      "rows": [
+        [
+          "Revenue",
+          "$24,500"
+        ],
+        [
+          "Orders",
+          "182"
+        ],
+        [
+          "Customers",
+          "96"
+        ],
+        [
+          "Conversion",
+          "4.2%"
+        ]
+      ]
+    }
+  ],
+  "loading": {
+    "status": "Loading…",
+    "disabled": true,
+    "rows": [
+      [
+        "Revenue",
+        "$24,500"
+      ],
+      [
+        "Orders",
+        "182"
+      ],
+      [
+        "Customers",
+        "96"
+      ],
+      [
+        "Conversion",
+        "4.2%"
+      ]
+    ]
+  },
+  "delayedSuccess": {
+    "status": "4 metrics shown.",
+    "disabled": false,
+    "rows": [
+      [
+        "Revenue",
+        "$24,500"
+      ],
+      [
+        "Orders",
+        "182"
+      ],
+      [
+        "Customers",
+        "96"
+      ],
+      [
+        "Conversion",
+        "4.2%"
+      ]
+    ]
+  },
+  "cycles": [
+    {
+      "n": 1,
+      "calls": 7,
+      "nodes": 4,
+      "listeners": {
+        "#status": {},
+        "#filter": {
+          "input": 1
+        },
+        "#refresh": {
+          "click": 1
+        },
+        "#metrics": {}
+      }
+    },
+    {
+      "n": 5,
+      "calls": 11,
+      "nodes": 4,
+      "listeners": {
+        "#status": {},
+        "#filter": {
+          "input": 1
+        },
+        "#refresh": {
+          "click": 1
+        },
+        "#metrics": {}
+      }
+    },
+    {
+      "n": 15,
+      "calls": 21,
+      "nodes": 4,
+      "listeners": {
+        "#status": {},
+        "#filter": {
+          "input": 1
+        },
+        "#refresh": {
+          "click": 1
+        },
+        "#metrics": {}
+      }
+    }
+  ],
+  "finalFailure": {
+    "status": "Unable to refresh metrics. Showing last successful data. Try Refresh data.",
+    "disabled": false,
+    "rows": []
+  },
+  "initialFailureComparison": [
+    {
+      "build": "before",
+      "failed": {
+        "status": "",
+        "disabled": false,
+        "rows": 0
+      },
+      "retryRows": [
+        [
+          "Revenue",
+          "$24,500"
+        ],
+        [
+          "Orders",
+          "182"
+        ],
+        [
+          "Customers",
+          "96"
+        ],
+        [
+          "Conversion",
+          "4.2%"
+        ]
+      ]
+    },
+    {
+      "build": "after",
+      "failed": {
+        "status": "Unable to refresh metrics. Try Refresh data.",
+        "disabled": false,
+        "rows": 0
+      },
+      "retryRows": [
+        [
+          "Revenue",
+          "$24,500"
+        ],
+        [
+          "Orders",
+          "182"
+        ],
+        [
+          "Customers",
+          "96"
+        ],
+        [
+          "Conversion",
+          "4.2%"
+        ]
+      ]
+    }
+  ]
+}

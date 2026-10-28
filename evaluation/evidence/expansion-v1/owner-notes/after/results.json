@@ -1,0 +1,214 @@
+{
+  "fixture": "owner-notes",
+  "captured_at": "2026-10-28T09:07:03.603Z",
+  "app_hashes": {
+    "README.md": "3b584a1596898d5fc272d18f4a28f8de76f3b11e2430cf36ac1240972599b175",
+    "server.py": "f8ce346c8f475836402aa018008dc5fc9cac7d280a6ec5a3b8ee6aa6ad66374f",
+    "index.html": "616f7704e43569d5dda95ea9fdcd603e95b4dc4476869ec82ddb0edaba4b83ec",
+    "app.js": "5a3f7bbf3118235dd392cc7825afdb66e44b2ad333799e3e9b75fd0ff1206da0",
+    "style.css": "70af5abebb650c507b67807a6a5d16d61a32dad35157ed70d4075edb192fb501"
+  },
+  "environment": {
+    "node": "v24.19.0",
+    "os": "darwin",
+    "cpu": "Apple M2",
+    "browser": "156.0.8078.49",
+    "channel": "chrome",
+    "throttling": "none",
+    "execution_isolation": "Fresh temporary copy of five declared fixture files; fresh process, empty data directory.",
+    "task_budget": "dashboard filter local p95 of five post-warmup samples <=100ms; no field data"
+  },
+  "results": [
+    {
+      "id": "owner-positive-controls",
+      "criteria": [
+        "S02"
+      ],
+      "steps": "A/B list and read owned resources; anonymous is denied.",
+      "captured_at": "2026-10-28T09:07:01.151Z",
+      "details": {
+        "aList": {
+          "status": 200,
+          "data": [
+            {
+              "id": "note-a",
+              "owner": "alice",
+              "text": "Alice working note"
+            }
+          ]
+        },
+        "bList": {
+          "status": 200,
+          "data": [
+            {
+              "id": "note-b",
+              "owner": "bob",
+              "text": "Bob working note"
+            }
+          ]
+        },
+        "aRead": {
+          "status": 200,
+          "data": {
+            "id": "note-a",
+            "owner": "alice",
+            "text": "Alice working note"
+          }
+        },
+        "anonymous": {
+          "status": 401,
+          "data": {
+            "error": "Sign in required"
+          }
+        },
+        "anonymousWrite": {
+          "status": 401,
+          "data": {
+            "error": "Sign in required"
+          }
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "id": "cross-owner-read",
+      "criteria": [
+        "S02"
+      ],
+      "steps": "Direct request by A for B resource; no UI guard is involved.",
+      "captured_at": "2026-10-28T09:07:01.161Z",
+      "details": {
+        "response": {
+          "status": 404,
+          "data": {
+            "error": "Not found"
+          }
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "id": "cross-owner-write",
+      "criteria": [
+        "S02"
+      ],
+      "steps": "Direct A->B mutation, then B independently reads its data.",
+      "captured_at": "2026-10-28T09:07:01.163Z",
+      "details": {
+        "before": {
+          "status": 200,
+          "data": {
+            "id": "note-b",
+            "owner": "bob",
+            "text": "Bob working note"
+          }
+        },
+        "mutation": {
+          "status": 404,
+          "data": {
+            "error": "Not found"
+          }
+        },
+        "after": {
+          "status": 200,
+          "data": {
+            "id": "note-b",
+            "owner": "bob",
+            "text": "Bob working note"
+          }
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "id": "owned-edit-and-validation",
+      "criteria": [
+        "S02",
+        "S03"
+      ],
+      "steps": "Owned quotes/Unicode/plain markup persist; extra ownership fields are rejected.",
+      "captured_at": "2026-10-28T09:07:01.166Z",
+      "details": {
+        "write": {
+          "status": 200,
+          "data": {
+            "ok": true
+          }
+        },
+        "read": {
+          "status": 200,
+          "data": {
+            "id": "note-a",
+            "owner": "alice",
+            "text": "Owner's café <b>plain text</b>"
+          }
+        },
+        "transfer": {
+          "status": 422,
+          "data": {
+            "error": "Use plain text up to 1000 characters"
+          }
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "id": "session-lifecycle",
+      "criteria": [
+        "S04"
+      ],
+      "steps": "Verify local cookie flags, invalid login, logout and old-session replay.",
+      "captured_at": "2026-10-28T09:07:01.169Z",
+      "details": {
+        "flags": {
+          "httpOnly": true,
+          "sameSiteStrict": true
+        },
+        "invalid": 401,
+        "logout": {
+          "status": 200,
+          "data": {
+            "ok": true
+          }
+        },
+        "replay": {
+          "status": 401,
+          "data": {
+            "error": "Sign in required"
+          }
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "id": "session-expiry",
+      "criteria": [
+        "S04"
+      ],
+      "steps": "Actual one-second test-session expiry; no fake clock.",
+      "captured_at": "2026-10-28T09:07:01.171Z",
+      "details": {
+        "initial": 200,
+        "expired": 401
+      },
+      "status": "pass"
+    },
+    {
+      "id": "login-desktop-preserve",
+      "criteria": [
+        "S03",
+        "S04"
+      ],
+      "steps": "Capture unchanged login UI, then use owned note UI and logout.",
+      "captured_at": "2026-10-28T09:07:02.929Z",
+      "details": {
+        "runtime_errors": [],
+        "literalValue": "Owner's café <b>plain text</b>",
+        "markupElements": 0
+      },
+      "status": "pass"
+    }
+  ],
+  "logs": [],
+  "limitations": "Evaluator-led observations on seeded local fixtures. Not a skill-effectiveness comparison, full security assessment, field CWV or WCAG conformance claim."
+}

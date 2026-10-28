@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-10-28T09:02:14.799232+00:00",
+  "only_changed_target_files": [
+    "owner-notes/server.py"
+  ],
+  "all_non_server_files_unchanged": true,
+  "server_exactly_two_expected_predicate_changes": true,
+  "syntax_compiles": true,
+  "regression_comparison": {
+    "before": {
+      "checks": {
+        "all_successful_lists_contain_only_actor_records": true,
+        "both_owner_reads_return_their_record": true,
+        "all_plain_text_and_length_roundtrips_exact": true,
+        "all_non_cross_owner_status_and_state_controls_match": true,
+        "both_cross_owner_reads_denied": false,
+        "both_cross_owner_writes_denied": false,
+        "both_victims_unchanged_in_independent_sqlite": false,
+        "successful_json_responses_disable_cache": true,
+        "cors_origin_samples_not_granted": true
+      },
+      "observation_count": 120,
+      "expected_mismatches": [
+        "forbidden cross-owner read",
+        "forbidden cross-owner write",
+        "forbidden write must leave independent state unchanged",
+        "forbidden cross-owner read",
+        "forbidden cross-owner write",
+        "forbidden write must leave independent state unchanged"
+      ]
+    },
+    "after": {
+      "checks": {
+        "all_successful_lists_contain_only_actor_records": true,
+        "both_owner_reads_return_their_record": true,
+        "all_plain_text_and_length_roundtrips_exact": true,
+        "all_non_cross_owner_status_and_state_controls_match": true,
+        "both_cross_owner_reads_denied": true,
+        "both_cross_owner_writes_denied": true,
+        "both_victims_unchanged_in_independent_sqlite": true,
+        "successful_json_responses_disable_cache": true,
+        "cors_origin_samples_not_granted": true
+      },
+      "observation_count": 120,
+      "expected_mismatches": []
+    }
+  },
+  "limits": "Handler byte streams only; network bind prohibited; no browser or actual process restart."
+}

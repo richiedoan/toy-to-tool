@@ -1,0 +1,98 @@
+{
+  "U01": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "U02": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "U03": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "U04": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "U05": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "U06": {
+    "selection": "deferred",
+    "reason": "Starts at Advanced; report observed risks anyway."
+  },
+  "A01": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "A02": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "A03": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "A04": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "A05": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "A06": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "P01": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "P02": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "P03": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "P04": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "P05": {
+    "selection": "deferred",
+    "reason": "Starts at Advanced; report observed risks anyway."
+  },
+  "P06": {
+    "selection": "deferred",
+    "reason": "Starts at Advanced; report observed risks anyway."
+  },
+  "O01": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "O02": {
+    "selection": "not_applicable",
+    "reason": "All relevant features are absent: deployed: E-context: absent from the explicitly local, replaceable-data architecture/contract."
+  },
+  "O03": {
+    "selection": "not_applicable",
+    "reason": "All relevant features are absent: important_data: E-context: absent from the explicitly local, replaceable-data architecture/contract."
+  },
+  "O04": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "O05": {
+    "selection": "not_applicable",
+    "reason": "All relevant features are absent: persistent_data: E-context: absent from the explicitly local, replaceable-data architecture/contract.; deployed: E-context: absent from the explicitly local, replaceable-data architecture/contract."
+  },
+  "O06": {
+    "selection": "deferred",
+    "reason": "Starts at Advanced; report observed risks anyway."
+  }
+}

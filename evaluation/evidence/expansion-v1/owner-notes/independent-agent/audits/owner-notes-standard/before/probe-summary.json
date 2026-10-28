@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-10-28T08:59:12.205737+00:00",
+  "observation_count": 120,
+  "mismatches": [
+    "forbidden cross-owner read",
+    "forbidden cross-owner write",
+    "forbidden write must leave independent state unchanged",
+    "forbidden cross-owner read",
+    "forbidden cross-owner write",
+    "forbidden write must leave independent state unchanged"
+  ],
+  "limits": "Actual HTTP handlers with byte streams and independent SQLite checks; no listening socket, process restart or browser execution. Expected cross-owner denials are 404 to match existing missing-resource API."
+}

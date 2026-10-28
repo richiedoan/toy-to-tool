@@ -1,0 +1,33 @@
+{
+  "fixture": "owner-notes",
+  "captured_at": "2026-10-28T08:53:43.976Z",
+  "app_hashes": {
+    "README.md": "3b584a1596898d5fc272d18f4a28f8de76f3b11e2430cf36ac1240972599b175",
+    "server.py": "bf842588c3b903c62b5c66f48c7dbc0063623ebafe9571244fa6fa84397bb4fa",
+    "index.html": "616f7704e43569d5dda95ea9fdcd603e95b4dc4476869ec82ddb0edaba4b83ec",
+    "app.js": "5a3f7bbf3118235dd392cc7825afdb66e44b2ad333799e3e9b75fd0ff1206da0",
+    "style.css": "70af5abebb650c507b67807a6a5d16d61a32dad35157ed70d4075edb192fb501"
+  },
+  "environment": {
+    "node": "v24.19.0",
+    "os": "darwin",
+    "cpu": "Apple M2",
+    "browser": "156.0.8078.49",
+    "channel": "chrome",
+    "throttling": "none",
+    "task_budget": "dashboard filter local p95 of five post-warmup samples <=100ms; no field data"
+  },
+  "results": [
+    {
+      "id": "infrastructure",
+      "criteria": [],
+      "status": "unknown",
+      "error": "Error: Server failed to start: 1"
+    }
+  ],
+  "logs": [
+    "Traceback (most recent call last):\n  File \"/Users/richie.aeolus.vii/toy-to-tool/fixtures/owner-notes/server.py\", line 15, in <module>\n",
+    "    USERS = {name: hashlib.scrypt((name + '-demo').encode(), salt=(name + '-fixture-salt').encode(), n=16384, r=8, p=1)\n  File \"/Users/richie.aeolus.vii/toy-to-tool/fixtures/owner-notes/server.py\", line 15, in <dictcomp>\n    USERS = {name: hashlib.scrypt((name + '-demo').encode(), salt=(name + '-fixture-salt').encode(), n=16384, r=8, p=1)\nAttributeError: module 'hashlib' has no attribute 'scrypt'\n"
+  ],
+  "limitations": "Evaluator-led observations on seeded local fixtures. Not a skill-effectiveness comparison, full security assessment, field CWV or WCAG conformance claim."
+}

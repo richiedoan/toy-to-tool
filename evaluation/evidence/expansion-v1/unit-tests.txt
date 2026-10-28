@@ -1,0 +1,38 @@
+test_blocker_remains_blocker_without_fix_authority (test_audit.AuditTests) ... ok
+test_catalog_is_complete (test_audit.AuditTests) ... ok
+test_decisions_do_not_depend_on_severity (test_audit.AuditTests) ... ok
+test_example_report_is_consistent (test_audit.AuditTests) ... ok
+test_group_scope_cannot_hide_unscoped_coverage_or_add_unrelated_claims (test_audit.AuditTests) ... ok
+test_group_scope_selects_only_functionality_without_faking_other_outcomes (test_audit.AuditTests) ... ok
+test_levels_are_cumulative_but_features_are_conditional (test_audit.AuditTests) ... ok
+test_local_evidence_artifact_must_exist (test_audit.AuditTests) ... ok
+test_out_of_level_failure_requires_explicit_observation (test_audit.AuditTests) ... ok
+test_profile_rejects_unknown_keys_and_boolean_strings (test_audit.AuditTests) ... ok
+test_real_report_cannot_use_synthetic_evidence (test_audit.AuditTests) ... ok
+test_rejects_duplicate_and_missing_ids (test_audit.AuditTests) ... ok
+test_rejects_missing_detail_and_dangling_source (test_audit.AuditTests) ... ok
+test_report_rejects_invalid_enums_and_dangling_evidence (test_audit.AuditTests) ... ok
+test_report_rejects_unsupported_pass_and_unjustified_na (test_audit.AuditTests) ... ok
+test_report_requires_coverage_and_consistent_decision (test_audit.AuditTests) ... ok
+test_demonstrated_failure_is_not_hidden_by_another_unexecuted_case (test_evaluation_outcomes.OutcomeTests) ... ok
+test_infrastructure_error_is_unknown (test_evaluation_outcomes.OutcomeTests) ... ok
+test_only_completed_assertions_can_pass (test_evaluation_outcomes.OutcomeTests) ... ok
+test_agent_packet_cannot_be_nested_in_evaluator_repository (test_evaluation_packet.PacketTests) ... ok
+test_corrupt_archive_is_rejected_before_export (test_evaluation_packet.PacketTests) ... ok
+test_existing_destination_is_never_overwritten (test_evaluation_packet.PacketTests) ... ok
+test_packet_contains_baseline_and_skill_without_evaluator_answers_or_history (test_evaluation_packet.PacketTests) ... ok
+test_each_packet_contains_restorable_original_and_only_needed_skills (test_expansion_packets.ExpansionPacketTests) ... ok
+test_packet_must_be_outside_evaluator_repository (test_expansion_packets.ExpansionPacketTests) ... ok
+test_coverage_gaps_and_infrastructure_do_not_disappear (test_expansion_reporting.ExpansionReportingTests) ... ok
+test_local_task_success_does_not_pass_field_cwv (test_expansion_reporting.ExpansionReportingTests) ... ok
+test_every_skill_copies_without_external_markdown_dependencies (test_skill_packages.SkillPackageTests) ... ok
+test_evidence_root_supports_target_workspace_without_path_escape (test_skill_packages.SkillPackageTests) ... ok
+test_isolated_package_has_canonical_engine_and_no_evaluator_material (test_skill_packages.SkillPackageTests) ... ok
+test_read_only_installation_can_validate_target_workspace_artifacts (test_skill_packages.SkillPackageTests) ... ok
+test_redaction_preserves_status_payload_and_binary_artifacts (test_trace_redaction.TraceRedactionTests) ... ok
+test_refuses_unowned_or_unrecognized_archives (test_trace_redaction.TraceRedactionTests) ... ok
+
+----------------------------------------------------------------------
+Ran 33 tests in 1.484s
+
+OK

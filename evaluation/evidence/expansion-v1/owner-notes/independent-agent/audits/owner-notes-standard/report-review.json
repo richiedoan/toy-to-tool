@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-10-28T09:03:08.695596+00:00",
+  "checks": [
+    {
+      "phase": "before",
+      "json_markdown_rows_agree": true,
+      "all_registered_evidence_exists": true,
+      "all_standard_group_S_criteria_present": true,
+      "unknowns_visible": [
+        "S03",
+        "S04",
+        "S05"
+      ],
+      "deferred": [
+        "S06"
+      ],
+      "sufficiency_review": "Source plus real handler execution supports ownership failure/fix and positive controls. Does not claim a live server/browser/process test. Raw state checks and mismatch counts agree with narrative."
+    },
+    {
+      "phase": "after",
+      "json_markdown_rows_agree": true,
+      "all_registered_evidence_exists": true,
+      "all_standard_group_S_criteria_present": true,
+      "unknowns_visible": [
+        "S03",
+        "S04",
+        "S05"
+      ],
+      "deferred": [
+        "S06"
+      ],
+      "sufficiency_review": "Source plus real handler execution supports ownership failure/fix and positive controls. Does not claim a live server/browser/process test. Raw state checks and mismatch counts agree with narrative."
+    }
+  ]
+}

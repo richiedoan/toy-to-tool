@@ -1,0 +1,3119 @@
+[
+  {
+    "timestamp": "2026-10-28T09:01:32.155686+00:00",
+    "label": "runtime",
+    "python": "3.9.6 (default, May 22 2026, 11:13:45) \n[Clang 21.0.0 (clang-2100.1.1.101)]",
+    "port": 0,
+    "source_hashes": {
+      "server.py": "f8ce346c8f475836402aa018008dc5fc9cac7d280a6ec5a3b8ee6aa6ad66374f",
+      "index.html": "616f7704e43569d5dda95ea9fdcd603e95b4dc4476869ec82ddb0edaba4b83ec",
+      "README.md": "3b584a1596898d5fc272d18f4a28f8de76f3b11e2430cf36ac1240972599b175",
+      "style.css": "70af5abebb650c507b67807a6a5d16d61a32dad35157ed70d4075edb192fb501",
+      "app.js": "5a3f7bbf3118235dd392cc7825afdb66e44b2ad333799e3e9b75fd0ff1206da0"
+    },
+    "command": "supplied .venv/bin/python audits/owner-notes-standard/probe.py after",
+    "execution": "Actual BaseHTTPRequestHandler parses HTTP/1.0 bytes; only listening server constructor replaced; real SQLite and session closure. Recreate closure for restart simulation, not process/network restart."
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.156824+00:00",
+    "label": "public asset",
+    "actor": "anonymous",
+    "method": "GET",
+    "path": "/",
+    "request_body": null,
+    "request_headers": {
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "text/html"
+    },
+    "response": "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Owner notes</title><link rel=\"icon\" href=\"data:,\"><link rel=\"stylesheet\" href=\"style.css\"></head><body><main>\n<p class=\"eyebrow\">PERSONAL WORKSPACE</p><h1>Owner notes</h1><p>Your private working notes, in one place.</p>\n<form id=\"login\"><label for=\"username\">Username</label><input id=\"username\" required autocomplete=\"username\"><label for=\"password\">Password</label><input id=\"password\" type=\"password\" required autocomplete=\"current-password\"><button>Sign in</button></form>\n<section id=\"workspace\" hidden><div class=\"row\"><h2>Your notes</h2><button id=\"logout\">Sign out</button></div><ul id=\"notes\"></ul></section>\n<p id=\"status\" role=\"status\" aria-live=\"polite\">Sign in to continue.</p>\n</main><script src=\"app.js\"></script></body></html>\n",
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.156975+00:00",
+    "label": "public asset",
+    "actor": "anonymous",
+    "method": "GET",
+    "path": "/app.js",
+    "request_body": null,
+    "request_headers": {
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "text/javascript"
+    },
+    "response": "const status = document.querySelector('#status');\nasync function request(path, options = {}) {\n  const response = await fetch(path, { ...options, headers: { 'Content-Type': 'application/json' } });\n  const data = await response.json();\n  if (!response.ok) throw new Error(data.error);\n  return data;\n}\nasync function load() {\n  const notes = await request('/api/notes');\n  const list = document.querySelector('#notes');\n  list.replaceChildren();\n  for (const record of notes) {\n    const item = document.createElement('li');\n    const label = document.createElement('label');\n    label.textContent = 'Working note'; label.htmlFor = record.id;\n    const input = document.createElement('textarea');\n    input.id = record.id; input.maxLength = 1000; input.value = record.text;\n    const save = document.createElement('button'); save.textContent = 'Save note';\n    save.addEventListener('click', async () => {\n      save.disabled = true; status.textContent = 'Saving…';\n      try { await request(`/api/notes/${record.id}`, { method: 'PATCH', body: JSON.stringify({ text: input.value }) }); status.textContent = 'Note saved.'; }\n      catch (error) { status.textContent = error.message; }\n      finally { save.disabled = false; }\n    });\n    item.append(label, input, save); list.append(item);\n  }\n}\ndocument.querySelector('#login').addEventListener('submit', async event => {\n  event.preventDefault();\n  try {\n    await request('/api/login', { method: 'POST', body: JSON.stringify({ username: document.querySelector('#username').value, password: document.querySelector('#password').value }) });\n    document.querySelector('#password').value = '';\n    await load(); document.querySelector('#login').hidden = true; document.querySelector('#workspace').hidden = false; status.textContent = 'Your notes are ready.';\n  } catch (error) { status.textContent = error.message; }\n});\ndocument.querySelector('#logout').addEventListener('click', async () => {\n  try { await request('/api/logout', { method: 'POST', body: '{}' }); document.querySelector('#workspace').hidden = true; document.querySelector('#notes').replaceChildren(); document.querySelector('#login').hidden = false; status.textContent = 'Signed out.'; }\n  catch (error) { status.textContent = error.message; }\n});\n",
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.157093+00:00",
+    "label": "public asset",
+    "actor": "anonymous",
+    "method": "GET",
+    "path": "/style.css",
+    "request_body": null,
+    "request_headers": {
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "text/css"
+    },
+    "response": ":root { color-scheme: light; --ink: #182c2b; --muted: #465b58; --paper: #f3f5f2; --panel: #fff; --accent: #176454; --line: #b6c5bd; }\n* { box-sizing: border-box; }\nbody { margin: 0; color: var(--ink); background: var(--paper); font: 1rem/1.5 system-ui, sans-serif; }\nmain { max-width: 48rem; margin: 0 auto; padding: 2rem 1rem; }\nheader { margin-bottom: 2rem; }\nh1 { font-size: 2rem; margin: .25rem 0; }\nh2 { font-size: 1.125rem; margin-top: 0; }\np { margin: .5rem 0; }\n.eyebrow { color: var(--accent); font-size: .75rem; font-weight: 700; letter-spacing: .125rem; }\nsection { background: var(--panel); border: 1px solid var(--line); padding: 1.25rem; border-radius: .5rem; }\nlabel { display: block; font-weight: 600; }\n.row { display: flex; gap: .75rem; align-items: center; }\ninput:not([type=\"checkbox\"]), textarea { width: 100%; padding: .625rem; color: var(--ink); background: var(--panel); border: 1px solid var(--muted); border-radius: .25rem; font: inherit; }\ninput[type=\"checkbox\"] { width: 1.25rem; height: 1.25rem; margin: .75rem .5rem .75rem 0; }\nbutton { background: var(--accent); color: white; border: 1px solid var(--accent); padding: .625rem 1rem; border-radius: .25rem; font: inherit; cursor: pointer; white-space: nowrap; }\nbutton:disabled { cursor: wait; opacity: .7; }\n:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }\n#feedback { min-height: 1.5rem; margin: 1rem 0; }\n#tasks { padding: 0; list-style: none; }\n#tasks li { border-top: 1px solid var(--line); padding: 1rem 0; }\nh3 { margin: 0 0 .75rem; font-size: 1.125rem; overflow-wrap: anywhere; }\ntextarea { display: block; min-height: 5rem; resize: vertical; }\n.check { display: flex; align-items: center; }\nfooter { color: var(--muted); font-size: .875rem; padding-top: 1rem; }\n@media (max-width: 32rem) { .row { flex-direction: column; align-items: stretch; } main { padding-top: 1rem; } }\n",
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.318697+00:00",
+    "label": "invalid login",
+    "actor": "alice",
+    "method": "POST",
+    "path": "/api/login",
+    "request_body": {
+      "username": "alice",
+      "password": "[REDACTED public demo or invalid test password]"
+    },
+    "request_headers": {
+      "Content-Type": "application/json",
+      "Content-Length": "42"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Invalid credentials"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.482444+00:00",
+    "label": "valid login",
+    "actor": "alice",
+    "method": "POST",
+    "path": "/api/login",
+    "request_body": {
+      "username": "alice",
+      "password": "[REDACTED public demo or invalid test password]"
+    },
+    "request_headers": {
+      "Content-Type": "application/json",
+      "Content-Length": "47"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff",
+      "Set-Cookie": "session=[REDACTED]; HttpOnly; SameSite=Strict; Path=/; Max-Age=1800"
+    },
+    "response": {
+      "username": "alice"
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.646318+00:00",
+    "label": "invalid login",
+    "actor": "bob",
+    "method": "POST",
+    "path": "/api/login",
+    "request_body": {
+      "username": "bob",
+      "password": "[REDACTED public demo or invalid test password]"
+    },
+    "request_headers": {
+      "Content-Type": "application/json",
+      "Content-Length": "40"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Invalid credentials"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.886777+00:00",
+    "label": "valid login",
+    "actor": "bob",
+    "method": "POST",
+    "path": "/api/login",
+    "request_body": {
+      "username": "bob",
+      "password": "[REDACTED public demo or invalid test password]"
+    },
+    "request_headers": {
+      "Content-Type": "application/json",
+      "Content-Length": "43"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff",
+      "Set-Cookie": "session=[REDACTED]; HttpOnly; SameSite=Strict; Path=/; Max-Age=1800"
+    },
+    "response": {
+      "username": "bob"
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.886927+00:00",
+    "label": "anonymous read",
+    "actor": "anonymous",
+    "method": "GET",
+    "path": "/api/notes",
+    "request_body": null,
+    "request_headers": {
+      "Content-Length": "0"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.887056+00:00",
+    "label": "anonymous read",
+    "actor": "anonymous",
+    "method": "GET",
+    "path": "/api/notes/note-a",
+    "request_body": null,
+    "request_headers": {
+      "Content-Length": "0"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.887156+00:00",
+    "label": "anonymous read",
+    "actor": "anonymous",
+    "method": "GET",
+    "path": "/api/notes/note-b",
+    "request_body": null,
+    "request_headers": {
+      "Content-Length": "0"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.887454+00:00",
+    "label": "before anonymous write",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Alice working note"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "expected_state": null,
+    "matches_expected": null
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.887598+00:00",
+    "label": "anonymous write",
+    "actor": "anonymous",
+    "method": "PATCH",
+    "path": "/api/notes/note-a",
+    "request_body": {
+      "text": "ANONYMOUS"
+    },
+    "request_headers": {
+      "Content-Type": "application/json",
+      "Content-Length": "21"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.887740+00:00",
+    "label": "anonymous write must not mutate",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Alice working note"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "expected_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Alice working note"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.887876+00:00",
+    "label": "before anonymous write",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Alice working note"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "expected_state": null,
+    "matches_expected": null
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.888000+00:00",
+    "label": "anonymous write",
+    "actor": "anonymous",
+    "method": "PATCH",
+    "path": "/api/notes/note-b",
+    "request_body": {
+      "text": "ANONYMOUS"
+    },
+    "request_headers": {
+      "Content-Type": "application/json",
+      "Content-Length": "21"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.888112+00:00",
+    "label": "anonymous write must not mutate",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Alice working note"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "expected_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Alice working note"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.888301+00:00",
+    "label": "forged session",
+    "actor": "forged",
+    "method": "GET",
+    "path": "/api/notes",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.888557+00:00",
+    "label": "owner filtered list",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Alice working note"
+      }
+    ],
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.888784+00:00",
+    "label": "owner read",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes/note-a",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "id": "note-a",
+      "owner": "alice",
+      "text": "Alice working note"
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.888998+00:00",
+    "label": "forbidden cross-owner read",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes/note-b",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 404,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Not found"
+    },
+    "expected_status": [
+      404
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.889098+00:00",
+    "label": "before forbidden write",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Alice working note"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "expected_state": null,
+    "matches_expected": null
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.889350+00:00",
+    "label": "forbidden cross-owner write",
+    "actor": "alice",
+    "method": "PATCH",
+    "path": "/api/notes/note-b",
+    "request_body": {
+      "text": "CROSS-OWNER-MARKER-alice"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "36"
+    },
+    "status": 404,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Not found"
+    },
+    "expected_status": [
+      404
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.889448+00:00",
+    "label": "forbidden write must leave independent state unchanged",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Alice working note"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "expected_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Alice working note"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.889674+00:00",
+    "label": "victim independently reads after forbidden write",
+    "actor": "bob",
+    "method": "GET",
+    "path": "/api/notes/note-b",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "id": "note-b",
+      "owner": "bob",
+      "text": "Bob working note"
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.890475+00:00",
+    "label": "valid plain text save",
+    "actor": "alice",
+    "method": "PATCH",
+    "path": "/api/notes/note-a",
+    "request_body": {
+      "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "114"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "ok": true
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.890741+00:00",
+    "label": "independent committed readback",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes/note-a",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "id": "note-a",
+      "owner": "alice",
+      "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.890748+00:00",
+    "label": "plain text roundtrip",
+    "actor": "alice",
+    "expected": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';",
+    "actual": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';",
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.890885+00:00",
+    "label": "committed SQLite plain text",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "expected_state": null,
+    "matches_expected": null
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.890999+00:00",
+    "label": "before invalid payload",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "expected_state": null,
+    "matches_expected": null
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.891146+00:00",
+    "label": "reject invalid note or ownership transfer",
+    "actor": "alice",
+    "method": "PATCH",
+    "path": "/api/notes/note-a",
+    "request_body": {
+      "text": "x",
+      "owner": "bob"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "29"
+    },
+    "status": 422,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Use plain text up to 1000 characters"
+    },
+    "expected_status": [
+      422
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.891250+00:00",
+    "label": "rejected payload must not mutate",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "expected_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.891360+00:00",
+    "label": "before invalid payload",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "expected_state": null,
+    "matches_expected": null
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.891504+00:00",
+    "label": "reject invalid note or ownership transfer",
+    "actor": "alice",
+    "method": "PATCH",
+    "path": "/api/notes/note-a",
+    "request_body": {
+      "owner": "bob"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "16"
+    },
+    "status": 422,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Use plain text up to 1000 characters"
+    },
+    "expected_status": [
+      422
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.891605+00:00",
+    "label": "rejected payload must not mutate",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "expected_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.891717+00:00",
+    "label": "before invalid payload",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "expected_state": null,
+    "matches_expected": null
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.891858+00:00",
+    "label": "reject invalid note or ownership transfer",
+    "actor": "alice",
+    "method": "PATCH",
+    "path": "/api/notes/note-a",
+    "request_body": {
+      "text": null
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "14"
+    },
+    "status": 422,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Use plain text up to 1000 characters"
+    },
+    "expected_status": [
+      422
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.891953+00:00",
+    "label": "rejected payload must not mutate",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "expected_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.892050+00:00",
+    "label": "before invalid payload",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "expected_state": null,
+    "matches_expected": null
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.892187+00:00",
+    "label": "reject invalid note or ownership transfer",
+    "actor": "alice",
+    "method": "PATCH",
+    "path": "/api/notes/note-a",
+    "request_body": {
+      "text": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "1013"
+    },
+    "status": 422,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Use plain text up to 1000 characters"
+    },
+    "expected_status": [
+      422
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.892276+00:00",
+    "label": "rejected payload must not mutate",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "expected_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.892815+00:00",
+    "label": "valid length boundary",
+    "actor": "alice",
+    "method": "PATCH",
+    "path": "/api/notes/note-a",
+    "request_body": {
+      "text": ""
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "12"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "ok": true
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.893029+00:00",
+    "label": "boundary readback",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes/note-a",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "id": "note-a",
+      "owner": "alice",
+      "text": ""
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.893034+00:00",
+    "label": "length boundary exact roundtrip",
+    "length": 0,
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.893533+00:00",
+    "label": "valid length boundary",
+    "actor": "alice",
+    "method": "PATCH",
+    "path": "/api/notes/note-a",
+    "request_body": {
+      "text": "雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "3012"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "ok": true
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.893759+00:00",
+    "label": "boundary readback",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes/note-a",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "id": "note-a",
+      "owner": "alice",
+      "text": "雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪"
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.893764+00:00",
+    "label": "length boundary exact roundtrip",
+    "length": 1000,
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.894268+00:00",
+    "label": "restore readable marker",
+    "actor": "alice",
+    "method": "PATCH",
+    "path": "/api/notes/note-a",
+    "request_body": {
+      "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "114"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "ok": true
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.894468+00:00",
+    "label": "SQL identifier marker",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes/'%20OR%201=1--",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 404,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Not found"
+    },
+    "expected_status": [
+      404
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.894661+00:00",
+    "label": "missing resource read",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes/missing",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 404,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Not found"
+    },
+    "expected_status": [
+      404
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.894876+00:00",
+    "label": "missing resource write",
+    "actor": "alice",
+    "method": "PATCH",
+    "path": "/api/notes/missing",
+    "request_body": {
+      "text": "safe"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "16"
+    },
+    "status": 404,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Not found"
+    },
+    "expected_status": [
+      404
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.895070+00:00",
+    "label": "owner filtered list",
+    "actor": "bob",
+    "method": "GET",
+    "path": "/api/notes",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": [
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.895267+00:00",
+    "label": "owner read",
+    "actor": "bob",
+    "method": "GET",
+    "path": "/api/notes/note-b",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "id": "note-b",
+      "owner": "bob",
+      "text": "Bob working note"
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.895456+00:00",
+    "label": "forbidden cross-owner read",
+    "actor": "bob",
+    "method": "GET",
+    "path": "/api/notes/note-a",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 404,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Not found"
+    },
+    "expected_status": [
+      404
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.895565+00:00",
+    "label": "before forbidden write",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "expected_state": null,
+    "matches_expected": null
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.895783+00:00",
+    "label": "forbidden cross-owner write",
+    "actor": "bob",
+    "method": "PATCH",
+    "path": "/api/notes/note-a",
+    "request_body": {
+      "text": "CROSS-OWNER-MARKER-bob"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "34"
+    },
+    "status": 404,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Not found"
+    },
+    "expected_status": [
+      404
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.895873+00:00",
+    "label": "forbidden write must leave independent state unchanged",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "expected_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      }
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.896080+00:00",
+    "label": "victim independently reads after forbidden write",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes/note-a",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "id": "note-a",
+      "owner": "alice",
+      "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.896566+00:00",
+    "label": "valid plain text save",
+    "actor": "bob",
+    "method": "PATCH",
+    "path": "/api/notes/note-b",
+    "request_body": {
+      "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "114"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "ok": true
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.896779+00:00",
+    "label": "independent committed readback",
+    "actor": "bob",
+    "method": "GET",
+    "path": "/api/notes/note-b",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "id": "note-b",
+      "owner": "bob",
+      "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.896783+00:00",
+    "label": "plain text roundtrip",
+    "actor": "bob",
+    "expected": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';",
+    "actual": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';",
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.896873+00:00",
+    "label": "committed SQLite plain text",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_state": null,
+    "matches_expected": null
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.896976+00:00",
+    "label": "before invalid payload",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_state": null,
+    "matches_expected": null
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.897107+00:00",
+    "label": "reject invalid note or ownership transfer",
+    "actor": "bob",
+    "method": "PATCH",
+    "path": "/api/notes/note-b",
+    "request_body": {
+      "text": "x",
+      "owner": "alice"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "31"
+    },
+    "status": 422,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Use plain text up to 1000 characters"
+    },
+    "expected_status": [
+      422
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.897197+00:00",
+    "label": "rejected payload must not mutate",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.897292+00:00",
+    "label": "before invalid payload",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_state": null,
+    "matches_expected": null
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.897468+00:00",
+    "label": "reject invalid note or ownership transfer",
+    "actor": "bob",
+    "method": "PATCH",
+    "path": "/api/notes/note-b",
+    "request_body": {
+      "owner": "alice"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "18"
+    },
+    "status": 422,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Use plain text up to 1000 characters"
+    },
+    "expected_status": [
+      422
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.897558+00:00",
+    "label": "rejected payload must not mutate",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.897652+00:00",
+    "label": "before invalid payload",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_state": null,
+    "matches_expected": null
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.897779+00:00",
+    "label": "reject invalid note or ownership transfer",
+    "actor": "bob",
+    "method": "PATCH",
+    "path": "/api/notes/note-b",
+    "request_body": {
+      "text": null
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "14"
+    },
+    "status": 422,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Use plain text up to 1000 characters"
+    },
+    "expected_status": [
+      422
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.897867+00:00",
+    "label": "rejected payload must not mutate",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.897961+00:00",
+    "label": "before invalid payload",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_state": null,
+    "matches_expected": null
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.898092+00:00",
+    "label": "reject invalid note or ownership transfer",
+    "actor": "bob",
+    "method": "PATCH",
+    "path": "/api/notes/note-b",
+    "request_body": {
+      "text": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "1013"
+    },
+    "status": 422,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Use plain text up to 1000 characters"
+    },
+    "expected_status": [
+      422
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.898179+00:00",
+    "label": "rejected payload must not mutate",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.898698+00:00",
+    "label": "valid length boundary",
+    "actor": "bob",
+    "method": "PATCH",
+    "path": "/api/notes/note-b",
+    "request_body": {
+      "text": ""
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "12"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "ok": true
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.898903+00:00",
+    "label": "boundary readback",
+    "actor": "bob",
+    "method": "GET",
+    "path": "/api/notes/note-b",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "id": "note-b",
+      "owner": "bob",
+      "text": ""
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.898907+00:00",
+    "label": "length boundary exact roundtrip",
+    "length": 0,
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.899399+00:00",
+    "label": "valid length boundary",
+    "actor": "bob",
+    "method": "PATCH",
+    "path": "/api/notes/note-b",
+    "request_body": {
+      "text": "雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "3012"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "ok": true
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.899616+00:00",
+    "label": "boundary readback",
+    "actor": "bob",
+    "method": "GET",
+    "path": "/api/notes/note-b",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "id": "note-b",
+      "owner": "bob",
+      "text": "雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪雪"
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.899621+00:00",
+    "label": "length boundary exact roundtrip",
+    "length": 1000,
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.900109+00:00",
+    "label": "restore readable marker",
+    "actor": "bob",
+    "method": "PATCH",
+    "path": "/api/notes/note-b",
+    "request_body": {
+      "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "114"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "ok": true
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.900320+00:00",
+    "label": "SQL identifier marker",
+    "actor": "bob",
+    "method": "GET",
+    "path": "/api/notes/'%20OR%201=1--",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 404,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Not found"
+    },
+    "expected_status": [
+      404
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.900518+00:00",
+    "label": "missing resource read",
+    "actor": "bob",
+    "method": "GET",
+    "path": "/api/notes/missing",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 404,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Not found"
+    },
+    "expected_status": [
+      404
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.900731+00:00",
+    "label": "missing resource write",
+    "actor": "bob",
+    "method": "PATCH",
+    "path": "/api/notes/missing",
+    "request_body": {
+      "text": "safe"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "16"
+    },
+    "status": 404,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Not found"
+    },
+    "expected_status": [
+      404
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.900832+00:00",
+    "label": "before feature probes",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_state": null,
+    "matches_expected": null
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.900971+00:00",
+    "label": "cross-site simple form content rejected",
+    "actor": "alice",
+    "method": "PATCH",
+    "path": "/api/notes/note-a",
+    "request_body": "{\"text\":\"CROSS-SITE\"}",
+    "request_headers": {
+      "Origin": "https://invalid.example",
+      "Content-Type": "text/plain",
+      "Cookie": "[REDACTED]",
+      "Content-Length": "21"
+    },
+    "status": 422,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Use plain text up to 1000 characters"
+    },
+    "expected_status": [
+      422
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.901097+00:00",
+    "label": "cross-origin preflight unsupported",
+    "actor": "anonymous",
+    "method": "OPTIONS",
+    "path": "/api/notes/note-a",
+    "request_body": null,
+    "request_headers": {
+      "Origin": "https://invalid.example",
+      "Access-Control-Request-Method": "PATCH",
+      "Access-Control-Request-Headers": "content-type",
+      "Content-Length": "0"
+    },
+    "status": 501,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Connection": "close",
+      "Content-Type": "text/html;charset=utf-8",
+      "Content-Length": "500"
+    },
+    "response": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\n        \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\">\n        <title>Error response</title>\n    </head>\n    <body>\n        <h1>Error response</h1>\n        <p>Error code: 501</p>\n        <p>Message: Unsupported method ('OPTIONS').</p>\n        <p>Error code explanation: HTTPStatus.NOT_IMPLEMENTED - Server does not support this operation.</p>\n    </body>\n</html>\n",
+    "expected_status": [
+      501
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.901317+00:00",
+    "label": "foreign origin read has no CORS grant",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes",
+    "request_body": null,
+    "request_headers": {
+      "Origin": "https://invalid.example",
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.901521+00:00",
+    "label": "same origin read",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes",
+    "request_body": null,
+    "request_headers": {
+      "Origin": "http://127.0.0.1:0",
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.901646+00:00",
+    "label": "bounded oversized JSON",
+    "actor": "alice",
+    "method": "PATCH",
+    "path": "/api/notes/note-a",
+    "request_body": {
+      "text": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "4112"
+    },
+    "status": 422,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Use plain text up to 1000 characters"
+    },
+    "expected_status": [
+      422
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.901760+00:00",
+    "label": "malformed JSON",
+    "actor": "alice",
+    "method": "PATCH",
+    "path": "/api/notes/note-a",
+    "request_body": "{",
+    "request_headers": {
+      "Content-Type": "application/json",
+      "Cookie": "[REDACTED]",
+      "Content-Length": "1"
+    },
+    "status": 422,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Use plain text up to 1000 characters"
+    },
+    "expected_status": [
+      422
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.901868+00:00",
+    "label": "feature probes must leave state unchanged",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.901985+00:00",
+    "label": "nonpublic path denied",
+    "actor": "anonymous",
+    "method": "GET",
+    "path": "/server.py",
+    "request_body": null,
+    "request_headers": {
+      "Content-Length": "0"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.902079+00:00",
+    "label": "nonpublic path denied",
+    "actor": "anonymous",
+    "method": "GET",
+    "path": "/README.md",
+    "request_body": null,
+    "request_headers": {
+      "Content-Length": "0"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.902171+00:00",
+    "label": "nonpublic path denied",
+    "actor": "anonymous",
+    "method": "GET",
+    "path": "/notes.sqlite",
+    "request_body": null,
+    "request_headers": {
+      "Content-Length": "0"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.902270+00:00",
+    "label": "nonpublic path denied",
+    "actor": "anonymous",
+    "method": "GET",
+    "path": "/../server.py",
+    "request_body": null,
+    "request_headers": {
+      "Content-Length": "0"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.902361+00:00",
+    "label": "nonpublic path denied",
+    "actor": "anonymous",
+    "method": "GET",
+    "path": "/api/no-such-route",
+    "request_body": null,
+    "request_headers": {
+      "Content-Length": "0"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.902478+00:00",
+    "label": "logout",
+    "actor": "alice",
+    "method": "POST",
+    "path": "/api/logout",
+    "request_body": {},
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "2"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff",
+      "Set-Cookie": "session=[REDACTED]; HttpOnly; SameSite=Strict; Path=/; Max-Age=0"
+    },
+    "response": {
+      "ok": true
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.902579+00:00",
+    "label": "post logout replay read",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.902685+00:00",
+    "label": "post logout replay read",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes/note-a",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.902941+00:00",
+    "label": "before logout replay write",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_state": null,
+    "matches_expected": null
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.903145+00:00",
+    "label": "post logout replay write",
+    "actor": "alice",
+    "method": "PATCH",
+    "path": "/api/notes/note-a",
+    "request_body": {
+      "text": "REPLAY"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "18"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:32 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:32.903301+00:00",
+    "label": "logout replay must not mutate",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:33.067326+00:00",
+    "label": "new login after logout",
+    "actor": "alice",
+    "method": "POST",
+    "path": "/api/login",
+    "request_body": {
+      "username": "alice",
+      "password": "[REDACTED public demo or invalid test password]"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "47"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:33 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff",
+      "Set-Cookie": "session=[REDACTED]; HttpOnly; SameSite=Strict; Path=/; Max-Age=1800"
+    },
+    "response": {
+      "username": "alice"
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:33.067821+00:00",
+    "label": "new valid session read",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:33 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:33.067965+00:00",
+    "label": "before server recreation",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_state": null,
+    "matches_expected": null
+  },
+  {
+    "timestamp": "2026-10-28T09:01:33.068315+00:00",
+    "label": "server recreation invalidates old session",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:33 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:33.229422+00:00",
+    "label": "relogin after restart",
+    "actor": "alice",
+    "method": "POST",
+    "path": "/api/login",
+    "request_body": {
+      "username": "alice",
+      "password": "[REDACTED public demo or invalid test password]"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "47"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:33 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff",
+      "Set-Cookie": "session=[REDACTED]; HttpOnly; SameSite=Strict; Path=/; Max-Age=1800"
+    },
+    "response": {
+      "username": "alice"
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:33.229835+00:00",
+    "label": "persisted note owner read",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes/note-a",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:33 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "id": "note-a",
+      "owner": "alice",
+      "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:33.230030+00:00",
+    "label": "server recreation invalidates old session",
+    "actor": "bob",
+    "method": "GET",
+    "path": "/api/notes",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:33 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:33.410133+00:00",
+    "label": "relogin after restart",
+    "actor": "bob",
+    "method": "POST",
+    "path": "/api/login",
+    "request_body": {
+      "username": "bob",
+      "password": "[REDACTED public demo or invalid test password]"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "43"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:33 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff",
+      "Set-Cookie": "session=[REDACTED]; HttpOnly; SameSite=Strict; Path=/; Max-Age=1800"
+    },
+    "response": {
+      "username": "bob"
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:33.410595+00:00",
+    "label": "persisted note owner read",
+    "actor": "bob",
+    "method": "GET",
+    "path": "/api/notes/note-b",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:33 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "id": "note-b",
+      "owner": "bob",
+      "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:33.410746+00:00",
+    "label": "SQLite persists across server recreation",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:33.574454+00:00",
+    "label": "short expiry login",
+    "actor": "alice",
+    "method": "POST",
+    "path": "/api/login",
+    "request_body": {
+      "username": "alice",
+      "password": "[REDACTED public demo or invalid test password]"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "47"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:33 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff",
+      "Set-Cookie": "session=[REDACTED]; HttpOnly; SameSite=Strict; Path=/; Max-Age=1"
+    },
+    "response": {
+      "username": "alice"
+    },
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:33.574899+00:00",
+    "label": "short expiry initially valid",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 200,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:33 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_status": [
+      200
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:34.781462+00:00",
+    "label": "expired read",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:34 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:34.782032+00:00",
+    "label": "expired read",
+    "actor": "alice",
+    "method": "GET",
+    "path": "/api/notes/note-a",
+    "request_body": null,
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Length": "0"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:34 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:34.783905+00:00",
+    "label": "before expired write",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_state": null,
+    "matches_expected": null
+  },
+  {
+    "timestamp": "2026-10-28T09:01:34.784733+00:00",
+    "label": "expired write",
+    "actor": "alice",
+    "method": "PATCH",
+    "path": "/api/notes/note-a",
+    "request_body": {
+      "text": "EXPIRED"
+    },
+    "request_headers": {
+      "Cookie": "[REDACTED]",
+      "Content-Type": "application/json",
+      "Content-Length": "19"
+    },
+    "status": 401,
+    "response_headers": {
+      "Server": "BaseHTTP/0.6 Python/3.9.6",
+      "Date": "Wed, 28 Oct 2026 09:01:34 GMT",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "response": {
+      "error": "Sign in required"
+    },
+    "expected_status": [
+      401
+    ],
+    "matches_expected": true
+  },
+  {
+    "timestamp": "2026-10-28T09:01:34.785414+00:00",
+    "label": "expiry must not mutate",
+    "independent_sqlite_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "expected_state": [
+      {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      },
+      {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Plain quotes ' \" Unicode café 雪 — <img src=x onerror=\"window.auditMarker=1\"> ; SELECT 'audit';"
+      }
+    ],
+    "matches_expected": true
+  }
+]

@@ -1,0 +1,34 @@
+{
+  "protected_files": {
+    "README.md": {
+      "before_sha256": "3b584a1596898d5fc272d18f4a28f8de76f3b11e2430cf36ac1240972599b175",
+      "after_sha256": "3b584a1596898d5fc272d18f4a28f8de76f3b11e2430cf36ac1240972599b175",
+      "unchanged": true
+    },
+    "index.html": {
+      "before_sha256": "616f7704e43569d5dda95ea9fdcd603e95b4dc4476869ec82ddb0edaba4b83ec",
+      "after_sha256": "616f7704e43569d5dda95ea9fdcd603e95b4dc4476869ec82ddb0edaba4b83ec",
+      "unchanged": true
+    },
+    "app.js": {
+      "before_sha256": "5a3f7bbf3118235dd392cc7825afdb66e44b2ad333799e3e9b75fd0ff1206da0",
+      "after_sha256": "5a3f7bbf3118235dd392cc7825afdb66e44b2ad333799e3e9b75fd0ff1206da0",
+      "unchanged": true
+    },
+    "style.css": {
+      "before_sha256": "70af5abebb650c507b67807a6a5d16d61a32dad35157ed70d4075edb192fb501",
+      "after_sha256": "70af5abebb650c507b67807a6a5d16d61a32dad35157ed70d4075edb192fb501",
+      "unchanged": true
+    }
+  },
+  "approved_screenshot": {
+    "file": "approved-login.png",
+    "before_sha256": "3565b8ed899976a451dc1bf220cafdc3a14bf10c49486c9a87f157a42a84c23d",
+    "after_sha256": "3565b8ed899976a451dc1bf220cafdc3a14bf10c49486c9a87f157a42a84c23d",
+    "byte_identical": true
+  },
+  "changed_source_files": [
+    "server.py"
+  ],
+  "claim_limit": "These scoped fixtures and protected files/states only; not general agent effectiveness."
+}

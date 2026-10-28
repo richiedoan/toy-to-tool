@@ -1,0 +1,245 @@
+{
+  "captured_at": "2026-10-28T08:54:16.387Z",
+  "runtime": "v24.19.0",
+  "scope": "Real app.js executed in Node VM with minimal DOM and controlled fetch; no rendering, browser input-to-frame timing, keyboard, AT or leak proof.",
+  "initial": {
+    "status": "4 metrics shown.",
+    "disabled": false,
+    "rows": [
+      [
+        "Revenue",
+        "$24,500"
+      ],
+      [
+        "Orders",
+        "182"
+      ],
+      [
+        "Customers",
+        "96"
+      ],
+      [
+        "Conversion",
+        "4.2%"
+      ]
+    ]
+  },
+  "filters": [
+    {
+      "query": "REVen",
+      "status": "1 metrics shown.",
+      "disabled": false,
+      "rows": [
+        [
+          "Revenue",
+          "$24,500"
+        ]
+      ]
+    },
+    {
+      "query": "orders",
+      "status": "1 metrics shown.",
+      "disabled": false,
+      "rows": [
+        [
+          "Orders",
+          "182"
+        ]
+      ]
+    },
+    {
+      "query": "zzz",
+      "status": "No matching metrics. Clear the filter to see all metrics.",
+      "disabled": false,
+      "rows": []
+    },
+    {
+      "query": "",
+      "status": "4 metrics shown.",
+      "disabled": false,
+      "rows": [
+        [
+          "Revenue",
+          "$24,500"
+        ],
+        [
+          "Orders",
+          "182"
+        ],
+        [
+          "Customers",
+          "96"
+        ],
+        [
+          "Conversion",
+          "4.2%"
+        ]
+      ]
+    }
+  ],
+  "filterRequests": 0,
+  "synchronousHandlerSamplesMs": [
+    320.0525,
+    320.0290420000001,
+    320.0238330000002,
+    320.02991699999984,
+    320.0339170000002
+  ],
+  "timingLimit": "Five handler durations after warmup, diagnostic only. No requestAnimationFrame or Chrome; cannot establish README p95 budget.",
+  "faults": [
+    {
+      "fault": "503",
+      "status": "",
+      "disabled": false,
+      "rows": []
+    },
+    {
+      "fault": "retry",
+      "status": "4 metrics shown.",
+      "disabled": false,
+      "rows": [
+        [
+          "Revenue",
+          "$24,500"
+        ],
+        [
+          "Orders",
+          "182"
+        ],
+        [
+          "Customers",
+          "96"
+        ],
+        [
+          "Conversion",
+          "4.2%"
+        ]
+      ]
+    },
+    {
+      "fault": "offline",
+      "status": "",
+      "disabled": false,
+      "rows": []
+    },
+    {
+      "fault": "retry",
+      "status": "4 metrics shown.",
+      "disabled": false,
+      "rows": [
+        [
+          "Revenue",
+          "$24,500"
+        ],
+        [
+          "Orders",
+          "182"
+        ],
+        [
+          "Customers",
+          "96"
+        ],
+        [
+          "Conversion",
+          "4.2%"
+        ]
+      ]
+    }
+  ],
+  "loading": {
+    "status": "Loading…",
+    "disabled": true,
+    "rows": [
+      [
+        "Revenue",
+        "$24,500"
+      ],
+      [
+        "Orders",
+        "182"
+      ],
+      [
+        "Customers",
+        "96"
+      ],
+      [
+        "Conversion",
+        "4.2%"
+      ]
+    ]
+  },
+  "delayedSuccess": {
+    "status": "4 metrics shown.",
+    "disabled": false,
+    "rows": [
+      [
+        "Revenue",
+        "$24,500"
+      ],
+      [
+        "Orders",
+        "182"
+      ],
+      [
+        "Customers",
+        "96"
+      ],
+      [
+        "Conversion",
+        "4.2%"
+      ]
+    ]
+  },
+  "cycles": [
+    {
+      "n": 1,
+      "calls": 7,
+      "nodes": 4,
+      "listeners": {
+        "#status": {},
+        "#filter": {
+          "input": 1
+        },
+        "#refresh": {
+          "click": 1
+        },
+        "#metrics": {}
+      }
+    },
+    {
+      "n": 5,
+      "calls": 11,
+      "nodes": 4,
+      "listeners": {
+        "#status": {},
+        "#filter": {
+          "input": 1
+        },
+        "#refresh": {
+          "click": 1
+        },
+        "#metrics": {}
+      }
+    },
+    {
+      "n": 15,
+      "calls": 21,
+      "nodes": 4,
+      "listeners": {
+        "#status": {},
+        "#filter": {
+          "input": 1
+        },
+        "#refresh": {
+          "click": 1
+        },
+        "#metrics": {}
+      }
+    }
+  ],
+  "finalFailure": {
+    "status": "",
+    "disabled": false,
+    "rows": []
+  }
+}

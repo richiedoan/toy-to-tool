@@ -1,0 +1,68 @@
+{
+  "captured_at": "2026-10-28T08:57:46.080541+00:00",
+  "scope": "Actual server do_GET handlers with in-memory output and intercepted server construction. No socket, actual startup, network or operator detection path verified.",
+  "bind_address": [
+    "127.0.0.1",
+    8767
+  ],
+  "requests": [
+    {
+      "path": "/",
+      "response_headers": "HTTP/1.0 200 OK\r\nServer: BaseHTTP/0.6 Python/3.9.6\r\nDate: Wed, 28 Oct 2026 08:57:46 GMT\r\nContent-Type: text/html",
+      "body": "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Metrics dashboard</title><link rel=\"icon\" href=\"data:,\"><link rel=\"stylesheet\" href=\"style.css\"></head><body><main class=\"shell\">\n<header><div><p class=\"eyebrow\">BUSINESS OVERVIEW</p><h1>Metrics dashboard</h1><p>Today's operating snapshot.</p></div><button id=\"refresh\">Refresh data</button></header>\n<label for=\"filter\">Filter metrics</label><input id=\"filter\" type=\"search\" autocomplete=\"off\" placeholder=\"Find a metric\">\n<p id=\"status\" role=\"status\" aria-live=\"polite\"></p><section id=\"metrics\" aria-label=\"Current metrics\"></section>\n<footer>Local reporting workspace</footer></main><script src=\"app.js\"></script></body></html>\n"
+    },
+    {
+      "path": "/app.js",
+      "response_headers": "HTTP/1.0 200 OK\r\nServer: BaseHTTP/0.6 Python/3.9.6\r\nDate: Wed, 28 Oct 2026 08:57:46 GMT\r\nContent-Type: text/javascript",
+      "body": "let metrics = [];\nconst status = document.querySelector('#status');\nconst filter = document.querySelector('#filter');\nconst refresh = document.querySelector('#refresh');\nfunction render() {\n  const visible = metrics.filter(item => item.title.toLowerCase().includes(filter.value.toLowerCase()));\n  const section = document.querySelector('#metrics');\n  section.replaceChildren();\n  for (const item of visible) {\n    const article = document.createElement('article');\n    const title = document.createElement('h2'); title.textContent = item.title;\n    const value = document.createElement('p'); value.className = 'value'; value.textContent = item.value;\n    article.append(title, value); section.append(article);\n  }\n  status.textContent = visible.length ? `${visible.length} metrics shown.` : 'No matching metrics. Clear the filter to see all metrics.';\n}\nasync function load() {\n  refresh.disabled = true; status.textContent = 'Loading\u2026';\n  try {\n    const response = await fetch('/api/metrics');\n    if (!response.ok) throw new Error('Unavailable');\n    metrics = await response.json(); render();\n  } catch {\n    status.textContent = 'Unable to refresh metrics. ' +\n      (metrics.length ? 'Showing last successful data. ' : '') +\n      'Try Refresh data.';\n  } finally { refresh.disabled = false; }\n}\nfilter.addEventListener('input', render);\nrefresh.addEventListener('click', load);\nload();\n"
+    },
+    {
+      "path": "/style.css",
+      "response_headers": "HTTP/1.0 200 OK\r\nServer: BaseHTTP/0.6 Python/3.9.6\r\nDate: Wed, 28 Oct 2026 08:57:46 GMT\r\nContent-Type: text/css",
+      "body": ":root { color-scheme: light; --ink: #182c2b; --muted: #465b58; --paper: #f3f5f2; --panel: #fff; --accent: #176454; --line: #b6c5bd; }\n* { box-sizing: border-box; }\nbody { margin: 0; overflow-x: hidden; background: var(--paper); color: var(--ink); font: 1rem/1.5 system-ui, sans-serif; }\n.shell { width: 1100px; max-width: 100%; margin: 2rem auto; padding: 1.5rem; }\nheader { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 2rem; }\nh1 { margin: .25rem 0; font-size: 2rem; }\nh2 { font-size: 1rem; margin: 0; }\np { margin: .5rem 0; }\n.eyebrow { color: var(--accent); font-size: .75rem; font-weight: 700; letter-spacing: .125rem; }\nlabel { display: block; font-weight: 600; }\ninput { width: 100%; padding: .75rem; border: 1px solid var(--muted); border-radius: .25rem; font: inherit; color: var(--ink); background: var(--panel); }\nbutton { padding: .75rem 1rem; min-height: 44px; border: 1px solid var(--accent); border-radius: .25rem; background: var(--accent); color: white; font: inherit; white-space: nowrap; cursor: pointer; }\nbutton:disabled { cursor: wait; }\n:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }\n#status { min-height: 1.5rem; margin: 1rem 0; }\n#metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }\narticle { background: var(--panel); border: 1px solid var(--line); border-radius: .5rem; padding: 1.25rem; }\n.value { font-size: 1.75rem; font-weight: 600; margin: .75rem 0 0; }\nfooter { margin-top: 2rem; color: var(--muted); font-size: .875rem; }\n@media (max-width: 767px) {\n  #metrics { grid-template-columns: repeat(2, 1fr); }\n}\n@media (max-width: 479px) {\n  #metrics { grid-template-columns: 1fr; }\n}\n"
+    },
+    {
+      "path": "/api/metrics",
+      "response_headers": "HTTP/1.0 200 OK\r\nServer: BaseHTTP/0.6 Python/3.9.6\r\nDate: Wed, 28 Oct 2026 08:57:46 GMT\r\nContent-Type: application/json\r\nCache-Control: no-store\r\nX-Request-ID: fad30c60-92a6-4db6-968c-21071ac96e18",
+      "body": "[{\"title\": \"Revenue\", \"value\": \"$24,500\"}, {\"title\": \"Orders\", \"value\": \"182\"}, {\"title\": \"Customers\", \"value\": \"96\"}, {\"title\": \"Conversion\", \"value\": \"4.2%\"}]"
+    },
+    {
+      "path": "/api/metrics",
+      "response_headers": "HTTP/1.0 503 Service Unavailable\r\nServer: BaseHTTP/0.6 Python/3.9.6\r\nDate: Wed, 28 Oct 2026 08:57:46 GMT\r\nContent-Type: application/json\r\nCache-Control: no-store\r\nX-Request-ID: 76b0123a-92ea-4218-a927-e027ec83fb98",
+      "body": "{\"error\": \"Metrics temporarily unavailable\"}"
+    },
+    {
+      "path": "/api/metrics",
+      "response_headers": "HTTP/1.0 200 OK\r\nServer: BaseHTTP/0.6 Python/3.9.6\r\nDate: Wed, 28 Oct 2026 08:57:46 GMT\r\nContent-Type: application/json\r\nCache-Control: no-store\r\nX-Request-ID: b93bb8e5-d7a2-4d9b-89f8-eee7c868b598",
+      "body": "[{\"title\": \"Revenue\", \"value\": \"$24,500\"}, {\"title\": \"Orders\", \"value\": \"182\"}, {\"title\": \"Customers\", \"value\": \"96\"}, {\"title\": \"Conversion\", \"value\": \"4.2%\"}]"
+    },
+    {
+      "path": "/api/metrics?unavailable=1",
+      "response_headers": "HTTP/1.0 503 Service Unavailable\r\nServer: BaseHTTP/0.6 Python/3.9.6\r\nDate: Wed, 28 Oct 2026 08:57:46 GMT\r\nContent-Type: application/json\r\nCache-Control: no-store\r\nX-Request-ID: cd8bf69e-e528-4137-8ec2-9e0114f1e2a6",
+      "body": "{\"error\": \"Metrics temporarily unavailable\"}"
+    },
+    {
+      "path": "/api/metrics",
+      "response_headers": "HTTP/1.0 200 OK\r\nServer: BaseHTTP/0.6 Python/3.9.6\r\nDate: Wed, 28 Oct 2026 08:57:46 GMT\r\nContent-Type: application/json\r\nCache-Control: no-store\r\nX-Request-ID: 646e8a31-4f0d-42b7-b0c1-dba644cd7309",
+      "body": "[{\"title\": \"Revenue\", \"value\": \"$24,500\"}, {\"title\": \"Orders\", \"value\": \"182\"}, {\"title\": \"Customers\", \"value\": \"96\"}, {\"title\": \"Conversion\", \"value\": \"4.2%\"}]"
+    },
+    {
+      "path": "/missing",
+      "response_headers": "HTTP/1.0 404 Not Found\r\nServer: BaseHTTP/0.6 Python/3.9.6\r\nDate: Wed, 28 Oct 2026 08:57:46 GMT\r\nConnection: close\r\nContent-Type: text/html;charset=utf-8\r\nContent-Length: 447",
+      "body": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\n        \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\">\n        <title>Error response</title>\n    </head>\n    <body>\n        <h1>Error response</h1>\n        <p>Error code: 404</p>\n        <p>Message: Not Found.</p>\n        <p>Error code explanation: 404 - Nothing matches the given URI.</p>\n    </body>\n</html>\n"
+    }
+  ],
+  "diagnostics": [
+    {
+      "event": "metrics_unavailable",
+      "request_id": "76b0123a-92ea-4218-a927-e027ec83fb98",
+      "status": 503
+    },
+    {
+      "event": "metrics_unavailable",
+      "request_id": "cd8bf69e-e528-4137-8ec2-9e0114f1e2a6",
+      "status": 503
+    }
+  ],
+  "checks": "Two correlated redacted 503 events; fail-on-2 once; controlled unavailable; success before/after; assets and 404; deterministic metric equality."
+}

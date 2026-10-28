@@ -1,0 +1,7 @@
+Fixed the demonstrated cross-owner read and update bypasses with two SQL ownership checks. UI, API and architecture preserved.
+
+Recheck: 120 observation records, zero mismatches; independent SQLite checks confirmed forbidden writes left victim data unchanged. Both reports validated.
+
+[Audit artifacts](/private/tmp/toy-owner-notes-v2-agent/audits/owner-notes-standard/README.md) include read-only before/after reports, hashes, patch, observations and regression evidence.
+
+Live-network, browser and actual process-restart checks were unexecuted; related outcomes remain unknown.

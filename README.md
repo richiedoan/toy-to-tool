@@ -49,3 +49,9 @@ The detailed user brief was supplied locally as the untracked input `PROJECT_BRI
 The catalogue distinguishes [WCAG 2.2 normative requirements](https://www.w3.org/TR/2024/REC-WCAG22-20241212/) from the project's evaluation policy and explanatory guidance. Security references [OWASP ASVS 5.0.0](https://asvs.owasp.org/) without claiming numbered control coverage; exact requirement mappings would need a separate scoped verification. [Google Web Vitals](https://web.dev/articles/vitals) informs the performance criterion's field thresholds. Full titles, versions, access dates, per-criterion links and exceptions are in the catalogue.
 
 Passing this protocol is not a declaration of WCAG AA compliance or system security. The validator checks structure, enumerations, coverage, reference integrity and decision consistency. A reviewer or consuming skill must still inspect evidence authenticity, applicability, standards exceptions and sufficiency for the claimed scope. Synthetic examples are not assurance for a real app.
+
+## Six specialist groups and portable installation
+
+The five additional specialists are UX & Visual Quality, Accessibility, Security & Privacy, Performance & Resilience, and Deployment & Operations. Together with Functionality & Data they reuse the 36 criteria and one report contract. See [specialist and bundle guidance](docs/skills.md) for names, scope, standalone exports and runtime requirements.
+
+The new [owner-notes](fixtures/owner-notes/README.md) and [dashboard](fixtures/dashboard/README.md) fixtures have checksummed buggy originals, neutral agent packets and [recorded before/after trials](evaluation/evidence/expansion-v1/workflow.md). The trials verify the listed fixes and explicit preservation controls; they are not a controlled skill-effectiveness study.

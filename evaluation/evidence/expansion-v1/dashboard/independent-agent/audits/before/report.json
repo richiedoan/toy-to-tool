@@ -1,0 +1,671 @@
+{
+  "criterion_groups": [
+    "U",
+    "A",
+    "P",
+    "O"
+  ],
+  "report_kind": "audit",
+  "catalog_version": "1.0.0",
+  "audit_level": "Standard",
+  "change_permission": "fix_scoped",
+  "profile": {
+    "name": "Local metrics dashboard",
+    "features": {
+      "ui": true,
+      "pointer_ui": true,
+      "operations": true,
+      "inputs": true,
+      "persistent_data": false,
+      "shared_writes": false,
+      "user_changes": false,
+      "protected_resources": false,
+      "untrusted_execution": false,
+      "authentication": false,
+      "csrf_surface": false,
+      "cors_surface": false,
+      "uploads": false,
+      "public_endpoints": false,
+      "abuse_surface": false,
+      "network": true,
+      "resource_lifecycle": true,
+      "load_requirements": false,
+      "realtime": false,
+      "offline_sync": false,
+      "background_sync": false,
+      "deployed": false,
+      "important_data": false,
+      "operated_service": true
+    },
+    "rationale": {
+      "ui": "Native dashboard screen.",
+      "pointer_ui": "Search and refresh native controls.",
+      "operations": "Read and refresh metrics.",
+      "inputs": "Disposable title filter.",
+      "persistent_data": "No durable retention or restore. Last success is document memory, checked in U02/P02.",
+      "shared_writes": "README and source establish absence: deterministic read-only stateless localhost fixture; no shared writes.",
+      "user_changes": "No data mutation, destructive, cancel or back workflow. Disposable filter correction is checked in U02.",
+      "protected_resources": "README and source establish absence: deterministic read-only stateless localhost fixture; no protected resources.",
+      "untrusted_execution": "README and source establish absence: deterministic read-only stateless localhost fixture; no untrusted execution.",
+      "authentication": "README and source establish absence: deterministic read-only stateless localhost fixture; no authentication.",
+      "csrf_surface": "README and source establish absence: deterministic read-only stateless localhost fixture; no csrf surface.",
+      "cors_surface": "README and source establish absence: deterministic read-only stateless localhost fixture; no cors surface.",
+      "uploads": "README and source establish absence: deterministic read-only stateless localhost fixture; no uploads.",
+      "public_endpoints": "README and source establish absence: deterministic read-only stateless localhost fixture; no public endpoints.",
+      "abuse_surface": "README and source establish absence: deterministic read-only stateless localhost fixture; no abuse surface.",
+      "network": "GET /api/metrics.",
+      "resource_lifecycle": "Document listeners, replaced nodes and transient fetches.",
+      "load_requirements": "README and source establish absence: deterministic read-only stateless localhost fixture; no load requirements.",
+      "realtime": "README and source establish absence: deterministic read-only stateless localhost fixture; no realtime.",
+      "offline_sync": "README and source establish absence: deterministic read-only stateless localhost fixture; no offline sync.",
+      "background_sync": "README and source establish absence: deterministic read-only stateless localhost fixture; no background sync.",
+      "deployed": "README and source establish absence: deterministic read-only stateless localhost fixture; no deployed.",
+      "important_data": "README and source establish absence: deterministic read-only stateless localhost fixture; no important data.",
+      "operated_service": "Local operator starts service and receives stderr events."
+    }
+  },
+  "scope_and_limitations": "Standard focused U/A/P/O audit against dashboard/README.md. Expert source review, real app handlers in Node VM with controlled DOM/fetch, Python in-memory HTTP handler checks, clean-copy startup attempts. No real browser: Chrome launch exit 134; no browser MCP/automation. Socket bind denied by sandbox. No screenshots, rendered accessibility/geometry, AT, text zoom, real keyboard, Chrome input-to-frame samples, field CWV, user sessions, load or production assurance. Source hashes identify builds; repository has no HEAD. Protected README startup-path failure remains proposed. Patched layout/performance failures remain verification pending at original severity until browser recheck.",
+  "evidence": [
+    {
+      "id": "requirements",
+      "location": "audits/before/source/README.md",
+      "description": "Agreed task, budget and preservation contract.",
+      "environment": "Local macOS; supplied Python 3.9.6 venv and Node v24.19.0; exact limits in context and artifacts.",
+      "captured_at": "2026-10-28T08:57:24.939859+00:00",
+      "kind": "requirement",
+      "synthetic": false
+    },
+    {
+      "id": "context",
+      "location": "audits/context.json",
+      "description": "Actual environment, probes, scope, tasks and unavailable tools.",
+      "environment": "Local macOS; supplied Python 3.9.6 venv and Node v24.19.0; exact limits in context and artifacts.",
+      "captured_at": "2026-10-28T08:57:24.939859+00:00",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "source",
+      "location": "audits/before/source-observations.json",
+      "description": "Criterion-linked static observations and preservation boundaries.",
+      "environment": "Local macOS; supplied Python 3.9.6 venv and Node v24.19.0; exact limits in context and artifacts.",
+      "captured_at": "2026-10-28T08:57:24.939859+00:00",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "hashes",
+      "location": "audits/before/source-hashes.json",
+      "description": "SHA-256 source manifest.",
+      "environment": "Local macOS; supplied Python 3.9.6 venv and Node v24.19.0; exact limits in context and artifacts.",
+      "captured_at": "2026-10-28T08:57:24.939859+00:00",
+      "kind": "artifact",
+      "synthetic": false
+    },
+    {
+      "id": "handlers",
+      "location": "audits/before/handlers.json",
+      "description": "Executed app handlers under explicitly controlled Node adapter; not browser results.",
+      "environment": "Local macOS; supplied Python 3.9.6 venv and Node v24.19.0; exact limits in context and artifacts.",
+      "captured_at": "2026-10-28T08:57:24.939859+00:00",
+      "kind": "measurement",
+      "synthetic": false
+    },
+    {
+      "id": "server",
+      "location": "audits/before/server-handlers.json",
+      "description": "Executed Python HTTP handlers in memory; no live service assurance.",
+      "environment": "Local macOS; supplied Python 3.9.6 venv and Node v24.19.0; exact limits in context and artifacts.",
+      "captured_at": "2026-10-28T08:57:24.939859+00:00",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "startup",
+      "location": "audits/before/operations.json",
+      "description": "Clean copy documented path failure and socket-denied fallback attempt.",
+      "environment": "Local macOS; supplied Python 3.9.6 venv and Node v24.19.0; exact limits in context and artifacts.",
+      "captured_at": "2026-10-28T08:57:24.939859+00:00",
+      "kind": "observation",
+      "synthetic": false
+    }
+  ],
+  "findings": [
+    {
+      "id": "finding-U01",
+      "criterion_id": "U01",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Source task mapping exists, but actual screen hierarchy and user interpretation have not been exercised. Expert review only.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical U01 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes",
+        "handlers"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve approved desktop tokens, content, native controls, endpoint and architecture. No unrelated changes.",
+      "verification_plan": "Repeat criterion protocol with a working browser/local socket permission; do not treat static checks as runtime assurance.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-U02",
+      "criterion_id": "U02",
+      "status": "fail",
+      "severity": "important",
+      "decision": "fix",
+      "reason": "503/offline handlers clear successful rows and blank status. Required explanation and retention fail.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical U02 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes",
+        "handlers"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": true,
+        "measurable_benefit": true,
+        "authorized": true,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Small authorized app-only correction; verify measurable recovery/fit/delay and unchanged desktop/data. Low scope, browser regression evidence unavailable.",
+      "verification_plan": "Keep rows and explain retry; rerun 503/offline, initial failure, slow response, empty filter and recovery.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-U03",
+      "criterion_id": "U03",
+      "status": "fail",
+      "severity": "important",
+      "decision": "fix",
+      "reason": "Fixed 1100px shell exceeds 320/390/768 widths, with hidden horizontal overflow. Source establishes unsupported mobile layout; rendered control coordinates unavailable.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical U03 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes",
+        "handlers"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": true,
+        "measurable_benefit": true,
+        "authorized": true,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Small authorized app-only correction; verify measurable recovery/fit/delay and unchanged desktop/data. Low scope, browser regression evidence unavailable.",
+      "verification_plan": "Fit shell, wrap narrow header and adapt columns; recheck three tasks at all four widths and approved 1440 desktop.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-U04",
+      "criterion_id": "U04",
+      "status": "not_applicable",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All relevant features are absent: user_changes: No data mutation, destructive, cancel or back workflow. Disposable filter correction is checked in U02. Source architecture and README inspected; no additional infrastructure justified.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical U04 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve approved desktop tokens, content, native controls, endpoint and architecture. No unrelated changes.",
+      "verification_plan": "Repeat criterion protocol with a working browser/local socket permission; do not treat static checks as runtime assurance.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-U05",
+      "criterion_id": "U05",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Single screen uses consistent native controls/cards in source; rendered equivalent states and desktop preservation require browser evidence.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical U05 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes",
+        "handlers"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve approved desktop tokens, content, native controls, endpoint and architecture. No unrelated changes.",
+      "verification_plan": "Repeat criterion protocol with a working browser/local socket permission; do not treat static checks as runtime assurance.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-A01",
+      "criterion_id": "A01",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Native button and search retained; real Tab/Shift+Tab/Enter task paths and focus sequence unexecuted.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical A01 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes",
+        "handlers"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve approved desktop tokens, content, native controls, endpoint and architecture. No unrelated changes.",
+      "verification_plan": "Repeat criterion protocol with a working browser/local socket permission; do not treat static checks as runtime assurance.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-A02",
+      "criterion_id": "A02",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Explicit label, native roles, status live region retained; accessibility tree and supported AT state announcements unexecuted.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical A02 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes",
+        "handlers"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve approved desktop tokens, content, native controls, endpoint and architecture. No unrelated changes.",
+      "verification_plan": "Repeat criterion protocol with a working browser/local socket permission; do not treat static checks as runtime assurance.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-A03",
+      "criterion_id": "A03",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Source palette inventoried; actual computed/composited text colors across states and placeholder unmeasured.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical A03 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes",
+        "handlers"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve approved desktop tokens, content, native controls, endpoint and architecture. No unrelated changes.",
+      "verification_plan": "Repeat criterion protocol with a working browser/local socket permission; do not treat static checks as runtime assurance.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-A04",
+      "criterion_id": "A04",
+      "status": "fail",
+      "severity": "important",
+      "decision": "fix",
+      "reason": "Fixed 1100px shell with hidden overflow violates 320 CSS pixel reflow contract. 200% text-resize runtime is unexecuted.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical A04 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes",
+        "handlers"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": true,
+        "measurable_benefit": true,
+        "authorized": true,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Small authorized app-only correction; verify measurable recovery/fit/delay and unchanged desktop/data. Low scope, browser regression evidence unavailable.",
+      "verification_plan": "Use responsive shell/cards; recheck at 320 CSS pixels and 200% text size, then desktop positive controls.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-A05",
+      "criterion_id": "A05",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Focus-visible rule retained; focus visibility and occlusion unexecuted in browser.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical A05 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes",
+        "handlers"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve approved desktop tokens, content, native controls, endpoint and architecture. No unrelated changes.",
+      "verification_plan": "Repeat criterion protocol with a working browser/local socket permission; do not treat static checks as runtime assurance.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-A06",
+      "criterion_id": "A06",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Native controls and CSS padding retained; real hit regions and spacing geometry unmeasured.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical A06 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes",
+        "handlers"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve approved desktop tokens, content, native controls, endpoint and architecture. No unrelated changes.",
+      "verification_plan": "Repeat criterion protocol with a working browser/local socket permission; do not treat static checks as runtime assurance.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-P01",
+      "criterion_id": "P01",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "VM core data/filter/retry handlers run without exceptions, but supported-browser tasks and runtime logs are unavailable.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical P01 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes",
+        "handlers"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve approved desktop tokens, content, native controls, endpoint and architecture. No unrelated changes.",
+      "verification_plan": "Repeat criterion protocol with a working browser/local socket permission; do not treat static checks as runtime assurance.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-P02",
+      "criterion_id": "P02",
+      "status": "fail",
+      "severity": "important",
+      "decision": "fix",
+      "reason": "Controlled rejected fetch and 503 erase last success and feedback; retry handler recovers but failure state is untruthful. Timeout subcase also unverified.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical P02 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes",
+        "handlers"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": true,
+        "measurable_benefit": true,
+        "authorized": true,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Small authorized app-only correction; verify measurable recovery/fit/delay and unchanged desktop/data. Low scope, browser regression evidence unavailable.",
+      "verification_plan": "Retain data and show explanation/retry; rerun faults and delayed success; bounded hung-request case still needs investigation.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-P03",
+      "criterion_id": "P03",
+      "status": "fail",
+      "severity": "important",
+      "decision": "fix",
+      "reason": "Each input deliberately busy-waits at least 320ms before rendering, exceeding the 100ms input-to-next-frame ceiling. Node samples corroborate handler delay; Chrome measurements unavailable.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical P03 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes",
+        "handlers"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": true,
+        "measurable_benefit": true,
+        "authorized": true,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Small authorized app-only correction; verify measurable recovery/fit/delay and unchanged desktop/data. Low scope, browser regression evidence unavailable.",
+      "verification_plan": "Remove busy wait; remeasure same Chrome setup at 1440x900 after warmup, five consecutive input-to-next-frame samples and nearest-rank p95 = sorted[ceil(.95*5)-1].",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-P04",
+      "criterion_id": "P04",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "15-cycle VM checkpoints show four nodes and stable listeners; real browser timers, requests, resources and teardown unexecuted.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical P04 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes",
+        "handlers"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve approved desktop tokens, content, native controls, endpoint and architecture. No unrelated changes.",
+      "verification_plan": "Repeat criterion protocol with a working browser/local socket permission; do not treat static checks as runtime assurance.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-O01",
+      "criterion_id": "O01",
+      "status": "fail",
+      "severity": "important",
+      "decision": "propose",
+      "reason": "Clean-copy README command fails: fixtures/dashboard/server.py does not exist. Correct actual path startup was attempted but sandbox denied bind; that denial is not an app failure.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical O01 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes",
+        "startup"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": true,
+        "measurable_benefit": true,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "README edit forbidden; propose correction only.",
+      "verification_plan": "Owner-approved future README correction to python3 dashboard/server.py --port 8767, then isolated clean startup and browser smoke. README is protected, so no edit authorized.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-O02",
+      "criterion_id": "O02",
+      "status": "not_applicable",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All relevant features are absent: deployed: README and source establish absence: deterministic read-only stateless localhost fixture; no deployed. Source architecture and README inspected; no additional infrastructure justified.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical O02 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve approved desktop tokens, content, native controls, endpoint and architecture. No unrelated changes.",
+      "verification_plan": "Repeat criterion protocol with a working browser/local socket permission; do not treat static checks as runtime assurance.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-O03",
+      "criterion_id": "O03",
+      "status": "not_applicable",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All relevant features are absent: important_data: README and source establish absence: deterministic read-only stateless localhost fixture; no important data. Source architecture and README inspected; no additional infrastructure justified.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical O03 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve approved desktop tokens, content, native controls, endpoint and architecture. No unrelated changes.",
+      "verification_plan": "Repeat criterion protocol with a working browser/local socket permission; do not treat static checks as runtime assurance.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-O04",
+      "criterion_id": "O04",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "In-memory real handlers produce correlated redacted 503 events with only event/request_id/status; actual owner stderr channel needs live startup, blocked by sandbox bind denial.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical O04 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes",
+        "server"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve approved desktop tokens, content, native controls, endpoint and architecture. No unrelated changes.",
+      "verification_plan": "Repeat criterion protocol with a working browser/local socket permission; do not treat static checks as runtime assurance.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-O05",
+      "criterion_id": "O05",
+      "status": "not_applicable",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All relevant features are absent: persistent_data: No durable retention or restore. Last success is document memory, checked in U02/P02.; deployed: README and source establish absence: deterministic read-only stateless localhost fixture; no deployed. Source architecture and README inspected; no additional infrastructure justified.",
+      "requirement_or_goal": "dashboard/README.md tasks and boundaries; canonical O05 protocol at Standard.",
+      "affected_users_and_conditions": "Local dashboard readers/operators; disposable deterministic data. Source and controlled handler execution only; browser-dependent portions unexecuted.",
+      "evidence_ids": [
+        "requirements",
+        "context",
+        "source",
+        "hashes"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve approved desktop tokens, content, native controls, endpoint and architecture. No unrelated changes.",
+      "verification_plan": "Repeat criterion protocol with a working browser/local socket permission; do not treat static checks as runtime assurance.",
+      "observed_outside_level": false
+    }
+  ]
+}

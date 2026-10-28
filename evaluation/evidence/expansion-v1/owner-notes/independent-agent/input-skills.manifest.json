@@ -1,0 +1,15 @@
+{
+  "archive_sha256": "c7ba20078cba7a6b0f729f047ca0d99f3a7224150a325e71b8a3720b1d9b370a",
+  "files": {
+    "security-privacy/SKILL.md": "d4d4847a15de6bc0c79c425c8898ebfcf0954a80af71e32e4171b60dbde6906a",
+    "security-privacy/references/engine/criteria/v1.json": "7aa829250fd2fb7441c7527c1f56164e2a336a106073891d3476569461b558e7",
+    "security-privacy/references/engine/docs/method.md": "18ff2181702a88ac1bd78ca17ab34de53e037af78178c5d1ea46bc075befa8f7",
+    "security-privacy/references/engine/docs/missing-access.md": "23250459bad4897c2d5f375ffeedf519ce1b3b18d6341a7be049346d3b603a53",
+    "security-privacy/references/engine/docs/report-template.md": "9e021c3739619906ae9b19b2230ea57f8917210f6b7aecbb53328efe9d394578",
+    "security-privacy/references/engine/requirements.txt": "ead6ae335f2e4f11ef9f66f1a7de8c26b2fc66b83518c089ae180f1c80ab0275",
+    "security-privacy/references/engine/schemas/catalog.schema.json": "fe68a0edf1d9f81b6bbb09465b0b29ee8951c5593872d3ecb2be7ef19e739105",
+    "security-privacy/references/engine/schemas/profile.schema.json": "e9610a0b9ad84668ef62b534621d43aece1e84b52f290e100e2e449355afec0c",
+    "security-privacy/references/engine/schemas/report.schema.json": "35fa803dcfc79b0ed9087089147827201957ef19b7e7b5a3b3677f1210e070f8",
+    "security-privacy/references/engine/scripts/audit.py": "6d8ed5ed9327a5616f5d4af75cff316a93fb2bfc6c0b47dbbd53b64c383b79df"
+  }
+}

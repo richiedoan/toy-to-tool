@@ -1,0 +1,3 @@
+# Fixture review workspace
+
+Target: owner-notes/. Use the supplied skills: security-privacy. Read the target README for product requirements and preservation boundaries. Run Inspect -> Improve -> Recheck at Standard. Fix scoped, demonstrated defects within the target app only; do not change the README, product contract, unrelated code or approved desktop design. Retain before/after reports, raw observations and patches under audits/. Use an available Python interpreter with the declared engine dependencies, and an explicit target evidence root. Do not read outside this workspace or seek evaluator answers. Use disposable data; save artifacts in English.

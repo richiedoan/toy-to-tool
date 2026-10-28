@@ -1,0 +1,45 @@
+{
+  "captured_at": "2026-10-28T08:55:55.154761+00:00",
+  "method": "Expert source review, not rendered browser observations.",
+  "requirements": "Retained README at audits/before/source/README.md",
+  "U01": "One main; h1 Metrics dashboard; named Refresh data and Filter metrics controls map to three README tasks. Participant understanding unknown.",
+  "U02_P02": "Actual VM execution: on 503 and rejected fetch catch clears metrics and status; finally reenables button. Last four successful metric rows lost. Delay remains Loading and disabled until fetch resolves. No request timeout exists; bounded timeout behavior unexecuted. Empty filter matches and clearing work.",
+  "U03_A04": {
+    "expected": "320/390/768/1440 CSS widths and 200% text resize/reflow without obstructing refresh or text",
+    "source": ".shell width 1100px plus body overflow-x hidden; header nowrap and grid fixed four columns",
+    "widths": [
+      320,
+      390,
+      768,
+      1440
+    ],
+    "fixed_shell_excess_css_px": [
+      780,
+      710,
+      332,
+      0
+    ],
+    "limit": "Arithmetic is not rendered geometry; exact button coordinates, screenshots, keyboard reach and browser zoom unexecuted. Fixed width statically violates supported mobile contract."
+  },
+  "A01_A02_A05_A06": "Native button, explicit search label, live polite status and focus-visible 3px outline retained. DOM/tree, keyboard, visible focus, targets and screen-reader behavior unexecuted.",
+  "A03": "Source color tokens inventoried: ink #182c2b, muted #465b58, paper #f3f5f2, panel white, accent #176454; actual compositing, browser placeholder and state colors unmeasured. No contrast pass claimed.",
+  "P03": "Unconditional performance.now busy loop >=320ms per input; five warmed handler durations recorded in handlers.json. This alone exceeds 100ms before frame can run. Chrome p95 recheck requires browser, 1440x900, no throttling, actual hardware, warmup and five samples. No field CWV claim.",
+  "P04": "15 filter-clear-refresh cycles; VM node and listener counts stable at checkpoints 1/5/15, no new app listener registrations in render/load. Browser resources and teardown unexecuted; no leak claim.",
+  "O01": "README command references absent fixtures/dashboard/server.py. Clean copy exact command fails missing file; corrected invocation blocked at bind by PermissionError. Broken path is app documentation failure; bind denial is environment limitation. README change forbidden.",
+  "O02_O03_O05": "No deployment, important user data, backup/restore or release rollback requirement. Deterministic replaceable constants; no writes.",
+  "positive_controls": [
+    "Desktop 1100px shell, approved color/font/order/labels/native input/button and focus rules retained as source snapshot.",
+    "Four values: Revenue $24,500; Orders 182; Customers 96; Conversion 4.2%.",
+    "Case-insensitive title filter and clear; zero requests per filter; successful load; delayed load disabling refresh; failure retry handler.",
+    "Simple stdlib endpoint and bounded fail-on mechanism; no frontend packages or build."
+  ],
+  "authorized_changes": [
+    "Constrain shell to viewport, wrap header only when it cannot fit, adapt card columns below desktop widths.",
+    "Retain metrics and explain failure with retry direction.",
+    "Remove unconditional busy wait; preserve synchronous render and values."
+  ],
+  "excluded_changes": [
+    "No README modification, server/framework replacement, design token change, renamed controls or metrics."
+  ],
+  "recheck": "Same source/VM scenarios and hashes; browser-dependent failures retain severity until matching browser evidence exists."
+}

@@ -1,0 +1,447 @@
+{
+  "fixture": "dashboard",
+  "captured_at": "2026-10-28T09:03:27.951Z",
+  "app_hashes": {
+    "README.md": "de3fa2d3becb2545295aebfb6a94bbbc26cd811534043d86b22962b65aaaeba9",
+    "server.py": "b938a82d23431ac458dc3b171079857078eab83475209390289fcb6119d49d8b",
+    "index.html": "f6031cefe7485937271d62261bffbefb1d1edb5158f735184d5726f6e6afa716",
+    "app.js": "9f5a3aa78aff5b6ad0abbb79c32a906291ac8359c5da2be7a4e7b077e0356284",
+    "style.css": "8c5c045683a4f9253d82bb202c1e7eda550e278b6e49579e35d23e28162e23be"
+  },
+  "environment": {
+    "node": "v24.19.0",
+    "os": "darwin",
+    "cpu": "Apple M2",
+    "browser": "156.0.8078.49",
+    "channel": "chrome",
+    "throttling": "none",
+    "execution_isolation": "Fresh temporary copy of five declared fixture files; fresh process, empty data directory.",
+    "task_budget": "dashboard filter local p95 of five post-warmup samples <=100ms; no field data"
+  },
+  "results": [
+    {
+      "id": "layout-320",
+      "criteria": [
+        "U03",
+        "A04"
+      ],
+      "steps": "Load at actual CSS viewport; verify essential Refresh and metric text fit without horizontal task obstruction.",
+      "captured_at": "2026-10-28T09:03:23.773Z",
+      "details": {
+        "runtime_errors": [],
+        "geometry": {
+          "x": 24,
+          "right": 149.984375,
+          "width": 320,
+          "scrollWidth": 320
+        },
+        "values": [
+          "$24,500",
+          "182",
+          "96",
+          "4.2%"
+        ]
+      },
+      "status": "pass"
+    },
+    {
+      "id": "layout-390",
+      "criteria": [
+        "U03",
+        "A04"
+      ],
+      "steps": "Load at actual CSS viewport; verify essential Refresh and metric text fit without horizontal task obstruction.",
+      "captured_at": "2026-10-28T09:03:24.123Z",
+      "details": {
+        "runtime_errors": [],
+        "geometry": {
+          "x": 24,
+          "right": 149.984375,
+          "width": 390,
+          "scrollWidth": 390
+        },
+        "values": [
+          "$24,500",
+          "182",
+          "96",
+          "4.2%"
+        ]
+      },
+      "status": "pass"
+    },
+    {
+      "id": "layout-768",
+      "criteria": [
+        "U03",
+        "A04"
+      ],
+      "steps": "Load at actual CSS viewport; verify essential Refresh and metric text fit without horizontal task obstruction.",
+      "captured_at": "2026-10-28T09:03:24.345Z",
+      "details": {
+        "runtime_errors": [],
+        "geometry": {
+          "x": 618.015625,
+          "right": 744,
+          "width": 768,
+          "scrollWidth": 768
+        },
+        "values": [
+          "$24,500",
+          "182",
+          "96",
+          "4.2%"
+        ]
+      },
+      "status": "pass"
+    },
+    {
+      "id": "layout-1440",
+      "criteria": [
+        "U03",
+        "A04"
+      ],
+      "steps": "Load at actual CSS viewport; verify essential Refresh and metric text fit without horizontal task obstruction.",
+      "captured_at": "2026-10-28T09:03:24.573Z",
+      "details": {
+        "runtime_errors": [],
+        "geometry": {
+          "x": 1120.015625,
+          "right": 1246,
+          "width": 1440,
+          "scrollWidth": 1440
+        },
+        "values": [
+          "$24,500",
+          "182",
+          "96",
+          "4.2%"
+        ]
+      },
+      "status": "pass"
+    },
+    {
+      "id": "desktop-approved",
+      "criteria": [
+        "U01",
+        "U05",
+        "A02"
+      ],
+      "steps": "Capture approved successful desktop screen and native labels/control behavior.",
+      "captured_at": "2026-10-28T09:03:24.814Z",
+      "details": {
+        "runtime_errors": [],
+        "title": "Metrics dashboard",
+        "filterName": 1
+      },
+      "status": "pass"
+    },
+    {
+      "id": "error-recovery",
+      "criteria": [
+        "U02",
+        "U04",
+        "P02"
+      ],
+      "steps": "After successful data, induce 503; retain values, explain error, then retry successfully.",
+      "captured_at": "2026-10-28T09:03:25.075Z",
+      "details": {
+        "runtime_errors": [],
+        "errorText": "Unable to refresh metrics. Showing last successful data. Try Refresh data.",
+        "retainedValues": [
+          "$24,500",
+          "182",
+          "96",
+          "4.2%"
+        ],
+        "recovered": [
+          "$24,500",
+          "182",
+          "96",
+          "4.2%"
+        ]
+      },
+      "status": "pass"
+    },
+    {
+      "id": "loading-empty-correction",
+      "criteria": [
+        "U02",
+        "U04"
+      ],
+      "steps": "Enter a nonmatching query, clear it, then observe a controlled slow refresh and successful completion.",
+      "captured_at": "2026-10-28T09:03:25.454Z",
+      "details": {
+        "runtime_errors": [],
+        "empty": "No matching metrics. Clear the filter to see all metrics.",
+        "pending": "Loading…",
+        "finished": "4 metrics shown."
+      },
+      "status": "pass"
+    },
+    {
+      "id": "local-filter-budget",
+      "criteria": [
+        "P03"
+      ],
+      "steps": "Warm filter; measure five actual input-dispatch-to-next-frame samples at 1440x900, no throttling; p95<=100ms. Verify values.",
+      "captured_at": "2026-10-28T09:03:25.983Z",
+      "details": {
+        "runtime_errors": [],
+        "timing": {
+          "samples_ms": [
+            16.59999999962747,
+            16.300000000745058,
+            17.09999999962747,
+            16.59999999962747,
+            16.200000001117587
+          ],
+          "p95_ms": 17.09999999962747,
+          "calculation": "Nearest-rank p95 of five post-warmup samples",
+          "query": ""
+        },
+        "values": [
+          "$24,500",
+          "182",
+          "96",
+          "4.2%"
+        ]
+      },
+      "status": "pass"
+    },
+    {
+      "id": "keyboard-focus-targets",
+      "criteria": [
+        "A01",
+        "A02",
+        "A05",
+        "A06"
+      ],
+      "steps": "Tab to Refresh and Filter, inspect focus visibility/geometry, activate refresh using Enter.",
+      "captured_at": "2026-10-28T09:03:26.314Z",
+      "details": {
+        "runtime_errors": [],
+        "focus": {
+          "id": "refresh",
+          "width": 125.984375,
+          "height": 50,
+          "outlineWidth": "3px",
+          "outlineStyle": "solid",
+          "visible": true
+        },
+        "filter_box": {
+          "x": 194,
+          "y": 234,
+          "width": 1052,
+          "height": 50
+        },
+        "matching": [
+          "Revenue"
+        ]
+      },
+      "status": "pass"
+    },
+    {
+      "id": "text-contrast",
+      "criteria": [
+        "A03"
+      ],
+      "steps": "Measure actual computed text/background colors and unrounded WCAG sRGB ratios for every distinct text style in the normal state.",
+      "captured_at": "2026-10-28T09:03:26.623Z",
+      "details": {
+        "runtime_errors": [],
+        "pairs": [
+          {
+            "selector": "h1",
+            "foreground": "rgb(24, 44, 43)",
+            "background": "rgb(243, 245, 242)",
+            "size_px": 32,
+            "weight": "700",
+            "ratio": 13.357137470861394,
+            "minimum": 3
+          },
+          {
+            "selector": ".eyebrow",
+            "foreground": "rgb(23, 100, 84)",
+            "background": "rgb(243, 245, 242)",
+            "size_px": 12,
+            "weight": "700",
+            "ratio": 6.411789941370507,
+            "minimum": 4.5
+          },
+          {
+            "selector": "header p:last-child",
+            "foreground": "rgb(24, 44, 43)",
+            "background": "rgb(243, 245, 242)",
+            "size_px": 16,
+            "weight": "400",
+            "ratio": 13.357137470861394,
+            "minimum": 4.5
+          },
+          {
+            "selector": "label",
+            "foreground": "rgb(24, 44, 43)",
+            "background": "rgb(243, 245, 242)",
+            "size_px": 16,
+            "weight": "600",
+            "ratio": 13.357137470861394,
+            "minimum": 4.5
+          },
+          {
+            "selector": "#filter",
+            "foreground": "rgb(24, 44, 43)",
+            "background": "rgb(255, 255, 255)",
+            "size_px": 16,
+            "weight": "400",
+            "ratio": 14.644407846760892,
+            "minimum": 4.5
+          },
+          {
+            "selector": "#filter::placeholder",
+            "foreground": "rgb(117, 117, 117)",
+            "background": "rgb(255, 255, 255)",
+            "size_px": 16,
+            "weight": "400",
+            "ratio": 4.607518093747377,
+            "minimum": 4.5
+          },
+          {
+            "selector": "#refresh",
+            "foreground": "rgb(255, 255, 255)",
+            "background": "rgb(23, 100, 84)",
+            "size_px": 16,
+            "weight": "400",
+            "ratio": 7.029714797352717,
+            "minimum": 4.5
+          },
+          {
+            "selector": "#status",
+            "foreground": "rgb(24, 44, 43)",
+            "background": "rgb(243, 245, 242)",
+            "size_px": 16,
+            "weight": "400",
+            "ratio": 13.357137470861394,
+            "minimum": 4.5
+          },
+          {
+            "selector": "h2",
+            "foreground": "rgb(24, 44, 43)",
+            "background": "rgb(255, 255, 255)",
+            "size_px": 16,
+            "weight": "700",
+            "ratio": 14.644407846760892,
+            "minimum": 4.5
+          },
+          {
+            "selector": ".value",
+            "foreground": "rgb(24, 44, 43)",
+            "background": "rgb(255, 255, 255)",
+            "size_px": 28,
+            "weight": "600",
+            "ratio": 14.644407846760892,
+            "minimum": 3
+          },
+          {
+            "selector": "footer",
+            "foreground": "rgb(70, 91, 88)",
+            "background": "rgb(243, 245, 242)",
+            "size_px": 14,
+            "weight": "400",
+            "ratio": 6.60993489356021,
+            "minimum": 4.5
+          }
+        ]
+      },
+      "status": "pass"
+    },
+    {
+      "id": "resize-text",
+      "criteria": [
+        "A04"
+      ],
+      "steps": "Increase actual root text scale to 200%; inspect that essential action remains reachable. This is supplemental text-resize evidence, not a complete browser zoom conformance test.",
+      "captured_at": "2026-10-28T09:03:26.873Z",
+      "details": {
+        "runtime_errors": [],
+        "box": {
+          "x": 982.5,
+          "y": 185,
+          "width": 239.5,
+          "height": 98
+        },
+        "title": "Metrics dashboard"
+      },
+      "status": "pass"
+    },
+    {
+      "id": "repeat-refresh-resources",
+      "criteria": [
+        "P01",
+        "P04"
+      ],
+      "steps": "Warm up then perform five refresh/filter cycles; inspect request count, final data and runtime exceptions.",
+      "captured_at": "2026-10-28T09:03:27.126Z",
+      "details": {
+        "runtime_errors": [],
+        "requests": 5,
+        "values": [
+          "$24,500",
+          "182",
+          "96",
+          "4.2%"
+        ]
+      },
+      "status": "pass"
+    },
+    {
+      "id": "operator-diagnostics",
+      "criteria": [
+        "O04"
+      ],
+      "steps": "Inject a real safe service failure; correlate response ID with redacted operator stderr event.",
+      "captured_at": "2026-10-28T09:03:27.786Z",
+      "details": {
+        "status": 503,
+        "request_id": "aa6c55d6-3a1d-4ecf-a4ce-63f97ae8ed46",
+        "logged": true
+      },
+      "status": "pass"
+    },
+    {
+      "id": "clean-startup-smoke",
+      "criteria": [
+        "O01"
+      ],
+      "steps": "A fresh Python process started from declared source files; GET page and deterministic metrics succeed without extra dependencies.",
+      "captured_at": "2026-10-28T09:03:27.905Z",
+      "details": {
+        "page_status": 200,
+        "api": {
+          "status": 200,
+          "data": [
+            {
+              "title": "Revenue",
+              "value": "$24,500"
+            },
+            {
+              "title": "Orders",
+              "value": "182"
+            },
+            {
+              "title": "Customers",
+              "value": "96"
+            },
+            {
+              "title": "Conversion",
+              "value": "4.2%"
+            }
+          ]
+        }
+      },
+      "status": "pass"
+    }
+  ],
+  "logs": [
+    "{\"event\": \"metrics_unavailable\", \"request_id\": \"aa6c55d6-3a1d-4ecf-a4ce-63f97ae8ed46\", \"status\": 503}\n"
+  ],
+  "limitations": "Evaluator-led observations on seeded local fixtures. Not a skill-effectiveness comparison, full security assessment, field CWV or WCAG conformance claim."
+}

@@ -1,0 +1,12 @@
+{
+  "captured_at": "2026-10-28T08:55:03.168590+00:00",
+  "python": "3.9.6 (default, May 22 2026, 11:13:45) \n[Clang 21.0.0 (clang-2100.1.1.101)]",
+  "clean_copy": "audits/before/clean-start",
+  "declared_command": "python3 fixtures/dashboard/server.py --port 8767",
+  "documented_start": {
+    "exit": 2,
+    "stderr": "/private/tmp/toy-dashboard-agent/.venv/bin/python: can't open file '/private/tmp/toy-dashboard-agent/audits/before/clean-start/fixtures/dashboard/server.py': [Errno 2] No such file or directory\n"
+  },
+  "runtime_limitation": "Fallback startup unavailable; inspect server.stderr. A sandbox bind denial is not an application failure.",
+  "stderr_raw": "Traceback (most recent call last):\n  File \"/private/tmp/toy-dashboard-agent/audits/before/clean-start/dashboard/server.py\", line 54, in <module>\n    server = create_server(args.port, args.fail_on)\n  File \"/private/tmp/toy-dashboard-agent/audits/before/clean-start/dashboard/server.py\", line 46, in create_server\n    return ThreadingHTTPServer(('127.0.0.1', port), Handler)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socketserver.py\", line 452, in __init__\n    self.server_bind()\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/server.py\", line 138, in server_bind\n    socketserver.TCPServer.server_bind(self)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socketserver.py\", line 466, in server_bind\n    self.socket.bind(self.server_address)\nPermissionError: [Errno 1] Operation not permitted\n"
+}

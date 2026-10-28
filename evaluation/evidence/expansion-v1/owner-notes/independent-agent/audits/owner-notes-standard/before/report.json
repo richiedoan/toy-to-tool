@@ -1,0 +1,277 @@
+{
+  "criterion_groups": [
+    "S"
+  ],
+  "report_kind": "audit",
+  "catalog_version": "1.0.0",
+  "audit_level": "Standard",
+  "change_permission": "fix_scoped",
+  "profile": {
+    "name": "Owner notes localhost fixture",
+    "features": {
+      "ui": true,
+      "pointer_ui": true,
+      "operations": true,
+      "inputs": true,
+      "persistent_data": true,
+      "shared_writes": false,
+      "user_changes": true,
+      "protected_resources": true,
+      "untrusted_execution": true,
+      "authentication": true,
+      "csrf_surface": true,
+      "cors_surface": true,
+      "uploads": false,
+      "public_endpoints": true,
+      "abuse_surface": true,
+      "network": true,
+      "resource_lifecycle": true,
+      "load_requirements": false,
+      "realtime": false,
+      "offline_sync": false,
+      "background_sync": false,
+      "deployed": false,
+      "important_data": false,
+      "operated_service": false
+    },
+    "rationale": {
+      "ui": "Native HTML login and editor.",
+      "pointer_ui": "Native buttons.",
+      "operations": "Local HTTP server.",
+      "inputs": "Login and plain text notes.",
+      "persistent_data": "SQLite persists notes across restart.",
+      "shared_writes": "No collaborative writes; independent owner records.",
+      "user_changes": "Owners update notes.",
+      "protected_resources": "Per-owner notes.",
+      "untrusted_execution": "Text crosses DOM and SQL boundaries.",
+      "authentication": "Two public test identities and in-memory sessions.",
+      "csrf_surface": "Cookie authenticated state changes.",
+      "cors_surface": "Browser HTTP API without cross-origin sharing requirement.",
+      "uploads": "No file upload routes or controls.",
+      "public_endpoints": "Static assets, login and logout.",
+      "abuse_surface": "Public login and bounded JSON input.",
+      "network": "Loopback HTTP.",
+      "resource_lifecycle": "Sessions expire and reset on restart.",
+      "load_requirements": "No agreed load or rate budget in README.",
+      "realtime": "Absent in the inspected localhost fixture and README contract.",
+      "offline_sync": "Absent in the inspected localhost fixture and README contract.",
+      "background_sync": "Absent in the inspected localhost fixture and README contract.",
+      "deployed": "README limits this fixture to isolated localhost.",
+      "important_data": "Only disposable fixture records; no production privacy or backup promise.",
+      "operated_service": "No production service operation in scope."
+    }
+  },
+  "scope_and_limitations": "Standard, group S only. Authorized demonstrated, proportionate corrections inside owner-notes; README/UI/architecture preserved. Actual Handler byte-stream execution with real SQLite; listening socket denied by sandbox and browser unavailable. No live network, browser, real process restart, HTTPS, production, load or certification claim. External files and evaluator material not accessed. Before/after stored separately; hashes bind source.",
+  "evidence": [
+    {
+      "id": "E-contract",
+      "location": "audits/owner-notes-standard/before/source/README.md",
+      "description": "Unchanged product contract, three priority tasks and preservation boundaries.",
+      "environment": "Supplied .venv Python 3.9; local stdlib handlers and real disposable SQLite; see E-context.",
+      "captured_at": "2026-10-28T09:01:23.764841+00:00",
+      "kind": "requirement",
+      "synthetic": false
+    },
+    {
+      "id": "E-context",
+      "location": "audits/owner-notes-standard/context.json",
+      "description": "Environment, versions, source classification and capability discovery.",
+      "environment": "Supplied .venv Python 3.9; local stdlib handlers and real disposable SQLite; see E-context.",
+      "captured_at": "2026-10-28T09:01:23.764841+00:00",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-source",
+      "location": "audits/owner-notes-standard/source-review.md",
+      "description": "Criterion-linked sink/lifecycle/surface inspection, positive controls and pre-edit decision.",
+      "environment": "Supplied .venv Python 3.9; local stdlib handlers and real disposable SQLite; see E-context.",
+      "captured_at": "2026-10-28T09:01:23.764841+00:00",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-network",
+      "location": "audits/owner-notes-standard/network-startup-failure.log",
+      "description": "Actual startup failed at socket.bind with PermissionError; network checks unexecuted.",
+      "environment": "Supplied .venv Python 3.9; local stdlib handlers and real disposable SQLite; see E-context.",
+      "captured_at": "2026-10-28T09:01:23.764841+00:00",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-hashes",
+      "location": "audits/owner-notes-standard/before/source-hashes.json",
+      "description": "SHA-256 target source identity.",
+      "environment": "Supplied .venv Python 3.9; local stdlib handlers and real disposable SQLite; see E-context.",
+      "captured_at": "2026-10-28T09:01:23.764841+00:00",
+      "kind": "artifact",
+      "synthetic": false
+    },
+    {
+      "id": "E-probes",
+      "location": "audits/owner-notes-standard/before/observations.json",
+      "description": "Actual handler requests/responses, expected values, independent SQLite state. Sessions redacted.",
+      "environment": "Supplied .venv Python 3.9; local stdlib handlers and real disposable SQLite; see E-context.",
+      "captured_at": "2026-10-28T09:01:23.764841+00:00",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-summary",
+      "location": "audits/owner-notes-standard/before/probe-summary.json",
+      "description": "Observation count and mismatches against expected contract.",
+      "environment": "Supplied .venv Python 3.9; local stdlib handlers and real disposable SQLite; see E-context.",
+      "captured_at": "2026-10-28T09:01:23.764841+00:00",
+      "kind": "measurement",
+      "synthetic": false
+    }
+  ],
+  "findings": [
+    {
+      "id": "finding-S01",
+      "criterion_id": "S01",
+      "status": "fail",
+      "severity": "important",
+      "decision": "fix",
+      "reason": "Restricted note text is exposed to another authenticated owner through GET by id; only public demo identities otherwise appear in accessible source/assets.",
+      "requirement_or_goal": "Only intended public data reaches public audiences; owner note text restricted.",
+      "affected_users_and_conditions": "Both public test identities on disposable localhost records; two directions tested. Live browser/network operation unverified.",
+      "evidence_ids": [
+        "E-contract",
+        "E-context",
+        "E-source",
+        "E-network",
+        "E-hashes",
+        "E-probes",
+        "E-summary"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": true,
+        "measurable_benefit": true,
+        "authorized": true,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only GET/UPDATE parameterized owner predicates authorized for demonstrated bypass; preserve UI, auth, schema and API. Low scope/risk; unchanged positive controls verify benefit.",
+      "verification_plan": "Replay probe.py with fresh disposable SQLite; check A/B/anonymous read/write separately, independent victim state, own operations, payload boundaries and session controls. Complete browser/network/process checks in an authorized environment for unknown portions.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-S02",
+      "criterion_id": "S02",
+      "status": "fail",
+      "severity": "important",
+      "decision": "fix",
+      "reason": "Alice and Bob can each read and update the other note; GET/PATCH return 200 and SQLite confirms changed victim text. Lists, anonymous denial and own operations already work.",
+      "requirement_or_goal": "README: each user may list, read and update only their own records; anonymous access prohibited; ownership cannot transfer.",
+      "affected_users_and_conditions": "Both public test identities on disposable localhost records; two directions tested. Live browser/network operation unverified.",
+      "evidence_ids": [
+        "E-contract",
+        "E-context",
+        "E-source",
+        "E-network",
+        "E-hashes",
+        "E-probes",
+        "E-summary"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": true,
+        "measurable_benefit": true,
+        "authorized": true,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only GET/UPDATE parameterized owner predicates authorized for demonstrated bypass; preserve UI, auth, schema and API. Low scope/risk; unchanged positive controls verify benefit.",
+      "verification_plan": "Replay probe.py with fresh disposable SQLite; check A/B/anonymous read/write separately, independent victim state, own operations, payload boundaries and session controls. Complete browser/network/process checks in an authorized environment for unknown portions.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-S03",
+      "criterion_id": "S03",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "SQL parameterization and safe DOM sinks inspected; inert markup/quotes/Unicode/SQL-like text roundtrip exactly. Actual browser execution unverified.",
+      "requirement_or_goal": "README: plain text up to 1000 characters, quotes/Unicode valid; preserve parameterized SQL and text-safe rendering.",
+      "affected_users_and_conditions": "Both public test identities on disposable localhost records; two directions tested. Live browser/network operation unverified.",
+      "evidence_ids": [
+        "E-contract",
+        "E-context",
+        "E-source",
+        "E-network",
+        "E-hashes",
+        "E-probes",
+        "E-summary"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve demonstrated correct mechanisms. No changes justified by unavailable browser/network evidence.",
+      "verification_plan": "Replay probe.py with fresh disposable SQLite; check A/B/anonymous read/write separately, independent victim state, own operations, payload boundaries and session controls. Complete browser/network/process checks in an authorized environment for unknown portions.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-S04",
+      "criterion_id": "S04",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Valid/invalid login, server-side expiry, logout replay for reads/writes, relogin and server recreation tested via actual handlers. Cookie/transport behavior in browser, live network and real process restart unexecuted.",
+      "requirement_or_goal": "README: login, own operations, logout revokes previous session; expiry in memory and restart invalidation; local HTTP permitted.",
+      "affected_users_and_conditions": "Both public test identities on disposable localhost records; two directions tested. Live browser/network operation unverified.",
+      "evidence_ids": [
+        "E-contract",
+        "E-context",
+        "E-source",
+        "E-network",
+        "E-hashes",
+        "E-probes",
+        "E-summary"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve demonstrated correct mechanisms. No changes justified by unavailable browser/network evidence.",
+      "verification_plan": "Replay probe.py with fresh disposable SQLite; check A/B/anonymous read/write separately, independent victim state, own operations, payload boundaries and session controls. Complete browser/network/process checks in an authorized environment for unknown portions.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-S05",
+      "criterion_id": "S05",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Source and low-volume handler probes cover JSON bounds, CORS headers, static/login routes; uploads absent. Browser cross-site workflow and cookie enforcement unexecuted; no agreed rate/concurrency budget. Composite remains unknown.",
+      "requirement_or_goal": "Architecture-specific CSRF/CORS/public endpoints/input bounds, no unrelated infrastructure; independently classify uploads and abuse.",
+      "affected_users_and_conditions": "Both public test identities on disposable localhost records; two directions tested. Live browser/network operation unverified.",
+      "evidence_ids": [
+        "E-contract",
+        "E-context",
+        "E-source",
+        "E-network",
+        "E-hashes",
+        "E-probes",
+        "E-summary"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve demonstrated correct mechanisms. No changes justified by unavailable browser/network evidence.",
+      "verification_plan": "Replay probe.py with fresh disposable SQLite; check A/B/anonymous read/write separately, independent victim state, own operations, payload boundaries and session controls. Complete browser/network/process checks in an authorized environment for unknown portions.",
+      "observed_outside_level": false
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "captured_at": "2026-10-28T08:57:41.850067+00:00",
+  "workspace": "/private/tmp/toy-owner-notes-v2-agent",
+  "python": "3.9.6 (default, May 22 2026, 11:13:45) \n[Clang 21.0.0 (clang-2100.1.1.101)]",
+  "executable": "/private/tmp/toy-owner-notes-v2-agent/.venv/bin/python",
+  "sqlite": "3.54.0",
+  "engine_dependencies": {
+    "attrs": "26.1.0",
+    "jsonschema": "4.23.0",
+    "jsonschema-specifications": "2025.9.1",
+    "referencing": "0.36.2",
+    "rpds-py": "0.27.1",
+    "typing_extensions": "4.16.0"
+  },
+  "revision": "No commits/HEAD available; source hashes and complete target baseline retained.",
+  "requirements": "owner-notes/README.md and user instructions; Standard group S; fix_scoped only demonstrated proportionate target corrections.",
+  "classification": "Public: HTML/JS/CSS and demo identity definitions. Owner-restricted: note text and ownership. Sensitive session tokens retained only in test process memory; traces redact cookies. Disposable data only.",
+  "tasks": [
+    "Login/list/read own notes",
+    "Edit/save/independent readback",
+    "Logout/replay previous session denied"
+  ],
+  "browser_attempt": "Tool discovery found no Chrome/DevTools/browser execution tools; target contains no browser test setup. No browser installed or dependencies added. Browser runtime XSS/CSRF and visible workflow unexecuted.",
+  "scope_limits": "No reads outside workspace, no evaluator material or external sources accessed. Referenced external RTK file not read because user explicitly prohibits outside-workspace reads. Only supplied local skill is used. No production, HTTPS, distributed sessions or load assurance."
+}

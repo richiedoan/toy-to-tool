@@ -1,0 +1,700 @@
+{
+  "criterion_groups": [
+    "U",
+    "A",
+    "P",
+    "O"
+  ],
+  "report_kind": "audit",
+  "catalog_version": "1.0.0",
+  "audit_level": "Standard",
+  "change_permission": "fix_scoped",
+  "profile": {
+    "name": "dashboard disposable local fixture",
+    "features": {
+      "ui": true,
+      "pointer_ui": true,
+      "operations": true,
+      "inputs": true,
+      "persistent_data": false,
+      "shared_writes": false,
+      "user_changes": true,
+      "protected_resources": false,
+      "untrusted_execution": false,
+      "authentication": false,
+      "csrf_surface": false,
+      "cors_surface": false,
+      "uploads": false,
+      "public_endpoints": true,
+      "abuse_surface": null,
+      "network": true,
+      "resource_lifecycle": true,
+      "load_requirements": false,
+      "realtime": false,
+      "offline_sync": false,
+      "background_sync": false,
+      "deployed": false,
+      "important_data": false,
+      "operated_service": true
+    },
+    "rationale": {
+      "ui": "E-context: present in documented tasks/source and exercised runtime.",
+      "pointer_ui": "E-context: present in documented tasks/source and exercised runtime.",
+      "operations": "E-context: present in documented tasks/source and exercised runtime.",
+      "inputs": "E-context: present in documented tasks/source and exercised runtime.",
+      "persistent_data": "E-context: absent from the explicitly local, replaceable-data architecture/contract.",
+      "shared_writes": "E-context: absent from the explicitly local, replaceable-data architecture/contract.",
+      "user_changes": "E-context: present in documented tasks/source and exercised runtime.",
+      "protected_resources": "E-context: absent from the explicitly local, replaceable-data architecture/contract.",
+      "untrusted_execution": "E-context: absent from the explicitly local, replaceable-data architecture/contract.",
+      "authentication": "E-context: absent from the explicitly local, replaceable-data architecture/contract.",
+      "csrf_surface": "E-context: absent from the explicitly local, replaceable-data architecture/contract.",
+      "cors_surface": "E-context: absent from the explicitly local, replaceable-data architecture/contract.",
+      "uploads": "E-context: absent from the explicitly local, replaceable-data architecture/contract.",
+      "public_endpoints": "E-context: present in documented tasks/source and exercised runtime.",
+      "abuse_surface": "E-context: not established; do not infer absence from this focused trial.",
+      "network": "E-context: present in documented tasks/source and exercised runtime.",
+      "resource_lifecycle": "E-context: present in documented tasks/source and exercised runtime.",
+      "load_requirements": "E-context: absent from the explicitly local, replaceable-data architecture/contract.",
+      "realtime": "E-context: absent from the explicitly local, replaceable-data architecture/contract.",
+      "offline_sync": "E-context: absent from the explicitly local, replaceable-data architecture/contract.",
+      "background_sync": "E-context: absent from the explicitly local, replaceable-data architecture/contract.",
+      "deployed": "E-context: absent from the explicitly local, replaceable-data architecture/contract.",
+      "important_data": "E-context: absent from the explicitly local, replaceable-data architecture/contract.",
+      "operated_service": "E-context: present in documented tasks/source and exercised runtime."
+    }
+  },
+  "scope_and_limitations": "Evaluator-led real HTTP/Chrome checks on an isolated seeded fixture. Scope is limited to recorded cases; source/handler-only independent agent findings are archived separately. No skill-effectiveness, full WCAG, field CWV or ASVS certification claim. See E-context and E-preservation.",
+  "evidence": [
+    {
+      "id": "E-context",
+      "location": "evaluation/evidence/expansion-v1/dashboard/context.md",
+      "description": "Agreed tasks, safe scope, source inspection, capability and evidence limits.",
+      "environment": "{\"node\": \"v24.19.0\", \"os\": \"darwin\", \"cpu\": \"Apple M2\", \"browser\": \"156.0.8078.49\", \"channel\": \"chrome\", \"throttling\": \"none\", \"execution_isolation\": \"Fresh temporary copy of five declared fixture files; fresh process, empty data directory.\", \"task_budget\": \"dashboard filter local p95 of five post-warmup samples <=100ms; no field data\"}",
+      "captured_at": "2026-10-28T09:03:27.951Z",
+      "kind": "requirement",
+      "synthetic": false
+    },
+    {
+      "id": "E-preservation",
+      "location": "evaluation/evidence/expansion-v1/dashboard/preservation.json",
+      "description": "Protected source hashes and identical approved screenshot comparison.",
+      "environment": "{\"node\": \"v24.19.0\", \"os\": \"darwin\", \"cpu\": \"Apple M2\", \"browser\": \"156.0.8078.49\", \"channel\": \"chrome\", \"throttling\": \"none\", \"execution_isolation\": \"Fresh temporary copy of five declared fixture files; fresh process, empty data directory.\", \"task_budget\": \"dashboard filter local p95 of five post-warmup samples <=100ms; no field data\"}",
+      "captured_at": "2026-10-28T09:03:27.951Z",
+      "kind": "artifact",
+      "synthetic": false
+    },
+    {
+      "id": "E-layout-320",
+      "location": "evaluation/evidence/expansion-v1/dashboard/after/results.json",
+      "description": "Executed case layout-320: raw HTTP/UI/measurement observations and reproduction steps.",
+      "environment": "{\"node\": \"v24.19.0\", \"os\": \"darwin\", \"cpu\": \"Apple M2\", \"browser\": \"156.0.8078.49\", \"channel\": \"chrome\", \"throttling\": \"none\", \"execution_isolation\": \"Fresh temporary copy of five declared fixture files; fresh process, empty data directory.\", \"task_budget\": \"dashboard filter local p95 of five post-warmup samples <=100ms; no field data\"}",
+      "captured_at": "2026-10-28T09:03:27.951Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-layout-390",
+      "location": "evaluation/evidence/expansion-v1/dashboard/after/results.json",
+      "description": "Executed case layout-390: raw HTTP/UI/measurement observations and reproduction steps.",
+      "environment": "{\"node\": \"v24.19.0\", \"os\": \"darwin\", \"cpu\": \"Apple M2\", \"browser\": \"156.0.8078.49\", \"channel\": \"chrome\", \"throttling\": \"none\", \"execution_isolation\": \"Fresh temporary copy of five declared fixture files; fresh process, empty data directory.\", \"task_budget\": \"dashboard filter local p95 of five post-warmup samples <=100ms; no field data\"}",
+      "captured_at": "2026-10-28T09:03:27.951Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-layout-768",
+      "location": "evaluation/evidence/expansion-v1/dashboard/after/results.json",
+      "description": "Executed case layout-768: raw HTTP/UI/measurement observations and reproduction steps.",
+      "environment": "{\"node\": \"v24.19.0\", \"os\": \"darwin\", \"cpu\": \"Apple M2\", \"browser\": \"156.0.8078.49\", \"channel\": \"chrome\", \"throttling\": \"none\", \"execution_isolation\": \"Fresh temporary copy of five declared fixture files; fresh process, empty data directory.\", \"task_budget\": \"dashboard filter local p95 of five post-warmup samples <=100ms; no field data\"}",
+      "captured_at": "2026-10-28T09:03:27.951Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-layout-1440",
+      "location": "evaluation/evidence/expansion-v1/dashboard/after/results.json",
+      "description": "Executed case layout-1440: raw HTTP/UI/measurement observations and reproduction steps.",
+      "environment": "{\"node\": \"v24.19.0\", \"os\": \"darwin\", \"cpu\": \"Apple M2\", \"browser\": \"156.0.8078.49\", \"channel\": \"chrome\", \"throttling\": \"none\", \"execution_isolation\": \"Fresh temporary copy of five declared fixture files; fresh process, empty data directory.\", \"task_budget\": \"dashboard filter local p95 of five post-warmup samples <=100ms; no field data\"}",
+      "captured_at": "2026-10-28T09:03:27.951Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-desktop-approved",
+      "location": "evaluation/evidence/expansion-v1/dashboard/after/results.json",
+      "description": "Executed case desktop-approved: raw HTTP/UI/measurement observations and reproduction steps.",
+      "environment": "{\"node\": \"v24.19.0\", \"os\": \"darwin\", \"cpu\": \"Apple M2\", \"browser\": \"156.0.8078.49\", \"channel\": \"chrome\", \"throttling\": \"none\", \"execution_isolation\": \"Fresh temporary copy of five declared fixture files; fresh process, empty data directory.\", \"task_budget\": \"dashboard filter local p95 of five post-warmup samples <=100ms; no field data\"}",
+      "captured_at": "2026-10-28T09:03:27.951Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-error-recovery",
+      "location": "evaluation/evidence/expansion-v1/dashboard/after/results.json",
+      "description": "Executed case error-recovery: raw HTTP/UI/measurement observations and reproduction steps.",
+      "environment": "{\"node\": \"v24.19.0\", \"os\": \"darwin\", \"cpu\": \"Apple M2\", \"browser\": \"156.0.8078.49\", \"channel\": \"chrome\", \"throttling\": \"none\", \"execution_isolation\": \"Fresh temporary copy of five declared fixture files; fresh process, empty data directory.\", \"task_budget\": \"dashboard filter local p95 of five post-warmup samples <=100ms; no field data\"}",
+      "captured_at": "2026-10-28T09:03:27.951Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-loading-empty-correction",
+      "location": "evaluation/evidence/expansion-v1/dashboard/after/results.json",
+      "description": "Executed case loading-empty-correction: raw HTTP/UI/measurement observations and reproduction steps.",
+      "environment": "{\"node\": \"v24.19.0\", \"os\": \"darwin\", \"cpu\": \"Apple M2\", \"browser\": \"156.0.8078.49\", \"channel\": \"chrome\", \"throttling\": \"none\", \"execution_isolation\": \"Fresh temporary copy of five declared fixture files; fresh process, empty data directory.\", \"task_budget\": \"dashboard filter local p95 of five post-warmup samples <=100ms; no field data\"}",
+      "captured_at": "2026-10-28T09:03:27.951Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-local-filter-budget",
+      "location": "evaluation/evidence/expansion-v1/dashboard/after/results.json",
+      "description": "Executed case local-filter-budget: raw HTTP/UI/measurement observations and reproduction steps.",
+      "environment": "{\"node\": \"v24.19.0\", \"os\": \"darwin\", \"cpu\": \"Apple M2\", \"browser\": \"156.0.8078.49\", \"channel\": \"chrome\", \"throttling\": \"none\", \"execution_isolation\": \"Fresh temporary copy of five declared fixture files; fresh process, empty data directory.\", \"task_budget\": \"dashboard filter local p95 of five post-warmup samples <=100ms; no field data\"}",
+      "captured_at": "2026-10-28T09:03:27.951Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-keyboard-focus-targets",
+      "location": "evaluation/evidence/expansion-v1/dashboard/after/results.json",
+      "description": "Executed case keyboard-focus-targets: raw HTTP/UI/measurement observations and reproduction steps.",
+      "environment": "{\"node\": \"v24.19.0\", \"os\": \"darwin\", \"cpu\": \"Apple M2\", \"browser\": \"156.0.8078.49\", \"channel\": \"chrome\", \"throttling\": \"none\", \"execution_isolation\": \"Fresh temporary copy of five declared fixture files; fresh process, empty data directory.\", \"task_budget\": \"dashboard filter local p95 of five post-warmup samples <=100ms; no field data\"}",
+      "captured_at": "2026-10-28T09:03:27.951Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-text-contrast",
+      "location": "evaluation/evidence/expansion-v1/dashboard/after/results.json",
+      "description": "Executed case text-contrast: raw HTTP/UI/measurement observations and reproduction steps.",
+      "environment": "{\"node\": \"v24.19.0\", \"os\": \"darwin\", \"cpu\": \"Apple M2\", \"browser\": \"156.0.8078.49\", \"channel\": \"chrome\", \"throttling\": \"none\", \"execution_isolation\": \"Fresh temporary copy of five declared fixture files; fresh process, empty data directory.\", \"task_budget\": \"dashboard filter local p95 of five post-warmup samples <=100ms; no field data\"}",
+      "captured_at": "2026-10-28T09:03:27.951Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-resize-text",
+      "location": "evaluation/evidence/expansion-v1/dashboard/after/results.json",
+      "description": "Executed case resize-text: raw HTTP/UI/measurement observations and reproduction steps.",
+      "environment": "{\"node\": \"v24.19.0\", \"os\": \"darwin\", \"cpu\": \"Apple M2\", \"browser\": \"156.0.8078.49\", \"channel\": \"chrome\", \"throttling\": \"none\", \"execution_isolation\": \"Fresh temporary copy of five declared fixture files; fresh process, empty data directory.\", \"task_budget\": \"dashboard filter local p95 of five post-warmup samples <=100ms; no field data\"}",
+      "captured_at": "2026-10-28T09:03:27.951Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-repeat-refresh-resources",
+      "location": "evaluation/evidence/expansion-v1/dashboard/after/results.json",
+      "description": "Executed case repeat-refresh-resources: raw HTTP/UI/measurement observations and reproduction steps.",
+      "environment": "{\"node\": \"v24.19.0\", \"os\": \"darwin\", \"cpu\": \"Apple M2\", \"browser\": \"156.0.8078.49\", \"channel\": \"chrome\", \"throttling\": \"none\", \"execution_isolation\": \"Fresh temporary copy of five declared fixture files; fresh process, empty data directory.\", \"task_budget\": \"dashboard filter local p95 of five post-warmup samples <=100ms; no field data\"}",
+      "captured_at": "2026-10-28T09:03:27.951Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-operator-diagnostics",
+      "location": "evaluation/evidence/expansion-v1/dashboard/after/results.json",
+      "description": "Executed case operator-diagnostics: raw HTTP/UI/measurement observations and reproduction steps.",
+      "environment": "{\"node\": \"v24.19.0\", \"os\": \"darwin\", \"cpu\": \"Apple M2\", \"browser\": \"156.0.8078.49\", \"channel\": \"chrome\", \"throttling\": \"none\", \"execution_isolation\": \"Fresh temporary copy of five declared fixture files; fresh process, empty data directory.\", \"task_budget\": \"dashboard filter local p95 of five post-warmup samples <=100ms; no field data\"}",
+      "captured_at": "2026-10-28T09:03:27.951Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-clean-startup-smoke",
+      "location": "evaluation/evidence/expansion-v1/dashboard/after/results.json",
+      "description": "Executed case clean-startup-smoke: raw HTTP/UI/measurement observations and reproduction steps.",
+      "environment": "{\"node\": \"v24.19.0\", \"os\": \"darwin\", \"cpu\": \"Apple M2\", \"browser\": \"156.0.8078.49\", \"channel\": \"chrome\", \"throttling\": \"none\", \"execution_isolation\": \"Fresh temporary copy of five declared fixture files; fresh process, empty data directory.\", \"task_budget\": \"dashboard filter local p95 of five post-warmup samples <=100ms; no field data\"}",
+      "captured_at": "2026-10-28T09:03:27.951Z",
+      "kind": "observation",
+      "synthetic": false
+    }
+  ],
+  "findings": [
+    {
+      "id": "finding-U01",
+      "criterion_id": "U01",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All listed applicable cases passed; conclusion limited to these tasks/states. This is expert task-alignment review, not real-user understanding evidence.",
+      "requirement_or_goal": "Purpose, labels and primary actions match the target task; expert opinion is labeled as such.",
+      "affected_users_and_conditions": "Disposable local fixture users in the documented tasks and recorded browser/API environment.",
+      "evidence_ids": [
+        "E-context",
+        "E-desktop-approved"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only the demonstrated target-app correction is authorized; preserve approved controls, design and architecture. Unknown subcases require evidence, not speculative refactoring.",
+      "verification_plan": "Repeat the original cases with matching source/environment, compare protected-file hashes and approved screenshots, then collect the named missing evidence before any broader pass.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-U02",
+      "criterion_id": "U02",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All listed applicable cases passed; conclusion limited to these tasks/states.",
+      "requirement_or_goal": "Relevant loading, empty, success, error and disabled states explain the actual situation and next action.",
+      "affected_users_and_conditions": "Disposable local fixture users in the documented tasks and recorded browser/API environment.",
+      "evidence_ids": [
+        "E-context",
+        "E-error-recovery",
+        "E-loading-empty-correction"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only the demonstrated target-app correction is authorized; preserve approved controls, design and architecture. Unknown subcases require evidence, not speculative refactoring.",
+      "verification_plan": "Repeat the original cases with matching source/environment, compare protected-file hashes and approved screenshots, then collect the named missing evidence before any broader pass.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-U03",
+      "criterion_id": "U03",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All listed applicable cases passed; conclusion limited to these tasks/states.",
+      "requirement_or_goal": "Essential content, buttons and forms remain reachable without obstructing clipping, overlap or occlusion.",
+      "affected_users_and_conditions": "Disposable local fixture users in the documented tasks and recorded browser/API environment.",
+      "evidence_ids": [
+        "E-context",
+        "E-layout-320",
+        "E-layout-390",
+        "E-layout-768",
+        "E-layout-1440"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only the demonstrated target-app correction is authorized; preserve approved controls, design and architecture. Unknown subcases require evidence, not speculative refactoring.",
+      "verification_plan": "Repeat the original cases with matching source/environment, compare protected-file hashes and approved screenshots, then collect the named missing evidence before any broader pass.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-U04",
+      "criterion_id": "U04",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All listed applicable cases passed; conclusion limited to these tasks/states.",
+      "requirement_or_goal": "Invalid input, cancel/back behavior and destructive actions provide proportionate prevention or recovery.",
+      "affected_users_and_conditions": "Disposable local fixture users in the documented tasks and recorded browser/API environment.",
+      "evidence_ids": [
+        "E-context",
+        "E-loading-empty-correction"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only the demonstrated target-app correction is authorized; preserve approved controls, design and architecture. Unknown subcases require evidence, not speculative refactoring.",
+      "verification_plan": "Repeat the original cases with matching source/environment, compare protected-file hashes and approved screenshots, then collect the named missing evidence before any broader pass.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-U05",
+      "criterion_id": "U05",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All listed applicable cases passed; conclusion limited to these tasks/states.",
+      "requirement_or_goal": "Typography, spacing, color, buttons, labels and behavior follow agreed patterns or documented intentional differences.",
+      "affected_users_and_conditions": "Disposable local fixture users in the documented tasks and recorded browser/API environment.",
+      "evidence_ids": [
+        "E-context",
+        "E-desktop-approved",
+        "E-preservation"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only the demonstrated target-app correction is authorized; preserve approved controls, design and architecture. Unknown subcases require evidence, not speculative refactoring.",
+      "verification_plan": "Repeat the original cases with matching source/environment, compare protected-file hashes and approved screenshots, then collect the named missing evidence before any broader pass.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-A01",
+      "criterion_id": "A01",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All listed applicable cases passed; conclusion limited to these tasks/states.",
+      "requirement_or_goal": "Tasks are keyboard operable with meaningful focus order and no keyboard trap, subject to documented source exceptions.",
+      "affected_users_and_conditions": "Disposable local fixture users in the documented tasks and recorded browser/API environment.",
+      "evidence_ids": [
+        "E-context",
+        "E-keyboard-focus-targets"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only the demonstrated target-app correction is authorized; preserve approved controls, design and architecture. Unknown subcases require evidence, not speculative refactoring.",
+      "verification_plan": "Repeat the original cases with matching source/environment, compare protected-file hashes and approved screenshots, then collect the named missing evidence before any broader pass.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-A02",
+      "criterion_id": "A02",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Native name/label positive controls passed, but actual assistive-technology behavior was not exercised.",
+      "requirement_or_goal": "Names, roles, labels and relevant states accurately describe each tested control.",
+      "affected_users_and_conditions": "Disposable local fixture users in the documented tasks and recorded browser/API environment.",
+      "evidence_ids": [
+        "E-context",
+        "E-desktop-approved",
+        "E-keyboard-focus-targets"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only the demonstrated target-app correction is authorized; preserve approved controls, design and architecture. Unknown subcases require evidence, not speculative refactoring.",
+      "verification_plan": "Repeat the original cases with matching source/environment, compare protected-file hashes and approved screenshots, then collect the named missing evidence before any broader pass.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-A03",
+      "criterion_id": "A03",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All listed applicable cases passed; conclusion limited to these tasks/states.",
+      "requirement_or_goal": "Applicable normal text reaches 4.5:1; large text reaches 3:1 on its actual background.",
+      "affected_users_and_conditions": "Disposable local fixture users in the documented tasks and recorded browser/API environment.",
+      "evidence_ids": [
+        "E-context",
+        "E-text-contrast"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only the demonstrated target-app correction is authorized; preserve approved controls, design and architecture. Unknown subcases require evidence, not speculative refactoring.",
+      "verification_plan": "Repeat the original cases with matching source/environment, compare protected-file hashes and approved screenshots, then collect the named missing evidence before any broader pass.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-A04",
+      "criterion_id": "A04",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Original narrow-layout geometry was rechecked; text-scale probe is supplemental, not complete zoom/state conformance coverage.",
+      "requirement_or_goal": "Text resizes to 200%; reflow preserves information/function at the source dimensions without unnecessary two-axis scrolling.",
+      "affected_users_and_conditions": "Disposable local fixture users in the documented tasks and recorded browser/API environment.",
+      "evidence_ids": [
+        "E-context",
+        "E-layout-320",
+        "E-resize-text"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only the demonstrated target-app correction is authorized; preserve approved controls, design and architecture. Unknown subcases require evidence, not speculative refactoring.",
+      "verification_plan": "Repeat the original cases with matching source/environment, compare protected-file hashes and approved screenshots, then collect the named missing evidence before any broader pass.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-A05",
+      "criterion_id": "A05",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All listed applicable cases passed; conclusion limited to these tasks/states.",
+      "requirement_or_goal": "Keyboard focus is visibly indicated and the focused component is not entirely hidden by author-created content.",
+      "affected_users_and_conditions": "Disposable local fixture users in the documented tasks and recorded browser/API environment.",
+      "evidence_ids": [
+        "E-context",
+        "E-keyboard-focus-targets"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only the demonstrated target-app correction is authorized; preserve approved controls, design and architecture. Unknown subcases require evidence, not speculative refactoring.",
+      "verification_plan": "Repeat the original cases with matching source/environment, compare protected-file hashes and approved screenshots, then collect the named missing evidence before any broader pass.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-A06",
+      "criterion_id": "A06",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All listed applicable cases passed; conclusion limited to these tasks/states.",
+      "requirement_or_goal": "Targets are at least 24 by 24 CSS pixels or satisfy a documented source exception.",
+      "affected_users_and_conditions": "Disposable local fixture users in the documented tasks and recorded browser/API environment.",
+      "evidence_ids": [
+        "E-context",
+        "E-keyboard-focus-targets"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only the demonstrated target-app correction is authorized; preserve approved controls, design and architecture. Unknown subcases require evidence, not speculative refactoring.",
+      "verification_plan": "Repeat the original cases with matching source/environment, compare protected-file hashes and approved screenshots, then collect the named missing evidence before any broader pass.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-P01",
+      "criterion_id": "P01",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All listed applicable cases passed; conclusion limited to these tasks/states.",
+      "requirement_or_goal": "No application crash or exception prevents the agreed core tasks.",
+      "affected_users_and_conditions": "Disposable local fixture users in the documented tasks and recorded browser/API environment.",
+      "evidence_ids": [
+        "E-context",
+        "E-repeat-refresh-resources"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only the demonstrated target-app correction is authorized; preserve approved controls, design and architecture. Unknown subcases require evidence, not speculative refactoring.",
+      "verification_plan": "Repeat the original cases with matching source/environment, compare protected-file hashes and approved screenshots, then collect the named missing evidence before any broader pass.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-P02",
+      "criterion_id": "P02",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "The observed 503 recovery was rechecked; offline and timeout paths remain unexecuted.",
+      "requirement_or_goal": "Offline, timeout and server errors end in truthful states that retain necessary input and permit safe recovery.",
+      "affected_users_and_conditions": "Disposable local fixture users in the documented tasks and recorded browser/API environment.",
+      "evidence_ids": [
+        "E-context",
+        "E-error-recovery"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only the demonstrated target-app correction is authorized; preserve approved controls, design and architecture. Unknown subcases require evidence, not speculative refactoring.",
+      "verification_plan": "Repeat the original cases with matching source/environment, compare protected-file hashes and approved screenshots, then collect the named missing evidence before any broader pass.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-P03",
+      "criterion_id": "P03",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "The agreed local task budget was measured; adequate field p75 LCP/INP/CLS data does not exist.",
+      "requirement_or_goal": "Relevant field p75 LCP <= 2.5s, INP <= 200ms and CLS <= 0.1; additional task budgets cover important gaps.",
+      "affected_users_and_conditions": "Disposable local fixture users in the documented tasks and recorded browser/API environment.",
+      "evidence_ids": [
+        "E-context",
+        "E-local-filter-budget"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only the demonstrated target-app correction is authorized; preserve approved controls, design and architecture. Unknown subcases require evidence, not speculative refactoring.",
+      "verification_plan": "Repeat the original cases with matching source/environment, compare protected-file hashes and approved screenshots, then collect the named missing evidence before any broader pass.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-P04",
+      "criterion_id": "P04",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Bounded repeated-request controls ran; full timer/subscription/teardown resource lifecycle evidence is missing.",
+      "requirement_or_goal": "Resources follow their intended lifecycle; repeated task cycles do not accumulate unintended work.",
+      "affected_users_and_conditions": "Disposable local fixture users in the documented tasks and recorded browser/API environment.",
+      "evidence_ids": [
+        "E-context",
+        "E-repeat-refresh-resources"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only the demonstrated target-app correction is authorized; preserve approved controls, design and architecture. Unknown subcases require evidence, not speculative refactoring.",
+      "verification_plan": "Repeat the original cases with matching source/environment, compare protected-file hashes and approved screenshots, then collect the named missing evidence before any broader pass.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-O01",
+      "criterion_id": "O01",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All listed applicable cases passed; conclusion limited to these tasks/states.",
+      "requirement_or_goal": "A clean checkout installs, builds and starts by following documented dependency/configuration steps.",
+      "affected_users_and_conditions": "Disposable local fixture users in the documented tasks and recorded browser/API environment.",
+      "evidence_ids": [
+        "E-context",
+        "E-clean-startup-smoke"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only the demonstrated target-app correction is authorized; preserve approved controls, design and architecture. Unknown subcases require evidence, not speculative refactoring.",
+      "verification_plan": "Repeat the original cases with matching source/environment, compare protected-file hashes and approved screenshots, then collect the named missing evidence before any broader pass.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-O02",
+      "criterion_id": "O02",
+      "status": "not_applicable",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All relevant features are absent: deployed: E-context: absent from the explicitly local, replaceable-data architecture/contract.",
+      "requirement_or_goal": "Required environment variables, URLs, public/private configuration and storage are correct for the target runtime.",
+      "affected_users_and_conditions": "No qualifying deployment, important data or persistent user storage exists in this documented fixture.",
+      "evidence_ids": [
+        "E-context"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve the local replaceable-data setup; no infrastructure addition is justified.",
+      "verification_plan": "Revisit applicability if the deployment, data importance or persistence contract changes.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-O03",
+      "criterion_id": "O03",
+      "status": "not_applicable",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All relevant features are absent: important_data: E-context: absent from the explicitly local, replaceable-data architecture/contract.",
+      "requirement_or_goal": "Preservation matches accepted loss and ownership requirements; exports and automated backups are distinguished.",
+      "affected_users_and_conditions": "No qualifying deployment, important data or persistent user storage exists in this documented fixture.",
+      "evidence_ids": [
+        "E-context"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve the local replaceable-data setup; no infrastructure addition is justified.",
+      "verification_plan": "Revisit applicability if the deployment, data importance or persistence contract changes.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-O04",
+      "criterion_id": "O04",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All listed applicable cases passed; conclusion limited to these tasks/states.",
+      "requirement_or_goal": "An appropriate detection channel and diagnostic information reach a responsible owner.",
+      "affected_users_and_conditions": "Disposable local fixture users in the documented tasks and recorded browser/API environment.",
+      "evidence_ids": [
+        "E-context",
+        "E-operator-diagnostics"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Only the demonstrated target-app correction is authorized; preserve approved controls, design and architecture. Unknown subcases require evidence, not speculative refactoring.",
+      "verification_plan": "Repeat the original cases with matching source/environment, compare protected-file hashes and approved screenshots, then collect the named missing evidence before any broader pass.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-O05",
+      "criterion_id": "O05",
+      "status": "not_applicable",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All relevant features are absent: persistent_data: E-context: absent from the explicitly local, replaceable-data architecture/contract.; deployed: E-context: absent from the explicitly local, replaceable-data architecture/contract.",
+      "requirement_or_goal": "Applicable restore and rollback procedures work in isolation with valid data and compatible schemas.",
+      "affected_users_and_conditions": "No qualifying deployment, important data or persistent user storage exists in this documented fixture.",
+      "evidence_ids": [
+        "E-context"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve the local replaceable-data setup; no infrastructure addition is justified.",
+      "verification_plan": "Revisit applicability if the deployment, data importance or persistence contract changes.",
+      "observed_outside_level": false
+    }
+  ]
+}

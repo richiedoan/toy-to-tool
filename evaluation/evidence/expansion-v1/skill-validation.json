@@ -1,0 +1,149 @@
+[
+  {
+    "skill": "toy-to-tool-audit",
+    "form": "source",
+    "command": "skill-creator quick_validate.py",
+    "exit_code": 0,
+    "stdout": "Skill is valid!"
+  },
+  {
+    "skill": "toy-to-tool-audit",
+    "form": "isolated-bundle",
+    "command": "skill-creator quick_validate.py",
+    "exit_code": 0,
+    "stdout": "Skill is valid!"
+  },
+  {
+    "skill": "toy-to-tool-audit",
+    "form": "isolated-bundle",
+    "command": "bundled-engine validate from unrelated directory",
+    "exit_code": 0,
+    "stdout": "Valid: 36 unique criteria; structure, levels and references checked."
+  },
+  {
+    "skill": "functionality-data",
+    "form": "source",
+    "command": "skill-creator quick_validate.py",
+    "exit_code": 0,
+    "stdout": "Skill is valid!"
+  },
+  {
+    "skill": "functionality-data",
+    "form": "isolated-bundle",
+    "command": "skill-creator quick_validate.py",
+    "exit_code": 0,
+    "stdout": "Skill is valid!"
+  },
+  {
+    "skill": "functionality-data",
+    "form": "isolated-bundle",
+    "command": "bundled-engine validate from unrelated directory",
+    "exit_code": 0,
+    "stdout": "Valid: 36 unique criteria; structure, levels and references checked."
+  },
+  {
+    "skill": "ux-visual-quality",
+    "form": "source",
+    "command": "skill-creator quick_validate.py",
+    "exit_code": 0,
+    "stdout": "Skill is valid!"
+  },
+  {
+    "skill": "ux-visual-quality",
+    "form": "isolated-bundle",
+    "command": "skill-creator quick_validate.py",
+    "exit_code": 0,
+    "stdout": "Skill is valid!"
+  },
+  {
+    "skill": "ux-visual-quality",
+    "form": "isolated-bundle",
+    "command": "bundled-engine validate from unrelated directory",
+    "exit_code": 0,
+    "stdout": "Valid: 36 unique criteria; structure, levels and references checked."
+  },
+  {
+    "skill": "accessibility",
+    "form": "source",
+    "command": "skill-creator quick_validate.py",
+    "exit_code": 0,
+    "stdout": "Skill is valid!"
+  },
+  {
+    "skill": "accessibility",
+    "form": "isolated-bundle",
+    "command": "skill-creator quick_validate.py",
+    "exit_code": 0,
+    "stdout": "Skill is valid!"
+  },
+  {
+    "skill": "accessibility",
+    "form": "isolated-bundle",
+    "command": "bundled-engine validate from unrelated directory",
+    "exit_code": 0,
+    "stdout": "Valid: 36 unique criteria; structure, levels and references checked."
+  },
+  {
+    "skill": "security-privacy",
+    "form": "source",
+    "command": "skill-creator quick_validate.py",
+    "exit_code": 0,
+    "stdout": "Skill is valid!"
+  },
+  {
+    "skill": "security-privacy",
+    "form": "isolated-bundle",
+    "command": "skill-creator quick_validate.py",
+    "exit_code": 0,
+    "stdout": "Skill is valid!"
+  },
+  {
+    "skill": "security-privacy",
+    "form": "isolated-bundle",
+    "command": "bundled-engine validate from unrelated directory",
+    "exit_code": 0,
+    "stdout": "Valid: 36 unique criteria; structure, levels and references checked."
+  },
+  {
+    "skill": "performance-resilience",
+    "form": "source",
+    "command": "skill-creator quick_validate.py",
+    "exit_code": 0,
+    "stdout": "Skill is valid!"
+  },
+  {
+    "skill": "performance-resilience",
+    "form": "isolated-bundle",
+    "command": "skill-creator quick_validate.py",
+    "exit_code": 0,
+    "stdout": "Skill is valid!"
+  },
+  {
+    "skill": "performance-resilience",
+    "form": "isolated-bundle",
+    "command": "bundled-engine validate from unrelated directory",
+    "exit_code": 0,
+    "stdout": "Valid: 36 unique criteria; structure, levels and references checked."
+  },
+  {
+    "skill": "deployment-operations",
+    "form": "source",
+    "command": "skill-creator quick_validate.py",
+    "exit_code": 0,
+    "stdout": "Skill is valid!"
+  },
+  {
+    "skill": "deployment-operations",
+    "form": "isolated-bundle",
+    "command": "skill-creator quick_validate.py",
+    "exit_code": 0,
+    "stdout": "Skill is valid!"
+  },
+  {
+    "skill": "deployment-operations",
+    "form": "isolated-bundle",
+    "command": "bundled-engine validate from unrelated directory",
+    "exit_code": 0,
+    "stdout": "Valid: 36 unique criteria; structure, levels and references checked."
+  }
+]

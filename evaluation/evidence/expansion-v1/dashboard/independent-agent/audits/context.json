@@ -1,0 +1,35 @@
+{
+  "captured_at": "2026-10-28T08:53:41.049954+00:00",
+  "root": "/private/tmp/toy-dashboard-agent",
+  "revision": "Unborn Git repository; use retained SHA-256 source manifests.",
+  "runtime": {
+    "python": "3.9.6",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "node": "v24.19.0"
+  },
+  "dependencies": {
+    "attrs": "26.1.0",
+    "jsonschema": "4.23.0",
+    "jsonschema-specifications": "2025.9.1",
+    "referencing": "0.36.2",
+    "rpds-py": "0.27.1",
+    "typing_extensions": "4.16.0"
+  },
+  "browser_probe": {
+    "command": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome --headless=new --remote-debugging-port=9222 --user-data-dir=<workspace>/audits/browser-profile --no-first-run --no-default-browser-check about:blank",
+    "exit_code": 134,
+    "output": "No output; exited before a debugging endpoint became available."
+  },
+  "tool_probe": "No browser MCP tool. Workspace Node playwright, puppeteer and @playwright/test unavailable. Python playwright, websocket, websockets and selenium unavailable. No browser or dependencies installed.",
+  "limits": [
+    "No screenshots, rendered geometry, accessibility tree, assistive technology, real keyboard, text zoom or Chrome filter timings collected.",
+    "No field CWV, participant research, load or production checks. Node handler timing is not the README Chrome budget."
+  ],
+  "tasks": [
+    "Read four metrics at 320, 390, 768 and 1440 CSS pixels.",
+    "Filter titles without changing values or requesting data.",
+    "Refresh, explain failure, retain last success, retry."
+  ],
+  "scope": "Standard U/A/P/O; scoped edits to dashboard only. Preserve README, desktop design, labels, metrics, native controls, existing behavior and simple architecture."
+}
