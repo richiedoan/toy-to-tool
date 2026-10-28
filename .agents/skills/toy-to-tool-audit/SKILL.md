@@ -1,6 +1,9 @@
 ---
 name: toy-to-tool-audit
 description: Audit an existing application's important workflows using the Toy to Tool v1 criteria, collect linked evidence, and propose or verify scoped fixes. Use for application quality audits and turning audit findings into proportionate changes.
+license: MIT
+metadata:
+  version: "1.0.0"
 ---
 
 # Toy to Tool audit
@@ -11,7 +14,7 @@ Coordinate an evidence-based audit of an existing app through the six stages bel
 
 For a group-specific audit, use its specialist if available, otherwise execute the selected canonical group protocols directly with explicit `--group` reporting. Retain the agreed level and authority; no other installed skill is required.
 
-Use `references/engine` as engine root when bundled; otherwise use the repository root three directories above this skill directory. Resolve that root from this file, independently of the target app's working directory. Read [the evaluation method](../../../docs/method.md), validate [the catalogue](../../../criteria/v1.json), and load the full entries for selected criteria. The catalogue owns IDs, starting levels, exceptions, test protocols and decisions; do not copy or replace it with a new checklist. The skill requires the repository's `criteria/`, `schemas/`, `scripts/`, `docs/method.md` and Python dependencies. Copying this skill folder alone does not install the engine.
+Use `references/engine` as engine root when bundled; otherwise use the repository root three directories above this skill directory. Resolve that root from this file, independently of the target app's working directory. Read [the evaluation method](references/engine/docs/method.md), validate [the catalogue](references/engine/criteria/v1.json), and load the full entries for selected criteria. The catalogue owns IDs, starting levels, exceptions, test protocols and decisions; do not copy or replace it with a new checklist. The skill requires the repository's `criteria/`, `schemas/`, `scripts/`, `docs/method.md` and Python dependencies. Copying this skill folder alone does not install the engine.
 
 Run engine commands from that root with its documented Python environment. Run app commands from the app root. Store sanitized artifacts under a new `audits/<unique-run-id>/` in the target workspace; do not overwrite an earlier run. For separate installations validate local artifacts with `--evidence-root` set to that workspace; repository-local runs may use the engine root default. Reports may link authorized HTTPS artifacts instead. Local evidence locations in JSON are relative to the selected evidence root and must exist. Audit output is ignored by Git; do not publish evidence without the user's instruction.
 
@@ -45,7 +48,7 @@ Do not ask a level question merely to obtain agreement with the default. Ask whe
 
 ## 3. Select applicable criteria
 
-Create `profile.json` using [the profile schema](../../../schemas/profile.schema.json), not the hypothetical values in `examples/profile.json`. Set present features to true, demonstrated absence to false and unresolved features to null; include the supporting context/evidence IDs in each rationale. Inspect every feature once, without asking the user a separate question for each flag.
+Create `profile.json` using [the profile schema](references/engine/schemas/profile.schema.json), not the hypothetical values in `examples/profile.json`. Set present features to true, demonstrated absence to false and unresolved features to null; include the supporting context/evidence IDs in each rationale. Inspect every feature once, without asking the user a separate question for each flag.
 
 From the engine root, use the real run directory and selected level:
 

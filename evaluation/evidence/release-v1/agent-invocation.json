@@ -1,0 +1,25 @@
+{
+  "command": [
+    "codex",
+    "exec",
+    "--ephemeral",
+    "--skip-git-repo-check",
+    "--sandbox",
+    "workspace-write",
+    "--model",
+    "gpt-6.1-sol",
+    "-c",
+    "model_reasoning_effort=\"medium\"",
+    "--json",
+    "-C",
+    "/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls",
+    "-o",
+    "/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls/audits/final.txt",
+    "Use $security-privacy installed in this project to Inspect, Improve and Recheck fixtures/owner-notes against its README at Standard. Only proportionate fixes inside that app are authorized; preserve README, UI, API and working behavior. Use only installed skill resources and the project Python environment; do not read the original source repository or outside this workspace. If starting a local service, use port 0 and disposable data, never an already-running service. Save before/after reports, source hashes, change patch and executed regression evidence under audits/. Use the installed validator with --evidence-root set to this project. Do not claim tests passed unless run. State runtime limits. English artifacts."
+  ],
+  "cwd": "/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls",
+  "purpose": "Installed-skill integration smoke; not a controlled comparison",
+  "started_at_epoch": 1793183758.9240599,
+  "exit_code": 0,
+  "elapsed_seconds": 327.85406732559204
+}

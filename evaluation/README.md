@@ -55,3 +55,9 @@ node evaluation/expansion-check.mjs dashboard fixtures/dashboard evaluation/runs
 ```
 
 Use new external packet destinations and new output directories under `evaluation/`. The harness redacts session/authentication fields from traces using the stdlib evaluator utility; this is not an app modification. `owner-notes-v2` is the runnable buggy baseline; v1 is kept only for the recorded unavailable-scrypt calibration. Dashboard uses v1. Both have adjacent hash manifests. Evaluator-only expectations are in `private/expansion-expected-findings.md`; they are not exported. The [expansion handover](evidence/expansion-v1/workflow.md) separates the two fresh CLI attempts from real evaluator HTTP/Chrome observations, preservation evidence and unexecuted checks. `expansion_reports.py` maps recorded observations and explicit coverage gaps into the same schema; it refuses to overwrite reports and does not promote a local task-budget pass into field CWV.
+
+## Installed release smoke and controlled comparison
+
+The [release-v1 verification](evidence/release-v1/verification.md) records `skills` CLI discovery, a copied install into a new target project, explicit Codex invocation from that installed copy, resource integrity and a real HTTP/Chrome recheck of the installed target fixture. It is an integration smoke, not an efficacy comparison.
+
+The paired skills/no-skills protocol is documented in [docs/comparison.md](../docs/comparison.md). Its runner restores every arm from immutable archives, pins model/prompt/tools/budgets, hashes inputs, rejects reused workspaces and requires independent evidence-backed adjudication. Its current [status](comparison/STATUS.json) is `not_evaluated`; the local profile failed the clean-environment preflight, so no model runs or comparative metrics were created.

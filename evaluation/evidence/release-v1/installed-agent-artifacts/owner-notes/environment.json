@@ -1,0 +1,11 @@
+{
+  "captured_at": "2026-10-28T10:37:22.672079+00:00",
+  "python": "3.9.6 (default, May 22 2026, 11:13:45) \n[Clang 21.0.0 (clang-2100.1.1.101)]",
+  "executable": "/private/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls/.venv/bin/python",
+  "sqlite": "3.54.0",
+  "jsonschema": "4.23.0",
+  "revision": "No committed HEAD; file SHA-256 manifests identify source",
+  "revision_command_exit": 128,
+  "browser_tool_discovery": "No Chrome, browser or Playwright tool exposed by available tool metadata. No documented project browser test setup. Browser execution unavailable; no dependency installed.",
+  "scope": "User: Standard S group; scoped app-only fixes. README/UI/API/working behavior preserved. Only installed skill resources, workspace and project Python. Outside RTK reference not read because user prohibits outside workspace reads."
+}

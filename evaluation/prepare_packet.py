@@ -8,7 +8,10 @@ import subprocess
 import sys
 import tarfile
 
+
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from scripts.package_skill import package
 
 
 def prepare(destination, bootstrap=False):
@@ -38,12 +41,12 @@ def prepare(destination, bootstrap=False):
     # Explicit files only: no evaluator docs, hidden tests, run logs, or Git history.
     files = ['criteria/v1.json', 'schemas/catalog.schema.json', 'schemas/profile.schema.json',
              'schemas/report.schema.json', 'scripts/audit.py', 'docs/method.md', 'docs/missing-access.md', 'docs/report-template.md', 'requirements.txt',
-             '.agents/skills/functionality-data/SKILL.md',
              '.agents/skills/toy-to-tool-audit/references/missing-access.md']
     for name in files:
         target = destination / name
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / name, target)
+    package('functionality-data', destination / '.agents/skills/functionality-data')
     (destination / 'AGENTS.md').write_text(
         '# Local evaluation workspace\n\n'
         'Use .agents/skills/functionality-data/SKILL.md for Functionality & Data work. '

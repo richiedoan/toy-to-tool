@@ -1,11 +1,14 @@
 ---
 name: deployment-operations
 description: Check reproducible startup, runtime configuration, data preservation, failure diagnosis and verified recovery objectives. Use for app setup and operational-readiness audits appropriate to the real deployment.
+license: MIT
+metadata:
+  version: "1.0.0"
 ---
 
 # Deployment & Operations: Inspect → Improve → Recheck
 
-Use when the requested audit includes group O; report only the agreed groups. Reuse the canonical [O01-O06 protocols](../../../criteria/v1.json), [method and decisions](../../../docs/method.md) and [English report template](../../../docs/report-template.md). Use `references/engine` as engine root when bundled; otherwise the repository root three directories above this skill directory. No sibling skill is required. Python and the engine requirements provide the shared validator; do not add another test framework by default.
+Use when the requested audit includes group O; report only the agreed groups. Reuse the canonical [O01-O06 protocols](references/engine/criteria/v1.json), [method and decisions](references/engine/docs/method.md) and [English report template](references/engine/docs/report-template.md). Use `references/engine` as engine root when bundled; otherwise the repository root three directories above this skill directory. No sibling skill is required. Python and the engine requirements provide the shared validator; do not add another test framework by default.
 
 ## Conditions and scope
 
@@ -38,4 +41,4 @@ Use the shared report schema and English template. Every factual conclusion, fix
 
 ## Limits
 
-Follow [missing-access guidance](../../../docs/missing-access.md) for unavailable browser, runtime or credentials. Continue independent work, record the actual collection attempt and leave dependent conclusions unknown. A failed tool probe alone is not an application failure. Source review, handler tests, browser behavior, field measurements and real-user evidence have different scopes. Report the strongest conclusion actually supported. During evaluation do not seek hidden tests, expected findings or reference fixes. A manual walkthrough or isolated agent attempt is not a controlled skill-effectiveness study.
+Follow [missing-access guidance](references/engine/docs/missing-access.md) for unavailable browser, runtime or credentials. Continue independent work, record the actual collection attempt and leave dependent conclusions unknown. A failed tool probe alone is not an application failure. Source review, handler tests, browser behavior, field measurements and real-user evidence have different scopes. Report the strongest conclusion actually supported. During evaluation do not seek hidden tests, expected findings or reference fixes. A manual walkthrough or isolated agent attempt is not a controlled skill-effectiveness study.

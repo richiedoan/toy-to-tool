@@ -1,11 +1,14 @@
 ---
 name: ux-visual-quality
 description: Evaluate screen purpose, reachable states, responsive task access, error recovery and pattern consistency. Use for usability and layout audits with evidence-led, scoped changes.
+license: MIT
+metadata:
+  version: "1.0.0"
 ---
 
 # UX & Visual Quality: Inspect → Improve → Recheck
 
-Use when the requested audit includes group U; report only the agreed groups. Reuse the canonical [U01-U06 protocols](../../../criteria/v1.json), [method and decisions](../../../docs/method.md) and [English report template](../../../docs/report-template.md). Use `references/engine` as engine root when bundled; otherwise the repository root three directories above this skill directory. No sibling skill is required. Python and the engine requirements provide the shared validator; do not add another test framework by default.
+Use when the requested audit includes group U; report only the agreed groups. Reuse the canonical [U01-U06 protocols](references/engine/criteria/v1.json), [method and decisions](references/engine/docs/method.md) and [English report template](references/engine/docs/report-template.md). Use `references/engine` as engine root when bundled; otherwise the repository root three directories above this skill directory. No sibling skill is required. Python and the engine requirements provide the shared validator; do not add another test framework by default.
 
 ## Conditions and scope
 
@@ -38,4 +41,4 @@ Use the shared report schema and English template. Every factual conclusion, fix
 
 ## Limits
 
-Follow [missing-access guidance](../../../docs/missing-access.md) for unavailable browser, runtime or credentials. Continue independent work, record the actual collection attempt and leave dependent conclusions unknown. A failed tool probe alone is not an application failure. Source review, handler tests, browser behavior, field measurements and real-user evidence have different scopes. Report the strongest conclusion actually supported. During evaluation do not seek hidden tests, expected findings or reference fixes. A manual walkthrough or isolated agent attempt is not a controlled skill-effectiveness study.
+Follow [missing-access guidance](references/engine/docs/missing-access.md) for unavailable browser, runtime or credentials. Continue independent work, record the actual collection attempt and leave dependent conclusions unknown. A failed tool probe alone is not an application failure. Source review, handler tests, browser behavior, field measurements and real-user evidence have different scopes. Report the strongest conclusion actually supported. During evaluation do not seek hidden tests, expected findings or reference fixes. A manual walkthrough or isolated agent attempt is not a controlled skill-effectiveness study.

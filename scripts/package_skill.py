@@ -19,10 +19,14 @@ def package(name, destination):
         raise ValueError('Destination must not exist; no installed work is overwritten')
     if ROOT == destination or ROOT in destination.parents:
         raise ValueError('Export outside the source repository to avoid recursive/self copies')
-    source = ROOT / '.agents/skills' / name
+    source = ROOT / 'authoring' / name
     shutil.copytree(source, destination, ignore=shutil.ignore_patterns('__pycache__', '.venv'))
+    template = destination / 'SKILL.md.in'
     entry = destination / 'SKILL.md'
-    entry.write_text(entry.read_text().replace('../../../', 'references/engine/'))
+    entry.write_text(template.read_text().replace('../../../', 'references/engine/'))
+    template.unlink()
+    for legal in ('LICENSE', 'THIRD_PARTY_NOTICES.md'):
+        shutil.copyfile(ROOT / legal, destination / legal)
     for filename in ENGINE_FILES:
         target = destination / 'references/engine' / filename
         target.parent.mkdir(parents=True, exist_ok=True)

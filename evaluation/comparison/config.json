@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "agent": "codex",
+  "agent_version": "0.164.0",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "sandbox": "workspace-write",
+  "fixtures": ["tracker", "owner-notes", "dashboard"],
+  "replicates": 3,
+  "order_seed": 20261028,
+  "budget": {"wall_seconds": 300, "observed_command_starts": 40},
+  "environment_receipt": "evaluation/comparison/environment.template.json"
+}

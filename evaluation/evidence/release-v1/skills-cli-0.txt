@@ -1,0 +1,44 @@
+
+│
+●   codex  Agent detected — installing non-interactively
+[?25l│
+◇  Source: /Users/richie.aeolus.vii/toy-to-tool
+[?25h[?25l│
+◇  Local path validated
+[?25h[?25l│
+◇  Found 7 skills
+[?25h
+│
+◇  Available Skills
+│
+│    accessibility
+│
+│      Evaluate keyboard access, names and semantics, contrast, zoom/reflow, focus and pointer targets against the applicable WCAG 2.2 definitions. Use for scoped accessibility inspections and verification.
+│
+│    deployment-operations
+│
+│      Check reproducible startup, runtime configuration, data preservation, failure diagnosis and verified recovery objectives. Use for app setup and operational-readiness audits appropriate to the real deployment.
+│
+│    functionality-data
+│
+│      Inspect and improve an application's real operations, persistence, outcome feedback, input rules, repeated actions and concurrent updates using criteria F01-F06. Use for Functionality & Data audits and verified scoped fixes.
+│
+│    performance-resilience
+│
+│      Measure core-task failures, network recovery, interaction budgets, repeated resource lifecycles and defined load/reconnection behavior. Use for reproducible performance or resilience investigations.
+│
+│    security-privacy
+│
+│      Assess authorization, data exposure, execution boundaries and session behavior using authorized test identities and safe probes. Use for architecture-specific security audits and narrowly verified corrections.
+│
+│    toy-to-tool-audit
+│
+│      Audit an existing application's important workflows using the Toy to Tool v1 criteria, collect linked evidence, and propose or verify scoped fixes. Use for application quality audits and turning audit findings into proportionate changes.
+│
+│    ux-visual-quality
+│
+│      Evaluate screen purpose, reachable states, responsive task access, error recovery and pattern consistency. Use for usability and layout audits with evidence-led, scoped changes.
+
+│
+└  Use --skill <name> to install specific skills
+

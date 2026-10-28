@@ -1,0 +1,26 @@
+{
+  "S01": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "S02": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "S03": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "S04": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "S05": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "S06": {
+    "selection": "deferred",
+    "reason": "Starts at Advanced; report observed risks anyway."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/private/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls/.venv/bin/python",
+    ".agents/skills/security-privacy/references/engine/scripts/audit.py",
+    "validate",
+    "--report",
+    "audits/owner-notes/before/report.json",
+    "--evidence-root",
+    "/private/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls"
+  ],
+  "exit_code": 0,
+  "stdout": "Valid: 36 unique criteria; structure, levels and references checked. Report structure, coverage and decisions checked.\n",
+  "stderr": "",
+  "timestamp": "2026-10-28T10:40:11.579049+00:00"
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "skill": "accessibility",
+    "installed_path": "/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls/.agents/skills/accessibility",
+    "copy_not_symlink": true,
+    "resources_complete": true
+  },
+  {
+    "skill": "deployment-operations",
+    "installed_path": "/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls/.agents/skills/deployment-operations",
+    "copy_not_symlink": true,
+    "resources_complete": true
+  },
+  {
+    "skill": "functionality-data",
+    "installed_path": "/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls/.agents/skills/functionality-data",
+    "copy_not_symlink": true,
+    "resources_complete": true
+  },
+  {
+    "skill": "performance-resilience",
+    "installed_path": "/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls/.agents/skills/performance-resilience",
+    "copy_not_symlink": true,
+    "resources_complete": true
+  },
+  {
+    "skill": "security-privacy",
+    "installed_path": "/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls/.agents/skills/security-privacy",
+    "copy_not_symlink": true,
+    "resources_complete": true
+  },
+  {
+    "skill": "toy-to-tool-audit",
+    "installed_path": "/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls/.agents/skills/toy-to-tool-audit",
+    "copy_not_symlink": true,
+    "resources_complete": true
+  },
+  {
+    "skill": "ux-visual-quality",
+    "installed_path": "/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls/.agents/skills/ux-visual-quality",
+    "copy_not_symlink": true,
+    "resources_complete": true
+  }
+]

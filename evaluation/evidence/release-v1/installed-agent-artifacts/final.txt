@@ -1,0 +1,9 @@
+Fixed cross-owner note reads and updates with two scoped query changes. README, UI and valid owned operations are preserved.
+
+Recheck: **64 handler requests and 37 state/value checks matched expectations**. Both reports passed the installed validator with the project evidence root.
+
+- [Before report](audits/owner-notes/before/report.md)
+- [After report](audits/owner-notes/after/report.md)
+- [Change patch](audits/owner-notes/change.patch)
+
+Hashes and regression evidence are saved alongside them. Runtime limits: socket binding was denied; checks used real handlers and disposable SQLite. Network/browser behavior remains unverified, and S05 remains unknown.

@@ -1,0 +1,7 @@
+{
+  "fixtures/owner-notes/README.md": "3b584a1596898d5fc272d18f4a28f8de76f3b11e2430cf36ac1240972599b175",
+  "fixtures/owner-notes/app.js": "5a3f7bbf3118235dd392cc7825afdb66e44b2ad333799e3e9b75fd0ff1206da0",
+  "fixtures/owner-notes/index.html": "616f7704e43569d5dda95ea9fdcd603e95b4dc4476869ec82ddb0edaba4b83ec",
+  "fixtures/owner-notes/server.py": "b16174f16192c3f02b0167b50517448238bfb740aa9a3cb2ff75f8dd2b66b96b",
+  "fixtures/owner-notes/style.css": "70af5abebb650c507b67807a6a5d16d61a32dad35157ed70d4075edb192fb501"
+}

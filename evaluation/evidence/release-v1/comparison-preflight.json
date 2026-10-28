@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-10-28T10:40:51.305356+00:00",
+  "agent_version": "codex-cli 0.164.0",
+  "ambient_skill_directory_counts": {
+    "/Users/richie.aeolus.vii/.agents/skills": 26,
+    "/Users/richie.aeolus.vii/.codex/skills": 0
+  },
+  "environment_receipt_sha256": "93178259225a5abe26733a6ef7ad901fdb16b6077619782288a08a432ee4a3ac",
+  "issues": [
+    "Ambient user skills exist; use a genuinely clean account/isolated environment",
+    "A reviewed clean-environment/tool-capability receipt is missing or unverified"
+  ],
+  "eligible_to_execute": false
+}

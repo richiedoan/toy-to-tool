@@ -1,0 +1,22 @@
+{
+  "timestamp": "2026-10-28T10:40:52.046503+00:00",
+  "criterion_ids": [
+    "S01",
+    "S02",
+    "S03",
+    "S04",
+    "S05"
+  ],
+  "before_manifest_intact": true,
+  "changed_app_files": [
+    "server.py"
+  ],
+  "README_UI_assets_identical": true,
+  "patch": "--- a/fixtures/owner-notes/server.py\n+++ b/fixtures/owner-notes/server.py\n@@ -110,7 +110,7 @@\n                     return\n                 if self.path.startswith('/api/notes/'):\n                     note_id = self.path.removeprefix('/api/notes/')\n-                    row = db.execute('SELECT id, owner, text FROM notes WHERE id = ?', (note_id,)).fetchone()\n+                    row = db.execute('SELECT id, owner, text FROM notes WHERE id = ? AND owner = ?', (note_id, user)).fetchone()\n                     self.reply(200, dict(row)) if row else self.reply(404, {'error': 'Not found'})\n                     return\n             self.reply(404, {'error': 'Not found'})\n@@ -133,7 +133,7 @@\n                 return\n             note_id = self.path.removeprefix('/api/notes/')\n             with sqlite3.connect(database) as db:\n-                changed = db.execute('UPDATE notes SET text = ? WHERE id = ?', (text, note_id)).rowcount\n+                changed = db.execute('UPDATE notes SET text = ? WHERE id = ? AND owner = ?', (text, note_id, user)).rowcount\n             self.reply(200, {'ok': True}) if changed else self.reply(404, {'error': 'Not found'})\n \n     return ThreadingHTTPServer(('127.0.0.1', port), Handler)\n",
+  "AST_parse_ok": true,
+  "requests_checked": 64,
+  "independent_value_or_state_checks": 37,
+  "all_handler_expectations_match": true,
+  "source_review": "Only id-based GET and PATCH SQL queries changed: owner bound in WHERE. Existing SQL parameterization, API success/error shapes, list logic, auth/cookie/expiry/logout implementation, schema and text validation unchanged. No UI edits. This corrects the demonstrated protected boundary violation; allowed-owner/anonymous checks and independent SQLite reads establish bounded regression evidence.",
+  "evidence_sufficiency": "S01/S02 evidence supports fixed local handler ownership; S03 uses source safe-sink defense inspection plus query roundtrip, not a browser execution result; S04 handler lifecycle and factory recreation only. S05 remains unknown due to missing browser and abuse expectations. No network/process-restart claim. Reports reflect these bounds."
+}

@@ -1,0 +1,349 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": "adjudicated"
+    },
+    "reviewer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "finding_reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "finding_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "verdict": {
+            "enum": [
+              "true_positive",
+              "false_positive",
+              "unresolved"
+            ]
+          },
+          "defect_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "evidence_paths": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "finding_id",
+          "verdict",
+          "defect_id",
+          "evidence_paths",
+          "rationale"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "fix_reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "defect_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "verdict": {
+            "enum": [
+              "successful",
+              "failed",
+              "unverified"
+            ]
+          },
+          "evidence_paths": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "defect_id",
+          "verdict",
+          "evidence_paths",
+          "rationale"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "claim_reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "verdict": {
+            "enum": [
+              "correct",
+              "incorrect",
+              "unresolved"
+            ]
+          },
+          "evidence_paths": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "claim_id",
+          "verdict",
+          "evidence_paths",
+          "rationale"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "regressions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "confirmed": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "baseline_status": {
+            "enum": [
+              "pass",
+              "fail",
+              "unknown"
+            ]
+          },
+          "after_status": {
+            "enum": [
+              "pass",
+              "fail",
+              "unknown"
+            ]
+          },
+          "evidence_paths": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "case_id",
+          "confirmed",
+          "baseline_status",
+          "after_status",
+          "evidence_paths",
+          "rationale"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "scope_violations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "confirmed": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "evidence_paths": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "case_id",
+          "confirmed",
+          "evidence_paths",
+          "rationale"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "interventions_required": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1
+          },
+          "stage": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_paths": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "event_id",
+          "question",
+          "stage",
+          "evidence_paths"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "interventions_performed": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1
+          },
+          "stage": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_paths": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "event_id",
+          "question",
+          "stage",
+          "evidence_paths"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "regression_coverage_complete": {
+      "type": "boolean"
+    },
+    "scope_review_complete": {
+      "type": "boolean"
+    },
+    "intervention_review_complete": {
+      "type": "boolean"
+    },
+    "billing": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "amount_usd": {
+              "type": "number",
+              "minimum": 0
+            },
+            "receipt_evidence_path": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "amount_usd",
+            "receipt_evidence_path"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "status",
+    "reviewer",
+    "run_id",
+    "finding_reviews",
+    "fix_reviews",
+    "claim_reviews",
+    "regressions",
+    "scope_violations",
+    "interventions_required",
+    "interventions_performed",
+    "regression_coverage_complete",
+    "scope_review_complete",
+    "intervention_review_complete",
+    "billing"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,2616 @@
+{
+  "phase": "after",
+  "captured_at": "2026-10-28T10:40:14.401993+00:00",
+  "source_sha256": {
+    "server.py": "f8ce346c8f475836402aa018008dc5fc9cac7d280a6ec5a3b8ee6aa6ad66374f",
+    "index.html": "616f7704e43569d5dda95ea9fdcd603e95b4dc4476869ec82ddb0edaba4b83ec",
+    "README.md": "3b584a1596898d5fc272d18f4a28f8de76f3b11e2430cf36ac1240972599b175",
+    "style.css": "70af5abebb650c507b67807a6a5d16d61a32dad35157ed70d4075edb192fb501",
+    "app.js": "5a3f7bbf3118235dd392cc7825afdb66e44b2ad333799e3e9b75fd0ff1206da0"
+  },
+  "launches": [
+    {
+      "mode": "real BaseHTTPRequestHandler over in-memory request/response streams; no listening socket",
+      "factory": "create_server(0, <disposable-data-dir>, 60)",
+      "timestamp": "2026-10-28T10:40:12.062647+00:00"
+    },
+    {
+      "mode": "real BaseHTTPRequestHandler over in-memory request/response streams; no listening socket",
+      "factory": "create_server(0, <disposable-data-dir>, 1)",
+      "timestamp": "2026-10-28T10:40:13.027597+00:00"
+    }
+  ],
+  "requests": [
+    {
+      "id": "public-/",
+      "timestamp": "2026-10-28T10:40:12.063149+00:00",
+      "actor": "anonymous",
+      "method": "GET",
+      "path": "/",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Owner notes</title><link rel=\"icon\" href=\"data:,\"><link rel=\"stylesheet\" href=\"style.css\"></head><body><main>\n<p class=\"eyebrow\">PERSONAL WORKSPACE</p><h1>Owner notes</h1><p>Your private working notes, in one place.</p>\n<form id=\"login\"><label for=\"username\">Username</label><input id=\"username\" required autocomplete=\"username\"><label for=\"password\">Password</label><input id=\"password\" type=\"password\" required autocomplete=\"current-password\"><button>Sign in</button></form>\n<section id=\"workspace\" hidden><div class=\"row\"><h2>Your notes</h2><button id=\"logout\">Sign out</button></div><ul id=\"notes\"></ul></section>\n<p id=\"status\" role=\"status\" aria-live=\"polite\">Sign in to continue.</p>\n</main><script src=\"app.js\"></script></body></html>\n",
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "text/html"
+      }
+    },
+    {
+      "id": "public-/app.js",
+      "timestamp": "2026-10-28T10:40:12.063567+00:00",
+      "actor": "anonymous",
+      "method": "GET",
+      "path": "/app.js",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": "const status = document.querySelector('#status');\nasync function request(path, options = {}) {\n  const response = await fetch(path, { ...options, headers: { 'Content-Type': 'application/json' } });\n  const data = await response.json();\n  if (!response.ok) throw new Error(data.error);\n  return data;\n}\nasync function load() {\n  const notes = await request('/api/notes');\n  const list = document.querySelector('#notes');\n  list.replaceChildren();\n  for (const record of notes) {\n    const item = document.createElement('li');\n    const label = document.createElement('label');\n    label.textContent = 'Working note'; label.htmlFor = record.id;\n    const input = document.createElement('textarea');\n    input.id = record.id; input.maxLength = 1000; input.value = record.text;\n    const save = document.createElement('button'); save.textContent = 'Save note';\n    save.addEventListener('click', async () => {\n      save.disabled = true; status.textContent = 'Saving…';\n      try { await request(`/api/notes/${record.id}`, { method: 'PATCH', body: JSON.stringify({ text: input.value }) }); status.textContent = 'Note saved.'; }\n      catch (error) { status.textContent = error.message; }\n      finally { save.disabled = false; }\n    });\n    item.append(label, input, save); list.append(item);\n  }\n}\ndocument.querySelector('#login').addEventListener('submit', async event => {\n  event.preventDefault();\n  try {\n    await request('/api/login', { method: 'POST', body: JSON.stringify({ username: document.querySelector('#username').value, password: document.querySelector('#password').value }) });\n    document.querySelector('#password').value = '';\n    await load(); document.querySelector('#login').hidden = true; document.querySelector('#workspace').hidden = false; status.textContent = 'Your notes are ready.';\n  } catch (error) { status.textContent = error.message; }\n});\ndocument.querySelector('#logout').addEventListener('click', async () => {\n  try { await request('/api/logout', { method: 'POST', body: '{}' }); document.querySelector('#workspace').hidden = true; document.querySelector('#notes').replaceChildren(); document.querySelector('#login').hidden = false; status.textContent = 'Signed out.'; }\n  catch (error) { status.textContent = error.message; }\n});\n",
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "text/javascript"
+      }
+    },
+    {
+      "id": "public-/style.css",
+      "timestamp": "2026-10-28T10:40:12.064374+00:00",
+      "actor": "anonymous",
+      "method": "GET",
+      "path": "/style.css",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": ":root { color-scheme: light; --ink: #182c2b; --muted: #465b58; --paper: #f3f5f2; --panel: #fff; --accent: #176454; --line: #b6c5bd; }\n* { box-sizing: border-box; }\nbody { margin: 0; color: var(--ink); background: var(--paper); font: 1rem/1.5 system-ui, sans-serif; }\nmain { max-width: 48rem; margin: 0 auto; padding: 2rem 1rem; }\nheader { margin-bottom: 2rem; }\nh1 { font-size: 2rem; margin: .25rem 0; }\nh2 { font-size: 1.125rem; margin-top: 0; }\np { margin: .5rem 0; }\n.eyebrow { color: var(--accent); font-size: .75rem; font-weight: 700; letter-spacing: .125rem; }\nsection { background: var(--panel); border: 1px solid var(--line); padding: 1.25rem; border-radius: .5rem; }\nlabel { display: block; font-weight: 600; }\n.row { display: flex; gap: .75rem; align-items: center; }\ninput:not([type=\"checkbox\"]), textarea { width: 100%; padding: .625rem; color: var(--ink); background: var(--panel); border: 1px solid var(--muted); border-radius: .25rem; font: inherit; }\ninput[type=\"checkbox\"] { width: 1.25rem; height: 1.25rem; margin: .75rem .5rem .75rem 0; }\nbutton { background: var(--accent); color: white; border: 1px solid var(--accent); padding: .625rem 1rem; border-radius: .25rem; font: inherit; cursor: pointer; white-space: nowrap; }\nbutton:disabled { cursor: wait; opacity: .7; }\n:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }\n#feedback { min-height: 1.5rem; margin: 1rem 0; }\n#tasks { padding: 0; list-style: none; }\n#tasks li { border-top: 1px solid var(--line); padding: 1rem 0; }\nh3 { margin: 0 0 .75rem; font-size: 1.125rem; overflow-wrap: anywhere; }\ntextarea { display: block; min-height: 5rem; resize: vertical; }\n.check { display: flex; align-items: center; }\nfooter { color: var(--muted); font-size: .875rem; padding-top: 1rem; }\n@media (max-width: 32rem) { .row { flex-direction: column; align-items: stretch; } main { padding-top: 1rem; } }\n",
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "text/css"
+      }
+    },
+    {
+      "id": "invalid-login",
+      "timestamp": "2026-10-28T10:40:12.221506+00:00",
+      "actor": "anonymous",
+      "method": "POST",
+      "path": "/api/login",
+      "input": {
+        "username": "alice",
+        "password": "<public demo value omitted>"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "44",
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Invalid credentials"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "unknown-login",
+      "timestamp": "2026-10-28T10:40:12.221622+00:00",
+      "actor": "anonymous",
+      "method": "POST",
+      "path": "/api/login",
+      "input": {
+        "username": "nobody",
+        "password": "<public demo value omitted>"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "45",
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Invalid credentials"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "login-alice",
+      "timestamp": "2026-10-28T10:40:12.380819+00:00",
+      "actor": "alice",
+      "method": "POST",
+      "path": "/api/login",
+      "input": {
+        "username": "alice",
+        "password": "<public demo value omitted>"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "47",
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": {
+        "username": "alice"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff",
+        "Set-Cookie": "session=<redacted>; HttpOnly; SameSite=Strict; Path=/; Max-Age=60"
+      }
+    },
+    {
+      "id": "login-bob",
+      "timestamp": "2026-10-28T10:40:12.538508+00:00",
+      "actor": "bob",
+      "method": "POST",
+      "path": "/api/login",
+      "input": {
+        "username": "bob",
+        "password": "<public demo value omitted>"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "43",
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": {
+        "username": "bob"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff",
+        "Set-Cookie": "session=<redacted>; HttpOnly; SameSite=Strict; Path=/; Max-Age=60"
+      }
+    },
+    {
+      "id": "alice-list",
+      "timestamp": "2026-10-28T10:40:12.538925+00:00",
+      "actor": "alice",
+      "method": "GET",
+      "path": "/api/notes",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": [
+        {
+          "id": "note-a",
+          "owner": "alice",
+          "text": "Alice working note"
+        }
+      ],
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "alice-read-note-a",
+      "timestamp": "2026-10-28T10:40:12.539181+00:00",
+      "actor": "alice",
+      "method": "GET",
+      "path": "/api/notes/note-a",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "Alice working note"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "alice-write-note-a",
+      "timestamp": "2026-10-28T10:40:12.540299+00:00",
+      "actor": "alice",
+      "method": "PATCH",
+      "path": "/api/notes/note-a",
+      "input": {
+        "text": "owned:alice"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "23",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": {
+        "ok": true
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "alice-readback-note-a",
+      "timestamp": "2026-10-28T10:40:12.540747+00:00",
+      "actor": "alice",
+      "method": "GET",
+      "path": "/api/notes/note-a",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "owned:alice"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "alice-read-note-b",
+      "timestamp": "2026-10-28T10:40:12.540968+00:00",
+      "actor": "alice",
+      "method": "GET",
+      "path": "/api/notes/note-b",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        404
+      ],
+      "actual_status": 404,
+      "status_matches": true,
+      "response": {
+        "error": "Not found"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "alice-write-note-b",
+      "timestamp": "2026-10-28T10:40:12.541308+00:00",
+      "actor": "alice",
+      "method": "PATCH",
+      "path": "/api/notes/note-b",
+      "input": {
+        "text": "forbidden:alice"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "27",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        404
+      ],
+      "actual_status": 404,
+      "status_matches": true,
+      "response": {
+        "error": "Not found"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "bob-list",
+      "timestamp": "2026-10-28T10:40:12.541617+00:00",
+      "actor": "bob",
+      "method": "GET",
+      "path": "/api/notes",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": [
+        {
+          "id": "note-b",
+          "owner": "bob",
+          "text": "Bob working note"
+        }
+      ],
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "bob-read-note-a",
+      "timestamp": "2026-10-28T10:40:12.541813+00:00",
+      "actor": "bob",
+      "method": "GET",
+      "path": "/api/notes/note-a",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        404
+      ],
+      "actual_status": 404,
+      "status_matches": true,
+      "response": {
+        "error": "Not found"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "bob-write-note-a",
+      "timestamp": "2026-10-28T10:40:12.542119+00:00",
+      "actor": "bob",
+      "method": "PATCH",
+      "path": "/api/notes/note-a",
+      "input": {
+        "text": "forbidden:bob"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "25",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        404
+      ],
+      "actual_status": 404,
+      "status_matches": true,
+      "response": {
+        "error": "Not found"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "bob-read-note-b",
+      "timestamp": "2026-10-28T10:40:12.542412+00:00",
+      "actor": "bob",
+      "method": "GET",
+      "path": "/api/notes/note-b",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "Bob working note"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "bob-write-note-b",
+      "timestamp": "2026-10-28T10:40:12.543078+00:00",
+      "actor": "bob",
+      "method": "PATCH",
+      "path": "/api/notes/note-b",
+      "input": {
+        "text": "owned:bob"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "21",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": {
+        "ok": true
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "bob-readback-note-b",
+      "timestamp": "2026-10-28T10:40:12.543485+00:00",
+      "actor": "bob",
+      "method": "GET",
+      "path": "/api/notes/note-b",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": {
+        "id": "note-b",
+        "owner": "bob",
+        "text": "owned:bob"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "anonymous-list",
+      "timestamp": "2026-10-28T10:40:12.543579+00:00",
+      "actor": "anonymous",
+      "method": "GET",
+      "path": "/api/notes",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "anonymous-read-note-a",
+      "timestamp": "2026-10-28T10:40:12.543663+00:00",
+      "actor": "anonymous",
+      "method": "GET",
+      "path": "/api/notes/note-a",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "anonymous-write-note-a",
+      "timestamp": "2026-10-28T10:40:12.543880+00:00",
+      "actor": "anonymous",
+      "method": "PATCH",
+      "path": "/api/notes/note-a",
+      "input": {
+        "text": "forbidden:anonymous"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "31",
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "anonymous-read-note-b",
+      "timestamp": "2026-10-28T10:40:12.544079+00:00",
+      "actor": "anonymous",
+      "method": "GET",
+      "path": "/api/notes/note-b",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "anonymous-write-note-b",
+      "timestamp": "2026-10-28T10:40:12.544276+00:00",
+      "actor": "anonymous",
+      "method": "PATCH",
+      "path": "/api/notes/note-b",
+      "input": {
+        "text": "forbidden:anonymous"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "31",
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "inert-marker",
+      "timestamp": "2026-10-28T10:40:12.544940+00:00",
+      "actor": "alice",
+      "method": "PATCH",
+      "path": "/api/notes/note-a",
+      "input": {
+        "text": "<audit-tag> & ' \" ; SELECT * FROM notes; -- Unicode café 🐍"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "87",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": {
+        "ok": true
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "inert-marker-read",
+      "timestamp": "2026-10-28T10:40:12.545267+00:00",
+      "actor": "alice",
+      "method": "GET",
+      "path": "/api/notes/note-a",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "<audit-tag> & ' \" ; SELECT * FROM notes; -- Unicode café 🐍"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "limit-1000",
+      "timestamp": "2026-10-28T10:40:12.545749+00:00",
+      "actor": "alice",
+      "method": "PATCH",
+      "path": "/api/notes/note-a",
+      "input": {
+        "text": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "1012",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": {
+        "ok": true
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "limit-1000-read",
+      "timestamp": "2026-10-28T10:40:12.546065+00:00",
+      "actor": "alice",
+      "method": "GET",
+      "path": "/api/notes/note-a",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": {
+        "id": "note-a",
+        "owner": "alice",
+        "text": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "empty-text",
+      "timestamp": "2026-10-28T10:40:12.546537+00:00",
+      "actor": "alice",
+      "method": "PATCH",
+      "path": "/api/notes/note-a",
+      "input": {
+        "text": ""
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "12",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": {
+        "ok": true
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "empty-text-read",
+      "timestamp": "2026-10-28T10:40:12.546849+00:00",
+      "actor": "alice",
+      "method": "GET",
+      "path": "/api/notes/note-a",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": {
+        "id": "note-a",
+        "owner": "alice",
+        "text": ""
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "over-limit",
+      "timestamp": "2026-10-28T10:40:12.547067+00:00",
+      "actor": "alice",
+      "method": "PATCH",
+      "path": "/api/notes/note-a",
+      "input": {
+        "text": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "1013",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        422
+      ],
+      "actual_status": 422,
+      "status_matches": true,
+      "response": {
+        "error": "Use plain text up to 1000 characters"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "null",
+      "timestamp": "2026-10-28T10:40:12.547371+00:00",
+      "actor": "alice",
+      "method": "PATCH",
+      "path": "/api/notes/note-a",
+      "input": {
+        "text": null
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "14",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        422
+      ],
+      "actual_status": 422,
+      "status_matches": true,
+      "response": {
+        "error": "Use plain text up to 1000 characters"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "number",
+      "timestamp": "2026-10-28T10:40:12.547677+00:00",
+      "actor": "alice",
+      "method": "PATCH",
+      "path": "/api/notes/note-a",
+      "input": {
+        "text": 3
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "11",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        422
+      ],
+      "actual_status": 422,
+      "status_matches": true,
+      "response": {
+        "error": "Use plain text up to 1000 characters"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "owner-transfer",
+      "timestamp": "2026-10-28T10:40:12.547973+00:00",
+      "actor": "alice",
+      "method": "PATCH",
+      "path": "/api/notes/note-a",
+      "input": {
+        "text": "safe",
+        "owner": "bob"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "32",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        422
+      ],
+      "actual_status": 422,
+      "status_matches": true,
+      "response": {
+        "error": "Use plain text up to 1000 characters"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "missing-text",
+      "timestamp": "2026-10-28T10:40:12.548263+00:00",
+      "actor": "alice",
+      "method": "PATCH",
+      "path": "/api/notes/note-a",
+      "input": {},
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "2",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        422
+      ],
+      "actual_status": 422,
+      "status_matches": true,
+      "response": {
+        "error": "Use plain text up to 1000 characters"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "id-query-read-missing",
+      "timestamp": "2026-10-28T10:40:12.548543+00:00",
+      "actor": "alice",
+      "method": "GET",
+      "path": "/api/notes/missing",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        404
+      ],
+      "actual_status": 404,
+      "status_matches": true,
+      "response": {
+        "error": "Not found"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "id-query-write-missing",
+      "timestamp": "2026-10-28T10:40:12.548833+00:00",
+      "actor": "alice",
+      "method": "PATCH",
+      "path": "/api/notes/missing",
+      "input": {
+        "text": "inert"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "17",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        404
+      ],
+      "actual_status": 404,
+      "status_matches": true,
+      "response": {
+        "error": "Not found"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "id-query-read-note-a' OR '1'='1",
+      "timestamp": "2026-10-28T10:40:12.549112+00:00",
+      "actor": "alice",
+      "method": "GET",
+      "path": "/api/notes/note-a'%20OR%20'1'='1",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        404
+      ],
+      "actual_status": 404,
+      "status_matches": true,
+      "response": {
+        "error": "Not found"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "id-query-write-note-a' OR '1'='1",
+      "timestamp": "2026-10-28T10:40:12.549403+00:00",
+      "actor": "alice",
+      "method": "PATCH",
+      "path": "/api/notes/note-a'%20OR%20'1'='1",
+      "input": {
+        "text": "inert"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "17",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        404
+      ],
+      "actual_status": 404,
+      "status_matches": true,
+      "response": {
+        "error": "Not found"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "csrf-form",
+      "timestamp": "2026-10-28T10:40:12.549693+00:00",
+      "actor": "alice (explicit cookie; not browser)",
+      "method": "PATCH",
+      "path": "/api/notes/note-a",
+      "input": "text=csrf",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Origin": "https://untrusted.invalid",
+        "Content-Length": "9",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        422
+      ],
+      "actual_status": 422,
+      "status_matches": true,
+      "response": {
+        "error": "Use plain text up to 1000 characters"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "csrf-text",
+      "timestamp": "2026-10-28T10:40:12.549980+00:00",
+      "actor": "alice (explicit cookie; not browser)",
+      "method": "PATCH",
+      "path": "/api/notes/note-a",
+      "input": "{\"text\":\"cross-site-marker\"}",
+      "headers": {
+        "Content-Type": "text/plain",
+        "Origin": "https://untrusted.invalid",
+        "Content-Length": "28",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        422
+      ],
+      "actual_status": 422,
+      "status_matches": true,
+      "response": {
+        "error": "Use plain text up to 1000 characters"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "malformed-json",
+      "timestamp": "2026-10-28T10:40:12.550273+00:00",
+      "actor": "alice (explicit cookie; not browser)",
+      "method": "PATCH",
+      "path": "/api/notes/note-a",
+      "input": "{",
+      "headers": {
+        "Content-Type": "application/json",
+        "Origin": "https://untrusted.invalid",
+        "Content-Length": "1",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        422
+      ],
+      "actual_status": 422,
+      "status_matches": true,
+      "response": {
+        "error": "Use plain text up to 1000 characters"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "oversized-json",
+      "timestamp": "2026-10-28T10:40:12.550557+00:00",
+      "actor": "alice (explicit cookie; not browser)",
+      "method": "PATCH",
+      "path": "/api/notes/note-a",
+      "input": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "headers": {
+        "Content-Type": "application/json",
+        "Origin": "https://untrusted.invalid",
+        "Content-Length": "4097",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        422
+      ],
+      "actual_status": 422,
+      "status_matches": true,
+      "response": {
+        "error": "Use plain text up to 1000 characters"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "origin-read-http://127.0.0.1:0",
+      "timestamp": "2026-10-28T10:40:12.550735+00:00",
+      "actor": "anonymous",
+      "method": "GET",
+      "path": "/api/notes",
+      "input": null,
+      "headers": {
+        "Origin": "http://127.0.0.1:0",
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "preflight-http://127.0.0.1:0",
+      "timestamp": "2026-10-28T10:40:12.550834+00:00",
+      "actor": "anonymous",
+      "method": "OPTIONS",
+      "path": "/api/notes/note-a",
+      "input": null,
+      "headers": {
+        "Origin": "http://127.0.0.1:0",
+        "Access-Control-Request-Method": "PATCH",
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        501
+      ],
+      "actual_status": 501,
+      "status_matches": true,
+      "response": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\n        \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\">\n        <title>Error response</title>\n    </head>\n    <body>\n        <h1>Error response</h1>\n        <p>Error code: 501</p>\n        <p>Message: Unsupported method ('OPTIONS').</p>\n        <p>Error code explanation: HTTPStatus.NOT_IMPLEMENTED - Server does not support this operation.</p>\n    </body>\n</html>\n",
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Connection": "close",
+        "Content-Type": "text/html;charset=utf-8",
+        "Content-Length": "500"
+      }
+    },
+    {
+      "id": "origin-read-https://untrusted.invalid",
+      "timestamp": "2026-10-28T10:40:12.550920+00:00",
+      "actor": "anonymous",
+      "method": "GET",
+      "path": "/api/notes",
+      "input": null,
+      "headers": {
+        "Origin": "https://untrusted.invalid",
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "preflight-https://untrusted.invalid",
+      "timestamp": "2026-10-28T10:40:12.551009+00:00",
+      "actor": "anonymous",
+      "method": "OPTIONS",
+      "path": "/api/notes/note-a",
+      "input": null,
+      "headers": {
+        "Origin": "https://untrusted.invalid",
+        "Access-Control-Request-Method": "PATCH",
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        501
+      ],
+      "actual_status": 501,
+      "status_matches": true,
+      "response": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\n        \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\">\n        <title>Error response</title>\n    </head>\n    <body>\n        <h1>Error response</h1>\n        <p>Error code: 501</p>\n        <p>Message: Unsupported method ('OPTIONS').</p>\n        <p>Error code explanation: HTTPStatus.NOT_IMPLEMENTED - Server does not support this operation.</p>\n    </body>\n</html>\n",
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Connection": "close",
+        "Content-Type": "text/html;charset=utf-8",
+        "Content-Length": "500"
+      }
+    },
+    {
+      "id": "private-path-/server.py",
+      "timestamp": "2026-10-28T10:40:12.551088+00:00",
+      "actor": "anonymous",
+      "method": "GET",
+      "path": "/server.py",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "private-path-/README.md",
+      "timestamp": "2026-10-28T10:40:12.551163+00:00",
+      "actor": "anonymous",
+      "method": "GET",
+      "path": "/README.md",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "private-path-/../server.py",
+      "timestamp": "2026-10-28T10:40:12.551237+00:00",
+      "actor": "anonymous",
+      "method": "GET",
+      "path": "/../server.py",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "private-path-/.git/config",
+      "timestamp": "2026-10-28T10:40:12.551312+00:00",
+      "actor": "anonymous",
+      "method": "GET",
+      "path": "/.git/config",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "private-path-/notes.sqlite",
+      "timestamp": "2026-10-28T10:40:12.551384+00:00",
+      "actor": "anonymous",
+      "method": "GET",
+      "path": "/notes.sqlite",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "logout",
+      "timestamp": "2026-10-28T10:40:12.551482+00:00",
+      "actor": "alice",
+      "method": "POST",
+      "path": "/api/logout",
+      "input": {},
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "2",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": {
+        "ok": true
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff",
+        "Set-Cookie": "session=<redacted>; HttpOnly; SameSite=Strict; Path=/; Max-Age=0"
+      }
+    },
+    {
+      "id": "logout-replay-read-/api/notes",
+      "timestamp": "2026-10-28T10:40:12.551569+00:00",
+      "actor": "alice revoked",
+      "method": "GET",
+      "path": "/api/notes",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "logout-replay-read-/api/notes/note-a",
+      "timestamp": "2026-10-28T10:40:12.551652+00:00",
+      "actor": "alice revoked",
+      "method": "GET",
+      "path": "/api/notes/note-a",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "logout-replay-write",
+      "timestamp": "2026-10-28T10:40:12.551867+00:00",
+      "actor": "alice revoked",
+      "method": "PATCH",
+      "path": "/api/notes/note-a",
+      "input": {
+        "text": "revoked"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "19",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "new-login-after-logout",
+      "timestamp": "2026-10-28T10:40:12.709330+00:00",
+      "actor": "alice",
+      "method": "POST",
+      "path": "/api/login",
+      "input": {
+        "username": "alice",
+        "password": "<public demo value omitted>"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "47",
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": {
+        "username": "alice"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff",
+        "Set-Cookie": "session=<redacted>; HttpOnly; SameSite=Strict; Path=/; Max-Age=60"
+      }
+    },
+    {
+      "id": "new-session-read",
+      "timestamp": "2026-10-28T10:40:12.709681+00:00",
+      "actor": "alice",
+      "method": "GET",
+      "path": "/api/notes/note-a",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": {
+        "id": "note-a",
+        "owner": "alice",
+        "text": ""
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:12 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "restart-replay-alice",
+      "timestamp": "2026-10-28T10:40:13.027796+00:00",
+      "actor": "alice prior process",
+      "method": "GET",
+      "path": "/api/notes",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:13 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "restart-replay-bob",
+      "timestamp": "2026-10-28T10:40:13.027918+00:00",
+      "actor": "bob prior process",
+      "method": "GET",
+      "path": "/api/notes",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:13 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "short-session-login",
+      "timestamp": "2026-10-28T10:40:13.185391+00:00",
+      "actor": "alice",
+      "method": "POST",
+      "path": "/api/login",
+      "input": {
+        "username": "alice",
+        "password": "<public demo value omitted>"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "47",
+        "Host": "127.0.0.1"
+      },
+      "session": "absent",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": {
+        "username": "alice"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:13 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff",
+        "Set-Cookie": "session=<redacted>; HttpOnly; SameSite=Strict; Path=/; Max-Age=1"
+      }
+    },
+    {
+      "id": "pre-expiry",
+      "timestamp": "2026-10-28T10:40:13.185655+00:00",
+      "actor": "alice",
+      "method": "GET",
+      "path": "/api/notes",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        200
+      ],
+      "actual_status": 200,
+      "status_matches": true,
+      "response": [
+        {
+          "id": "note-a",
+          "owner": "alice",
+          "text": ""
+        }
+      ],
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:13 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "post-expiry-read",
+      "timestamp": "2026-10-28T10:40:14.397128+00:00",
+      "actor": "alice expired",
+      "method": "GET",
+      "path": "/api/notes/note-a",
+      "input": null,
+      "headers": {
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:14 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "id": "post-expiry-write",
+      "timestamp": "2026-10-28T10:40:14.399910+00:00",
+      "actor": "alice expired",
+      "method": "PATCH",
+      "path": "/api/notes/note-a",
+      "input": {
+        "text": "expired"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "19",
+        "Host": "127.0.0.1"
+      },
+      "session": "present (redacted)",
+      "expected_status": [
+        401
+      ],
+      "actual_status": 401,
+      "status_matches": true,
+      "response": {
+        "error": "Sign in required"
+      },
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.9.6",
+        "Date": "Wed, 28 Oct 2026 10:40:14 GMT",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      }
+    }
+  ],
+  "independent_checks": [
+    {
+      "id": "static-matches-/",
+      "expected": "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Owner notes</title><link rel=\"icon\" href=\"data:,\"><link rel=\"stylesheet\" href=\"style.css\"></head><body><main>\n<p class=\"eyebrow\">PERSONAL WORKSPACE</p><h1>Owner notes</h1><p>Your private working notes, in one place.</p>\n<form id=\"login\"><label for=\"username\">Username</label><input id=\"username\" required autocomplete=\"username\"><label for=\"password\">Password</label><input id=\"password\" type=\"password\" required autocomplete=\"current-password\"><button>Sign in</button></form>\n<section id=\"workspace\" hidden><div class=\"row\"><h2>Your notes</h2><button id=\"logout\">Sign out</button></div><ul id=\"notes\"></ul></section>\n<p id=\"status\" role=\"status\" aria-live=\"polite\">Sign in to continue.</p>\n</main><script src=\"app.js\"></script></body></html>\n",
+      "actual": "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Owner notes</title><link rel=\"icon\" href=\"data:,\"><link rel=\"stylesheet\" href=\"style.css\"></head><body><main>\n<p class=\"eyebrow\">PERSONAL WORKSPACE</p><h1>Owner notes</h1><p>Your private working notes, in one place.</p>\n<form id=\"login\"><label for=\"username\">Username</label><input id=\"username\" required autocomplete=\"username\"><label for=\"password\">Password</label><input id=\"password\" type=\"password\" required autocomplete=\"current-password\"><button>Sign in</button></form>\n<section id=\"workspace\" hidden><div class=\"row\"><h2>Your notes</h2><button id=\"logout\">Sign out</button></div><ul id=\"notes\"></ul></section>\n<p id=\"status\" role=\"status\" aria-live=\"polite\">Sign in to continue.</p>\n</main><script src=\"app.js\"></script></body></html>\n",
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.063206+00:00"
+    },
+    {
+      "id": "static-matches-/app.js",
+      "expected": "const status = document.querySelector('#status');\nasync function request(path, options = {}) {\n  const response = await fetch(path, { ...options, headers: { 'Content-Type': 'application/json' } });\n  const data = await response.json();\n  if (!response.ok) throw new Error(data.error);\n  return data;\n}\nasync function load() {\n  const notes = await request('/api/notes');\n  const list = document.querySelector('#notes');\n  list.replaceChildren();\n  for (const record of notes) {\n    const item = document.createElement('li');\n    const label = document.createElement('label');\n    label.textContent = 'Working note'; label.htmlFor = record.id;\n    const input = document.createElement('textarea');\n    input.id = record.id; input.maxLength = 1000; input.value = record.text;\n    const save = document.createElement('button'); save.textContent = 'Save note';\n    save.addEventListener('click', async () => {\n      save.disabled = true; status.textContent = 'Saving…';\n      try { await request(`/api/notes/${record.id}`, { method: 'PATCH', body: JSON.stringify({ text: input.value }) }); status.textContent = 'Note saved.'; }\n      catch (error) { status.textContent = error.message; }\n      finally { save.disabled = false; }\n    });\n    item.append(label, input, save); list.append(item);\n  }\n}\ndocument.querySelector('#login').addEventListener('submit', async event => {\n  event.preventDefault();\n  try {\n    await request('/api/login', { method: 'POST', body: JSON.stringify({ username: document.querySelector('#username').value, password: document.querySelector('#password').value }) });\n    document.querySelector('#password').value = '';\n    await load(); document.querySelector('#login').hidden = true; document.querySelector('#workspace').hidden = false; status.textContent = 'Your notes are ready.';\n  } catch (error) { status.textContent = error.message; }\n});\ndocument.querySelector('#logout').addEventListener('click', async () => {\n  try { await request('/api/logout', { method: 'POST', body: '{}' }); document.querySelector('#workspace').hidden = true; document.querySelector('#notes').replaceChildren(); document.querySelector('#login').hidden = false; status.textContent = 'Signed out.'; }\n  catch (error) { status.textContent = error.message; }\n});\n",
+      "actual": "const status = document.querySelector('#status');\nasync function request(path, options = {}) {\n  const response = await fetch(path, { ...options, headers: { 'Content-Type': 'application/json' } });\n  const data = await response.json();\n  if (!response.ok) throw new Error(data.error);\n  return data;\n}\nasync function load() {\n  const notes = await request('/api/notes');\n  const list = document.querySelector('#notes');\n  list.replaceChildren();\n  for (const record of notes) {\n    const item = document.createElement('li');\n    const label = document.createElement('label');\n    label.textContent = 'Working note'; label.htmlFor = record.id;\n    const input = document.createElement('textarea');\n    input.id = record.id; input.maxLength = 1000; input.value = record.text;\n    const save = document.createElement('button'); save.textContent = 'Save note';\n    save.addEventListener('click', async () => {\n      save.disabled = true; status.textContent = 'Saving…';\n      try { await request(`/api/notes/${record.id}`, { method: 'PATCH', body: JSON.stringify({ text: input.value }) }); status.textContent = 'Note saved.'; }\n      catch (error) { status.textContent = error.message; }\n      finally { save.disabled = false; }\n    });\n    item.append(label, input, save); list.append(item);\n  }\n}\ndocument.querySelector('#login').addEventListener('submit', async event => {\n  event.preventDefault();\n  try {\n    await request('/api/login', { method: 'POST', body: JSON.stringify({ username: document.querySelector('#username').value, password: document.querySelector('#password').value }) });\n    document.querySelector('#password').value = '';\n    await load(); document.querySelector('#login').hidden = true; document.querySelector('#workspace').hidden = false; status.textContent = 'Your notes are ready.';\n  } catch (error) { status.textContent = error.message; }\n});\ndocument.querySelector('#logout').addEventListener('click', async () => {\n  try { await request('/api/logout', { method: 'POST', body: '{}' }); document.querySelector('#workspace').hidden = true; document.querySelector('#notes').replaceChildren(); document.querySelector('#login').hidden = false; status.textContent = 'Signed out.'; }\n  catch (error) { status.textContent = error.message; }\n});\n",
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.063608+00:00"
+    },
+    {
+      "id": "static-matches-/style.css",
+      "expected": ":root { color-scheme: light; --ink: #182c2b; --muted: #465b58; --paper: #f3f5f2; --panel: #fff; --accent: #176454; --line: #b6c5bd; }\n* { box-sizing: border-box; }\nbody { margin: 0; color: var(--ink); background: var(--paper); font: 1rem/1.5 system-ui, sans-serif; }\nmain { max-width: 48rem; margin: 0 auto; padding: 2rem 1rem; }\nheader { margin-bottom: 2rem; }\nh1 { font-size: 2rem; margin: .25rem 0; }\nh2 { font-size: 1.125rem; margin-top: 0; }\np { margin: .5rem 0; }\n.eyebrow { color: var(--accent); font-size: .75rem; font-weight: 700; letter-spacing: .125rem; }\nsection { background: var(--panel); border: 1px solid var(--line); padding: 1.25rem; border-radius: .5rem; }\nlabel { display: block; font-weight: 600; }\n.row { display: flex; gap: .75rem; align-items: center; }\ninput:not([type=\"checkbox\"]), textarea { width: 100%; padding: .625rem; color: var(--ink); background: var(--panel); border: 1px solid var(--muted); border-radius: .25rem; font: inherit; }\ninput[type=\"checkbox\"] { width: 1.25rem; height: 1.25rem; margin: .75rem .5rem .75rem 0; }\nbutton { background: var(--accent); color: white; border: 1px solid var(--accent); padding: .625rem 1rem; border-radius: .25rem; font: inherit; cursor: pointer; white-space: nowrap; }\nbutton:disabled { cursor: wait; opacity: .7; }\n:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }\n#feedback { min-height: 1.5rem; margin: 1rem 0; }\n#tasks { padding: 0; list-style: none; }\n#tasks li { border-top: 1px solid var(--line); padding: 1rem 0; }\nh3 { margin: 0 0 .75rem; font-size: 1.125rem; overflow-wrap: anywhere; }\ntextarea { display: block; min-height: 5rem; resize: vertical; }\n.check { display: flex; align-items: center; }\nfooter { color: var(--muted); font-size: .875rem; padding-top: 1rem; }\n@media (max-width: 32rem) { .row { flex-direction: column; align-items: stretch; } main { padding-top: 1rem; } }\n",
+      "actual": ":root { color-scheme: light; --ink: #182c2b; --muted: #465b58; --paper: #f3f5f2; --panel: #fff; --accent: #176454; --line: #b6c5bd; }\n* { box-sizing: border-box; }\nbody { margin: 0; color: var(--ink); background: var(--paper); font: 1rem/1.5 system-ui, sans-serif; }\nmain { max-width: 48rem; margin: 0 auto; padding: 2rem 1rem; }\nheader { margin-bottom: 2rem; }\nh1 { font-size: 2rem; margin: .25rem 0; }\nh2 { font-size: 1.125rem; margin-top: 0; }\np { margin: .5rem 0; }\n.eyebrow { color: var(--accent); font-size: .75rem; font-weight: 700; letter-spacing: .125rem; }\nsection { background: var(--panel); border: 1px solid var(--line); padding: 1.25rem; border-radius: .5rem; }\nlabel { display: block; font-weight: 600; }\n.row { display: flex; gap: .75rem; align-items: center; }\ninput:not([type=\"checkbox\"]), textarea { width: 100%; padding: .625rem; color: var(--ink); background: var(--panel); border: 1px solid var(--muted); border-radius: .25rem; font: inherit; }\ninput[type=\"checkbox\"] { width: 1.25rem; height: 1.25rem; margin: .75rem .5rem .75rem 0; }\nbutton { background: var(--accent); color: white; border: 1px solid var(--accent); padding: .625rem 1rem; border-radius: .25rem; font: inherit; cursor: pointer; white-space: nowrap; }\nbutton:disabled { cursor: wait; opacity: .7; }\n:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }\n#feedback { min-height: 1.5rem; margin: 1rem 0; }\n#tasks { padding: 0; list-style: none; }\n#tasks li { border-top: 1px solid var(--line); padding: 1rem 0; }\nh3 { margin: 0 0 .75rem; font-size: 1.125rem; overflow-wrap: anywhere; }\ntextarea { display: block; min-height: 5rem; resize: vertical; }\n.check { display: flex; align-items: center; }\nfooter { color: var(--muted); font-size: .875rem; padding-top: 1rem; }\n@media (max-width: 32rem) { .row { flex-direction: column; align-items: stretch; } main { padding-top: 1rem; } }\n",
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.064413+00:00"
+    },
+    {
+      "id": "alice-list-owners",
+      "expected": [
+        "alice"
+      ],
+      "actual": [
+        "alice"
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.538932+00:00"
+    },
+    {
+      "id": "alice-state-note-a",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          "owned:alice"
+        ],
+        [
+          "note-b",
+          "bob",
+          "Bob working note"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          "owned:alice"
+        ],
+        [
+          "note-b",
+          "bob",
+          "Bob working note"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.540480+00:00"
+    },
+    {
+      "id": "alice-readback-text",
+      "expected": "owned:alice",
+      "actual": "owned:alice",
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.540752+00:00"
+    },
+    {
+      "id": "alice-state-note-b",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          "owned:alice"
+        ],
+        [
+          "note-b",
+          "bob",
+          "Bob working note"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          "owned:alice"
+        ],
+        [
+          "note-b",
+          "bob",
+          "Bob working note"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.541417+00:00"
+    },
+    {
+      "id": "bob-list-owners",
+      "expected": [
+        "bob"
+      ],
+      "actual": [
+        "bob"
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.541621+00:00"
+    },
+    {
+      "id": "bob-state-note-a",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          "owned:alice"
+        ],
+        [
+          "note-b",
+          "bob",
+          "Bob working note"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          "owned:alice"
+        ],
+        [
+          "note-b",
+          "bob",
+          "Bob working note"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.542222+00:00"
+    },
+    {
+      "id": "bob-state-note-b",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          "owned:alice"
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          "owned:alice"
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.543245+00:00"
+    },
+    {
+      "id": "bob-readback-text",
+      "expected": "owned:bob",
+      "actual": "owned:bob",
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.543490+00:00"
+    },
+    {
+      "id": "anonymous-state-note-a",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          "owned:alice"
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          "owned:alice"
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.543997+00:00"
+    },
+    {
+      "id": "anonymous-state-note-b",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          "owned:alice"
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          "owned:alice"
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.544381+00:00"
+    },
+    {
+      "id": "inert-marker-db",
+      "expected": "<audit-tag> & ' \" ; SELECT * FROM notes; -- Unicode café 🐍",
+      "actual": "<audit-tag> & ' \" ; SELECT * FROM notes; -- Unicode café 🐍",
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.545060+00:00"
+    },
+    {
+      "id": "inert-marker-roundtrip",
+      "expected": "<audit-tag> & ' \" ; SELECT * FROM notes; -- Unicode café 🐍",
+      "actual": "<audit-tag> & ' \" ; SELECT * FROM notes; -- Unicode café 🐍",
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.545271+00:00"
+    },
+    {
+      "id": "limit-1000-db",
+      "expected": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "actual": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.545864+00:00"
+    },
+    {
+      "id": "limit-1000-roundtrip",
+      "expected": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "actual": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.546069+00:00"
+    },
+    {
+      "id": "empty-text-db",
+      "expected": "",
+      "actual": "",
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.546648+00:00"
+    },
+    {
+      "id": "empty-text-roundtrip",
+      "expected": "",
+      "actual": "",
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.546853+00:00"
+    },
+    {
+      "id": "over-limit-unchanged",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.547171+00:00"
+    },
+    {
+      "id": "null-unchanged",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.547474+00:00"
+    },
+    {
+      "id": "number-unchanged",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.547777+00:00"
+    },
+    {
+      "id": "owner-transfer-unchanged",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.548070+00:00"
+    },
+    {
+      "id": "missing-text-unchanged",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.548362+00:00"
+    },
+    {
+      "id": "id-query-unchanged-missing",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.548930+00:00"
+    },
+    {
+      "id": "id-query-unchanged-note-a' OR '1'='1",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.549499+00:00"
+    },
+    {
+      "id": "csrf-form-unchanged",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.549791+00:00"
+    },
+    {
+      "id": "csrf-text-unchanged",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.550076+00:00"
+    },
+    {
+      "id": "malformed-json-unchanged",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.550368+00:00"
+    },
+    {
+      "id": "oversized-json-unchanged",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.550652+00:00"
+    },
+    {
+      "id": "no-cors-grant-http://127.0.0.1:0",
+      "expected": null,
+      "actual": null,
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.550739+00:00"
+    },
+    {
+      "id": "no-preflight-grant-http://127.0.0.1:0",
+      "expected": null,
+      "actual": null,
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.550838+00:00"
+    },
+    {
+      "id": "no-cors-grant-https://untrusted.invalid",
+      "expected": null,
+      "actual": null,
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.550924+00:00"
+    },
+    {
+      "id": "no-preflight-grant-https://untrusted.invalid",
+      "expected": null,
+      "actual": null,
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.551013+00:00"
+    },
+    {
+      "id": "logout-unchanged",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:12.551981+00:00"
+    },
+    {
+      "id": "restart-database-preserved",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:13.028059+00:00"
+    },
+    {
+      "id": "expiry-unchanged",
+      "expected": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "actual": [
+        [
+          "note-a",
+          "alice",
+          ""
+        ],
+        [
+          "note-b",
+          "bob",
+          "owned:bob"
+        ]
+      ],
+      "matches": true,
+      "timestamp": "2026-10-28T10:40:14.400870+00:00"
+    }
+  ],
+  "server_logs": [
+    {
+      "stderr": "No network server or log_message output; handler requests complete synchronously.",
+      "timestamp": "2026-10-28T10:40:12.709832+00:00"
+    },
+    {
+      "stderr": "No network server or log_message output; handler requests complete synchronously.",
+      "timestamp": "2026-10-28T10:40:14.400880+00:00"
+    }
+  ],
+  "summary": {
+    "requests": 64,
+    "unexpected_statuses": [],
+    "state_or_value_failures": []
+  },
+  "limits": "Socket bind denied (before/startup-failure.json). Real request handlers with in-memory HTTP wire streams and actual SQLite, not network HTTP/browser execution. No browser, TLS/deployed behavior, brute force, race/load or production privacy testing. Cookies redacted. Temp data removed. No service started."
+}

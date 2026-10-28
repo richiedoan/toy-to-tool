@@ -1,57 +1,73 @@
-# Toy to Tool evaluation criteria v1
+# Toy to Tool Agent Skills v1
 
-A machine-readable evaluation protocol for deciding what to fix, propose, preserve or investigate in an application. There are exactly 36 criteria, six in each of six groups. Essential, Standard and Advanced are cumulative project audit scopes; they do not grant code-change authority or represent ASVS certification.
+Seven installable Agent Skills for evidence-led application audits and narrowly verified fixes. The package contains one coordinator, six specialists, a 36-criterion catalogue, JSON schemas, a validator and three deliberately faulty local fixtures.
 
-## Run
+The project keeps four concepts separate: status (`pass`, `fail`, `unknown`, `not_applicable`), severity (`blocker`, `important`, `improvement`), decision (`fix`, `propose`, `preserve`, `investigate`) and audit level (`Essential`, `Standard`, `Advanced`). The project levels are cumulative scopes, not ASVS certification levels. An unrun check is never a pass and no aggregate score can hide a blocker.
 
-Requires Python 3.9 or later. From the repository root:
+## Install with the skills CLI
+
+Requirements: Node.js 22.20 or later for `skills` CLI 1.7.4, and Python 3.9 or later for the bundled validator. Clone or extract this repository, then run from the target project:
+
+```sh
+DISABLE_TELEMETRY=1 npx --yes skills@1.7.4 add /path/to/toy-to-tool --list
+DISABLE_TELEMETRY=1 npx --yes skills@1.7.4 add /path/to/toy-to-tool \
+  --agent codex --skill '*' --copy --yes
+npx --yes skills@1.7.4 list --agent codex
+```
+
+Install one skill by replacing `'*'` with, for example, `security-privacy`. `--copy` makes a project-local copy in `.agents/skills`; every copied skill contains its own criteria, schemas, validator, documentation and license. No plugin configuration is required or supplied.
+
+The exact local-path installation above was verified on macOS arm64 with Node 24.19.0, `skills` CLI 1.7.4 and Codex CLI 0.164.0. See the [installation guide](docs/installation.md) for the verified procedure, official format references, dependency setup and platform limits.
+
+## Use
+
+Ask explicitly for the relevant skill:
+
+```text
+$toy-to-tool-audit inspect this app at Essential level. Do not edit code.
+```
+
+```text
+$security-privacy inspect the owner-notes fixture, fix only demonstrated ownership
+boundary failures, recheck them, and preserve the current UI and API.
+```
+
+Reports must link each conclusion to a criterion and evidence. A typical workflow is Understand → set level/authority → select → collect evidence → propose or fix → verify and hand over. See [usage examples](docs/usage.md), [specialist scopes](docs/skills.md) and [limitations](docs/limitations.md).
+
+## Skills
+
+| Skill | Scope |
+| --- | --- |
+| `toy-to-tool-audit` | Coordinates a scoped multi-group audit |
+| `functionality-data` | F01–F06: operations, persistence, feedback, validation, repeats and concurrency |
+| `ux-visual-quality` | U01–U06: purpose, states, responsiveness, recovery and consistency |
+| `accessibility` | A01–A06: keyboard, semantics, contrast, reflow, focus and targets |
+| `security-privacy` | S01–S06: authorization, exposure, execution boundaries and sessions |
+| `performance-resilience` | P01–P06: task performance, recovery, budgets, lifecycle and load behavior |
+| `deployment-operations` | O01–O06: setup, configuration, persistence, diagnosis and recovery |
+
+`.agents/skills/` is the generated, install-ready distribution. `authoring/` is the source for skill instructions; `scripts/build_release.py --write` regenerates the distribution deterministically. `criteria/v1.json`, `schemas/` and `scripts/audit.py` are canonical.
+
+## Validate the release
 
 ```sh
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 .venv/bin/python scripts/audit.py validate
+.venv/bin/python scripts/build_release.py
 .venv/bin/python -m unittest discover -s tests -v
-.venv/bin/python scripts/audit.py validate --report examples/report.json
-.venv/bin/python scripts/audit.py select --profile examples/profile.json --level Standard
-.venv/bin/python scripts/audit.py template --profile examples/profile.json --level Essential > /tmp/audit-report.json
 ```
 
-Edit a copy of the example profile to describe the actual app before selecting criteria. `null` means a feature is not yet established; `false` requires a reason. A report template deliberately starts with unknown results, with reasoned exclusions for absent features. It is not a completed audit. Validation exits nonzero for invalid input.
+The validator checks structure and internal consistency, not the truth of audit evidence. Fixture workflows and retained evidence are documented in [evaluation/README.md](evaluation/README.md).
 
-## Audit orchestration skill
+## Controlled comparison
 
-Use `$toy-to-tool-audit` from this checkout, or ask the agent to read [SKILL.md](.agents/skills/toy-to-tool-audit/SKILL.md). The repository-local skill follows six stages: understand the priority tasks/users/data/environment, set level and authority, select criteria, collect evidence, propose or make scoped fixes, then verify and hand over.
+The repository includes a fail-closed paired protocol for the same Codex version/model, prompt, base tools, fixture and budget, with the only intended treatment difference being installed project skills. Every arm is restored from a checksummed baseline in a new git workspace. External adjudication records true defects, false alerts, successful fixes, regressions, report accuracy, intervention counts and observed cost without combining them into one score.
 
-It defaults to Essential inspection and recommendations without target-code edits, reuses existing permissions, and asks only questions that change a decision. It includes an [English report template](.agents/skills/toy-to-tool-audit/assets/report.md) and [missing-browser/runtime/credentials guidance](.agents/skills/toy-to-tool-audit/references/missing-access.md). Keep this skill with its repository engine; copying the skill directory alone is insufficient. Audit artifacts go in ignored `audits/<run-id>/` directories and are not published automatically.
+The comparison is currently **not evaluated**: this machine has ambient user skills and no reviewed clean-environment receipt, so the runner correctly refuses to execute. No efficacy numbers are claimed. Read [comparison protocol](docs/comparison.md) and [machine-readable status](evaluation/comparison/STATUS.json) to reproduce it in a clean environment.
 
-## Functionality & Data trial
+## Project status and license
 
-Use `$functionality-data` for an F01-F06 focus through Inspect → Improve → Recheck. Scoped reports use `--group F`; other groups have no assessed outcome. The local tracker and its neutral behavior contract are in `fixtures/tracker/`.
+Release-installation and installed-skill integration evidence is in [evaluation/evidence/release-v1](evaluation/evidence/release-v1/verification.md). Only the platforms listed there are verified; installation on one agent is not evidence of support for every agent.
 
-Evaluator instructions, the immutable original, context-separated agent-packet export and recorded before/after browser evidence are described in [evaluation/README.md](evaluation/README.md). Evaluator material is excluded from the agent packet. The recorded exercise includes a restricted independent CLI attempt and evaluator-led Chrome verification; it is not evidence of a skill-effectiveness gain.
-
-## Repository contract
-
-| Path | Purpose |
-| --- | --- |
-| `criteria/v1.json` | All 36 protocols, applicability gates, evidence, pass/fail/unknown rules, contextual severity, decisions, verification and source registry |
-| `schemas/` | JSON Schema 2020-12 contracts for catalogue, app profile and report |
-| `scripts/audit.py` | Schema and semantic validation, cumulative selection, decision function and report template generation |
-| `docs/method.md` | Skill-consumption instructions, aggregation, evidence and authority policy |
-| `docs/review.md` | Explicit project choices, verified scope and remaining review decisions |
-| `examples/` | Synthetic app profile/report and linked demonstration evidence for all four decisions |
-| `tests/` | Rejection and behavior tests for contract violations and decision boundaries |
-
-The detailed user brief was supplied locally as the untracked input `PROJECT_BRIFFF.md`, preserved unchanged. A file named `PROJECT_BRIEF.md` was not available. No application implementation was present.
-
-## Sources and limits
-
-The catalogue distinguishes [WCAG 2.2 normative requirements](https://www.w3.org/TR/2024/REC-WCAG22-20241212/) from the project's evaluation policy and explanatory guidance. Security references [OWASP ASVS 5.0.0](https://asvs.owasp.org/) without claiming numbered control coverage; exact requirement mappings would need a separate scoped verification. [Google Web Vitals](https://web.dev/articles/vitals) informs the performance criterion's field thresholds. Full titles, versions, access dates, per-criterion links and exceptions are in the catalogue.
-
-Passing this protocol is not a declaration of WCAG AA compliance or system security. The validator checks structure, enumerations, coverage, reference integrity and decision consistency. A reviewer or consuming skill must still inspect evidence authenticity, applicability, standards exceptions and sufficiency for the claimed scope. Synthetic examples are not assurance for a real app.
-
-## Six specialist groups and portable installation
-
-The five additional specialists are UX & Visual Quality, Accessibility, Security & Privacy, Performance & Resilience, and Deployment & Operations. Together with Functionality & Data they reuse the 36 criteria and one report contract. See [specialist and bundle guidance](docs/skills.md) for names, scope, standalone exports and runtime requirements.
-
-The new [owner-notes](fixtures/owner-notes/README.md) and [dashboard](fixtures/dashboard/README.md) fixtures have checksummed buggy originals, neutral agent packets and [recorded before/after trials](evaluation/evidence/expansion-v1/workflow.md). The trials verify the listed fixes and explicit preservation controls; they are not a controlled skill-effectiveness study.
+Contributions are welcome under [CONTRIBUTING.md](CONTRIBUTING.md). Original project code and documentation are licensed under the [MIT License](LICENSE); external standards remain under their own terms as described in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

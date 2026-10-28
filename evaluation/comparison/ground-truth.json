@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "usage": "Evaluator-only seeded defect units. Never copy this file into a trial workspace. Additional demonstrated defects require independent adjudication.",
+  "fixtures": {
+    "tracker": [
+      {"defect_id": "tracker-save-noop", "criteria": ["F01", "F03"], "expected": "A successful save creates a retrievable record; success feedback must match the committed outcome."},
+      {"defect_id": "tracker-refresh-loss", "criteria": ["F02"], "expected": "A saved record survives the fixture's documented refresh transition."},
+      {"defect_id": "tracker-repeat-duplicate", "criteria": ["F05"], "expected": "Repeated submission of the same action does not create an unintended duplicate."}
+    ],
+    "owner-notes": [
+      {"defect_id": "owner-read-boundary", "criteria": ["S01", "S02"], "expected": "A signed-in user cannot retrieve another owner's note by identifier."},
+      {"defect_id": "owner-write-boundary", "criteria": ["S02"], "expected": "A signed-in user cannot update another owner's note by identifier."}
+    ],
+    "dashboard": [
+      {"defect_id": "dashboard-mobile-access", "criteria": ["U03", "A04"], "expected": "Core dashboard tasks remain reachable without harmful horizontal clipping at the documented mobile viewport."},
+      {"defect_id": "dashboard-error-recovery", "criteria": ["U02", "P02"], "expected": "A failed data load has a visible error state and a usable recovery path."},
+      {"defect_id": "dashboard-local-filter-budget", "criteria": ["P03"], "expected": "The documented local filter action meets its repeatable fixture budget without an artificial blocking delay."}
+    ]
+  },
+  "preservation_controls": [
+    "README behavior contracts remain unchanged.",
+    "Previously passing functional scenarios still pass.",
+    "Approved desktop/login appearance remains unchanged where fixture evidence defines it.",
+    "No unrelated dependency, feature, architecture or UI refactor is introduced."
+  ]
+}

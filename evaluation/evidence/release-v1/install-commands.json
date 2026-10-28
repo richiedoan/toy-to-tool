@@ -1,0 +1,46 @@
+[
+  {
+    "command": [
+      "npx",
+      "--yes",
+      "skills@1.7.4",
+      "add",
+      "/Users/richie.aeolus.vii/toy-to-tool",
+      "--list"
+    ],
+    "cwd": "/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls",
+    "exit_code": 0,
+    "log": "skills-cli-0.txt"
+  },
+  {
+    "command": [
+      "npx",
+      "--yes",
+      "skills@1.7.4",
+      "add",
+      "/Users/richie.aeolus.vii/toy-to-tool",
+      "--agent",
+      "codex",
+      "--skill",
+      "*",
+      "--copy",
+      "--yes"
+    ],
+    "cwd": "/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls",
+    "exit_code": 0,
+    "log": "skills-cli-1.txt"
+  },
+  {
+    "command": [
+      "npx",
+      "--yes",
+      "skills@1.7.4",
+      "list",
+      "--agent",
+      "codex"
+    ],
+    "cwd": "/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls",
+    "exit_code": 0,
+    "log": "skills-cli-2.txt"
+  }
+]

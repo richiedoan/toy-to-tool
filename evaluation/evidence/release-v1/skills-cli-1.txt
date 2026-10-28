@@ -1,0 +1,63 @@
+
+│
+●   codex  Agent detected — installing non-interactively
+[?25l│
+◇  Source: /Users/richie.aeolus.vii/toy-to-tool
+[?25h[?25l│
+◇  Local path validated
+[?25h[?25l│
+◇  Found 7 skills
+[?25h│
+●  Installing all 7 skills
+
+│
+◇  Installation Summary ────────────────────╮
+│                                           │
+│  ./.agents/skills/accessibility           │
+│    copy → Codex                           │
+│                                           │
+│  ./.agents/skills/deployment-operations   │
+│    copy → Codex                           │
+│                                           │
+│  ./.agents/skills/functionality-data      │
+│    copy → Codex                           │
+│                                           │
+│  ./.agents/skills/performance-resilience  │
+│    copy → Codex                           │
+│                                           │
+│  ./.agents/skills/security-privacy        │
+│    copy → Codex                           │
+│                                           │
+│  ./.agents/skills/toy-to-tool-audit       │
+│    copy → Codex                           │
+│                                           │
+│  ./.agents/skills/ux-visual-quality       │
+│    copy → Codex                           │
+│                                           │
+├───────────────────────────────────────────╯
+[?25l│
+◇  Installation complete
+[?25h
+│
+◇  Installed 7 skills ──────────────────────────╮
+│                                               │
+│  ✓ accessibility (copied)                     │
+│    → ./.agents/skills/accessibility           │
+│  ✓ deployment-operations (copied)             │
+│    → ./.agents/skills/deployment-operations   │
+│  ✓ functionality-data (copied)                │
+│    → ./.agents/skills/functionality-data      │
+│  ✓ performance-resilience (copied)            │
+│    → ./.agents/skills/performance-resilience  │
+│  ✓ security-privacy (copied)                  │
+│    → ./.agents/skills/security-privacy        │
+│  ✓ toy-to-tool-audit (copied)                 │
+│    → ./.agents/skills/toy-to-tool-audit       │
+│  ✓ ux-visual-quality (copied)                 │
+│    → ./.agents/skills/ux-visual-quality       │
+│                                               │
+├───────────────────────────────────────────────╯
+
+│
+└  Done!  Review skills before use; they run with full agent permissions.
+

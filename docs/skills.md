@@ -1,6 +1,6 @@
 # Audit specialists and independent bundles
 
-All specialists reuse `criteria/v1.json`, the existing JSON report schema and fix/propose/preserve/investigate rules. Source skills live under `.agents/skills/`; criteria are not reauthored in each skill.
+All specialists reuse `criteria/v1.json`, the existing JSON report schema and fix/propose/preserve/investigate rules. Authoring templates live under `authoring/`; generated, install-ready skills live under `.agents/skills/`. Criteria are not reauthored manually in each skill.
 
 | Skill | Group | Primary evidence | Key limits |
 | --- | --- | --- | --- |
@@ -13,14 +13,16 @@ All specialists reuse `criteria/v1.json`, the existing JSON report schema and fi
 
 Each SKILL.md defines when to use it, Inspect → Improve → Recheck, evidence, limits and preservation controls. The coordinator can use an installed specialist or the canonical protocols directly; no installed sibling is mandatory.
 
-## Export a separately usable skill
+## Install or export a separately usable skill
+
+The preferred route is the `skills` CLI described in [installation.md](installation.md). Every directory under `.agents/skills/` is already self-contained; release checks ensure the generated copies match canonical resources.
 
 ```sh
 python3 scripts/package_skill.py security-privacy /tmp/exported-skills/security-privacy
 python3 scripts/package_skill.py accessibility /tmp/exported-skills/accessibility
 ```
 
-Use a new destination outside the source repository. The output folder is the self-contained skill bundle to use/install separately. Do not copy only the unbundled source SKILL.md. The exporter includes source instructions/assets, the full canonical catalogue/source registry, schemas, validator, requirements, method, English report template and missing-access guidance under `references/engine/`. Links are rewritten to bundled resources. It copies no fixture, evaluator oracle, hidden test, historical report, virtual environment or credentials. Existing destinations are never overwritten.
+Use a new destination outside the source repository. The output folder is the self-contained skill bundle to use/install separately. Do not copy an authoring template. The exporter includes instructions/assets, the full canonical catalogue/source registry, schemas, validator, requirements, method, English report template, missing-access guidance, license and notices under the bundle. Links are rewritten to `references/engine/`. It copies no fixture, evaluator oracle, hidden test, historical report, virtual environment or credentials. Existing destinations are never overwritten.
 
 The environment still needs a compatible Python interpreter and the declared packages, plus browser/AT/runtime/credentials for the checks that require them. Install the included requirements into an available environment; no write access to the installed skill is required. Create app profiles and evidence in the target workspace. Explicitly pass its root when validating local artifact links:
 

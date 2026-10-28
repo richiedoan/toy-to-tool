@@ -1,0 +1,319 @@
+{
+  "criterion_groups": [
+    "S"
+  ],
+  "report_kind": "audit",
+  "catalog_version": "1.0.0",
+  "audit_level": "Standard",
+  "change_permission": "fix_scoped",
+  "profile": {
+    "name": "Owner notes localhost fixture",
+    "features": {
+      "ui": true,
+      "pointer_ui": true,
+      "operations": true,
+      "inputs": true,
+      "persistent_data": true,
+      "shared_writes": true,
+      "user_changes": true,
+      "protected_resources": true,
+      "untrusted_execution": true,
+      "authentication": true,
+      "csrf_surface": true,
+      "cors_surface": false,
+      "uploads": false,
+      "public_endpoints": true,
+      "abuse_surface": true,
+      "network": true,
+      "resource_lifecycle": true,
+      "load_requirements": false,
+      "realtime": false,
+      "offline_sync": false,
+      "background_sync": false,
+      "deployed": false,
+      "important_data": false,
+      "operated_service": false
+    },
+    "rationale": {
+      "ui": "Native login/editor controls.",
+      "pointer_ui": "Buttons and text fields.",
+      "operations": "Login, read, update and logout routes.",
+      "inputs": "JSON credentials and plain text notes.",
+      "persistent_data": "SQLite survives restart.",
+      "shared_writes": "Threaded server can receive simultaneous writes.",
+      "user_changes": "Users edit notes.",
+      "protected_resources": "Owner-only notes.",
+      "untrusted_execution": "Input reaches SQL and browser text sinks.",
+      "authentication": "Cookie sessions for two demo users.",
+      "csrf_surface": "Cookie-authenticated PATCH and POST routes.",
+      "cors_surface": "No intended cross-origin API or CORS grants; still probe denied origins.",
+      "uploads": "No upload routes or file input.",
+      "public_endpoints": "Static assets, login and logout.",
+      "abuse_surface": "Public login and bounded JSON request parsing.",
+      "network": "Loopback HTTP.",
+      "resource_lifecycle": "In-memory sessions and SQLite connections.",
+      "load_requirements": "No throughput or concurrent load budget in README.",
+      "realtime": "No push transport.",
+      "offline_sync": "No offline synchronization.",
+      "background_sync": "No background synchronization.",
+      "deployed": "README defines localhost disposable fixture.",
+      "important_data": "Only disposable demo notes per README.",
+      "operated_service": "Local fixture without production operations contract."
+    }
+  },
+  "scope_and_limitations": "Standard, group S only; README and user define localhost disposable fixture contract. Source and real handler/SQLite checks only: socket bind denied; no network HTTP/browser verification. In-memory streams invoke original handlers and real database; only listening server class is captured. No production, TLS, race/load, brute-force, outside-workspace history or secret-store checks. No certification. S06 deferred. No committed HEAD; SHA-256 manifests identify source. After owner predicates added; historical failures retained in before/report.json.",
+  "evidence": [
+    {
+      "id": "E-context",
+      "location": "audits/owner-notes/context.md",
+      "description": "Requirement source, source traces, surface classification and scope",
+      "environment": "Python 3.9.6 / SQLite 3.54.0; local source + handler streams, disposable database; no listening service",
+      "captured_at": "2026-10-28T10:40:52.073379+00:00",
+      "kind": "requirement",
+      "synthetic": false
+    },
+    {
+      "id": "E-env",
+      "location": "audits/owner-notes/environment.json",
+      "description": "Actual project interpreter, revision and browser-tool discovery",
+      "environment": "Python 3.9.6 / SQLite 3.54.0; local source + handler streams, disposable database; no listening service",
+      "captured_at": "2026-10-28T10:40:52.073379+00:00",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-runtime",
+      "location": "audits/owner-notes/before/startup-failure.json",
+      "description": "Real port-0 startup failure: sandbox denied socket bind",
+      "environment": "Python 3.9.6 / SQLite 3.54.0; local source + handler streams, disposable database; no listening service",
+      "captured_at": "2026-10-28T10:40:52.073379+00:00",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-hashes",
+      "location": "audits/owner-notes/after/hashes.json",
+      "description": "SHA-256 source identity",
+      "environment": "Python 3.9.6 / SQLite 3.54.0; local source + handler streams, disposable database; no listening service",
+      "captured_at": "2026-10-28T10:40:52.073379+00:00",
+      "kind": "artifact",
+      "synthetic": false
+    },
+    {
+      "id": "E-regression",
+      "location": "audits/owner-notes/after/regression.json",
+      "description": "Executed actual handler request traces and independent SQLite expectations/results",
+      "environment": "Python 3.9.6 / SQLite 3.54.0; local source + handler streams, disposable database; no listening service",
+      "captured_at": "2026-10-28T10:40:52.073379+00:00",
+      "kind": "measurement",
+      "synthetic": false
+    },
+    {
+      "id": "E-runner",
+      "location": "audits/owner-notes/probe.py",
+      "description": "Exact executed deterministic request/state regression runner; no network claim",
+      "environment": "Python 3.9.6 / SQLite 3.54.0; local source + handler streams, disposable database; no listening service",
+      "captured_at": "2026-10-28T10:40:52.073379+00:00",
+      "kind": "artifact",
+      "synthetic": false
+    },
+    {
+      "id": "E-readme",
+      "location": "audits/owner-notes/before/README.md",
+      "description": "Immutable README requirements",
+      "environment": "Python 3.9.6 / SQLite 3.54.0; local source + handler streams, disposable database; no listening service",
+      "captured_at": "2026-10-28T10:40:52.073379+00:00",
+      "kind": "requirement",
+      "synthetic": false
+    },
+    {
+      "id": "E-baseline",
+      "location": "audits/owner-notes/before/report.json",
+      "description": "Immutable baseline important failures",
+      "environment": "Python 3.9.6 / SQLite 3.54.0; local source + handler streams, disposable database; no listening service",
+      "captured_at": "2026-10-28T10:40:52.073379+00:00",
+      "kind": "artifact",
+      "synthetic": false
+    },
+    {
+      "id": "E-patch",
+      "location": "audits/owner-notes/change.patch",
+      "description": "Minimal protected-boundary correction",
+      "environment": "Python 3.9.6 / SQLite 3.54.0; local source + handler streams, disposable database; no listening service",
+      "captured_at": "2026-10-28T10:40:52.073379+00:00",
+      "kind": "artifact",
+      "synthetic": false
+    },
+    {
+      "id": "E-review",
+      "location": "audits/owner-notes/after/review.json",
+      "description": "Source preservation, diff and evidence sufficiency review",
+      "environment": "Python 3.9.6 / SQLite 3.54.0; local source + handler streams, disposable database; no listening service",
+      "captured_at": "2026-10-28T10:40:52.073379+00:00",
+      "kind": "observation",
+      "synthetic": false
+    }
+  ],
+  "findings": [
+    {
+      "id": "finding-S01",
+      "criterion_id": "S01",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "Inspected fixture source/static surfaces and handler responses contain only intended public values or authorized note data after correction; cross-owner reads return 404. No production/history assurance.",
+      "requirement_or_goal": "README: owner-only list/read/update, no ownership transfer, plain text <=1000 characters, logout/expiry/restart invalidation; installed canonical S01 protocol.",
+      "affected_users_and_conditions": "Alice/Bob demo users and anonymous callers; isolated loopback fixture with disposable SQLite data. Bounded impact: no production data, credentials or deployment.",
+      "evidence_ids": [
+        "E-context",
+        "E-env",
+        "E-runtime",
+        "E-hashes",
+        "E-regression",
+        "E-runner",
+        "E-readme",
+        "E-baseline",
+        "E-patch",
+        "E-review"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve existing behavior/defenses. After patch only individual owner predicates differ; preserve UI/API/README/session/SQL parameterization.",
+      "verification_plan": "Replay identical runner against corrected source; compare forbidden reads/writes and independent owner state, allowed operations, anonymous, note constraints and session controls. For S05 obtain browser runtime and bounded abuse contract; do not claim these passed.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-S02",
+      "criterion_id": "S02",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "Original A/B read/write reproductions now return 404; independent SQLite confirms forbidden targets unchanged. Owner read/update/readback, filtered list and anonymous read/write controls succeed. All 64 handler requests and all independent checks match expectations.",
+      "requirement_or_goal": "README: owner-only list/read/update, no ownership transfer, plain text <=1000 characters, logout/expiry/restart invalidation; installed canonical S02 protocol.",
+      "affected_users_and_conditions": "Alice/Bob demo users and anonymous callers; isolated loopback fixture with disposable SQLite data. Bounded impact: no production data, credentials or deployment.",
+      "evidence_ids": [
+        "E-context",
+        "E-env",
+        "E-runtime",
+        "E-hashes",
+        "E-regression",
+        "E-runner",
+        "E-readme",
+        "E-baseline",
+        "E-patch",
+        "E-review"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve existing behavior/defenses. After patch only individual owner predicates differ; preserve UI/API/README/session/SQL parameterization.",
+      "verification_plan": "Replay identical runner against corrected source; compare forbidden reads/writes and independent owner state, allowed operations, anonymous, note constraints and session controls. For S05 obtain browser runtime and bounded abuse contract; do not claim these passed.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-S03",
+      "criterion_id": "S03",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "Source traces establish bound SQL parameters and safe DOM .value/textContent sinks; inert markup/quotes/Unicode/SQL marker and 0/1000 character roundtrips preserve data, 1001 characters and ownership fields rejected without mutation. No browser execution was observed; conclusion covers inspected defenses and handler/SQLite probes only.",
+      "requirement_or_goal": "README: owner-only list/read/update, no ownership transfer, plain text <=1000 characters, logout/expiry/restart invalidation; installed canonical S03 protocol.",
+      "affected_users_and_conditions": "Alice/Bob demo users and anonymous callers; isolated loopback fixture with disposable SQLite data. Bounded impact: no production data, credentials or deployment.",
+      "evidence_ids": [
+        "E-context",
+        "E-env",
+        "E-runtime",
+        "E-hashes",
+        "E-regression",
+        "E-runner",
+        "E-readme",
+        "E-baseline",
+        "E-patch",
+        "E-review"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve existing behavior/defenses. After patch only individual owner predicates differ; preserve UI/API/README/session/SQL parameterization.",
+      "verification_plan": "Replay identical runner against corrected source; compare forbidden reads/writes and independent owner state, allowed operations, anonymous, note constraints and session controls. For S05 obtain browser runtime and bounded abuse contract; do not claim these passed.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-S04",
+      "criterion_id": "S04",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "Valid/invalid login, monotonic expiry, logout replay (read/write), fresh login, session discard on factory recreation and SQLite retention all executed in original handlers. Cookie is HttpOnly/SameSite=Strict, scoped /; HTTP localhost is intentional. Factory recreation verifies in-memory invalidation, not an executed network process restart; real deployment/transport unverified.",
+      "requirement_or_goal": "README: owner-only list/read/update, no ownership transfer, plain text <=1000 characters, logout/expiry/restart invalidation; installed canonical S04 protocol.",
+      "affected_users_and_conditions": "Alice/Bob demo users and anonymous callers; isolated loopback fixture with disposable SQLite data. Bounded impact: no production data, credentials or deployment.",
+      "evidence_ids": [
+        "E-context",
+        "E-env",
+        "E-runtime",
+        "E-hashes",
+        "E-regression",
+        "E-runner",
+        "E-readme",
+        "E-baseline",
+        "E-patch",
+        "E-review"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve existing behavior/defenses. After patch only individual owner predicates differ; preserve UI/API/README/session/SQL parameterization.",
+      "verification_plan": "Replay identical runner against corrected source; compare forbidden reads/writes and independent owner state, allowed operations, anonymous, note constraints and session controls. For S05 obtain browser runtime and bounded abuse contract; do not claim these passed.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-S05",
+      "criterion_id": "S05",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Unknown composite: uploads absent by route/UI inventory; cross-origin reads grant no CORS headers, preflight 501; JSON-only write parser rejects simple cross-site form/text content and >4096-byte JSON without mutation; invalid public login errors bounded. CSRF browser SameSite enforcement unexecuted because no browser; abuse surface has no agreed rate/volume requirement. These unknown subcases prevent an overall pass. No observed S05 violation warrants changes.",
+      "requirement_or_goal": "README: owner-only list/read/update, no ownership transfer, plain text <=1000 characters, logout/expiry/restart invalidation; installed canonical S05 protocol.",
+      "affected_users_and_conditions": "Alice/Bob demo users and anonymous callers; isolated loopback fixture with disposable SQLite data. Bounded impact: no production data, credentials or deployment.",
+      "evidence_ids": [
+        "E-context",
+        "E-env",
+        "E-runtime",
+        "E-hashes",
+        "E-regression",
+        "E-runner",
+        "E-readme",
+        "E-baseline",
+        "E-patch",
+        "E-review"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No app edit. Establish browser CSRF behavior and an owner-approved bounded abuse contract before further assessment.",
+      "verification_plan": "Replay identical runner against corrected source; compare forbidden reads/writes and independent owner state, allowed operations, anonymous, note constraints and session controls. For S05 obtain browser runtime and bounded abuse contract; do not claim these passed.",
+      "observed_outside_level": false
+    }
+  ]
+}

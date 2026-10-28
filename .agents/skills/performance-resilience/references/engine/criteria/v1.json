@@ -1,0 +1,2349 @@
+{
+  "version": "1.0.0",
+  "sources": [
+    {
+      "id": "project",
+      "title": "Toy to Tool evaluation policy",
+      "version": "1.0.0",
+      "url": "docs/method.md",
+      "kind": "project-defined",
+      "verified_on": "2026-10-28"
+    },
+    {
+      "id": "wcag",
+      "title": "Web Content Accessibility Guidelines",
+      "version": "2.2, Recommendation 2024-12-12",
+      "url": "https://www.w3.org/TR/2024/REC-WCAG22-20241212/",
+      "kind": "normative",
+      "verified_on": "2026-10-28"
+    },
+    {
+      "id": "asvs",
+      "title": "OWASP Application Security Verification Standard",
+      "version": "5.0.0",
+      "url": "https://asvs.owasp.org/",
+      "kind": "guidance",
+      "verified_on": "2026-10-28"
+    },
+    {
+      "id": "cwv",
+      "title": "Web Vitals",
+      "version": "Living article, updated 2024-10-31; accessed 2026-10-28",
+      "url": "https://web.dev/articles/vitals",
+      "kind": "guidance",
+      "verified_on": "2026-10-28"
+    },
+    {
+      "id": "authorization",
+      "title": "OWASP Authorization Cheat Sheet",
+      "version": "Living guidance, accessed 2026-10-28",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html",
+      "kind": "guidance",
+      "verified_on": "2026-10-28"
+    },
+    {
+      "id": "session",
+      "title": "OWASP Session Management Cheat Sheet",
+      "version": "Living guidance, accessed 2026-10-28",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html",
+      "kind": "guidance",
+      "verified_on": "2026-10-28"
+    },
+    {
+      "id": "xss",
+      "title": "OWASP Cross Site Scripting Prevention Cheat Sheet",
+      "version": "Living guidance, accessed 2026-10-28",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html",
+      "kind": "guidance",
+      "verified_on": "2026-10-28"
+    },
+    {
+      "id": "threat",
+      "title": "OWASP Threat Modeling Cheat Sheet",
+      "version": "Living guidance, accessed 2026-10-28",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "kind": "guidance",
+      "verified_on": "2026-10-28"
+    },
+    {
+      "id": "keyboard",
+      "title": "WCAG 2.2 Understanding keyboard",
+      "version": "Living explanatory guidance, accessed 2026-10-28",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html",
+      "kind": "guidance",
+      "verified_on": "2026-10-28"
+    },
+    {
+      "id": "semantics",
+      "title": "WCAG 2.2 Understanding name-role-value",
+      "version": "Living explanatory guidance, accessed 2026-10-28",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html",
+      "kind": "guidance",
+      "verified_on": "2026-10-28"
+    },
+    {
+      "id": "contrast",
+      "title": "WCAG 2.2 Understanding contrast-minimum",
+      "version": "Living explanatory guidance, accessed 2026-10-28",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
+      "kind": "guidance",
+      "verified_on": "2026-10-28"
+    },
+    {
+      "id": "reflow",
+      "title": "WCAG 2.2 Understanding reflow",
+      "version": "Living explanatory guidance, accessed 2026-10-28",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html",
+      "kind": "guidance",
+      "verified_on": "2026-10-28"
+    },
+    {
+      "id": "target",
+      "title": "WCAG 2.2 Understanding target-size-minimum",
+      "version": "Living explanatory guidance, accessed 2026-10-28",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
+      "kind": "guidance",
+      "verified_on": "2026-10-28"
+    },
+    {
+      "id": "focus",
+      "title": "WCAG 2.2 Understanding focus-not-obscured-minimum",
+      "version": "Living explanatory guidance, accessed 2026-10-28",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html",
+      "kind": "guidance",
+      "verified_on": "2026-10-28"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "F01",
+      "name": "Core workflows perform real operations",
+      "group": "F",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Prevent users relying on an interface that only simulates a promised result.",
+      "applicability": {
+        "any_features": [],
+        "applies_when": "Always assess the agreed core tasks.",
+        "not_applicable_when": "No exclusion at criterion level; missing access or requirements means unknown."
+      },
+      "expected_behavior": "Each agreed essential task produces its actual intended result; any demo or mock behavior is disclosed.",
+      "test_steps": [
+        "List core tasks and their acceptance outcomes from the agreed requirements.",
+        "Execute each task end to end using a unique test marker.",
+        "Read the resulting artifact or authoritative state independently of the success UI."
+      ],
+      "test_data_and_environment": [
+        "Authorized test environment; test accounts where required.",
+        "Unique records and documented expected outcomes for each workflow."
+      ],
+      "required_evidence": [
+        "Task-to-requirement mapping, exact steps and build/environment.",
+        "Request/result or exported artifact and independent state readback; disclosed mock boundaries."
+      ],
+      "pass_conditions": [
+        "Every sampled core result matches its agreed outcome and disclosed operating mode."
+      ],
+      "fail_conditions": [
+        "A core task reports completion but performs no required operation, or silently uses a mock."
+      ],
+      "unknown_when": [
+        "Core task expectations, execution access or authoritative results are unavailable."
+      ],
+      "severity_guidance": {
+        "blocker": "A required core outcome cannot be achieved.",
+        "important": "A supported workflow fails with a viable workaround.",
+        "improvement": "A measured secondary friction remains without violating a core outcome."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of F01; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat the original task and verify independent readback; exercise a neighboring task for regression."
+      ],
+      "do_not_change": [
+        "Do not invent features or replace a disclosed demo with an unrequested backend."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "F02",
+      "name": "Data persists according to the agreed requirements",
+      "group": "F",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Protect users from losing data at transitions where retention was promised.",
+      "applicability": {
+        "any_features": [
+          "persistent_data"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Data survives exactly the agreed refresh, reopen, relogin, device and deployment boundaries.",
+      "test_steps": [
+        "Record a persistence matrix with required and excluded transitions.",
+        "Create distinguishable records, then perform each required transition.",
+        "Read and compare values, ownership and record counts after each transition."
+      ],
+      "test_data_and_environment": [
+        "Representative records; two devices/accounts only if the contract includes them.",
+        "A safe redeployment environment if retention across deployment is required."
+      ],
+      "required_evidence": [
+        "Agreed persistence matrix and before/after readbacks per transition."
+      ],
+      "pass_conditions": [
+        "All required transitions retain accurate, correctly scoped data."
+      ],
+      "fail_conditions": [
+        "A promised transition loses, corrupts or misattributes data."
+      ],
+      "unknown_when": [
+        "Retention boundaries are undecided or a required transition cannot be tested."
+      ],
+      "severity_guidance": {
+        "blocker": "Irreplaceable required data is lost.",
+        "important": "Recoverable data is lost or retention is unreliable.",
+        "improvement": "Measured retention friction exceeds a secondary goal."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of F02; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat every affected transition and compare the stored records, not only visible UI."
+      ],
+      "do_not_change": [
+        "Do not require a database, cloud sync or cross-device behavior without a requirement."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "F03",
+      "name": "UI feedback reflects actual operation outcomes",
+      "group": "F",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Prevent false confidence and repeated work caused by misleading completion feedback.",
+      "applicability": {
+        "any_features": [
+          "operations"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Pending, confirmed and failed operations are distinguishable; optimistic results reconcile or roll back.",
+      "test_steps": [
+        "Trigger success, controlled rejection and delayed response for each relevant operation.",
+        "Compare the feedback timeline with authoritative completion.",
+        "If optimistic updates exist, fail the operation and inspect rollback and retained input."
+      ],
+      "test_data_and_environment": [
+        "Network delay/error control in an authorized test environment; unique operation markers."
+      ],
+      "required_evidence": [
+        "Timestamped UI and request outcome timeline, including optimistic rollback when used."
+      ],
+      "pass_conditions": [
+        "Feedback never represents unconfirmed or failed work as confirmed completion."
+      ],
+      "fail_conditions": [
+        "Success remains visible after rejection or a pending operation is falsely confirmed."
+      ],
+      "unknown_when": [
+        "Failure/delay cannot be induced or authoritative outcome is inaccessible."
+      ],
+      "severity_guidance": {
+        "blocker": "False confirmation creates irreversible or high impact loss.",
+        "important": "Misleading feedback causes retries or incorrect user decisions.",
+        "improvement": "Timing or wording has a demonstrated minor usability cost."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of F03; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat success, failure and delay and verify the final state and feedback agree."
+      ],
+      "do_not_change": [
+        "Do not remove optimistic behavior that reconciles correctly solely by preference."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "F04",
+      "name": "Inputs follow the application's data rules",
+      "group": "F",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Allow valid user data while rejecting or normalizing values according to actual domain rules.",
+      "applicability": {
+        "any_features": [
+          "inputs"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Every relevant boundary applies the agreed data rules, including the trusted server boundary when present.",
+      "test_steps": [
+        "Build valid, empty, malformed, oversized and boundary-value cases from the domain contract.",
+        "Submit cases through the UI and directly to relevant trusted boundaries.",
+        "Compare acceptance, normalization, rejection and stored values with the contract."
+      ],
+      "test_data_and_environment": [
+        "Domain limits and normalization rules; fixtures immediately below, at and above each limit."
+      ],
+      "required_evidence": [
+        "Input/expected/actual matrix, boundary responses and stored-value readback."
+      ],
+      "pass_conditions": [
+        "All cases are accepted, normalized or rejected as specified at necessary boundaries."
+      ],
+      "fail_conditions": [
+        "Invalid values bypass a required boundary or valid data is incorrectly rejected."
+      ],
+      "unknown_when": [
+        "Domain rules or boundary access are missing."
+      ],
+      "severity_guidance": {
+        "blocker": "Invalid accepted data causes serious corruption or unsafe execution.",
+        "important": "Incorrect validation blocks legitimate work or damages data quality.",
+        "improvement": "Error explanation has a measured minor cost."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of F04; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Rerun the full boundary matrix including valid data previously at risk of rejection."
+      ],
+      "do_not_change": [
+        "Do not introduce arbitrary length, character or format restrictions."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "F05",
+      "name": "Repeated actions do not create unintended side effects",
+      "group": "F",
+      "starts_at": "Standard",
+      "purpose_and_user_impact": "Prevent accidental duplicates and repeated side effects without forbidding intentional repetition.",
+      "applicability": {
+        "any_features": [
+          "operations"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Repetition follows an explicit operation rule; retries do not duplicate effects that must occur once.",
+      "test_steps": [
+        "Classify operations as intentionally repeatable or requiring duplicate prevention.",
+        "Double-click, replay a submission and retry after a lost response.",
+        "Count committed records and external effects against the expected repetition rule."
+      ],
+      "test_data_and_environment": [
+        "Controlled response loss and test side-effect sink; identifiers for repeated requests."
+      ],
+      "required_evidence": [
+        "Operation repetition contract, request sequence and resulting record/effect counts."
+      ],
+      "pass_conditions": [
+        "Effects match the intended repetition rule in every tested sequence."
+      ],
+      "fail_conditions": [
+        "Unintended duplicate effects occur or legitimate repeated operations are blocked."
+      ],
+      "unknown_when": [
+        "Intended repetition or external effect count cannot be established."
+      ],
+      "severity_guidance": {
+        "blocker": "Duplicate payment or other irreversible high impact effect.",
+        "important": "Duplicate records or work needing manual correction.",
+        "improvement": "Measured duplicate-prevention friction with no critical effect."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of F05; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Replay the failing sequence and test a deliberately repeated valid action."
+      ],
+      "do_not_change": [
+        "Do not impose a distributed idempotency system on every action."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "F06",
+      "name": "Concurrent updates follow an explicit consistency rule",
+      "group": "F",
+      "starts_at": "Advanced",
+      "purpose_and_user_impact": "Prevent silent loss when multiple sessions edit the same important data.",
+      "applicability": {
+        "any_features": [
+          "shared_writes"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Concurrent writes follow an agreed rule for conflicts, visibility and preservation.",
+      "test_steps": [
+        "Document the consistency and conflict rule before testing.",
+        "Open two independent sessions on the same version; submit competing edits in both orders.",
+        "Read final state from both sessions and inspect conflict feedback and retained changes."
+      ],
+      "test_data_and_environment": [
+        "Two authorized sessions, same record version, deterministic competing values and controlled timing."
+      ],
+      "required_evidence": [
+        "Conflict contract, ordered write trace, both session outcomes and final authoritative state."
+      ],
+      "pass_conditions": [
+        "Conflicts and final state match the agreed rule with no silent important data loss."
+      ],
+      "fail_conditions": [
+        "Observed conflict handling violates the rule or silently discards important changes."
+      ],
+      "unknown_when": [
+        "The business conflict policy is unspecified or independent sessions cannot be exercised."
+      ],
+      "severity_guidance": {
+        "blocker": "Concurrent writes destroy irreplaceable or high impact data.",
+        "important": "Important edits are silently overwritten but recoverable.",
+        "improvement": "Measured avoidable conflict friction."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of F06; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat both write orders and verify convergence, notification and preservation."
+      ],
+      "do_not_change": [
+        "Do not choose last-write-wins, merge or locking without understanding business consequences."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "U01",
+      "name": "Users can identify the screen purpose and primary action",
+      "group": "U",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Help target users understand the task and identify a useful next action.",
+      "applicability": {
+        "any_features": [
+          "ui"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Purpose, labels and primary actions match the target task; expert opinion is labeled as such.",
+      "test_steps": [
+        "Record the target task and expected entry point for each essential screen.",
+        "Inspect headings, labels and action hierarchy against that task.",
+        "Where real participants are available, ask them to explain the purpose and locate the next action without coaching."
+      ],
+      "test_data_and_environment": [
+        "Target tasks and audience description; representative screen states."
+      ],
+      "required_evidence": [
+        "Annotated screens and task mapping; expert-review label or participant observations with conditions."
+      ],
+      "pass_conditions": [
+        "The inspected screen communicates the agreed purpose and next action; any understanding claim is limited to its evidence."
+      ],
+      "fail_conditions": [
+        "Mislabeling or ambiguous hierarchy demonstrably prevents the target action."
+      ],
+      "unknown_when": [
+        "Target tasks are unknown; user understanding remains unknown without participant evidence."
+      ],
+      "severity_guidance": {
+        "blocker": "Users cannot identify a critical action needed to complete the task.",
+        "important": "Ambiguity causes repeatable errors or delays.",
+        "improvement": "A measured wording/hierarchy improvement with low impact."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of U01; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Recheck task-to-label alignment and rerun the same participant task if understanding was the claim."
+      ],
+      "do_not_change": [
+        "Do not claim users understand a screen because an agent finds it clear."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "U02",
+      "name": "Relevant interface states are complete and actionable",
+      "group": "U",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Keep users informed and able to proceed when content is absent, pending or unavailable.",
+      "applicability": {
+        "any_features": [
+          "ui"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Relevant loading, empty, success, error and disabled states explain the actual situation and next action.",
+      "test_steps": [
+        "List reachable states per workflow rather than inventing states for every component.",
+        "Induce each reachable state, including slow loading and an empty result.",
+        "Attempt the indicated next action and check the workflow leaves waiting states."
+      ],
+      "test_data_and_environment": [
+        "Empty/populated fixtures and controlled latency/errors; documented pending timeout behavior."
+      ],
+      "required_evidence": [
+        "State matrix, screenshots, trigger steps and next-action results."
+      ],
+      "pass_conditions": [
+        "Every relevant state is truthful, understandable and actionable when an action exists."
+      ],
+      "fail_conditions": [
+        "A reachable state is blank, misleading or waits indefinitely without recovery."
+      ],
+      "unknown_when": [
+        "A reachable state cannot be induced or expected timing is undefined."
+      ],
+      "severity_guidance": {
+        "blocker": "A state blocks an essential task with no exit.",
+        "important": "A missing state causes user confusion or recoverable abandonment.",
+        "improvement": "Measured minor feedback friction."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of U02; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Revisit each affected state and complete its next action."
+      ],
+      "do_not_change": [
+        "Do not add states that serve no reachable behavior."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "U03",
+      "name": "Layout does not obstruct essential tasks",
+      "group": "U",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Keep necessary content and actions usable on the agreed devices and viewports.",
+      "applicability": {
+        "any_features": [
+          "ui"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Essential content, buttons and forms remain reachable without obstructing clipping, overlap or occlusion.",
+      "test_steps": [
+        "Record supported devices, viewport sizes and relevant orientations.",
+        "Complete core tasks at each target size with realistic and long content.",
+        "Inspect sticky elements, dialogs and virtual keyboards for obstructed controls."
+      ],
+      "test_data_and_environment": [
+        "Target viewport/device matrix; long labels and representative dense content."
+      ],
+      "required_evidence": [
+        "Screenshots with CSS viewport dimensions and exact reproduction steps per obstruction."
+      ],
+      "pass_conditions": [
+        "All essential actions and information remain reachable on tested target configurations."
+      ],
+      "fail_conditions": [
+        "Clipping, overlap or occlusion prevents a required action or hides essential information."
+      ],
+      "unknown_when": [
+        "Supported devices are undecided or required device behavior is untested."
+      ],
+      "severity_guidance": {
+        "blocker": "A supported device cannot complete a critical task.",
+        "important": "Obstruction requires a workaround on a supported configuration.",
+        "improvement": "Measured minor layout friction."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of U03; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat the task at the failing and adjacent target sizes using the same content."
+      ],
+      "do_not_change": [
+        "Do not classify all horizontal scrolling as a defect when two-dimensional content needs it."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "U04",
+      "name": "Users can prevent, correct, and recover from mistakes",
+      "group": "U",
+      "starts_at": "Standard",
+      "purpose_and_user_impact": "Reduce avoidable loss and let users correct mistakes in proportion to their impact.",
+      "applicability": {
+        "any_features": [
+          "user_changes"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Invalid input, cancel/back behavior and destructive actions provide proportionate prevention or recovery.",
+      "test_steps": [
+        "List common mistakes and destructive actions with their consequences.",
+        "Try invalid input, cancel and back during a partially completed task.",
+        "Perform a test deletion and exercise confirmation, undo or restore as designed."
+      ],
+      "test_data_and_environment": [
+        "Disposable records; draft inputs; agreed reversibility and acceptable-loss rules."
+      ],
+      "required_evidence": [
+        "Mistake/consequence matrix, screen/request trace and recovery readback."
+      ],
+      "pass_conditions": [
+        "Feedback, prevention or recovery matches each action impact and preserves required user work."
+      ],
+      "fail_conditions": [
+        "An avoidable mistake produces loss beyond agreed tolerance without appropriate protection."
+      ],
+      "unknown_when": [
+        "Impact or recovery expectations are undecided, or safe recovery cannot be tested."
+      ],
+      "severity_guidance": {
+        "blocker": "A common mistake causes unrecoverable important loss.",
+        "important": "Recoverable loss or costly correction affects daily tasks.",
+        "improvement": "Measured minor correction friction."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of U04; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat the mistake and verify recovery plus the normal successful path."
+      ],
+      "do_not_change": [
+        "Do not add confirmation dialogs to every small reversible action."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "U05",
+      "name": "Visual and interaction patterns are consistent",
+      "group": "U",
+      "starts_at": "Standard",
+      "purpose_and_user_impact": "Make familiar controls predictable across screens without imposing an aesthetic preference.",
+      "applicability": {
+        "any_features": [
+          "ui"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Typography, spacing, color, buttons, labels and behavior follow agreed patterns or documented intentional differences.",
+      "test_steps": [
+        "Inventory repeated components and any established design conventions.",
+        "Compare equivalent states across representative screens.",
+        "Reproduce inconsistent behavior and tie it to an error, delay or agreed design requirement."
+      ],
+      "test_data_and_environment": [
+        "Representative screens and states; existing tokens/components or documented conventions."
+      ],
+      "required_evidence": [
+        "Side-by-side captures, pattern references and observed impact or intentional-difference rationale."
+      ],
+      "pass_conditions": [
+        "Equivalent elements behave consistently or justified differences meet task needs."
+      ],
+      "fail_conditions": [
+        "An unintended divergence violates an agreed pattern or creates demonstrable interaction confusion."
+      ],
+      "unknown_when": [
+        "Intent or impact cannot be established; do not turn taste into a failure."
+      ],
+      "severity_guidance": {
+        "blocker": "Inconsistent destructive semantics cause serious loss.",
+        "important": "Inconsistent labels or interaction cause task errors.",
+        "improvement": "Measured visual scanning friction or minor pattern violation."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of U05; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Compare affected equivalent states again and rerun the confused interaction."
+      ],
+      "do_not_change": [
+        "Do not redesign the app to match the evaluator's taste."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "U06",
+      "name": "Important workflows are evaluated with target users",
+      "group": "U",
+      "starts_at": "Advanced",
+      "purpose_and_user_impact": "Ground usability claims in evidence from the intended audience.",
+      "applicability": {
+        "any_features": [
+          "ui"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Real target users perform representative tasks against goals defined before evaluation.",
+      "test_steps": [
+        "Define participant criteria, tasks, completion/error goals and any time targets before sessions.",
+        "Run tasks without coaching and record participant count and conditions.",
+        "Record completion, errors, time and sticking points as relevant; compare with predeclared goals."
+      ],
+      "test_data_and_environment": [
+        "Consenting real target participants and anonymized fixtures; consistent tasks and environment."
+      ],
+      "required_evidence": [
+        "Protocol, participant count, deidentified observations, metric definitions, results and limitations."
+      ],
+      "pass_conditions": [
+        "Real-user evaluation occurred and the predeclared applicable usability goals are met."
+      ],
+      "fail_conditions": [
+        "Real-user task results miss predeclared goals; report the observed affected tasks."
+      ],
+      "unknown_when": [
+        "No real target users, no prior goals or insufficient observations to support the conclusion."
+      ],
+      "severity_guidance": {
+        "blocker": "Target users repeatedly cannot complete a critical task.",
+        "important": "Repeated errors or delays miss an important goal.",
+        "improvement": "Measured secondary usability gain."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of U06; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat the affected task with appropriate target users and compare against the same goals."
+      ],
+      "do_not_change": [
+        "Do not substitute AI personas or agent simulations for participant evidence."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "A01",
+      "name": "Essential workflows are keyboard accessible",
+      "group": "A",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Allow people relying on keyboards to complete essential tasks.",
+      "applicability": {
+        "any_features": [
+          "ui"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Tasks are keyboard operable with meaningful focus order and no keyboard trap, subject to documented source exceptions.",
+      "test_steps": [
+        "Unplug or avoid the pointer; traverse each essential task with Tab, Shift+Tab and appropriate activation/navigation keys.",
+        "Open and exit menus, dialogs and custom widgets; record focus order.",
+        "For a claimed path-dependent-function exception, record why endpoints alone cannot express the underlying function."
+      ],
+      "test_data_and_environment": [
+        "Supported browser/OS and keyboard; representative controls and dialog states."
+      ],
+      "required_evidence": [
+        "Keystroke reproduction, focus sequence and task result; exception rationale where claimed."
+      ],
+      "pass_conditions": [
+        "Tested tasks work by keyboard without a trap or focus order that breaks meaning or operation."
+      ],
+      "fail_conditions": [
+        "A non-exempt action requires a pointer, focus is trapped, or focus order prevents operation."
+      ],
+      "unknown_when": [
+        "A required task or platform cannot be exercised."
+      ],
+      "severity_guidance": {
+        "blocker": "Keyboard users cannot complete a core task.",
+        "important": "A keyboard obstacle has a documented workaround.",
+        "improvement": "Measured keyboard friction beyond source minimum."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of A01; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat the complete task using only keyboard input, including entry and exit from modified widgets."
+      ],
+      "do_not_change": [
+        "Do not exempt text entry just because its input technique is handwriting."
+      ],
+      "sources": [
+        {
+          "source_id": "wcag",
+          "requirement_ids": [
+            "2.1.1",
+            "2.1.2",
+            "2.4.3"
+          ]
+        },
+        {
+          "source_id": "keyboard",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "WCAG 2.2: keyboard operation has an exception for underlying path-dependent functions; traps must permit a standard exit or advise a nonstandard exit; focus order must preserve meaning and operation.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "A02",
+      "name": "Controls have appropriate names and semantics",
+      "group": "A",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Expose control purpose and state to assistive technology.",
+      "applicability": {
+        "any_features": [
+          "ui"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Names, roles, labels and relevant states accurately describe each tested control.",
+      "test_steps": [
+        "Inspect native markup and the accessibility tree for representative controls.",
+        "Compare accessible names to visible labels and intended purpose.",
+        "Operate controls with supported assistive technology and verify changes to state/value are exposed."
+      ],
+      "test_data_and_environment": [
+        "Browser accessibility inspector, supported screen reader and all relevant control states."
+      ],
+      "required_evidence": [
+        "Control/name/role/state inventory, DOM/tree extracts and assistive-technology observations with versions."
+      ],
+      "pass_conditions": [
+        "Tested controls expose correct names, roles, relationships and updated states."
+      ],
+      "fail_conditions": [
+        "Missing or incorrect semantics prevent reliable identification or operation."
+      ],
+      "unknown_when": [
+        "Accessibility-tree or relevant assistive-technology behavior cannot be observed."
+      ],
+      "severity_guidance": {
+        "blocker": "Assistive-technology users cannot identify or operate an essential control.",
+        "important": "Incorrect semantics cause significant ambiguity or mistakes.",
+        "improvement": "Measured secondary naming improvement."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of A02; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Reinspect the accessibility tree and repeat operation/state changes using assistive technology."
+      ],
+      "do_not_change": [
+        "Prefer native HTML; do not add redundant or incorrect ARIA."
+      ],
+      "sources": [
+        {
+          "source_id": "wcag",
+          "requirement_ids": [
+            "1.3.1",
+            "3.3.2",
+            "4.1.2"
+          ]
+        },
+        {
+          "source_id": "semantics",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "WCAG 2.2 requires programmatically determinable control names and roles, exposed states/values, input labels or instructions, and conveyed relationships. The representative task sample is project-defined.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "A03",
+      "name": "Text contrast meets applicable minimum requirements",
+      "group": "A",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Keep text readable for users with reduced contrast sensitivity.",
+      "applicability": {
+        "any_features": [
+          "ui"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Applicable normal text reaches 4.5:1; large text reaches 3:1 on its actual background.",
+      "test_steps": [
+        "Inventory text/background pairs across actual themes and relevant states.",
+        "Measure computed colors and composited backgrounds, including images/gradients.",
+        "Classify large text and documented exceptions before comparing unrounded ratios."
+      ],
+      "test_data_and_environment": [
+        "Contrast measurement tool/version; actual fonts, sizes, weights and representative backgrounds."
+      ],
+      "required_evidence": [
+        "Foreground/background values, font size/weight, measured ratios, state screenshots and any exception rationale."
+      ],
+      "pass_conditions": [
+        "Every tested non-exempt text pair meets its applicable ratio."
+      ],
+      "fail_conditions": [
+        "A measured non-exempt pair falls below its applicable ratio."
+      ],
+      "unknown_when": [
+        "Actual backgrounds, font classification or reliable measurements are unavailable."
+      ],
+      "severity_guidance": {
+        "blocker": "Essential instructions or content are unreadable to affected users.",
+        "important": "Required labels or content miss applicable minimum contrast.",
+        "improvement": "A measured optional readability benefit beyond the minimum."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of A03; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Remeasure affected pairs in all impacted states/themes and verify adjacent text remains compliant."
+      ],
+      "do_not_change": [
+        "Do not recolor from visual impression alone or ignore intentional exempt logos."
+      ],
+      "sources": [
+        {
+          "source_id": "wcag",
+          "requirement_ids": [
+            "1.4.3"
+          ]
+        },
+        {
+          "source_id": "contrast",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "WCAG 2.2 SC 1.4.3: 4.5:1 normal and 3:1 large text. Large means at least 18 point or 14 point bold, or equivalent CJK sizes. Exceptions cover inactive controls, decoration, invisible/incidental text and logotypes; record the exact applicable exception.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "A04",
+      "name": "Zoom and reflow preserve content and functionality",
+      "group": "A",
+      "starts_at": "Standard",
+      "purpose_and_user_impact": "Keep content usable when users enlarge text or need narrow reading columns.",
+      "applicability": {
+        "any_features": [
+          "ui"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Text resizes to 200%; reflow preserves information/function at the source dimensions without unnecessary two-axis scrolling.",
+      "test_steps": [
+        "Resize text to 200% and complete the affected tasks.",
+        "Test vertical content at width equivalent to 320 CSS pixels, for example 1280 CSS pixels at 400% browser zoom.",
+        "For horizontal writing/scrolling content test height equivalent to 256 CSS pixels; inspect two-dimensional exceptions separately."
+      ],
+      "test_data_and_environment": [
+        "Supported browser with text resize/zoom; recorded CSS viewport, zoom and representative long content."
+      ],
+      "required_evidence": [
+        "Screenshots, actual CSS viewport/zoom, task outcomes and per-region exception rationale."
+      ],
+      "pass_conditions": [
+        "No information/function loss or non-exempt two-axis scrolling at the applicable test dimensions."
+      ],
+      "fail_conditions": [
+        "Resizing loses content/function or reflow requires non-exempt scrolling in two dimensions."
+      ],
+      "unknown_when": [
+        "Text resizing, viewport dimensions or required content cannot be verified."
+      ],
+      "severity_guidance": {
+        "blocker": "Zoom/reflow prevents an essential task.",
+        "important": "Important content becomes inaccessible or requires non-exempt two-axis scrolling.",
+        "improvement": "Measured reading friction beyond minimum."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of A04; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat both text resize and dimension-specific reflow checks on affected tasks."
+      ],
+      "do_not_change": [
+        "Do not equate an arbitrary phone preset with 320 CSS pixels; do not flatten essential two-dimensional content."
+      ],
+      "sources": [
+        {
+          "source_id": "wcag",
+          "requirement_ids": [
+            "1.4.4",
+            "1.4.10"
+          ]
+        },
+        {
+          "source_id": "reflow",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "WCAG 2.2 SC 1.4.4 excludes captions and images of text from text resize. SC 1.4.10 uses 320 CSS pixel width for vertical content and 256 CSS pixel height for horizontal content; parts requiring two-dimensional layout for meaning or use are excepted.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "A05",
+      "name": "Keyboard focus is visible and not entirely obscured",
+      "group": "A",
+      "starts_at": "Standard",
+      "purpose_and_user_impact": "Help keyboard users locate the active control, including around sticky and overlay content.",
+      "applicability": {
+        "any_features": [
+          "ui"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Keyboard focus is visibly indicated and the focused component is not entirely hidden by author-created content.",
+      "test_steps": [
+        "Tab through relevant controls in normal and sticky header/footer states.",
+        "Repeat with dialogs, overlays and scrolling containers.",
+        "Record visibility and occlusion; test whether user-opened content can be dismissed without advancing focus."
+      ],
+      "test_data_and_environment": [
+        "Keyboard, supported browser and representative overlay/scroll positions."
+      ],
+      "required_evidence": [
+        "Focus-state screenshots/video and keystrokes, with occluding content identified."
+      ],
+      "pass_conditions": [
+        "Focus can be located and no tested focused component is entirely obscured under applicable source conditions."
+      ],
+      "fail_conditions": [
+        "No visible keyboard focus mode exists, or a component is entirely hidden without an applicable note."
+      ],
+      "unknown_when": [
+        "Relevant overlays or focus states cannot be reached."
+      ],
+      "severity_guidance": {
+        "blocker": "Invisible focus makes an essential task unusable.",
+        "important": "Obscuration or missing focus causes substantial navigation errors.",
+        "improvement": "Measured visibility improvement beyond minimum."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of A05; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat the focus path at the same scroll positions and with all affected overlays."
+      ],
+      "do_not_change": [
+        "Do not misapply AAA focus appearance or zero-partial-occlusion requirements as AA minimums."
+      ],
+      "sources": [
+        {
+          "source_id": "wcag",
+          "requirement_ids": [
+            "2.4.7",
+            "2.4.11"
+          ]
+        },
+        {
+          "source_id": "focus",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "WCAG 2.2 requires a visible focus mode and prevents complete author-created occlusion. For movable UI use initial positions. User-opened content is not considered hiding focus if it can be revealed without advancing focus.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "A06",
+      "name": "Pointer targets have sufficient size or spacing",
+      "group": "A",
+      "starts_at": "Standard",
+      "purpose_and_user_impact": "Reduce unintended activations for users who have difficulty selecting small targets.",
+      "applicability": {
+        "any_features": [
+          "pointer_ui"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Targets are at least 24 by 24 CSS pixels or satisfy a documented source exception.",
+      "test_steps": [
+        "Measure actual interactive hit regions, not only icon graphics.",
+        "For undersized targets, test the spacing exception using 24 CSS pixel diameter circles centered on target bounding boxes.",
+        "Check equivalent control, inline, user-agent and essential/legal exceptions individually."
+      ],
+      "test_data_and_environment": [
+        "Browser geometry inspection; CSS pixel coordinates for neighboring interactive regions."
+      ],
+      "required_evidence": [
+        "Hit-box dimensions, spacing geometry, screenshots and exact exception rationale for every exempt sample."
+      ],
+      "pass_conditions": [
+        "Each tested target meets size or a demonstrated exception."
+      ],
+      "fail_conditions": [
+        "A target is undersized and no applicable exception is satisfied."
+      ],
+      "unknown_when": [
+        "Hit regions, neighboring geometry or exception facts are unknown."
+      ],
+      "severity_guidance": {
+        "blocker": "Target collisions prevent a critical action or trigger a dangerous action.",
+        "important": "Undersized non-exempt controls cause input errors.",
+        "improvement": "Measured precision improvement beyond the minimum."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of A06; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Remeasure hit regions and neighboring spacing after layout changes; activate adjacent targets."
+      ],
+      "do_not_change": [
+        "Do not force inline links to 24 by 24 or substitute the 44 by 44 AAA requirement."
+      ],
+      "sources": [
+        {
+          "source_id": "wcag",
+          "requirement_ids": [
+            "2.5.8"
+          ]
+        },
+        {
+          "source_id": "target",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "WCAG 2.2 SC 2.5.8: 24 by 24 CSS pixels. Spacing circles must not intersect another target or another undersized-target circle. Exceptions: equivalent compliant control on same page, inline/line-height-constrained targets, unmodified user-agent controls, and essential or legally required presentation.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "S01",
+      "name": "Secrets and sensitive data are not unintentionally exposed",
+      "group": "S",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Prevent unauthorized use of credentials and unintended disclosure of sensitive user information.",
+      "applicability": {
+        "any_features": [],
+        "applies_when": "Always assess the agreed core tasks.",
+        "not_applicable_when": "No exclusion at criterion level; missing access or requirements means unknown."
+      },
+      "expected_behavior": "Only intended public configuration/data reaches public surfaces; credentials and sensitive data remain within authorized boundaries.",
+      "test_steps": [
+        "Classify configuration and data by intended audience; distinguish public identifiers from credentials.",
+        "Inspect authorized source, built bundle, responses and logs; inspect history only when authorized.",
+        "Verify suspected exposures without copying secret values into evidence; if a credential leaked, propose revocation/rotation and scope investigation."
+      ],
+      "test_data_and_environment": [
+        "Test data, approved source/log/history access and data classification."
+      ],
+      "required_evidence": [
+        "Redacted location/context, intended audience, exposure path and safe confirmation; never raw secrets."
+      ],
+      "pass_conditions": [
+        "Inspected surfaces expose only data intended for their audiences."
+      ],
+      "fail_conditions": [
+        "A credential or sensitive data is available to an unauthorized audience."
+      ],
+      "unknown_when": [
+        "Classification, bundle/log access or exposure scope is missing; state uninspected surfaces explicitly."
+      ],
+      "severity_guidance": {
+        "blocker": "An active powerful credential or high impact sensitive data is publicly accessible.",
+        "important": "A restricted sensitive field leaks to a lower-trust audience.",
+        "improvement": "Measured defense improvement without a present exposure."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of S01; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Rescan affected source/bundle/responses/logs with redacted evidence; verify rotated credentials are invalidated only within authorization."
+      ],
+      "do_not_change": [
+        "Do not treat deleting a current file as credential revocation; do not hide a required public configuration identifier."
+      ],
+      "sources": [
+        {
+          "source_id": "asvs",
+          "requirement_ids": []
+        },
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "ASVS 5.0.0 is a security verification reference. No individual ASVS requirement identifier is claimed here; surface selection and credential incident handling are project-defined.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "S02",
+      "name": "Authorization is enforced at the trusted boundary",
+      "group": "S",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Prevent one user or anonymous caller from accessing another user's protected resources.",
+      "applicability": {
+        "any_features": [
+          "protected_resources"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Each protected request enforces the agreed access policy at a trusted boundary.",
+      "test_steps": [
+        "Build an actor/resource/action matrix from the access policy.",
+        "Use account A, account B and an anonymous session for allowed and forbidden actions.",
+        "Send direct requests with another test resource identifier; compare response and authoritative state."
+      ],
+      "test_data_and_environment": [
+        "Authorized test environment; A/B test accounts, distinct resources, anonymous session and request client."
+      ],
+      "required_evidence": [
+        "Redacted actor/action/resource matrix, direct request/response pairs and unchanged forbidden-resource state."
+      ],
+      "pass_conditions": [
+        "Every tested allowed action succeeds and every forbidden action is denied without information leakage or mutation."
+      ],
+      "fail_conditions": [
+        "A forbidden direct request reads or changes protected data, or legitimate access is incorrectly denied."
+      ],
+      "unknown_when": [
+        "Policy, test accounts or direct request access is unavailable."
+      ],
+      "severity_guidance": {
+        "blocker": "Cross-tenant access or modification exposes high impact resources.",
+        "important": "A bounded permission failure affects protected functionality.",
+        "improvement": "Measured permission-management improvement without bypass."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of S02; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Replay denied and allowed requests for A/B/anonymous at the trusted boundary."
+      ],
+      "do_not_change": [
+        "Do not accept hidden buttons or client route guards as sufficient protection."
+      ],
+      "sources": [
+        {
+          "source_id": "asvs",
+          "requirement_ids": []
+        },
+        {
+          "source_id": "authorization",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "OWASP Authorization Cheat Sheet recommends checking permissions on each request at the correct boundary. ASVS 5.0.0 is contextual; no numbered requirement mapping is asserted.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "S03",
+      "name": "Untrusted data cannot cross execution boundaries unsafely",
+      "group": "S",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Prevent untrusted input from becoming executable markup, queries or commands.",
+      "applicability": {
+        "any_features": [
+          "untrusted_execution"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Every relevant sink uses context-correct encoding, sanitization or parameterization.",
+      "test_steps": [
+        "Trace untrusted inputs to HTML/URL/script rendering, database queries and command execution where present.",
+        "Inspect the defense at each sink and test with harmless marker payloads.",
+        "Verify values remain data and intended rich-content use still works."
+      ],
+      "test_data_and_environment": [
+        "Authorized test environment, harmless non-exfiltrating payloads and a sink/context inventory."
+      ],
+      "required_evidence": [
+        "Input-to-sink trace, safe payload/result pairs and relevant defense implementation or runtime observation."
+      ],
+      "pass_conditions": [
+        "Tested untrusted values cannot alter execution semantics and intended safe content remains usable."
+      ],
+      "fail_conditions": [
+        "A safe probe demonstrates execution-context escape or a required context defense is absent."
+      ],
+      "unknown_when": [
+        "A sink, execution path or defense cannot be inspected/tested."
+      ],
+      "severity_guidance": {
+        "blocker": "Untrusted input controls privileged execution or exposes high impact data.",
+        "important": "An exploitable bounded rendering/query boundary is unsafe.",
+        "improvement": "Measured hardening benefit without a demonstrated exploit path."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of S03; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat safe probes in the original context and test valid escaped/rich input for regression."
+      ],
+      "do_not_change": [
+        "Do not apply one sanitizer to all contexts; never run destructive or exfiltrating probes."
+      ],
+      "sources": [
+        {
+          "source_id": "asvs",
+          "requirement_ids": []
+        },
+        {
+          "source_id": "xss",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "OWASP XSS guidance distinguishes output contexts and safe sinks. Query/command checks and their evidence rules here are project-defined; no ASVS numbered control mapping is claimed.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "S04",
+      "name": "Authentication and session lifecycle match the architecture",
+      "group": "S",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Keep identity and session access aligned with the application's actual security model.",
+      "applicability": {
+        "any_features": [
+          "authentication"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Login, expiry, logout, credential/session transport and storage follow a documented architecture-specific lifecycle.",
+      "test_steps": [
+        "Document session/token type, trust boundaries and what logout must invalidate.",
+        "Test valid/invalid login, expiry and logout; replay the relevant pre-logout test session after logout.",
+        "Inspect transport and storage controls against the actual model, including server state where relevant."
+      ],
+      "test_data_and_environment": [
+        "Test identity, controllable expiry, HTTPS test environment and declared logout/revocation semantics."
+      ],
+      "required_evidence": [
+        "Lifecycle contract, redacted request trace, expiry/logout replay and transport/storage observations."
+      ],
+      "pass_conditions": [
+        "Observed lifecycle and invalidation match the contract with appropriate transport/storage protection."
+      ],
+      "fail_conditions": [
+        "Expired/revoked access still works contrary to the contract or credentials cross a prohibited boundary."
+      ],
+      "unknown_when": [
+        "Logout invalidation scope, expiry behavior or credential/session controls cannot be established."
+      ],
+      "severity_guidance": {
+        "blocker": "An attacker can retain high impact access after required invalidation.",
+        "important": "Session lifecycle or protection violates an important security requirement.",
+        "improvement": "Measured lifecycle hardening beyond current requirements."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of S04; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat login, expiry and logout replay plus a new valid login after the change."
+      ],
+      "do_not_change": [
+        "Do not force a universal token/cookie mechanism or assume clearing UI state revokes server access."
+      ],
+      "sources": [
+        {
+          "source_id": "asvs",
+          "requirement_ids": []
+        },
+        {
+          "source_id": "session",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "OWASP Session Management guidance informs lifecycle, transport and storage checks. The required invalidation scope depends on architecture; no individual ASVS identifier is claimed.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "S05",
+      "name": "Feature-specific attack surfaces have appropriate controls",
+      "group": "S",
+      "starts_at": "Standard",
+      "purpose_and_user_impact": "Address relevant feature risks without applying unrelated security mechanisms.",
+      "applicability": {
+        "any_features": [
+          "csrf_surface",
+          "cors_surface",
+          "uploads",
+          "public_endpoints",
+          "abuse_surface"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Each applicable surface has controls appropriate to its data, exposure and trusted boundary.",
+      "test_steps": [
+        "Classify CSRF, CORS, uploads, public endpoints and abuse independently; record present, absent or unknown for each.",
+        "For CSRF test a harmless cross-site state change where ambient credentials matter; for CORS inspect allowed and denied origins without treating it as access control.",
+        "For uploads test benign oversized/type-mismatched files and access restrictions; for public endpoints/abuse test agreed low-volume limits and error behavior."
+      ],
+      "test_data_and_environment": [
+        "Explicitly authorized test environment and safe probes; controlled origins and inert upload fixtures; agreed low-volume abuse scenario."
+      ],
+      "required_evidence": [
+        "Per-surface applicability and rationale, request/result traces, control expectations and untested limitations."
+      ],
+      "pass_conditions": [
+        "Every applicable surface has verified controls matching its agreed threat; no relevant surface remains untested."
+      ],
+      "fail_conditions": [
+        "A tested surface admits a demonstrated prohibited cross-boundary action or agreed abuse."
+      ],
+      "unknown_when": [
+        "Any potentially applicable surface lacks facts, authorization, expected controls or test evidence."
+      ],
+      "severity_guidance": {
+        "blocker": "A feature enables high impact unauthorized execution, access or disruption.",
+        "important": "A relevant surface lacks an important demonstrated control.",
+        "improvement": "Measured bounded hardening gain."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of S05; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat each affected surface probe and verify valid cross-origin, upload and public use cases still work."
+      ],
+      "do_not_change": [
+        "Do not treat CORS as authentication/authorization, probe production without authorization, or install unrelated controls."
+      ],
+      "sources": [
+        {
+          "source_id": "asvs",
+          "requirement_ids": []
+        },
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "ASVS 5.0.0 provides security verification context. This feature-gated test bundle is project-defined and does not assert individual ASVS control coverage.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "S06",
+      "name": "Threats and trust boundaries are explicitly assessed",
+      "group": "S",
+      "starts_at": "Advanced",
+      "purpose_and_user_impact": "Prioritize realistic attack paths rather than equating a document with security.",
+      "applicability": {
+        "any_features": [],
+        "applies_when": "Always assess the agreed core tasks.",
+        "not_applicable_when": "No exclusion at criterion level; missing access or requirements means unknown."
+      },
+      "expected_behavior": "A scoped threat assessment connects assets, actors, data flows, trust boundaries and verified mitigations.",
+      "test_steps": [
+        "Map components, data flows, sensitive assets and trust boundaries.",
+        "List plausible abuse paths and prioritize likelihood and impact in context.",
+        "Trace important mitigations to actual tests and record residual risks and owners."
+      ],
+      "test_data_and_environment": [
+        "Current architecture/deployment information, data classification and authorized stakeholder input."
+      ],
+      "required_evidence": [
+        "Versioned flow/boundary diagram, ranked threats, mitigation-to-evidence links and residual risk ownership."
+      ],
+      "pass_conditions": [
+        "Relevant boundaries/threats are assessed and important mitigations are backed by verification."
+      ],
+      "fail_conditions": [
+        "A demonstrated important path is omitted or a claimed mitigation is contradicted by testing."
+      ],
+      "unknown_when": [
+        "Architecture, threat expectations or mitigation evidence is incomplete."
+      ],
+      "severity_guidance": {
+        "blocker": "A verified unmitigated high impact attack path exists.",
+        "important": "An important boundary lacks assessment or verified mitigation.",
+        "improvement": "Measured assessment coverage improvement."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of S06; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Update the affected flow/threat and rerun its mitigation test, retaining residual risk."
+      ],
+      "do_not_change": [
+        "Do not claim that a threat model proves the system is secure."
+      ],
+      "sources": [
+        {
+          "source_id": "asvs",
+          "requirement_ids": []
+        },
+        {
+          "source_id": "threat",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "OWASP Threat Modeling guidance informs asset, flow, boundary and mitigation assessment. Prioritization/evidence policy is project-defined; no ASVS control identifier is claimed.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "P01",
+      "name": "Core tasks are not blocked by runtime failures",
+      "group": "P",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Keep core outcomes available despite runtime error noise.",
+      "applicability": {
+        "any_features": [],
+        "applies_when": "Always assess the agreed core tasks.",
+        "not_applicable_when": "No exclusion at criterion level; missing access or requirements means unknown."
+      },
+      "expected_behavior": "No application crash or exception prevents the agreed core tasks.",
+      "test_steps": [
+        "Run all agreed core tasks in the supported runtime.",
+        "Capture application logs, exceptions and request failures while performing tasks.",
+        "Correlate each suspected error with a task failure and distinguish extension or unrelated console noise."
+      ],
+      "test_data_and_environment": [
+        "Supported runtime, clean browser profile where relevant and representative task fixtures."
+      ],
+      "required_evidence": [
+        "Task result, correlated stack/log/request trace, build and reproduction steps."
+      ],
+      "pass_conditions": [
+        "Core tasks complete without application runtime failures blocking them."
+      ],
+      "fail_conditions": [
+        "A reproducible application crash/exception prevents a required core outcome."
+      ],
+      "unknown_when": [
+        "Core execution or sufficient runtime evidence is unavailable."
+      ],
+      "severity_guidance": {
+        "blocker": "A core task crashes without a workaround.",
+        "important": "A bounded runtime failure requires a workaround.",
+        "improvement": "Measured resilience improvement without a blocking runtime defect."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of P01; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Rerun the original task and inspect correlated runtime output in the supported environment."
+      ],
+      "do_not_change": [
+        "Do not classify every warning, extension error or unrelated console message as an app defect."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "P02",
+      "name": "Network failures resolve into truthful, recoverable states",
+      "group": "P",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Prevent lost work and endless waiting during network outages.",
+      "applicability": {
+        "any_features": [
+          "network"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Offline, timeout and server errors end in truthful states that retain necessary input and permit safe recovery.",
+      "test_steps": [
+        "Induce offline, bounded timeout and server error during relevant tasks.",
+        "Observe how waiting ends and inspect retained input and actual commit state.",
+        "Reconnect and exercise retry where appropriate; count side effects and check retry bounds."
+      ],
+      "test_data_and_environment": [
+        "Controllable network/server errors, retained input fixtures and declared timeout/retry behavior."
+      ],
+      "required_evidence": [
+        "Fault timeline, UI/input state, commit readback and retry/effect counts."
+      ],
+      "pass_conditions": [
+        "Every tested fault exits waiting, explains the issue, preserves required input and recovers safely."
+      ],
+      "fail_conditions": [
+        "Indefinite waiting, misleading success, required input loss or unsafe repeated effects occur."
+      ],
+      "unknown_when": [
+        "Faults cannot be induced, timeout contract is missing or commit state cannot be read."
+      ],
+      "severity_guidance": {
+        "blocker": "An outage causes unrecoverable important loss or blocks a critical recovery.",
+        "important": "Recoverable task failure or misleading waiting affects normal use.",
+        "improvement": "Measured recovery friction."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of P02; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat each fault then recover; verify accurate final state and bounded retries."
+      ],
+      "do_not_change": [
+        "Do not introduce infinite retries or assume an absent response means no commit."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "P03",
+      "name": "Loading and interaction meet agreed performance targets",
+      "group": "P",
+      "starts_at": "Standard",
+      "purpose_and_user_impact": "Measure whether target users can load and interact within agreed experience budgets.",
+      "applicability": {
+        "any_features": [
+          "ui"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Relevant field p75 LCP <= 2.5s, INP <= 200ms and CLS <= 0.1; additional task budgets cover important gaps.",
+      "test_steps": [
+        "Record agreed task budgets, target device/network segments, measurement window and data adequacy rule.",
+        "For field data, inspect p75 for all three CWV metrics segmented appropriately across mobile and desktop.",
+        "For local measurements, record hardware, browser, network, cache, sample count and task timing; separate lab conclusions from field CWV."
+      ],
+      "test_data_and_environment": [
+        "Real-user telemetry with declared sample/window adequacy for field conclusions; reproducible local setup for diagnostics."
+      ],
+      "required_evidence": [
+        "Metric distributions, units, segments, sample counts/window, environment and task budgets; explicit field/lab distinction."
+      ],
+      "pass_conditions": [
+        "Adequate relevant field data meets all three p75 targets and applicable agreed task budgets."
+      ],
+      "fail_conditions": [
+        "Adequate field results or reproducible applicable task measurements exceed an agreed budget."
+      ],
+      "unknown_when": [
+        "Field data is absent/inadequate for CWV, or required task budgets are undecided; local evidence alone cannot pass field CWV."
+      ],
+      "severity_guidance": {
+        "blocker": "Latency makes a critical task unusable within its required deadline.",
+        "important": "Agreed field or task budget is missed with material daily-use impact.",
+        "improvement": "Measured improvement beyond satisfied budgets."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of P03; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Remeasure under the same conditions; use an adequate post-change field window before claiming field CWV improvement."
+      ],
+      "do_not_change": [
+        "Do not claim full CWV success from one Lighthouse score, invent field usage or replace task budgets with arbitrary universal timings."
+      ],
+      "sources": [
+        {
+          "source_id": "cwv",
+          "requirement_ids": []
+        },
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "Google Web Vitals recommends p75 thresholds of LCP 2.5 seconds, INP 200 milliseconds and CLS 0.1, evaluated for all three and segmented across mobile/desktop. Task budgets and sample adequacy decisions are project-defined.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "P04",
+      "name": "Repeated usage does not accumulate unintended resources",
+      "group": "P",
+      "starts_at": "Standard",
+      "purpose_and_user_impact": "Keep repeated use from degrading through abandoned timers, listeners or requests.",
+      "applicability": {
+        "any_features": [
+          "resource_lifecycle"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Resources follow their intended lifecycle; repeated task cycles do not accumulate unintended work.",
+      "test_steps": [
+        "Define a repeatable navigation/action cycle, sample checkpoints and expected steady-state resources.",
+        "Warm up, repeat the cycle and observe timers, subscriptions, requests and relevant resource counts.",
+        "Leave the feature and compare cleanup/retention with design; investigate trends across multiple observations."
+      ],
+      "test_data_and_environment": [
+        "Fixed cycle count, warmed-up baseline, runtime profiling tools and controlled background activity."
+      ],
+      "required_evidence": [
+        "Time series at defined checkpoints, resource identities and intended lifecycle; retained-object analysis if memory is suspected."
+      ],
+      "pass_conditions": [
+        "No unintended accumulation occurs across the defined cycle and teardown checkpoints."
+      ],
+      "fail_conditions": [
+        "Repeatable resource growth or duplicate work contradicts the intended lifecycle."
+      ],
+      "unknown_when": [
+        "Lifecycle expectation or repeated measurements are missing; one memory snapshot is insufficient."
+      ],
+      "severity_guidance": {
+        "blocker": "Accumulation reliably crashes or disables a critical task.",
+        "important": "Growing requests/resources materially degrade continued use.",
+        "improvement": "Measured lifecycle efficiency gain."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of P04; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat the identical warmed-up cycle and teardown observations and compare resource trends."
+      ],
+      "do_not_change": [
+        "Do not declare a memory leak from one heap snapshot or remove deliberate caches without evidence."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "P05",
+      "name": "Expected load and data volume meet agreed budgets",
+      "group": "P",
+      "starts_at": "Advanced",
+      "purpose_and_user_impact": "Verify capacity against actual expected data and concurrency.",
+      "applicability": {
+        "any_features": [
+          "load_requirements"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Latency, error rate and resource use meet budgets agreed before load testing.",
+      "test_steps": [
+        "Define representative data volume, concurrent users/requests, duration and environment with the owner.",
+        "Set latency percentiles, error-rate and resource budgets before executing.",
+        "Run the authorized load scenario, compare results and note production-representativeness limits."
+      ],
+      "test_data_and_environment": [
+        "Isolated/authorized load environment, seeded representative volume, approved concurrency/ramp/duration and resource monitoring."
+      ],
+      "required_evidence": [
+        "Scenario configuration, predeclared budgets, latency distribution, error rate, resource series and environment differences."
+      ],
+      "pass_conditions": [
+        "The expected-load scenario meets every applicable predeclared budget."
+      ],
+      "fail_conditions": [
+        "An agreed expected-load budget is reproducibly exceeded."
+      ],
+      "unknown_when": [
+        "Expected load, budgets, authorization or representative environment is missing."
+      ],
+      "severity_guidance": {
+        "blocker": "Expected load makes critical service unavailable or loses important data.",
+        "important": "Capacity misses an agreed material-use budget.",
+        "improvement": "Measured capacity margin gain beyond satisfied budgets."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of P05; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Rerun the same volume/concurrency scenario and compare latency, errors and resources."
+      ],
+      "do_not_change": [
+        "Do not set universal concurrency thresholds or load-test an unauthorized service."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "P06",
+      "name": "State recovers consistently after interruption",
+      "group": "P",
+      "starts_at": "Advanced",
+      "purpose_and_user_impact": "Keep replicas and pending work coherent after interruption.",
+      "applicability": {
+        "any_features": [
+          "realtime",
+          "offline_sync",
+          "background_sync"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Disconnect/reconnect and protocol-permitted duplicate, missing or reordered events follow an explicit recovery contract.",
+      "test_steps": [
+        "Record the real-time/offline/background protocol and its delivery/order guarantees.",
+        "Disconnect and reconnect during representative edits; inject duplicate, missing or reordered test events only where possible under that protocol.",
+        "Compare authoritative and local state, pending operations and conflict/loss handling against the recovery contract."
+      ],
+      "test_data_and_environment": [
+        "Authorized protocol test harness, test event identifiers and client/server state readback."
+      ],
+      "required_evidence": [
+        "Protocol/recovery contract, event timeline and before/after client/server state."
+      ],
+      "pass_conditions": [
+        "Every applicable interruption sequence converges or resolves exactly as contracted."
+      ],
+      "fail_conditions": [
+        "State silently diverges or required work is lost contrary to the contract."
+      ],
+      "unknown_when": [
+        "Recovery semantics, protocol guarantees or server observations are unavailable."
+      ],
+      "severity_guidance": {
+        "blocker": "Interruption permanently loses important work or corrupts shared state.",
+        "important": "Recoverable divergence disrupts supported workflows.",
+        "improvement": "Measured reconnection efficiency gain."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of P06; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat applicable fault sequences and verify convergence and retained pending work."
+      ],
+      "do_not_change": [
+        "Do not add client sequence/version mechanisms without checking server compatibility."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "O01",
+      "name": "Build and startup are reproducible",
+      "group": "O",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Allow another operator to install and run the project from declared inputs.",
+      "applicability": {
+        "any_features": [],
+        "applies_when": "Always assess the agreed core tasks.",
+        "not_applicable_when": "No exclusion at criterion level; missing access or requirements means unknown."
+      },
+      "expected_behavior": "A clean checkout installs, builds and starts by following documented dependency/configuration steps.",
+      "test_steps": [
+        "Use an isolated clean checkout without the author's installed dependencies or private local files.",
+        "Follow the documented runtime, dependency, configuration, build and startup steps.",
+        "Run a smoke task and record any undeclared input needed."
+      ],
+      "test_data_and_environment": [
+        "Clean checkout, declared runtime/tool versions, permitted package access and non-secret test configuration."
+      ],
+      "required_evidence": [
+        "Checkout revision, tool versions, command transcript, config variable names and startup/smoke result."
+      ],
+      "pass_conditions": [
+        "Install, build and startup succeed using only declared inputs."
+      ],
+      "fail_conditions": [
+        "An undeclared dependency/configuration or broken documented step prevents reproduction."
+      ],
+      "unknown_when": [
+        "Clean execution or a required external dependency cannot be accessed; an author-machine run is insufficient."
+      ],
+      "severity_guidance": {
+        "blocker": "No supported operator can build/start the required app.",
+        "important": "Reproduction needs undocumented recoverable steps.",
+        "improvement": "Measured setup friction beyond a working documented path."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of O01; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat documented setup in a fresh isolated environment and run a smoke task."
+      ],
+      "do_not_change": [
+        "Do not count a run in a dirty author environment as proof of reproducibility."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "O02",
+      "name": "Deployment configuration matches the runtime environment",
+      "group": "O",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Keep deployed behavior and persistence aligned with the actual hosting environment.",
+      "applicability": {
+        "any_features": [
+          "deployed"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Required environment variables, URLs, public/private configuration and storage are correct for the target runtime.",
+      "test_steps": [
+        "Inventory required variable names, URLs, storage and runtime constraints; redact secret values.",
+        "Compare local and deployed configuration boundaries and test target service connectivity.",
+        "Write test data and exercise deployment/restart retention where promised."
+      ],
+      "test_data_and_environment": [
+        "Authorized target/staging deployment, configuration contract and disposable retention fixtures."
+      ],
+      "required_evidence": [
+        "Redacted configuration matrix, runtime/storage assumptions, connectivity checks and retention readback."
+      ],
+      "pass_conditions": [
+        "Configuration is complete, secrets remain private and required persistence works in the target runtime."
+      ],
+      "fail_conditions": [
+        "Missing/wrong configuration breaks supported behavior, exposes secrets or loses promised durable data."
+      ],
+      "unknown_when": [
+        "Target environment or configuration/persistence expectations cannot be inspected."
+      ],
+      "severity_guidance": {
+        "blocker": "Deployment leaks a powerful secret or loses important durable data.",
+        "important": "Environment mismatch breaks a supported feature.",
+        "improvement": "Measured configuration-maintenance gain."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of O02; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat target startup/connectivity and affected restart/deployment retention checks."
+      ],
+      "do_not_change": [
+        "Do not put secrets in client configuration or rely on ephemeral files for required long-term data."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "O03",
+      "name": "Important data has an appropriate preservation strategy",
+      "group": "O",
+      "starts_at": "Essential",
+      "purpose_and_user_impact": "Give owners a suitable way to preserve data that is difficult to replace.",
+      "applicability": {
+        "any_features": [
+          "important_data"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Preservation matches accepted loss and ownership requirements; exports and automated backups are distinguished.",
+      "test_steps": [
+        "Inventory important data, acceptable loss and who owns/accesses each copy.",
+        "Inspect the actual export/backup mechanism, frequency, retention and failure behavior.",
+        "Create a test copy and verify it contains the expected data; reserve restore claims for O05 testing."
+      ],
+      "test_data_and_environment": [
+        "Disposable representative important data, agreed acceptable loss and authorized copy destination."
+      ],
+      "required_evidence": [
+        "Data/loss matrix, preservation type/schedule/ownership and test-copy manifest."
+      ],
+      "pass_conditions": [
+        "A working preservation mechanism matches the agreed loss/ownership needs."
+      ],
+      "fail_conditions": [
+        "Important data has no mechanism matching its agreed preservation needs."
+      ],
+      "unknown_when": [
+        "Important data, accepted loss, copy ownership or actual mechanism is unknown."
+      ],
+      "severity_guidance": {
+        "blocker": "Irreplaceable important data is exposed to loss beyond tolerance.",
+        "important": "Recoverable important data lacks its required preservation process.",
+        "improvement": "Measured export/preservation convenience gain."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of O03; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Recreate and inspect the copy; run O05 separately before asserting restore readiness."
+      ],
+      "do_not_change": [
+        "Do not call manual export an automatic backup or require database backups for stateless apps."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "O04",
+      "name": "Failures can be detected and investigated",
+      "group": "O",
+      "starts_at": "Standard",
+      "purpose_and_user_impact": "Let the owner recognize and diagnose failures without exposing sensitive data.",
+      "applicability": {
+        "any_features": [
+          "operated_service"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "An appropriate detection channel and diagnostic information reach a responsible owner.",
+      "test_steps": [
+        "Identify important failure modes, detection expectations and the responsible owner.",
+        "Induce a safe test failure and follow the actual detection path.",
+        "Use available logs/context to investigate while checking for sensitive information leakage."
+      ],
+      "test_data_and_environment": [
+        "Authorized safe failure injection, test correlation marker and owner-accessible diagnostics."
+      ],
+      "required_evidence": [
+        "Failure timestamp/marker, detection event/channel, investigation trace and redaction review."
+      ],
+      "pass_conditions": [
+        "The owner can detect the test failure and obtain enough safe context to investigate it."
+      ],
+      "fail_conditions": [
+        "An important failure is undetectable, uninvestigable or leaks sensitive data in diagnostics."
+      ],
+      "unknown_when": [
+        "No owner/detection expectation is agreed or the failure path cannot be tested."
+      ],
+      "severity_guidance": {
+        "blocker": "Critical failures remain undetected long enough to cause serious loss.",
+        "important": "Important incidents lack actionable detection or context.",
+        "improvement": "Measured diagnosis-time improvement."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of O04; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat the safe failure and verify detection, diagnostic usefulness and absence of sensitive leakage."
+      ],
+      "do_not_change": [
+        "Do not install complex observability infrastructure when a simpler verified mechanism suffices."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "O05",
+      "name": "Recovery and rollback procedures are verified",
+      "group": "O",
+      "starts_at": "Standard",
+      "purpose_and_user_impact": "Confirm recovery works before owners depend on it during an incident.",
+      "applicability": {
+        "any_features": [
+          "persistent_data",
+          "deployed"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Applicable restore and rollback procedures work in isolation with valid data and compatible schemas.",
+      "test_steps": [
+        "Classify data restore and application rollback separately from architecture and agreed needs.",
+        "Perform each applicable procedure in an isolated environment using a test copy/release.",
+        "Verify record integrity, schema compatibility and smoke tasks; record elapsed time and limitations."
+      ],
+      "test_data_and_environment": [
+        "Isolated target, representative test backup/release, documented steps and integrity expectations."
+      ],
+      "required_evidence": [
+        "Procedure transcript, elapsed time, restored-data checksums/counts, schema version and smoke results."
+      ],
+      "pass_conditions": [
+        "All applicable procedures were executed successfully with integrity and compatibility verified."
+      ],
+      "fail_conditions": [
+        "A tested required restore/rollback fails or produces incompatible/corrupt state."
+      ],
+      "unknown_when": [
+        "A required procedure cannot be executed or integrity/compatibility is unverified."
+      ],
+      "severity_guidance": {
+        "blocker": "Required recovery cannot restore important data/service after a critical incident.",
+        "important": "Recovery is unreliable or exceeds an agreed material target.",
+        "improvement": "Measured recovery convenience or speed gain."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of O05; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Repeat the affected isolated restore/rollback and verify integrity and supported tasks."
+      ],
+      "do_not_change": [
+        "Do not assert backups are usable without a restore test or run destructive drills in production."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    },
+    {
+      "id": "O06",
+      "name": "Operational objectives are defined and measured",
+      "group": "O",
+      "starts_at": "Advanced",
+      "purpose_and_user_impact": "Align reliability effort and incident response with actual service needs.",
+      "applicability": {
+        "any_features": [
+          "operated_service"
+        ],
+        "applies_when": "At least one listed feature is present; confirm against architecture and requirements.",
+        "not_applicable_when": "No listed feature exists, supported by the profile rationale."
+      },
+      "expected_behavior": "Agreed SLOs, recovery time and acceptable data loss have measurement windows, owners and proportionate response rules.",
+      "test_steps": [
+        "Agree service indicators/objectives, recovery time and data-loss tolerance for the actual use case.",
+        "Define measurement windows, signal sources, alerts, owners and response actions.",
+        "Inspect a sufficient measurement window and run a safe alert/response exercise; compare recovery evidence with objectives."
+      ],
+      "test_data_and_environment": [
+        "Owner-approved objectives and measurement definitions, relevant telemetry and safe response exercise."
+      ],
+      "required_evidence": [
+        "Objectives/window definitions, measured indicator results, alert/ownership/response trace and recovery evidence."
+      ],
+      "pass_conditions": [
+        "Objectives are defined and adequately measured; observed service/recovery results meet the agreed targets."
+      ],
+      "fail_conditions": [
+        "Sufficient measurements miss an objective or the required alert/response procedure demonstrably fails."
+      ],
+      "unknown_when": [
+        "Objectives, owners, measurement window or sufficient real observations are absent."
+      ],
+      "severity_guidance": {
+        "blocker": "A critical operational objective is violated with serious user impact.",
+        "important": "A material service/recovery objective or response rule is missed.",
+        "improvement": "Measured operational efficiency beyond satisfied objectives."
+      },
+      "decision_rules": {
+        "fix": "Apply the smallest authorized, proportionate correction to a demonstrated violation of O06; record a measurable recheck.",
+        "propose": "Use when a verified benefit needs a scope, product, architecture, access, or cost decision; retain the observed severity.",
+        "preserve": "Use when current behavior meets the contract, or the suggestion is only preference with no demonstrated benefit.",
+        "investigate": "Use when required observations, authorization, applicability facts, or the expected contract are missing."
+      },
+      "verification": [
+        "Re-evaluate the agreed measurement window and repeat the affected alert/recovery exercise."
+      ],
+      "do_not_change": [
+        "Do not invent 99.9% uptime or require an on-call rotation for every app."
+      ],
+      "sources": [
+        {
+          "source_id": "project",
+          "requirement_ids": []
+        }
+      ],
+      "source_requirement": "project-defined: this criterion is an evaluation rule, not an external certification requirement.",
+      "project_policy": "The starting level, sampling, evidence requirements, severity and change decision are project-defined. External references do not expand modification authority."
+    }
+  ]
+}

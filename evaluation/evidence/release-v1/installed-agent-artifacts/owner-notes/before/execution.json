@@ -1,0 +1,20 @@
+{
+  "command": ".venv/bin/python -B audits/owner-notes/probe.py before",
+  "exit_code": 0,
+  "stdout": {
+    "requests": 64,
+    "unexpected_statuses": [
+      "alice-read-note-b",
+      "alice-write-note-b",
+      "bob-read-note-a",
+      "bob-write-note-a"
+    ],
+    "state_or_value_failures": [
+      "alice-state-note-b",
+      "bob-state-note-a"
+    ]
+  },
+  "captured_at": "2026-10-28T10:38:37.430775+00:00",
+  "record_source": "Observed completed exec_command invocation; output matches saved regression summary.",
+  "meaning": "Baseline observation runner returns 0 while recording demonstrated violations; after runner exits 1 on any mismatch."
+}

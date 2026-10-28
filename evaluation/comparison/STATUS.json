@@ -1,0 +1,22 @@
+{
+  "status": "not_evaluated",
+  "as_of": "2026-10-28",
+  "completed_runs": 0,
+  "adjudicated_runs": 0,
+  "metrics": {
+    "true_defects_detected": null,
+    "false_alerts": null,
+    "successful_fixes": null,
+    "regressions": null,
+    "report_accuracy": null,
+    "interventions_required": null,
+    "interventions_performed": null,
+    "monetary_cost_usd": null
+  },
+  "blocking_reasons": [
+    "The current user profile has ambient custom skills.",
+    "No independently reviewed clean-environment and common-tool receipt is available."
+  ],
+  "note": "Installation and installed-skill smoke evidence is not a comparison arm. No efficacy result is claimed."
+}
+

@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/private/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls/.venv/bin/python",
+    "-B",
+    "/private/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls/fixtures/owner-notes/server.py",
+    "--port",
+    "0",
+    "--data-dir",
+    "/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/owner-notes-audit-_5lvimum",
+    "--session-seconds",
+    "60"
+  ],
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/private/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls/fixtures/owner-notes/server.py\", line 148, in <module>\n    server = create_server(args.port, args.data_dir, args.session_seconds)\n  File \"/private/var/folders/16/s8qkpyzx76x30zxfljpxc94m0000gn/T/toy-installed-release-soe99jls/fixtures/owner-notes/server.py\", line 139, in create_server\n    return ThreadingHTTPServer(('127.0.0.1', port), Handler)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socketserver.py\", line 452, in __init__\n    self.server_bind()\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/server.py\", line 138, in server_bind\n    socketserver.TCPServer.server_bind(self)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socketserver.py\", line 466, in server_bind\n    self.socket.bind(self.server_address)\nPermissionError: [Errno 1] Operation not permitted\n",
+  "time": "2026-10-28T10:38:08.366809+00:00"
+}

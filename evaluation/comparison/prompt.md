@@ -1,0 +1,7 @@
+Inspect, improve and recheck the one application under fixtures/ against its README requirements. Make only proportionate, evidenced corrections in the app. Preserve working behavior, approved UI, data rules and architecture; do not modify the README to make a test pass.
+
+Before edits, retain the observed baseline and source hashes. After edits, recheck the original problems and run relevant regression checks. Save before.md, after.md, changes.patch and trial-report.json under outputs/. The JSON must follow trial-report.schema.json. Optional criterion IDs must be genuine; use null rather than inventing an identifier. Every factual conclusion needs evidence. Unexecuted checks are unknown, never pass. Record limitations and uncertainty.
+
+Use only this workspace, the provided execution environment and disposable local data. Do not seek evaluator materials or read other workspaces. Do not connect to an already-running service; start your own service at an ephemeral port when needed. Do not install new application dependencies or add unrelated features/frameworks. A focused local test script under outputs/ is allowed when it establishes a requirement.
+
+Ask only for a missing decision that blocks a necessary action. Do not invent an answer or permission. Record the question and its blocking reason under outputs/interventions.jsonl, then complete independent work. Use English for saved artifacts. You may use relevant resources present in this workspace.

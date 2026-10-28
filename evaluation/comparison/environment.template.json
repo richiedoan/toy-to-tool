@@ -1,0 +1,11 @@
+{
+  "status": "unverified",
+  "reviewer": null,
+  "environment_id": null,
+  "tool_inventory": null,
+  "tool_versions": null,
+  "common_builtin_skill_inventory_sha256": null,
+  "custom_user_skills_absent": null,
+  "capabilities_verified": null,
+  "notes": "Record actual observations from a clean OS account or isolated runner. Do not change status merely to bypass a failed preflight. No credentials belong in this receipt."
+}

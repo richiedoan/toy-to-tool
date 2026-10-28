@@ -1,0 +1,20 @@
+--- a/fixtures/owner-notes/server.py
++++ b/fixtures/owner-notes/server.py
+@@ -110,7 +110,7 @@
+                     return
+                 if self.path.startswith('/api/notes/'):
+                     note_id = self.path.removeprefix('/api/notes/')
+-                    row = db.execute('SELECT id, owner, text FROM notes WHERE id = ?', (note_id,)).fetchone()
++                    row = db.execute('SELECT id, owner, text FROM notes WHERE id = ? AND owner = ?', (note_id, user)).fetchone()
+                     self.reply(200, dict(row)) if row else self.reply(404, {'error': 'Not found'})
+                     return
+             self.reply(404, {'error': 'Not found'})
+@@ -133,7 +133,7 @@
+                 return
+             note_id = self.path.removeprefix('/api/notes/')
+             with sqlite3.connect(database) as db:
+-                changed = db.execute('UPDATE notes SET text = ? WHERE id = ?', (text, note_id)).rowcount
++                changed = db.execute('UPDATE notes SET text = ? WHERE id = ? AND owner = ?', (text, note_id, user)).rowcount
+             self.reply(200, {'ok': True}) if changed else self.reply(404, {'error': 'Not found'})
+ 
+     return ThreadingHTTPServer(('127.0.0.1', port), Handler)
