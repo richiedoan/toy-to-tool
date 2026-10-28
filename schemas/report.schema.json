@@ -551,6 +551,21 @@
         "synthetic",
         "audit"
       ]
+    },
+    "criterion_groups": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "F",
+          "U",
+          "A",
+          "S",
+          "P",
+          "O"
+        ]
+      }
     }
   },
   "required": [

@@ -80,12 +80,18 @@ def validate_catalog(catalog):
     return catalog
 
 
-def select(catalog, profile, level):
+def select(catalog, profile, level, groups=None):
     check_schema(profile, 'profile')
     if level not in LEVELS:
         raise ValueError(f'Invalid audit level: {level}')
+    if groups is None:
+        groups = list('FUASPO')
+    if not groups or len(groups) != len(set(groups)) or not set(groups) <= set('FUASPO'):
+        raise ValueError('Criterion groups must be a nonempty unique subset of F/U/A/S/P/O')
     selections = {}
     for criterion in catalog['criteria']:
+        if criterion['group'] not in groups:
+            continue
         features = criterion['applicability']['any_features']
         values = [profile['features'][feature] for feature in features]
         if LEVELS.index(criterion['starts_at']) > LEVELS.index(level):
@@ -116,7 +122,7 @@ def decide(evidence_sufficient, violates_requirement, authorized, measurable_ben
 
 def validate_report(report, catalog):
     check_schema(report, 'report')
-    selections = select(catalog, report['profile'], report['audit_level'])
+    selections = select(catalog, report['profile'], report['audit_level'], report.get('criterion_groups'))
     evidence_ids = unique(report['evidence'], 'evidence')
     for evidence in report['evidence']:
         if report['report_kind'] == 'audit' and evidence['synthetic']:
@@ -181,8 +187,8 @@ def validate_report(report, catalog):
     return report
 
 
-def template(catalog, profile, level, permission='read_only'):
-    selections = select(catalog, profile, level)
+def template(catalog, profile, level, permission='read_only', groups=None):
+    selections = select(catalog, profile, level, groups)
     findings = []
     for cid, item in selections.items():
         if item['selection'] == 'deferred':
@@ -202,7 +208,8 @@ def template(catalog, profile, level, permission='read_only'):
             'verification_plan': 'Follow criterion test_steps and verification; link observations before concluding.',
             'observed_outside_level': False,
         })
-    return {'report_kind': 'template', 'catalog_version': catalog['version'], 'audit_level': level,
+    return {**({'criterion_groups': groups} if groups is not None else {}),
+            'report_kind': 'template', 'catalog_version': catalog['version'], 'audit_level': level,
             'change_permission': permission, 'profile': profile,
             'scope_and_limitations': 'Unexecuted template; profile facts require confirmation. No application assurance claimed.',
             'evidence': [], 'findings': findings}
@@ -215,6 +222,8 @@ def main():
     parser.add_argument('--profile', type=Path, default=ROOT / 'examples/profile.json')
     parser.add_argument('--level', choices=LEVELS, default='Essential')
     parser.add_argument('--report', type=Path)
+    parser.add_argument('--group', dest='groups', action='append', choices=list('FUASPO'),
+                        help='Limit selection/template to this group; repeat for several groups.')
     args = parser.parse_args()
     try:
         catalog = validate_catalog(load(args.catalog))
@@ -225,7 +234,7 @@ def main():
                   (' Report structure, coverage and decisions checked.' if args.report else ''))
         else:
             profile = load(args.profile)
-            value = select(catalog, profile, args.level) if args.command == 'select' else template(catalog, profile, args.level)
+            value = select(catalog, profile, args.level, args.groups) if args.command == 'select' else template(catalog, profile, args.level, groups=args.groups)
             print(json.dumps(value, indent=2))
     except (ValueError, OSError) as error:
         print(f'Invalid: {error}', file=sys.stderr)

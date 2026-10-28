@@ -17,6 +17,10 @@ Essential checks essential outcomes and basic risks, favoring minimal changes. S
 
 Composite criteria need subcase records within evidence: S05 classifies CSRF, CORS, uploads, public endpoints and abuse independently. O05 distinguishes restore from release rollback. An applicable failed subcase makes the criterion fail; absent subcases need reasons. If no subcase fails but a relevant subcase is untested, the result is unknown. A partly applicable criterion cannot be marked not applicable as a whole. The profile gates planning; it does not replace architecture review or subcase evidence.
 
+## Focused group audits
+
+For an agreed group-only audit, use `--group F` (or repeat `--group` for several groups) with `select` and `template`. The report records `criterion_groups`; omitted means all six groups for backwards compatibility. Coverage validation still requires every selected in-scope criterion, including unknowns and exclusions. Other groups have no assessed result. Do not narrow scope after observing a failure merely to make a report pass. A focused Functionality & Data report is not an overall application audit.
+
 ## Status, severity and decision
 
 Status is `pass`, `fail`, `unknown` or `not_applicable`. Pass needs sufficient evidence for the declared scope. Fail needs evidence of an agreed requirement/goal violation or a demonstrated risk under the criterion contract. Unknown is missing evidence/expectation; it is never counted as pass. Not applicable requires demonstrated feature absence and a written reason. Do not use a numeric total to hide failures or merge unknown with success. Summarize failures by severity and list unknown, excluded and deferred criteria separately.

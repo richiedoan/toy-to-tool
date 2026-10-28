@@ -128,5 +128,32 @@ class AuditTests(unittest.TestCase):
         validate_report(report, self.catalog)
 
 
+    def test_group_scope_selects_only_functionality_without_faking_other_outcomes(self):
+        scoped = select(self.catalog, self.profile, 'Standard', groups=['F'])
+        self.assertEqual(set(scoped), {f'F{i:02}' for i in range(1, 7)})
+        self.assertEqual(scoped['F06']['selection'], 'deferred')
+        from scripts.audit import template
+        report = template(self.catalog, self.profile, 'Standard', groups=['F'])
+        self.assertEqual(report['criterion_groups'], ['F'])
+        validate_report(report, self.catalog)
+        report['findings'].pop()
+        with self.assertRaises(ValueError):
+            validate_report(report, self.catalog)
+
+    def test_group_scope_cannot_hide_unscoped_coverage_or_add_unrelated_claims(self):
+        from scripts.audit import template
+        report = template(self.catalog, self.profile, 'Standard', groups=['F'])
+        del report['criterion_groups']
+        with self.assertRaises(ValueError):
+            validate_report(report, self.catalog)
+        report = template(self.catalog, self.profile, 'Standard', groups=['F'])
+        report['findings'][0]['criterion_id'] = 'U01'
+        with self.assertRaises(ValueError):
+            validate_report(report, self.catalog)
+        for groups in ([], ['X'], ['F', 'F']):
+            with self.assertRaises(ValueError):
+                select(self.catalog, self.profile, 'Standard', groups=groups)
+
+
 if __name__ == '__main__':
     unittest.main()
