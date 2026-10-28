@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-10-28T08:24:30.891649+00:00",
+  "results": [
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/audit.py",
+        "validate",
+        "--report",
+        "audits/standard-20261028/before/report.json"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/private/tmp/toy-functionality-agent-run/scripts/audit.py\", line 8, in <module>\n    from jsonschema import Draft202012Validator, FormatChecker\nModuleNotFoundError: No module named 'jsonschema'\n"
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/audit.py",
+        "validate",
+        "--report",
+        "audits/standard-20261028/after/report.json"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/private/tmp/toy-functionality-agent-run/scripts/audit.py\", line 8, in <module>\n    from jsonschema import Draft202012Validator, FormatChecker\nModuleNotFoundError: No module named 'jsonschema'\n"
+    }
+  ],
+  "conclusion": "Validation attempted for both reports, blocked at jsonschema import; validation pending."
+}

@@ -1,0 +1,378 @@
+{
+  "captured_at": "2026-10-28T08:20:49.889Z",
+  "app_hashes": {
+    "index.html": "68df86e18625deadf25a4ebb4802ca9b59f01f0ed0838dc347c05ca618d7319e",
+    "app.js": "b705dc4cf83a5fbea9613115b76b0e35c80748b8ce0e0997db774590fcbecb76",
+    "style.css": "70af5abebb650c507b67807a6a5d16d61a32dad35157ed70d4075edb192fb501",
+    "README.md": "1d5e99af67a0dafba52e791a05623dfd8ba3d7f5c73b31603871abcdf7f7c4ef"
+  },
+  "environment": {
+    "browser": "153.0.8010.47",
+    "channel": "chrome",
+    "node": "v24.19.0",
+    "os": "darwin",
+    "base_url": "http://127.0.0.1:51826",
+    "viewport": "1000x800",
+    "isolation": "Fresh context for each scenario; only fixture localStorage key inspected."
+  },
+  "results": [
+    {
+      "id": "create-readback",
+      "criteria": [
+        "F01",
+        "F04"
+      ],
+      "steps": [
+        "Submit a trimmed Unicode/punctuation title.",
+        "Compare visible and stored values."
+      ],
+      "started_at": "2026-10-28T08:20:36.232Z",
+      "status": "pass",
+      "observation": {
+        "feedback": "Task added.",
+        "input": "",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"9216d563-4b03-44a9-a4d7-24b613f4577a\",\"title\":\"Plan café <draft>\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "9216d563-4b03-44a9-a4d7-24b613f4577a",
+            "title": "Plan café <draft>",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "save-readback",
+      "criteria": [
+        "F01",
+        "F03"
+      ],
+      "steps": [
+        "Create one record.",
+        "Edit note and Completed; save.",
+        "Read committed values independently of confirmation."
+      ],
+      "started_at": "2026-10-28T08:20:36.716Z",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Saved note must match the requested edit\n+ actual - expected\n\n+ ''\n- 'Review with the team'\n",
+      "observation": {
+        "feedback": "Changes saved.",
+        "input": "",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"e475996e-0e42-45d4-a3fe-68db0c3d0dda\",\"title\":\"Plan the next step\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "e475996e-0e42-45d4-a3fe-68db0c3d0dda",
+            "title": "Plan the next step",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "refresh",
+      "criteria": [
+        "F02"
+      ],
+      "steps": [
+        "Create a uniquely titled record.",
+        "Read store; refresh same origin/profile.",
+        "Compare loaded records and identities."
+      ],
+      "started_at": "2026-10-28T08:20:37.526Z",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Refresh must load the committed record\n\n0 !== 1\n",
+      "observation": {
+        "feedback": "Ready.",
+        "input": "",
+        "visibleCount": 0,
+        "storedRaw": "[{\"id\":\"fc2feda7-bca8-4f49-a8ff-f0bc690f0bef\",\"title\":\"Retain across refresh\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "fc2feda7-bca8-4f49-a8ff-f0bc690f0bef",
+            "title": "Retain across refresh",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "reopen",
+      "criteria": [
+        "F02"
+      ],
+      "steps": [
+        "Create a record.",
+        "Close app tab; reopen same origin in same browser context.",
+        "Verify loaded record."
+      ],
+      "started_at": "2026-10-28T08:20:38.060Z",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n",
+      "observation": {
+        "feedback": "Ready.",
+        "input": "",
+        "visibleCount": 0,
+        "storedRaw": "[{\"id\":\"7f96d547-a162-4c7d-8d73-87e2888d2945\",\"title\":\"Retain across app reopen\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "7f96d547-a162-4c7d-8d73-87e2888d2945",
+            "title": "Retain across app reopen",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "rapid-repeat",
+      "criteria": [
+        "F05"
+      ],
+      "steps": [
+        "Fill one intention.",
+        "Invoke form submission twice before pending work settles.",
+        "Count committed identities."
+      ],
+      "started_at": "2026-10-28T08:20:38.671Z",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Repeated pending submission must create one record\n\n2 !== 1\n",
+      "observation": {
+        "feedback": "Task added.",
+        "input": "",
+        "visibleCount": 2,
+        "storedRaw": "[{\"id\":\"a90ac8ec-a53c-4d7d-86cf-c494fc4eb8be\",\"title\":\"One intention\",\"note\":\"\",\"done\":false},{\"id\":\"b73b3440-10a3-47e1-9b04-18c307724fa3\",\"title\":\"One intention\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "a90ac8ec-a53c-4d7d-86cf-c494fc4eb8be",
+            "title": "One intention",
+            "note": "",
+            "done": false
+          },
+          {
+            "id": "b73b3440-10a3-47e1-9b04-18c307724fa3",
+            "title": "One intention",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "intentional-repeat",
+      "criteria": [
+        "F05"
+      ],
+      "steps": [
+        "Submit a title.",
+        "After completion, submit the same title as a new intention.",
+        "Verify two distinct IDs."
+      ],
+      "started_at": "2026-10-28T08:20:39.513Z",
+      "status": "pass",
+      "observation": {
+        "feedback": "Task added.",
+        "input": "",
+        "visibleCount": 2,
+        "storedRaw": "[{\"id\":\"c94582ec-7fc5-481c-a356-3c278f788dc9\",\"title\":\"Repeat intentionally\",\"note\":\"\",\"done\":false},{\"id\":\"6c0562f3-7e5e-4f2a-b443-ad064ded58cc\",\"title\":\"Repeat intentionally\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "c94582ec-7fc5-481c-a356-3c278f788dc9",
+            "title": "Repeat intentionally",
+            "note": "",
+            "done": false
+          },
+          {
+            "id": "6c0562f3-7e5e-4f2a-b443-ad064ded58cc",
+            "title": "Repeat intentionally",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "title-boundaries",
+      "criteria": [
+        "F04"
+      ],
+      "steps": [
+        "Reject empty/whitespace and programmatic 81-character title.",
+        "Accept exactly 80 characters."
+      ],
+      "started_at": "2026-10-28T08:20:40.336Z",
+      "status": "pass",
+      "observation": {
+        "feedback": "Task added.",
+        "input": "",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"4017e215-9f28-4855-8c2d-eb99a9c6a498\",\"title\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "4017e215-9f28-4855-8c2d-eb99a9c6a498",
+            "title": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "note-boundaries",
+      "criteria": [
+        "F04"
+      ],
+      "steps": [
+        "Save exactly 500 note characters.",
+        "Attempt 501 through a programmatic value.",
+        "Verify rejection preserves the previous note."
+      ],
+      "started_at": "2026-10-28T08:20:41.803Z",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 500\n",
+      "observation": {
+        "feedback": "Changes saved.",
+        "input": "",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"0fb0d3b0-34b7-419d-a7cf-18805a387883\",\"title\":\"Plan the next step\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "0fb0d3b0-34b7-419d-a7cf-18805a387883",
+            "title": "Plan the next step",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "create-storage-failure",
+      "criteria": [
+        "F03"
+      ],
+      "steps": [
+        "Create an existing task.",
+        "Reject storage writes, then add another task.",
+        "Verify no false success, no previous-data loss, and retained input."
+      ],
+      "started_at": "2026-10-28T08:20:42.581Z",
+      "status": "pass",
+      "observation": {
+        "feedback": "Could not save. Your existing tasks are unchanged. Try again.",
+        "input": "Keep this draft",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"ad0ca541-bf9c-4273-9059-428e8a47682e\",\"title\":\"Keep existing\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "ad0ca541-bf9c-4273-9059-428e8a47682e",
+            "title": "Keep existing",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "save-storage-failure",
+      "criteria": [
+        "F03"
+      ],
+      "steps": [
+        "Create a task.",
+        "Reject storage writes; edit and save.",
+        "Compare feedback, old committed data and retained draft."
+      ],
+      "started_at": "2026-10-28T08:20:43.327Z",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /could not|unable|failed|not saved/i. Input:\n\n'Changes saved.'\n",
+      "observation": {
+        "feedback": "Changes saved.",
+        "input": "",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"e957f9b3-ba10-4d22-a9d2-f9d1d137e3c1\",\"title\":\"Plan the next step\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "e957f9b3-ba10-4d22-a9d2-f9d1d137e3c1",
+            "title": "Plan the next step",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "feedback-timing",
+      "criteria": [
+        "F03"
+      ],
+      "steps": [
+        "Start save.",
+        "If success is visible, independently confirm the new value already committed.",
+        "Wait for completion and compare again."
+      ],
+      "started_at": "2026-10-28T08:20:44.100Z",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ ''\n- 'Confirmed only after commit'\n",
+      "observation": {
+        "feedback": "Changes saved.",
+        "input": "",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"96b713bb-2584-4061-8388-86ef37182e25\",\"title\":\"Plan the next step\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "96b713bb-2584-4061-8388-86ef37182e25",
+            "title": "Plan the next step",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "save-repeat",
+      "criteria": [
+        "F01",
+        "F05"
+      ],
+      "steps": [
+        "Create and edit one record.",
+        "Activate save twice rapidly.",
+        "Verify one record with correct fields."
+      ],
+      "started_at": "2026-10-28T08:20:49.018Z",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ ''\n- 'One final value'\n",
+      "observation": {
+        "feedback": "Changes saved.",
+        "input": "",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"24db91e7-1b26-49f8-8ea2-1ce892a67d43\",\"title\":\"Plan the next step\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "24db91e7-1b26-49f8-8ea2-1ce892a67d43",
+            "title": "Plan the next step",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    }
+  ],
+  "limitation": "Executable workflow checks on a seeded local fixture, not a controlled skill effectiveness study. F06 and other groups unassessed."
+}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Task tracker</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header><p class="eyebrow">PERSONAL WORKSPACE</p><h1>Task tracker</h1><p>Keep your next steps and working notes together.</p></header>
+    <section aria-labelledby="add-heading">
+      <h2 id="add-heading">Add a task</h2>
+      <form id="add-form">
+        <label for="title">Task title</label>
+        <div class="row"><input id="title" name="title" maxlength="80" required autocomplete="off"><button id="add" type="submit">Add task</button></div>
+      </form>
+    </section>
+    <p id="feedback" role="status" aria-live="polite">Ready.</p>
+    <section aria-labelledby="list-heading"><h2 id="list-heading">Your tasks</h2><p id="empty">No tasks yet. Add your first next step above.</p><ul id="tasks"></ul></section>
+    <footer>Stored in this browser. Use the same local address when reopening.</footer>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

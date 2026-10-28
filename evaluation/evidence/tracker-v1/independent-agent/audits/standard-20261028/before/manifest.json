@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-10-28T08:21:20.107368+00:00",
+  "revision": "No git HEAD exists; file SHA-256 used.",
+  "sha256": {
+    "regression.json": "3ca5596bb658a06744a378e0b20a7cbf660c13881785de1d3cba7c42af45ca36",
+    "index.html": "68df86e18625deadf25a4ebb4802ca9b59f01f0ed0838dc347c05ca618d7319e",
+    "report.json": "1d3de4fd51a8c07785df4ebbceaa74e321e6948a03857598100827c6f13a4d74",
+    "report.md": "5365a99c0d02ea83b989fad4d62593a34c6b7fd2b296cdbce2c35feda180021d",
+    "README.md": "1d5e99af67a0dafba52e791a05623dfd8ba3d7f5c73b31603871abcdf7f7c4ef",
+    "app.js": "b705dc4cf83a5fbea9613115b76b0e35c80748b8ce0e0997db774590fcbecb76"
+  }
+}

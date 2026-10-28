@@ -9,6 +9,8 @@ Coordinate an evidence-based audit of an existing app through the six stages bel
 
 ## Load the contract
 
+For a requested Functionality & Data focus, use [the Functionality & Data skill](../functionality-data/SKILL.md) and explicit `--group F` reporting. Retain the agreed level and authority; do not expand that focused result into an all-group audit claim.
+
 This is a repository-local skill. Its engine root is three directories above this skill directory. Resolve that root from this file, independently of the target app's working directory. Read [the evaluation method](../../../docs/method.md), validate [the catalogue](../../../criteria/v1.json), and load the full entries for selected criteria. The catalogue owns IDs, starting levels, exceptions, test protocols and decisions; do not copy or replace it with a new checklist. The skill requires the repository's `criteria/`, `schemas/`, `scripts/`, `docs/method.md` and Python dependencies. Copying this skill folder alone does not install the engine.
 
 Run engine commands from that root with its documented Python environment. Run app commands from the app root. Store sanitized artifacts under a new `audits/<unique-run-id>/` in the engine repository; do not overwrite an earlier run. Reports may link authorized HTTPS artifacts instead. Local evidence locations in JSON are relative to the engine root and must exist. Audit output is ignored by Git; do not publish evidence without the user's instruction.

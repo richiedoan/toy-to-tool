@@ -1,0 +1,249 @@
+{
+  "report_kind": "audit",
+  "catalog_version": "1.0.0",
+  "audit_level": "Standard",
+  "criterion_groups": [
+    "F"
+  ],
+  "change_permission": "fix_scoped",
+  "profile": {
+    "name": "Local single-person task tracker",
+    "features": {
+      "ui": true,
+      "pointer_ui": true,
+      "operations": true,
+      "inputs": true,
+      "persistent_data": true,
+      "shared_writes": false,
+      "user_changes": true,
+      "protected_resources": false,
+      "untrusted_execution": false,
+      "authentication": false,
+      "csrf_surface": false,
+      "cors_surface": false,
+      "uploads": false,
+      "public_endpoints": false,
+      "abuse_surface": false,
+      "network": false,
+      "resource_lifecycle": false,
+      "load_requirements": false,
+      "realtime": false,
+      "offline_sync": false,
+      "background_sync": false,
+      "deployed": false,
+      "important_data": false,
+      "operated_service": false
+    },
+    "rationale": {
+      "ui": "HTML forms and task list in index.html.",
+      "pointer_ui": "Add and save buttons.",
+      "operations": "Add and edit via app.js.",
+      "inputs": "Titles 1-80 trimmed; notes up to 500 per README.",
+      "persistent_data": "Same-origin/profile refresh and reopen promised by README.",
+      "shared_writes": "Absent from tracker/app.js and index.html; README defines a local single-person browser app without backend, accounts, shared writes, deployment or sync. Static asset serving is test infrastructure only; non-sensitive replaceable tasks.",
+      "user_changes": "Notes and completion editable.",
+      "protected_resources": "Absent from tracker/app.js and index.html; README defines a local single-person browser app without backend, accounts, shared writes, deployment or sync. Static asset serving is test infrastructure only; non-sensitive replaceable tasks.",
+      "untrusted_execution": "Absent from tracker/app.js and index.html; README defines a local single-person browser app without backend, accounts, shared writes, deployment or sync. Static asset serving is test infrastructure only; non-sensitive replaceable tasks.",
+      "authentication": "Absent from tracker/app.js and index.html; README defines a local single-person browser app without backend, accounts, shared writes, deployment or sync. Static asset serving is test infrastructure only; non-sensitive replaceable tasks.",
+      "csrf_surface": "Absent from tracker/app.js and index.html; README defines a local single-person browser app without backend, accounts, shared writes, deployment or sync. Static asset serving is test infrastructure only; non-sensitive replaceable tasks.",
+      "cors_surface": "Absent from tracker/app.js and index.html; README defines a local single-person browser app without backend, accounts, shared writes, deployment or sync. Static asset serving is test infrastructure only; non-sensitive replaceable tasks.",
+      "uploads": "Absent from tracker/app.js and index.html; README defines a local single-person browser app without backend, accounts, shared writes, deployment or sync. Static asset serving is test infrastructure only; non-sensitive replaceable tasks.",
+      "public_endpoints": "Absent from tracker/app.js and index.html; README defines a local single-person browser app without backend, accounts, shared writes, deployment or sync. Static asset serving is test infrastructure only; non-sensitive replaceable tasks.",
+      "abuse_surface": "Absent from tracker/app.js and index.html; README defines a local single-person browser app without backend, accounts, shared writes, deployment or sync. Static asset serving is test infrastructure only; non-sensitive replaceable tasks.",
+      "network": "Absent from tracker/app.js and index.html; README defines a local single-person browser app without backend, accounts, shared writes, deployment or sync. Static asset serving is test infrastructure only; non-sensitive replaceable tasks.",
+      "resource_lifecycle": "Absent from tracker/app.js and index.html; README defines a local single-person browser app without backend, accounts, shared writes, deployment or sync. Static asset serving is test infrastructure only; non-sensitive replaceable tasks.",
+      "load_requirements": "Absent from tracker/app.js and index.html; README defines a local single-person browser app without backend, accounts, shared writes, deployment or sync. Static asset serving is test infrastructure only; non-sensitive replaceable tasks.",
+      "realtime": "Absent from tracker/app.js and index.html; README defines a local single-person browser app without backend, accounts, shared writes, deployment or sync. Static asset serving is test infrastructure only; non-sensitive replaceable tasks.",
+      "offline_sync": "Absent from tracker/app.js and index.html; README defines a local single-person browser app without backend, accounts, shared writes, deployment or sync. Static asset serving is test infrastructure only; non-sensitive replaceable tasks.",
+      "background_sync": "Absent from tracker/app.js and index.html; README defines a local single-person browser app without backend, accounts, shared writes, deployment or sync. Static asset serving is test infrastructure only; non-sensitive replaceable tasks.",
+      "deployed": "Absent from tracker/app.js and index.html; README defines a local single-person browser app without backend, accounts, shared writes, deployment or sync. Static asset serving is test infrastructure only; non-sensitive replaceable tasks.",
+      "important_data": "Absent from tracker/app.js and index.html; README defines a local single-person browser app without backend, accounts, shared writes, deployment or sync. Static asset serving is test infrastructure only; non-sensitive replaceable tasks.",
+      "operated_service": "Absent from tracker/app.js and index.html; README defines a local single-person browser app without backend, accounts, shared writes, deployment or sync. Static asset serving is test infrastructure only; non-sensitive replaceable tasks."
+    }
+  },
+  "scope_and_limitations": "Standard; Functionality & Data only (F01-F05). Single-person, non-sensitive browser-local tasks. Chrome aborted and loopback binding is denied. Executed Node VM uses controlled DOM/storage/timer adapters: real application source execution, not browser observations. No real browser refresh/reopen, native validation, rendered feedback or click interaction verified. F06 deferred at Advanced and concurrent-tab edits explicitly excluded by README; U/A/S/P/O excluded. Python dependency installation blocked by network; engine select/template and report validation unavailable (see tooling.json and validation.json). UTF-16 length convention preserved from existing JavaScript/HTML; no new Unicode policy inferred.",
+  "evidence": [
+    {
+      "id": "requirements",
+      "location": "tracker/README.md",
+      "description": "Agreed product contract and excluded retention/concurrency boundaries.",
+      "environment": "Supplied local workspace",
+      "captured_at": "2026-10-28T08:23:35.876Z",
+      "kind": "requirement",
+      "synthetic": false
+    },
+    {
+      "id": "execution",
+      "location": "audits/standard-20261028/after/regression.json",
+      "description": "Executed application source in Node VM; exact input cases, expected/actual readbacks and failure results. Adapters explicitly identified; no browser assurance.",
+      "environment": "v24.19.0; controlled adapters",
+      "captured_at": "2026-10-28T08:23:35.876Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "tooling",
+      "location": "audits/standard-20261028/tooling.json",
+      "description": "Actual browser/server and audit-engine capability failures.",
+      "environment": "Restricted local workspace",
+      "captured_at": "2026-10-28T08:23:35.876Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "source",
+      "location": "tracker/app.js",
+      "description": "Inspected target source; hash in execution artifact.",
+      "environment": "Local workspace; no git HEAD",
+      "captured_at": "2026-10-28T08:23:35.876Z",
+      "kind": "artifact",
+      "synthetic": false
+    },
+    {
+      "id": "neighbors",
+      "location": "audits/standard-20261028/after/neighboring.json",
+      "description": "27 executed handler checks including original cases, existing data, malformed storage, repeated edits, overlapping add/save, and failed draft preservation across another add.",
+      "environment": "Node v24.19.0; controlled DOM, timers and storage adapters",
+      "captured_at": "2026-10-28T08:24:30.891649+00:00",
+      "kind": "observation",
+      "synthetic": false
+    }
+  ],
+  "findings": [
+    {
+      "id": "after-F01",
+      "criterion_id": "F01",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Original reproduction and neighboring handler checks now pass in the Node adapter harness. Actual browser operation, native input behavior and promised browser retention transitions still require execution; no full criterion pass claimed.",
+      "requirement_or_goal": "README tasks 1-2: add titled task; save note and completion with independently readable values.",
+      "affected_users_and_conditions": "Single user adding, saving or reopening replaceable local tasks; controlled disposable test data only.",
+      "evidence_ids": [
+        "requirements",
+        "execution",
+        "source",
+        "tooling",
+        "neighbors"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Small app.js correction within authorized tracker/: load existing records, commit edits, reject invalid notes, guard pending operations. Preserve browser-local architecture and valid data. Regression risk: startup parsing and asynchronous operation interaction; tested with adapters, browser recheck pending.",
+      "verification_plan": "Run tools/regression.cjs against baseline/current source; then execute browser add/edit/readback, refresh and close/reopen on one origin/profile, pending/failure and native boundary cases. See tools/regression.cjs for exact input cases.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "after-F02",
+      "criterion_id": "F02",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Original reproduction and neighboring handler checks now pass in the Node adapter harness. Actual browser operation, native input behavior and promised browser retention transitions still require execution; no full criterion pass claimed.",
+      "requirement_or_goal": "README task 3: retain values and counts across refresh/reopen on same origin/profile.",
+      "affected_users_and_conditions": "Single user adding, saving or reopening replaceable local tasks; controlled disposable test data only.",
+      "evidence_ids": [
+        "requirements",
+        "execution",
+        "source",
+        "tooling",
+        "neighbors"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Small app.js correction within authorized tracker/: load existing records, commit edits, reject invalid notes, guard pending operations. Preserve browser-local architecture and valid data. Regression risk: startup parsing and asynchronous operation interaction; tested with adapters, browser recheck pending.",
+      "verification_plan": "Run tools/regression.cjs against baseline/current source; then execute browser add/edit/readback, refresh and close/reopen on one origin/profile, pending/failure and native boundary cases. See tools/regression.cjs for exact input cases.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "after-F03",
+      "criterion_id": "F03",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Original reproduction and neighboring handler checks now pass in the Node adapter harness. Actual browser operation, native input behavior and promised browser retention transitions still require execution; no full criterion pass claimed.",
+      "requirement_or_goal": "README: failed persistence must not be reported saved; retain prior data and recoverable input.",
+      "affected_users_and_conditions": "Single user adding, saving or reopening replaceable local tasks; controlled disposable test data only.",
+      "evidence_ids": [
+        "requirements",
+        "execution",
+        "source",
+        "tooling",
+        "neighbors"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Small app.js correction within authorized tracker/: load existing records, commit edits, reject invalid notes, guard pending operations. Preserve browser-local architecture and valid data. Regression risk: startup parsing and asynchronous operation interaction; tested with adapters, browser recheck pending.",
+      "verification_plan": "Run tools/regression.cjs against baseline/current source; then execute browser add/edit/readback, refresh and close/reopen on one origin/profile, pending/failure and native boundary cases. See tools/regression.cjs for exact input cases.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "after-F04",
+      "criterion_id": "F04",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Original reproduction and neighboring handler checks now pass in the Node adapter harness. Actual browser operation, native input behavior and promised browser retention transitions still require execution; no full criterion pass claimed.",
+      "requirement_or_goal": "README: trim title, 1-80 characters; notes up to 500; Unicode/punctuation valid.",
+      "affected_users_and_conditions": "Single user adding, saving or reopening replaceable local tasks; controlled disposable test data only.",
+      "evidence_ids": [
+        "requirements",
+        "execution",
+        "source",
+        "tooling",
+        "neighbors"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Small app.js correction within authorized tracker/: load existing records, commit edits, reject invalid notes, guard pending operations. Preserve browser-local architecture and valid data. Regression risk: startup parsing and asynchronous operation interaction; tested with adapters, browser recheck pending.",
+      "verification_plan": "Run tools/regression.cjs against baseline/current source; then execute browser add/edit/readback, refresh and close/reopen on one origin/profile, pending/failure and native boundary cases. See tools/regression.cjs for exact input cases.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "after-F05",
+      "criterion_id": "F05",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "Original failing sequence now passes; later same-title submission creates a distinct identity. Save repetition and failed-add retry also pass. Claim covers executed operation handlers.",
+      "requirement_or_goal": "README: one pending intention creates one record; later same-title intentional submission allowed.",
+      "affected_users_and_conditions": "Single user adding, saving or reopening replaceable local tasks; controlled disposable test data only.",
+      "evidence_ids": [
+        "requirements",
+        "execution",
+        "source",
+        "tooling",
+        "neighbors"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Small app.js correction within authorized tracker/: load existing records, commit edits, reject invalid notes, guard pending operations. Preserve browser-local architecture and valid data. Regression risk: startup parsing and asynchronous operation interaction; tested with adapters, browser recheck pending.",
+      "verification_plan": "Run tools/regression.cjs against baseline/current source; then execute browser add/edit/readback, refresh and close/reopen on one origin/profile, pending/failure and native boundary cases. See tools/regression.cjs for exact input cases.",
+      "observed_outside_level": false
+    }
+  ]
+}

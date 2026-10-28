@@ -24,6 +24,12 @@ Use `$toy-to-tool-audit` from this checkout, or ask the agent to read [SKILL.md]
 
 It defaults to Essential inspection and recommendations without target-code edits, reuses existing permissions, and asks only questions that change a decision. It includes an [English report template](.agents/skills/toy-to-tool-audit/assets/report.md) and [missing-browser/runtime/credentials guidance](.agents/skills/toy-to-tool-audit/references/missing-access.md). Keep this skill with its repository engine; copying the skill directory alone is insufficient. Audit artifacts go in ignored `audits/<run-id>/` directories and are not published automatically.
 
+## Functionality & Data trial
+
+Use `$functionality-data` for an F01-F06 focus through Inspect → Improve → Recheck. Scoped reports use `--group F`; other groups have no assessed outcome. The local tracker and its neutral behavior contract are in `fixtures/tracker/`.
+
+Evaluator instructions, the immutable original, context-separated agent-packet export and recorded before/after browser evidence are described in [evaluation/README.md](evaluation/README.md). Evaluator material is excluded from the agent packet. The recorded exercise includes a restricted independent CLI attempt and evaluator-led Chrome verification; it is not evidence of a skill-effectiveness gain.
+
 ## Repository contract
 
 | Path | Purpose |

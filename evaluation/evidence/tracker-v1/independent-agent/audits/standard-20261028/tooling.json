@@ -1,0 +1,85 @@
+{
+  "timestamp": "2026-10-28T08:19:17.161447+00:00",
+  "results": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "http.server",
+        "8765",
+        "--bind",
+        "127.0.0.1",
+        "--directory",
+        "tracker"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py\", line 197, in _run_module_as_main\n    return _run_code(code, main_globals, None,\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py\", line 87, in _run_code\n    exec(code, run_globals)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/server.py\", line 1297, in <module>\n    test(\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/server.py\", line 1252, in test\n    with ServerClass(addr, HandlerClass) as httpd:\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socketserver.py\", line 452, in __init__\n    self.server_bind()\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/server.py\", line 1295, in server_bind\n    return super().server_bind()\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/server.py\", line 138, in server_bind\n    socketserver.TCPServer.server_bind(self)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socketserver.py\", line 466, in server_bind\n    self.socket.bind(self.server_address)\nPermissionError: [Errno 1] Operation not permitted\n"
+    },
+    {
+      "command": [
+        "node",
+        "-e",
+        "const s=require(\"http\").createServer(); s.on(\"error\",e=>{console.error(e);process.exit(1)}); s.listen(8765,\"127.0.0.1\")"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Error: listen EPERM: operation not permitted 127.0.0.1:8765\n    at Server.setupListenHandle [as _listen2] (node:net:2145:21)\n    at listenInCluster (node:net:2224:12)\n    at node:net:2448:7\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {\n  code: 'EPERM',\n  errno: -1,\n  syscall: 'listen',\n  address: '127.0.0.1',\n  port: 8765\n}\n"
+    },
+    {
+      "command": [
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "Google Chrome 153.0.8010.47 \n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        "--headless=new",
+        "--no-first-run",
+        "--no-default-browser-check",
+        "--remote-debugging-pipe",
+        "--user-data-dir=/private/tmp/toy-functionality-agent-run/audits/standard-20261028/chrome-profile",
+        "about:blank"
+      ],
+      "returncode": -6,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/audit.py",
+        "select",
+        "--profile",
+        "audits/standard-20261028/profile.json",
+        "--level",
+        "Standard",
+        "--group",
+        "F"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/private/tmp/toy-functionality-agent-run/scripts/audit.py\", line 8, in <module>\n    from jsonschema import Draft202012Validator, FormatChecker\nModuleNotFoundError: No module named 'jsonschema'\n"
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/audit.py",
+        "template",
+        "--profile",
+        "audits/standard-20261028/profile.json",
+        "--level",
+        "Standard",
+        "--group",
+        "F"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/private/tmp/toy-functionality-agent-run/scripts/audit.py\", line 8, in <module>\n    from jsonschema import Draft202012Validator, FormatChecker\nModuleNotFoundError: No module named 'jsonschema'\n"
+    }
+  ]
+}

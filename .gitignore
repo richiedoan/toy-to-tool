@@ -2,4 +2,6 @@
 __pycache__/
 *.py[cod]
 .DS_Store
-audits/
+/audits/
+node_modules/
+evaluation/runs/

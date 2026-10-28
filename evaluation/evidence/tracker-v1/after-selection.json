@@ -1,0 +1,26 @@
+{
+  "F01": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "F02": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "F03": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "F04": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "F05": {
+    "selection": "applicable",
+    "reason": "Core criterion or at least one relevant feature is present."
+  },
+  "F06": {
+    "selection": "deferred",
+    "reason": "Starts at Advanced; report observed risks anyway."
+  }
+}

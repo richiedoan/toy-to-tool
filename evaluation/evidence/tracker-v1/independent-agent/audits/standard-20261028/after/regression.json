@@ -1,0 +1,575 @@
+{
+  "timestamp": "2026-10-28T08:23:35.876Z",
+  "source": "tracker/app.js",
+  "sha256": "a3bcbf1abc3c137b91923b3d88fb4e6e09f247f64def2b0ce1a061546176ba4e",
+  "runtime": "v24.19.0",
+  "scope": "Executed application JavaScript with controlled DOM, timer and storage adapters. No real browser, native form enforcement or persistence transitions verified.",
+  "results": [
+    {
+      "id": "create",
+      "criteria": [
+        "F01",
+        "F03",
+        "F04"
+      ],
+      "steps": "Submit padded Unicode title; inspect pending feedback/store, flush delay, read stored values and rendered heading.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "pending feedback",
+          "actual": "Adding…",
+          "expected": "Adding…"
+        },
+        {
+          "label": "pending count",
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "label": "stored title",
+          "actual": "Audit α — task!",
+          "expected": "Audit α — task!"
+        },
+        {
+          "label": "note",
+          "actual": "",
+          "expected": ""
+        },
+        {
+          "label": "done",
+          "actual": false,
+          "expected": false
+        },
+        {
+          "label": "visible title",
+          "actual": "Audit α — task!",
+          "expected": "Audit α — task!"
+        },
+        {
+          "label": "feedback",
+          "actual": "Task added.",
+          "expected": "Task added."
+        }
+      ]
+    },
+    {
+      "id": "edit",
+      "criteria": [
+        "F01",
+        "F03"
+      ],
+      "steps": "Create; change note and completion; save; inspect pending and final feedback plus independent storage readback.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "pending",
+          "actual": "Saving…",
+          "expected": "Saving…"
+        },
+        {
+          "label": "old committed note while pending",
+          "actual": "",
+          "expected": ""
+        },
+        {
+          "label": "saved note",
+          "actual": "Audit note café 😀",
+          "expected": "Audit note café 😀"
+        },
+        {
+          "label": "saved completion",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "label": "confirmed feedback",
+          "actual": "Changes saved.",
+          "expected": "Changes saved."
+        }
+      ]
+    },
+    {
+      "id": "reload-adapter",
+      "criteria": [
+        "F02"
+      ],
+      "steps": "Create; instantiate app again using same adapter store. This is startup logic only, NOT browser refresh.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "stored values",
+          "actual": [
+            {
+              "id": "bebfa55d-bdc4-4425-bb65-9ea9df3d051d",
+              "title": "Audit α — task",
+              "note": "",
+              "done": false
+            }
+          ],
+          "expected": [
+            {
+              "id": "bebfa55d-bdc4-4425-bb65-9ea9df3d051d",
+              "title": "Audit α — task",
+              "note": "",
+              "done": false
+            }
+          ]
+        },
+        {
+          "label": "rendered count",
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "label": "loaded title",
+          "actual": "Audit α — task",
+          "expected": "Audit α — task"
+        }
+      ]
+    },
+    {
+      "id": "repeat-add",
+      "criteria": [
+        "F05"
+      ],
+      "steps": "Fire submit twice before delay completes; compare IDs/count; later submit same title intentionally.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "one intention count",
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "label": "later intention count",
+          "actual": 2,
+          "expected": 2
+        },
+        {
+          "label": "distinct IDs",
+          "actual": 2,
+          "expected": 2
+        },
+        {
+          "label": "first identity retained",
+          "actual": "ac906b1a-1d64-4eb8-bbb6-65ec048837b7",
+          "expected": "ac906b1a-1d64-4eb8-bbb6-65ec048837b7"
+        }
+      ]
+    },
+    {
+      "id": "add-failure-retry",
+      "criteria": [
+        "F03",
+        "F05"
+      ],
+      "steps": "Create prior record; reject storage write; add; verify old storage/input/error; allow writes and retry.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "prior data intact",
+          "actual": [
+            {
+              "id": "78c26f4e-3165-471f-856c-25349341c576",
+              "title": "Audit α — task",
+              "note": "",
+              "done": false
+            }
+          ],
+          "expected": [
+            {
+              "id": "78c26f4e-3165-471f-856c-25349341c576",
+              "title": "Audit α — task",
+              "note": "",
+              "done": false
+            }
+          ]
+        },
+        {
+          "label": "input retained",
+          "actual": "Retry",
+          "expected": "Retry"
+        },
+        {
+          "label": "failure feedback",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "label": "retry count",
+          "actual": 2,
+          "expected": 2
+        }
+      ]
+    },
+    {
+      "id": "edit-failure-retry",
+      "criteria": [
+        "F01",
+        "F03",
+        "F05"
+      ],
+      "steps": "Create; reject storage write; edit/save; verify error, prior data, input; retry after recovery.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "prior data intact",
+          "actual": [
+            {
+              "id": "71afd8cd-d76e-41d9-90ab-c258bd740138",
+              "title": "Audit α — task",
+              "note": "",
+              "done": false
+            }
+          ],
+          "expected": [
+            {
+              "id": "71afd8cd-d76e-41d9-90ab-c258bd740138",
+              "title": "Audit α — task",
+              "note": "",
+              "done": false
+            }
+          ]
+        },
+        {
+          "label": "failure feedback",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "label": "draft retained",
+          "actual": "Keep this draft",
+          "expected": "Keep this draft"
+        },
+        {
+          "label": "completion draft retained",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "label": "retry note",
+          "actual": "Keep this draft",
+          "expected": "Keep this draft"
+        },
+        {
+          "label": "retry count",
+          "actual": 1,
+          "expected": 1
+        }
+      ]
+    },
+    {
+      "id": "reject-title-0-0",
+      "criteria": [
+        "F04"
+      ],
+      "steps": "Set title programmatically and dispatch submit (bypasses browser maxlength); invalid title must not write.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "record count",
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "label": "validation feedback",
+          "actual": "Enter a title of 1-80 characters.",
+          "expected": "Enter a title of 1-80 characters."
+        }
+      ]
+    },
+    {
+      "id": "reject-title-3-0",
+      "criteria": [
+        "F04"
+      ],
+      "steps": "Set title programmatically and dispatch submit (bypasses browser maxlength); invalid title must not write.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "record count",
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "label": "validation feedback",
+          "actual": "Enter a title of 1-80 characters.",
+          "expected": "Enter a title of 1-80 characters."
+        }
+      ]
+    },
+    {
+      "id": "reject-title-81-81",
+      "criteria": [
+        "F04"
+      ],
+      "steps": "Set title programmatically and dispatch submit (bypasses browser maxlength); invalid title must not write.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "record count",
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "label": "validation feedback",
+          "actual": "Enter a title of 1-80 characters.",
+          "expected": "Enter a title of 1-80 characters."
+        }
+      ]
+    },
+    {
+      "id": "title-boundary-1",
+      "criteria": [
+        "F04"
+      ],
+      "steps": "Submit 1 ASCII characters; independently read stored title.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "stored title",
+          "actual": "x",
+          "expected": "x"
+        }
+      ]
+    },
+    {
+      "id": "title-boundary-79",
+      "criteria": [
+        "F04"
+      ],
+      "steps": "Submit 79 ASCII characters; independently read stored title.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "stored title",
+          "actual": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "expected": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "id": "title-boundary-80",
+      "criteria": [
+        "F04"
+      ],
+      "steps": "Submit 80 ASCII characters; independently read stored title.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "stored title",
+          "actual": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "expected": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "id": "note-valid-0",
+      "criteria": [
+        "F01",
+        "F04"
+      ],
+      "steps": "Save valid note and true completion, then clear completion; inspect stored values.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "stored note",
+          "actual": "",
+          "expected": ""
+        },
+        {
+          "label": "true completion",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "label": "false completion",
+          "actual": false,
+          "expected": false
+        }
+      ]
+    },
+    {
+      "id": "note-valid-499",
+      "criteria": [
+        "F01",
+        "F04"
+      ],
+      "steps": "Save valid note and true completion, then clear completion; inspect stored values.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "stored note",
+          "actual": "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
+          "expected": "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
+        },
+        {
+          "label": "true completion",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "label": "false completion",
+          "actual": false,
+          "expected": false
+        }
+      ]
+    },
+    {
+      "id": "note-valid-500",
+      "criteria": [
+        "F01",
+        "F04"
+      ],
+      "steps": "Save valid note and true completion, then clear completion; inspect stored values.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "stored note",
+          "actual": "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
+          "expected": "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
+        },
+        {
+          "label": "true completion",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "label": "false completion",
+          "actual": false,
+          "expected": false
+        }
+      ]
+    },
+    {
+      "id": "note-valid-39",
+      "criteria": [
+        "F01",
+        "F04"
+      ],
+      "steps": "Save valid note and true completion, then clear completion; inspect stored values.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "stored note",
+          "actual": "Unicode café 😀 / <task> & punctuation!",
+          "expected": "Unicode café 😀 / <task> & punctuation!"
+        },
+        {
+          "label": "true completion",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "label": "false completion",
+          "actual": false,
+          "expected": false
+        }
+      ]
+    },
+    {
+      "id": "note-oversized",
+      "criteria": [
+        "F04"
+      ],
+      "steps": "Set note to 501 programmatic characters; save must reject and preserve committed record and draft.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "validation feedback",
+          "actual": "Enter a note of up to 500 characters.",
+          "expected": "Enter a note of up to 500 characters."
+        },
+        {
+          "label": "committed record",
+          "actual": [
+            {
+              "id": "5a27d608-979b-4f7f-9e84-4f2a8a3dba34",
+              "title": "Audit α — task",
+              "note": "",
+              "done": false
+            }
+          ],
+          "expected": [
+            {
+              "id": "5a27d608-979b-4f7f-9e84-4f2a8a3dba34",
+              "title": "Audit α — task",
+              "note": "",
+              "done": false
+            }
+          ]
+        },
+        {
+          "label": "draft",
+          "actual": "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
+          "expected": "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
+        }
+      ]
+    },
+    {
+      "id": "repeat-edit",
+      "criteria": [
+        "F05"
+      ],
+      "steps": "Repeat save click while pending; record identity/count unchanged and snapshot saved.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "count",
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "label": "identity",
+          "actual": "2e040c6f-b204-48ab-97f1-e4420206f043",
+          "expected": "2e040c6f-b204-48ab-97f1-e4420206f043"
+        },
+        {
+          "label": "value",
+          "actual": "Repeated save",
+          "expected": "Repeated save"
+        }
+      ]
+    },
+    {
+      "id": "existing-data",
+      "criteria": [
+        "F01",
+        "F02"
+      ],
+      "steps": "Load valid existing task with Unicode and punctuation; edit/save; retain identity.",
+      "status": "pass",
+      "observations": [
+        {
+          "label": "loaded count",
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "label": "loaded note",
+          "actual": "Kept notes 😀",
+          "expected": "Kept notes 😀"
+        },
+        {
+          "label": "loaded completion",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "label": "identity",
+          "actual": "existing-audit",
+          "expected": "existing-audit"
+        },
+        {
+          "label": "updated note",
+          "actual": "Updated existing",
+          "expected": "Updated existing"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "pass": 19,
+    "fail": 0
+  }
+}

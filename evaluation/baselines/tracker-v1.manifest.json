@@ -1,0 +1,9 @@
+{
+  "archive_sha256": "4af9c811c32f22a50f85739d1035314be6d91e8a103628217d39be89d9f21440",
+  "files": {
+    "README.md": "1d5e99af67a0dafba52e791a05623dfd8ba3d7f5c73b31603871abcdf7f7c4ef",
+    "app.js": "b705dc4cf83a5fbea9613115b76b0e35c80748b8ce0e0997db774590fcbecb76",
+    "index.html": "68df86e18625deadf25a4ebb4802ca9b59f01f0ed0838dc347c05ca618d7319e",
+    "style.css": "70af5abebb650c507b67807a6a5d16d61a32dad35157ed70d4075edb192fb501"
+  }
+}

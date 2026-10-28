@@ -1,0 +1,364 @@
+{
+  "captured_at": "2026-10-28T08:25:41.193Z",
+  "app_hashes": {
+    "index.html": "68df86e18625deadf25a4ebb4802ca9b59f01f0ed0838dc347c05ca618d7319e",
+    "app.js": "a3bcbf1abc3c137b91923b3d88fb4e6e09f247f64def2b0ce1a061546176ba4e",
+    "style.css": "70af5abebb650c507b67807a6a5d16d61a32dad35157ed70d4075edb192fb501",
+    "README.md": "1d5e99af67a0dafba52e791a05623dfd8ba3d7f5c73b31603871abcdf7f7c4ef"
+  },
+  "environment": {
+    "browser": "156.0.8078.49",
+    "channel": "chrome",
+    "node": "v24.19.0",
+    "os": "darwin",
+    "base_url": "http://127.0.0.1:52019",
+    "viewport": "1000x800",
+    "isolation": "Fresh context for each scenario; only fixture localStorage key inspected."
+  },
+  "results": [
+    {
+      "id": "create-readback",
+      "criteria": [
+        "F01",
+        "F04"
+      ],
+      "steps": [
+        "Submit a trimmed Unicode/punctuation title.",
+        "Compare visible and stored values."
+      ],
+      "started_at": "2026-10-28T08:25:30.192Z",
+      "status": "pass",
+      "observation": {
+        "feedback": "Task added.",
+        "input": "",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"05440fd3-e701-49a0-8d2d-9ada0f19efbe\",\"title\":\"Plan café <draft>\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "05440fd3-e701-49a0-8d2d-9ada0f19efbe",
+            "title": "Plan café <draft>",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "save-readback",
+      "criteria": [
+        "F01",
+        "F03"
+      ],
+      "steps": [
+        "Create one record.",
+        "Edit note and Completed; save.",
+        "Read committed values independently of confirmation."
+      ],
+      "started_at": "2026-10-28T08:25:31.744Z",
+      "status": "pass",
+      "observation": {
+        "feedback": "Changes saved.",
+        "input": "",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"e0d3d9ce-1e9d-4f67-88f1-92e61e5d4129\",\"title\":\"Plan the next step\",\"note\":\"Review with the team\",\"done\":true}]",
+        "stored": [
+          {
+            "id": "e0d3d9ce-1e9d-4f67-88f1-92e61e5d4129",
+            "title": "Plan the next step",
+            "note": "Review with the team",
+            "done": true
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "refresh",
+      "criteria": [
+        "F02"
+      ],
+      "steps": [
+        "Create a uniquely titled record.",
+        "Read store; refresh same origin/profile.",
+        "Compare loaded records and identities."
+      ],
+      "started_at": "2026-10-28T08:25:32.523Z",
+      "status": "pass",
+      "observation": {
+        "feedback": "Ready.",
+        "input": "",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"a95ae517-b467-4395-ad4f-11e914006b5b\",\"title\":\"Retain across refresh\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "a95ae517-b467-4395-ad4f-11e914006b5b",
+            "title": "Retain across refresh",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "reopen",
+      "criteria": [
+        "F02"
+      ],
+      "steps": [
+        "Create a record.",
+        "Close app tab; reopen same origin in same browser context.",
+        "Verify loaded record."
+      ],
+      "started_at": "2026-10-28T08:25:33.008Z",
+      "status": "pass",
+      "observation": {
+        "feedback": "Ready.",
+        "input": "",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"98ada794-4607-40a3-970c-7d1d114cbb4f\",\"title\":\"Retain across app reopen\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "98ada794-4607-40a3-970c-7d1d114cbb4f",
+            "title": "Retain across app reopen",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "rapid-repeat",
+      "criteria": [
+        "F05"
+      ],
+      "steps": [
+        "Fill one intention.",
+        "Invoke form submission twice before pending work settles.",
+        "Count committed identities."
+      ],
+      "started_at": "2026-10-28T08:25:33.610Z",
+      "status": "pass",
+      "observation": {
+        "feedback": "Task added.",
+        "input": "",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"54010faf-c945-4316-882a-0bea84528ce8\",\"title\":\"One intention\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "54010faf-c945-4316-882a-0bea84528ce8",
+            "title": "One intention",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "intentional-repeat",
+      "criteria": [
+        "F05"
+      ],
+      "steps": [
+        "Submit a title.",
+        "After completion, submit the same title as a new intention.",
+        "Verify two distinct IDs."
+      ],
+      "started_at": "2026-10-28T08:25:34.368Z",
+      "status": "pass",
+      "observation": {
+        "feedback": "Task added.",
+        "input": "",
+        "visibleCount": 2,
+        "storedRaw": "[{\"id\":\"ce4f92da-0ad7-4ef5-9de3-a80a964c7858\",\"title\":\"Repeat intentionally\",\"note\":\"\",\"done\":false},{\"id\":\"e346d747-5990-4edc-8e55-2efaec7c85b0\",\"title\":\"Repeat intentionally\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "ce4f92da-0ad7-4ef5-9de3-a80a964c7858",
+            "title": "Repeat intentionally",
+            "note": "",
+            "done": false
+          },
+          {
+            "id": "e346d747-5990-4edc-8e55-2efaec7c85b0",
+            "title": "Repeat intentionally",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "title-boundaries",
+      "criteria": [
+        "F04"
+      ],
+      "steps": [
+        "Reject empty/whitespace and programmatic 81-character title.",
+        "Accept exactly 80 characters."
+      ],
+      "started_at": "2026-10-28T08:25:35.089Z",
+      "status": "pass",
+      "observation": {
+        "feedback": "Task added.",
+        "input": "",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"b0a4d242-205b-4a28-b24a-6a0b0bb3edf5\",\"title\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "b0a4d242-205b-4a28-b24a-6a0b0bb3edf5",
+            "title": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "note-boundaries",
+      "criteria": [
+        "F04"
+      ],
+      "steps": [
+        "Save exactly 500 note characters.",
+        "Attempt 501 through a programmatic value.",
+        "Verify rejection preserves the previous note."
+      ],
+      "started_at": "2026-10-28T08:25:36.586Z",
+      "status": "pass",
+      "observation": {
+        "feedback": "Enter a note of up to 500 characters.",
+        "input": "",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"f16af721-340b-4711-bfba-de67cfd861d7\",\"title\":\"Plan the next step\",\"note\":\"nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn\",\"done\":true}]",
+        "stored": [
+          {
+            "id": "f16af721-340b-4711-bfba-de67cfd861d7",
+            "title": "Plan the next step",
+            "note": "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
+            "done": true
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "create-storage-failure",
+      "criteria": [
+        "F03"
+      ],
+      "steps": [
+        "Create an existing task.",
+        "Reject storage writes, then add another task.",
+        "Verify no false success, no previous-data loss, and retained input."
+      ],
+      "started_at": "2026-10-28T08:25:37.722Z",
+      "status": "pass",
+      "observation": {
+        "feedback": "Could not save. Your existing tasks are unchanged. Try again.",
+        "input": "Keep this draft",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"785cb135-5cf8-470b-8755-25d6719c8f7d\",\"title\":\"Keep existing\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "785cb135-5cf8-470b-8755-25d6719c8f7d",
+            "title": "Keep existing",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "save-storage-failure",
+      "criteria": [
+        "F03"
+      ],
+      "steps": [
+        "Create a task.",
+        "Reject storage writes; edit and save.",
+        "Compare feedback, old committed data and retained draft."
+      ],
+      "started_at": "2026-10-28T08:25:38.464Z",
+      "status": "pass",
+      "observation": {
+        "feedback": "Could not save. Your existing tasks are unchanged. Try again.",
+        "input": "",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"0bb03ace-5207-4bcd-95d3-958d8b013a0a\",\"title\":\"Plan the next step\",\"note\":\"\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "0bb03ace-5207-4bcd-95d3-958d8b013a0a",
+            "title": "Plan the next step",
+            "note": "",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "feedback-timing",
+      "criteria": [
+        "F03"
+      ],
+      "steps": [
+        "Start save.",
+        "If success is visible, independently confirm the new value already committed.",
+        "Wait for completion and compare again."
+      ],
+      "started_at": "2026-10-28T08:25:39.407Z",
+      "status": "pass",
+      "observation": {
+        "feedback": "Changes saved.",
+        "input": "",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"99320b14-4e52-4264-8286-2f160cbf0e06\",\"title\":\"Plan the next step\",\"note\":\"Confirmed only after commit\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "99320b14-4e52-4264-8286-2f160cbf0e06",
+            "title": "Plan the next step",
+            "note": "Confirmed only after commit",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    },
+    {
+      "id": "save-repeat",
+      "criteria": [
+        "F01",
+        "F05"
+      ],
+      "steps": [
+        "Create and edit one record.",
+        "Activate save twice rapidly.",
+        "Verify one record with correct fields."
+      ],
+      "started_at": "2026-10-28T08:25:40.290Z",
+      "status": "pass",
+      "observation": {
+        "feedback": "Changes saved.",
+        "input": "",
+        "visibleCount": 1,
+        "storedRaw": "[{\"id\":\"132bdb92-fff3-4da5-b3e9-4680d213b9ea\",\"title\":\"Plan the next step\",\"note\":\"One final value\",\"done\":false}]",
+        "stored": [
+          {
+            "id": "132bdb92-fff3-4da5-b3e9-4680d213b9ea",
+            "title": "Plan the next step",
+            "note": "One final value",
+            "done": false
+          }
+        ]
+      },
+      "runtime_errors": []
+    }
+  ],
+  "limitation": "Executable workflow checks on a seeded local fixture, not a controlled skill effectiveness study. F06 and other groups unassessed."
+}

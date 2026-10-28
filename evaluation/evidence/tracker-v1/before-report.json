@@ -1,0 +1,316 @@
+{
+  "criterion_groups": [
+    "F"
+  ],
+  "report_kind": "audit",
+  "catalog_version": "1.0.0",
+  "audit_level": "Standard",
+  "change_permission": "fix_scoped",
+  "profile": {
+    "name": "Single-person local browser tracker",
+    "features": {
+      "ui": true,
+      "pointer_ui": true,
+      "operations": true,
+      "inputs": true,
+      "persistent_data": true,
+      "shared_writes": false,
+      "user_changes": true,
+      "protected_resources": false,
+      "untrusted_execution": false,
+      "authentication": false,
+      "csrf_surface": false,
+      "cors_surface": false,
+      "uploads": false,
+      "public_endpoints": false,
+      "abuse_surface": false,
+      "network": false,
+      "resource_lifecycle": false,
+      "load_requirements": false,
+      "realtime": false,
+      "offline_sync": false,
+      "background_sync": false,
+      "deployed": false,
+      "important_data": false,
+      "operated_service": false
+    },
+    "rationale": {
+      "ui": "E-context: fixture README, app code and tested browser contract; feature present.",
+      "pointer_ui": "E-context: fixture README, app code and tested browser contract; feature present.",
+      "operations": "E-context: fixture README, app code and tested browser contract; feature present.",
+      "inputs": "E-context: fixture README, app code and tested browser contract; feature present.",
+      "persistent_data": "E-context: fixture README, app code and tested browser contract; feature present.",
+      "shared_writes": "E-context: fixture README, app code and tested browser contract; not part of this local, non-sensitive, single-editor contract.",
+      "user_changes": "E-context: fixture README, app code and tested browser contract; feature present.",
+      "protected_resources": "E-context: fixture README, app code and tested browser contract; not part of this local, non-sensitive, single-editor contract.",
+      "untrusted_execution": "E-context: fixture README, app code and tested browser contract; not part of this local, non-sensitive, single-editor contract.",
+      "authentication": "E-context: fixture README, app code and tested browser contract; not part of this local, non-sensitive, single-editor contract.",
+      "csrf_surface": "E-context: fixture README, app code and tested browser contract; not part of this local, non-sensitive, single-editor contract.",
+      "cors_surface": "E-context: fixture README, app code and tested browser contract; not part of this local, non-sensitive, single-editor contract.",
+      "uploads": "E-context: fixture README, app code and tested browser contract; not part of this local, non-sensitive, single-editor contract.",
+      "public_endpoints": "E-context: fixture README, app code and tested browser contract; not part of this local, non-sensitive, single-editor contract.",
+      "abuse_surface": "E-context: fixture README, app code and tested browser contract; not part of this local, non-sensitive, single-editor contract.",
+      "network": "E-context: fixture README, app code and tested browser contract; not part of this local, non-sensitive, single-editor contract.",
+      "resource_lifecycle": "E-context: fixture README, app code and tested browser contract; not part of this local, non-sensitive, single-editor contract.",
+      "load_requirements": "E-context: fixture README, app code and tested browser contract; not part of this local, non-sensitive, single-editor contract.",
+      "realtime": "E-context: fixture README, app code and tested browser contract; not part of this local, non-sensitive, single-editor contract.",
+      "offline_sync": "E-context: fixture README, app code and tested browser contract; not part of this local, non-sensitive, single-editor contract.",
+      "background_sync": "E-context: fixture README, app code and tested browser contract; not part of this local, non-sensitive, single-editor contract.",
+      "deployed": "E-context: fixture README, app code and tested browser contract; not part of this local, non-sensitive, single-editor contract.",
+      "important_data": "E-context: fixture README, app code and tested browser contract; not part of this local, non-sensitive, single-editor contract.",
+      "operated_service": "E-context: fixture README, app code and tested browser contract; not part of this local, non-sensitive, single-editor contract."
+    }
+  },
+  "scope_and_limitations": "Evaluator-led real Chrome workflow checks of a deliberately seeded fixture. Not an agent-effectiveness comparison. See E-context for scope and limitations. Some assertions following a first failure did not run; no pass claimed for those subcases.",
+  "evidence": [
+    {
+      "id": "E-context",
+      "location": "evaluation/evidence/tracker-v1/context.md",
+      "description": "Agreed tasks, environment, authorization and scope limitations.",
+      "environment": "Local disposable tracker fixture",
+      "captured_at": "2026-10-28T08:20:49.889Z",
+      "kind": "requirement",
+      "synthetic": false
+    },
+    {
+      "id": "E-create-readback",
+      "location": "evaluation/evidence/tracker-v1/before/results.json",
+      "description": "Actual browser result create-readback; see its steps, observed storage/UI and adjacent screenshot/trace.",
+      "environment": "{\"browser\": \"153.0.8010.47\", \"channel\": \"chrome\", \"node\": \"v24.19.0\", \"os\": \"darwin\", \"base_url\": \"http://127.0.0.1:51826\", \"viewport\": \"1000x800\", \"isolation\": \"Fresh context for each scenario; only fixture localStorage key inspected.\"}",
+      "captured_at": "2026-10-28T08:20:49.889Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-save-readback",
+      "location": "evaluation/evidence/tracker-v1/before/results.json",
+      "description": "Actual browser result save-readback; see its steps, observed storage/UI and adjacent screenshot/trace.",
+      "environment": "{\"browser\": \"153.0.8010.47\", \"channel\": \"chrome\", \"node\": \"v24.19.0\", \"os\": \"darwin\", \"base_url\": \"http://127.0.0.1:51826\", \"viewport\": \"1000x800\", \"isolation\": \"Fresh context for each scenario; only fixture localStorage key inspected.\"}",
+      "captured_at": "2026-10-28T08:20:49.889Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-refresh",
+      "location": "evaluation/evidence/tracker-v1/before/results.json",
+      "description": "Actual browser result refresh; see its steps, observed storage/UI and adjacent screenshot/trace.",
+      "environment": "{\"browser\": \"153.0.8010.47\", \"channel\": \"chrome\", \"node\": \"v24.19.0\", \"os\": \"darwin\", \"base_url\": \"http://127.0.0.1:51826\", \"viewport\": \"1000x800\", \"isolation\": \"Fresh context for each scenario; only fixture localStorage key inspected.\"}",
+      "captured_at": "2026-10-28T08:20:49.889Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-reopen",
+      "location": "evaluation/evidence/tracker-v1/before/results.json",
+      "description": "Actual browser result reopen; see its steps, observed storage/UI and adjacent screenshot/trace.",
+      "environment": "{\"browser\": \"153.0.8010.47\", \"channel\": \"chrome\", \"node\": \"v24.19.0\", \"os\": \"darwin\", \"base_url\": \"http://127.0.0.1:51826\", \"viewport\": \"1000x800\", \"isolation\": \"Fresh context for each scenario; only fixture localStorage key inspected.\"}",
+      "captured_at": "2026-10-28T08:20:49.889Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-rapid-repeat",
+      "location": "evaluation/evidence/tracker-v1/before/results.json",
+      "description": "Actual browser result rapid-repeat; see its steps, observed storage/UI and adjacent screenshot/trace.",
+      "environment": "{\"browser\": \"153.0.8010.47\", \"channel\": \"chrome\", \"node\": \"v24.19.0\", \"os\": \"darwin\", \"base_url\": \"http://127.0.0.1:51826\", \"viewport\": \"1000x800\", \"isolation\": \"Fresh context for each scenario; only fixture localStorage key inspected.\"}",
+      "captured_at": "2026-10-28T08:20:49.889Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-intentional-repeat",
+      "location": "evaluation/evidence/tracker-v1/before/results.json",
+      "description": "Actual browser result intentional-repeat; see its steps, observed storage/UI and adjacent screenshot/trace.",
+      "environment": "{\"browser\": \"153.0.8010.47\", \"channel\": \"chrome\", \"node\": \"v24.19.0\", \"os\": \"darwin\", \"base_url\": \"http://127.0.0.1:51826\", \"viewport\": \"1000x800\", \"isolation\": \"Fresh context for each scenario; only fixture localStorage key inspected.\"}",
+      "captured_at": "2026-10-28T08:20:49.889Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-title-boundaries",
+      "location": "evaluation/evidence/tracker-v1/before/results.json",
+      "description": "Actual browser result title-boundaries; see its steps, observed storage/UI and adjacent screenshot/trace.",
+      "environment": "{\"browser\": \"153.0.8010.47\", \"channel\": \"chrome\", \"node\": \"v24.19.0\", \"os\": \"darwin\", \"base_url\": \"http://127.0.0.1:51826\", \"viewport\": \"1000x800\", \"isolation\": \"Fresh context for each scenario; only fixture localStorage key inspected.\"}",
+      "captured_at": "2026-10-28T08:20:49.889Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-note-boundaries",
+      "location": "evaluation/evidence/tracker-v1/before/results.json",
+      "description": "Actual browser result note-boundaries; see its steps, observed storage/UI and adjacent screenshot/trace.",
+      "environment": "{\"browser\": \"153.0.8010.47\", \"channel\": \"chrome\", \"node\": \"v24.19.0\", \"os\": \"darwin\", \"base_url\": \"http://127.0.0.1:51826\", \"viewport\": \"1000x800\", \"isolation\": \"Fresh context for each scenario; only fixture localStorage key inspected.\"}",
+      "captured_at": "2026-10-28T08:20:49.889Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-create-storage-failure",
+      "location": "evaluation/evidence/tracker-v1/before/results.json",
+      "description": "Actual browser result create-storage-failure; see its steps, observed storage/UI and adjacent screenshot/trace.",
+      "environment": "{\"browser\": \"153.0.8010.47\", \"channel\": \"chrome\", \"node\": \"v24.19.0\", \"os\": \"darwin\", \"base_url\": \"http://127.0.0.1:51826\", \"viewport\": \"1000x800\", \"isolation\": \"Fresh context for each scenario; only fixture localStorage key inspected.\"}",
+      "captured_at": "2026-10-28T08:20:49.889Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-save-storage-failure",
+      "location": "evaluation/evidence/tracker-v1/before/results.json",
+      "description": "Actual browser result save-storage-failure; see its steps, observed storage/UI and adjacent screenshot/trace.",
+      "environment": "{\"browser\": \"153.0.8010.47\", \"channel\": \"chrome\", \"node\": \"v24.19.0\", \"os\": \"darwin\", \"base_url\": \"http://127.0.0.1:51826\", \"viewport\": \"1000x800\", \"isolation\": \"Fresh context for each scenario; only fixture localStorage key inspected.\"}",
+      "captured_at": "2026-10-28T08:20:49.889Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-feedback-timing",
+      "location": "evaluation/evidence/tracker-v1/before/results.json",
+      "description": "Actual browser result feedback-timing; see its steps, observed storage/UI and adjacent screenshot/trace.",
+      "environment": "{\"browser\": \"153.0.8010.47\", \"channel\": \"chrome\", \"node\": \"v24.19.0\", \"os\": \"darwin\", \"base_url\": \"http://127.0.0.1:51826\", \"viewport\": \"1000x800\", \"isolation\": \"Fresh context for each scenario; only fixture localStorage key inspected.\"}",
+      "captured_at": "2026-10-28T08:20:49.889Z",
+      "kind": "observation",
+      "synthetic": false
+    },
+    {
+      "id": "E-save-repeat",
+      "location": "evaluation/evidence/tracker-v1/before/results.json",
+      "description": "Actual browser result save-repeat; see its steps, observed storage/UI and adjacent screenshot/trace.",
+      "environment": "{\"browser\": \"153.0.8010.47\", \"channel\": \"chrome\", \"node\": \"v24.19.0\", \"os\": \"darwin\", \"base_url\": \"http://127.0.0.1:51826\", \"viewport\": \"1000x800\", \"isolation\": \"Fresh context for each scenario; only fixture localStorage key inspected.\"}",
+      "captured_at": "2026-10-28T08:20:49.889Z",
+      "kind": "observation",
+      "synthetic": false
+    }
+  ],
+  "findings": [
+    {
+      "id": "finding-F01",
+      "criterion_id": "F01",
+      "status": "fail",
+      "severity": "blocker",
+      "decision": "fix",
+      "reason": "Executed browser assertion failures: save-readback, save-repeat. Later assertions after a failure remain unexecuted.",
+      "requirement_or_goal": "Create and edit actual task values, not just interface fields or a completion message.",
+      "affected_users_and_conditions": "Single local user with disposable tasks at the same browser origin/profile.",
+      "evidence_ids": [
+        "E-context",
+        "E-create-readback",
+        "E-save-readback",
+        "E-save-repeat"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": true,
+        "measurable_benefit": true,
+        "authorized": true,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Correct existing handlers/loading only; preserve browser-local architecture and valid data. See recorded patch.",
+      "verification_plan": "Run the same browser scenarios against the exact recorded app hashes; compare committed values, counts and failure behavior.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-F02",
+      "criterion_id": "F02",
+      "status": "fail",
+      "severity": "blocker",
+      "decision": "fix",
+      "reason": "Executed browser assertion failures: refresh, reopen. Later assertions after a failure remain unexecuted.",
+      "requirement_or_goal": "Saved records load after refresh and app-tab reopen at the same origin/profile.",
+      "affected_users_and_conditions": "Single local user with disposable tasks at the same browser origin/profile.",
+      "evidence_ids": [
+        "E-context",
+        "E-refresh",
+        "E-reopen"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": true,
+        "measurable_benefit": true,
+        "authorized": true,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Correct existing handlers/loading only; preserve browser-local architecture and valid data. See recorded patch.",
+      "verification_plan": "Run the same browser scenarios against the exact recorded app hashes; compare committed values, counts and failure behavior.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-F03",
+      "criterion_id": "F03",
+      "status": "fail",
+      "severity": "important",
+      "decision": "fix",
+      "reason": "Executed browser assertion failures: save-readback, save-storage-failure, feedback-timing. Later assertions after a failure remain unexecuted.",
+      "requirement_or_goal": "Completion feedback follows actual committed results; rejected writes preserve draft and previous data.",
+      "affected_users_and_conditions": "Single local user with disposable tasks at the same browser origin/profile.",
+      "evidence_ids": [
+        "E-context",
+        "E-save-readback",
+        "E-create-storage-failure",
+        "E-save-storage-failure",
+        "E-feedback-timing"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": true,
+        "measurable_benefit": true,
+        "authorized": true,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Correct existing handlers/loading only; preserve browser-local architecture and valid data. See recorded patch.",
+      "verification_plan": "Run the same browser scenarios against the exact recorded app hashes; compare committed values, counts and failure behavior.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-F04",
+      "criterion_id": "F04",
+      "status": "fail",
+      "severity": "important",
+      "decision": "fix",
+      "reason": "Executed browser assertion failures: note-boundaries. Later assertions after a failure remain unexecuted.",
+      "requirement_or_goal": "Trimmed titles allow 1-80 characters; notes allow up to 500; valid Unicode and punctuation are accepted.",
+      "affected_users_and_conditions": "Single local user with disposable tasks at the same browser origin/profile.",
+      "evidence_ids": [
+        "E-context",
+        "E-create-readback",
+        "E-title-boundaries",
+        "E-note-boundaries"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": true,
+        "measurable_benefit": true,
+        "authorized": true,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Correct existing handlers/loading only; preserve browser-local architecture and valid data. See recorded patch.",
+      "verification_plan": "Run the same browser scenarios against the exact recorded app hashes; compare committed values, counts and failure behavior.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-F05",
+      "criterion_id": "F05",
+      "status": "fail",
+      "severity": "important",
+      "decision": "fix",
+      "reason": "Executed browser assertion failures: rapid-repeat, save-repeat. Later assertions after a failure remain unexecuted.",
+      "requirement_or_goal": "One pending intention creates one identity; later intentional same-title actions remain possible.",
+      "affected_users_and_conditions": "Single local user with disposable tasks at the same browser origin/profile.",
+      "evidence_ids": [
+        "E-context",
+        "E-rapid-repeat",
+        "E-intentional-repeat",
+        "E-save-repeat"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": true,
+        "measurable_benefit": true,
+        "authorized": true,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Correct existing handlers/loading only; preserve browser-local architecture and valid data. See recorded patch.",
+      "verification_plan": "Run the same browser scenarios against the exact recorded app hashes; compare committed values, counts and failure behavior.",
+      "observed_outside_level": false
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+Saved the [before report](/tmp/toy-functionality-agent-run/audits/standard-20261028/before/report.md), [after report](/tmp/toy-functionality-agent-run/audits/standard-20261028/after/report.md), and [regression evidence](/tmp/toy-functionality-agent-run/audits/standard-20261028/after/neighboring.json).
+
+Corrected saving edits, startup loading, oversized-note validation, repeated submissions, and draft preservation.
+
+Executed Node harness: **27 checks passed**; syntax check passed. Browser refresh/reopen and full browser behavior remain unverified because the environment blocked execution. Audit-engine validation remains pending because dependency installation failed.
