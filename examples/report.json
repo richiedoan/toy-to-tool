@@ -1,0 +1,841 @@
+{
+  "catalog_version": "1.0.0",
+  "audit_level": "Advanced",
+  "change_permission": "fix_scoped",
+  "profile": {
+    "name": "Synthetic single-editor record tool; replace with verified app facts",
+    "features": {
+      "ui": true,
+      "pointer_ui": true,
+      "operations": true,
+      "inputs": true,
+      "persistent_data": true,
+      "shared_writes": false,
+      "user_changes": true,
+      "protected_resources": null,
+      "untrusted_execution": null,
+      "authentication": null,
+      "csrf_surface": null,
+      "cors_surface": null,
+      "uploads": null,
+      "public_endpoints": null,
+      "abuse_surface": null,
+      "network": true,
+      "resource_lifecycle": true,
+      "load_requirements": false,
+      "realtime": false,
+      "offline_sync": false,
+      "background_sync": false,
+      "deployed": true,
+      "important_data": true,
+      "operated_service": true
+    },
+    "rationale": {
+      "ui": "Present in the hypothetical browser-based record editor.",
+      "pointer_ui": "Present in the hypothetical browser-based record editor.",
+      "operations": "Present in the hypothetical browser-based record editor.",
+      "inputs": "Present in the hypothetical browser-based record editor.",
+      "persistent_data": "Present in the hypothetical browser-based record editor.",
+      "shared_writes": "Absent from the hypothetical single-editor, non-synchronizing scope; no load contract requested.",
+      "user_changes": "Present in the hypothetical browser-based record editor.",
+      "protected_resources": "Not established; inspect the architecture before excluding.",
+      "untrusted_execution": "Not established; inspect the architecture before excluding.",
+      "authentication": "Not established; inspect the architecture before excluding.",
+      "csrf_surface": "Not established; inspect the architecture before excluding.",
+      "cors_surface": "Not established; inspect the architecture before excluding.",
+      "uploads": "Not established; inspect the architecture before excluding.",
+      "public_endpoints": "Not established; inspect the architecture before excluding.",
+      "abuse_surface": "Not established; inspect the architecture before excluding.",
+      "network": "Present in the hypothetical browser-based record editor.",
+      "resource_lifecycle": "Present in the hypothetical browser-based record editor.",
+      "load_requirements": "Absent from the hypothetical single-editor, non-synchronizing scope; no load contract requested.",
+      "realtime": "Absent from the hypothetical single-editor, non-synchronizing scope; no load contract requested.",
+      "offline_sync": "Absent from the hypothetical single-editor, non-synchronizing scope; no load contract requested.",
+      "background_sync": "Absent from the hypothetical single-editor, non-synchronizing scope; no load contract requested.",
+      "deployed": "Present in the hypothetical browser-based record editor.",
+      "important_data": "Present in the hypothetical browser-based record editor.",
+      "operated_service": "Present in the hypothetical browser-based record editor."
+    }
+  },
+  "scope_and_limitations": "Synthetic demonstration only. No real application was audited. All observations below are fictional and cannot be used as assurance.",
+  "evidence": [
+    {
+      "id": "demo-trace",
+      "location": "examples/evidence.md",
+      "description": "Fictional test records for demonstrating decision boundaries; not runtime observations.",
+      "environment": "Synthetic fixture; no deployed system",
+      "captured_at": "2026-10-28T00:00:00Z",
+      "kind": "artifact",
+      "synthetic": true
+    }
+  ],
+  "findings": [
+    {
+      "id": "finding-F01",
+      "criterion_id": "F01",
+      "status": "fail",
+      "severity": "blocker",
+      "decision": "fix",
+      "reason": "Fictional create action shows success but makes no required write.",
+      "requirement_or_goal": "Create must store the submitted record.",
+      "affected_users_and_conditions": "All test users creating a record.",
+      "evidence_ids": [
+        "demo-trace"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": true,
+        "measurable_benefit": true,
+        "authorized": true,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Scoped correction to existing save handler; low cost; verify duplicate and error behavior.",
+      "verification_plan": "Create marker DEMO-1; independently read the committed record and compare fields.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-F02",
+      "criterion_id": "F02",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "Fictional local persistence survives the required refresh/reopen; cloud sync is only a preference.",
+      "requirement_or_goal": "Local-only data must survive refresh/reopen; device sync is excluded.",
+      "affected_users_and_conditions": "Single-device users reopening the local editor.",
+      "evidence_ids": [
+        "demo-trace"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Retain the existing local storage design; no demonstrated benefit from a database migration.",
+      "verification_plan": "Recheck marker DEMO-2 after refresh and a complete app reopen.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-F03",
+      "criterion_id": "F03",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-F04",
+      "criterion_id": "F04",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-F05",
+      "criterion_id": "F05",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-F06",
+      "criterion_id": "F06",
+      "status": "not_applicable",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All relevant features are absent: shared_writes: Absent from the hypothetical single-editor, non-synchronizing scope; no load contract requested.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-U01",
+      "criterion_id": "U01",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-U02",
+      "criterion_id": "U02",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-U03",
+      "criterion_id": "U03",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-U04",
+      "criterion_id": "U04",
+      "status": "pass",
+      "severity": null,
+      "decision": "propose",
+      "reason": "Fictional measured correction flow meets its target; optional undo may reduce correction time but needs a product decision.",
+      "requirement_or_goal": "Correction must complete within the agreed task budget, already satisfied.",
+      "affected_users_and_conditions": "Users correcting a reversible edit.",
+      "evidence_ids": [
+        "demo-trace"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": true,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "New undo interaction changes product scope; compare cost and error consequences before implementation.",
+      "verification_plan": "Compare correction time and error rate with target users using the same task and prior goal.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-U05",
+      "criterion_id": "U05",
+      "status": "pass",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "Fictional button patterns follow the established design; a new color is taste without benefit.",
+      "requirement_or_goal": "Equivalent save controls follow the established pattern.",
+      "affected_users_and_conditions": "Users moving between the two example screens.",
+      "evidence_ids": [
+        "demo-trace"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "measurable_benefit": false,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Preserve the current design; a redesign has cost without demonstrated benefit.",
+      "verification_plan": "Compare save controls and repeat the same interaction on both screens.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-U06",
+      "criterion_id": "U06",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-A01",
+      "criterion_id": "A01",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-A02",
+      "criterion_id": "A02",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-A03",
+      "criterion_id": "A03",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-A04",
+      "criterion_id": "A04",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-A05",
+      "criterion_id": "A05",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-A06",
+      "criterion_id": "A06",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-S01",
+      "criterion_id": "S01",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-S02",
+      "criterion_id": "S02",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Feature applicability needs investigation. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-S03",
+      "criterion_id": "S03",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Feature applicability needs investigation. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-S04",
+      "criterion_id": "S04",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Feature applicability needs investigation. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-S05",
+      "criterion_id": "S05",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Feature applicability needs investigation. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-S06",
+      "criterion_id": "S06",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-P01",
+      "criterion_id": "P01",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-P02",
+      "criterion_id": "P02",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-P03",
+      "criterion_id": "P03",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-P04",
+      "criterion_id": "P04",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-P05",
+      "criterion_id": "P05",
+      "status": "not_applicable",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All relevant features are absent: load_requirements: Absent from the hypothetical single-editor, non-synchronizing scope; no load contract requested.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-P06",
+      "criterion_id": "P06",
+      "status": "not_applicable",
+      "severity": null,
+      "decision": "preserve",
+      "reason": "All relevant features are absent: realtime: Absent from the hypothetical single-editor, non-synchronizing scope; no load contract requested.; offline_sync: Absent from the hypothetical single-editor, non-synchronizing scope; no load contract requested.; background_sync: Absent from the hypothetical single-editor, non-synchronizing scope; no load contract requested.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-O01",
+      "criterion_id": "O01",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-O02",
+      "criterion_id": "O02",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-O03",
+      "criterion_id": "O03",
+      "status": "fail",
+      "severity": "important",
+      "decision": "propose",
+      "reason": "Fictional owner-approved daily backup requirement is unmet; adding a hosted backup service needs owner scope/cost approval.",
+      "requirement_or_goal": "Important records require an owner-controlled daily backup.",
+      "affected_users_and_conditions": "Owners losing their device between copies.",
+      "evidence_ids": [
+        "demo-trace"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": true,
+        "violates_requirement": true,
+        "measurable_benefit": true,
+        "authorized": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "Requires storage choice, retention cost and access review; outside scoped code corrections.",
+      "verification_plan": "Create a test backup, inspect its manifest and test isolated restoration under O05.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-O04",
+      "criterion_id": "O04",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-O05",
+      "criterion_id": "O05",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    },
+    {
+      "id": "finding-O06",
+      "criterion_id": "O06",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false
+    }
+  ],
+  "report_kind": "synthetic"
+}

@@ -1,0 +1,567 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "catalog_version": {
+      "const": "1.0.0"
+    },
+    "audit_level": {
+      "enum": [
+        "Essential",
+        "Standard",
+        "Advanced"
+      ]
+    },
+    "change_permission": {
+      "enum": [
+        "read_only",
+        "propose_only",
+        "fix_scoped"
+      ]
+    },
+    "profile": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "features": {
+          "type": "object",
+          "properties": {
+            "ui": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "pointer_ui": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "operations": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "inputs": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "persistent_data": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "shared_writes": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "user_changes": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "protected_resources": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "untrusted_execution": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "authentication": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "csrf_surface": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "cors_surface": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "uploads": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "public_endpoints": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "abuse_surface": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "network": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "resource_lifecycle": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "load_requirements": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "realtime": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "offline_sync": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "background_sync": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "deployed": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "important_data": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "operated_service": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "ui",
+            "pointer_ui",
+            "operations",
+            "inputs",
+            "persistent_data",
+            "shared_writes",
+            "user_changes",
+            "protected_resources",
+            "untrusted_execution",
+            "authentication",
+            "csrf_surface",
+            "cors_surface",
+            "uploads",
+            "public_endpoints",
+            "abuse_surface",
+            "network",
+            "resource_lifecycle",
+            "load_requirements",
+            "realtime",
+            "offline_sync",
+            "background_sync",
+            "deployed",
+            "important_data",
+            "operated_service"
+          ],
+          "additionalProperties": false
+        },
+        "rationale": {
+          "type": "object",
+          "properties": {
+            "ui": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "pointer_ui": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "operations": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "inputs": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "persistent_data": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "shared_writes": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "user_changes": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "protected_resources": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "untrusted_execution": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "authentication": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "csrf_surface": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "cors_surface": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "uploads": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "public_endpoints": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "abuse_surface": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "network": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "resource_lifecycle": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "load_requirements": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "realtime": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "offline_sync": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "background_sync": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "deployed": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "important_data": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "operated_service": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            }
+          },
+          "required": [
+            "ui",
+            "pointer_ui",
+            "operations",
+            "inputs",
+            "persistent_data",
+            "shared_writes",
+            "user_changes",
+            "protected_resources",
+            "untrusted_execution",
+            "authentication",
+            "csrf_surface",
+            "cors_surface",
+            "uploads",
+            "public_endpoints",
+            "abuse_surface",
+            "network",
+            "resource_lifecycle",
+            "load_requirements",
+            "realtime",
+            "offline_sync",
+            "background_sync",
+            "deployed",
+            "important_data",
+            "operated_service"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "name",
+        "features",
+        "rationale"
+      ],
+      "additionalProperties": false
+    },
+    "scope_and_limitations": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "location": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "environment": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "captured_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "kind": {
+            "enum": [
+              "observation",
+              "measurement",
+              "artifact",
+              "requirement"
+            ]
+          },
+          "synthetic": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "location",
+          "description",
+          "environment",
+          "captured_at",
+          "kind",
+          "synthetic"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "criterion_id": {
+            "type": "string",
+            "pattern": "^[FUASPO]0[1-6]$"
+          },
+          "status": {
+            "enum": [
+              "pass",
+              "fail",
+              "unknown",
+              "not_applicable"
+            ]
+          },
+          "severity": {
+            "enum": [
+              "blocker",
+              "important",
+              "improvement",
+              null
+            ]
+          },
+          "decision": {
+            "enum": [
+              "fix",
+              "propose",
+              "preserve",
+              "investigate"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "requirement_or_goal": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "affected_users_and_conditions": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "minItems": 0
+          },
+          "decision_inputs": {
+            "type": "object",
+            "properties": {
+              "evidence_sufficient": {
+                "type": "boolean"
+              },
+              "violates_requirement": {
+                "type": "boolean"
+              },
+              "measurable_benefit": {
+                "type": "boolean"
+              },
+              "authorized": {
+                "type": "boolean"
+              },
+              "proportional": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "evidence_sufficient",
+              "violates_requirement",
+              "measurable_benefit",
+              "authorized",
+              "proportional"
+            ],
+            "additionalProperties": false
+          },
+          "change_scope_cost_risk": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "verification_plan": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "observed_outside_level": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "criterion_id",
+          "status",
+          "severity",
+          "decision",
+          "reason",
+          "requirement_or_goal",
+          "affected_users_and_conditions",
+          "evidence_ids",
+          "decision_inputs",
+          "change_scope_cost_risk",
+          "verification_plan",
+          "observed_outside_level"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "report_kind": {
+      "enum": [
+        "template",
+        "synthetic",
+        "audit"
+      ]
+    }
+  },
+  "required": [
+    "catalog_version",
+    "audit_level",
+    "change_permission",
+    "profile",
+    "scope_and_limitations",
+    "evidence",
+    "findings",
+    "report_kind"
+  ],
+  "additionalProperties": false
+}
