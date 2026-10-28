@@ -50,7 +50,7 @@ def build(phase):
                'features': {key: key in present for key in keys},
                'rationale': {key: 'E-context: fixture README, app code and tested browser contract; ' +
                              ('feature present.' if key in present else 'not part of this local, non-sensitive, single-editor contract.') for key in keys}}
-    report = template(catalog, profile, 'Standard', 'fix_scoped', groups=['F'])
+    report = template(catalog, profile, 'Standard', 'fix_scoped', groups=['F'], report_format='1.0')
     report.update(report_kind='audit', scope_and_limitations=(
         'Evaluator-led real Chrome workflow checks of a deliberately seeded fixture. '
         'Not an agent-effectiveness comparison. See E-context for scope and limitations. '

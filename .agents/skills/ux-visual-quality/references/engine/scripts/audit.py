@@ -1,9 +1,14 @@
-"""Validate the v1 contract and emit deterministic criterion selections/report templates."""
+"""Validate audit contracts, select criteria, and render/review evidence-linked reports."""
 import argparse
+from collections import Counter
+from datetime import datetime, timezone
+import hashlib
+import html
 import json
+import os
 from pathlib import Path
 import sys
-from urllib.parse import urlparse
+from urllib.parse import quote, urlparse
 
 from jsonschema import Draft202012Validator, FormatChecker
 
@@ -120,11 +125,189 @@ def decide(evidence_sufficient, violates_requirement, authorized, measurable_ben
     return 'preserve'
 
 
+def execution_steps(report):
+    return {step['id']: step for task in report.get('tasks', []) for step in task['steps']}
+
+
+def validate_execution(report, selections, evidence_ids):
+    """Check declared execution/linkage, not the truth or sufficiency of artifacts."""
+    unique(report.get('tasks', []), 'task')
+    flat = [step for task in report.get('tasks', []) for step in task['steps']]
+    unique(flat, 'step')
+    steps = execution_steps(report)
+    evidence = {item['id']: item for item in report['evidence']}
+    seen = set()
+    for task in report.get('tasks', []):
+        if not set(task['evidence_ids']) <= evidence_ids:
+            raise ValueError(f'Dangling task evidence: {task["id"]}')
+        for step in task['steps']:
+            sid = step['id']
+            # Dependencies precede their consumers: this also rules out cycles.
+            if not set(step['depends_on']) <= seen:
+                raise ValueError(f'Missing or unordered step dependency: {sid}')
+            if not set(step['criterion_ids']) <= selections.keys():
+                raise ValueError(f'Step outside declared criterion groups: {sid}')
+            if not set(step['evidence_ids']) <= evidence_ids:
+                raise ValueError(f'Dangling step evidence: {sid}')
+            if step['execution'] != 'completed' and step['status'] != 'unknown':
+                raise ValueError(f'Uncompleted step cannot pass or fail: {sid}')
+            if step['execution'] == 'not_run' and step['evidence_ids']:
+                raise ValueError(f'Unexecuted step cannot claim result evidence: {sid}')
+            if step['execution'] != 'not_run' and not step['evidence_ids']:
+                raise ValueError(f'Executed step needs attempt/result evidence: {sid}')
+            if step['execution'] == 'completed':
+                if any(steps[dep]['status'] != 'pass' or steps[dep]['execution'] != 'completed'
+                       for dep in step['depends_on']):
+                    raise ValueError(f'Completed step has unverified prerequisite: {sid}')
+                if step['status'] in ('pass', 'fail'):
+                    modes = {mode for eid in step['evidence_ids'] for mode in evidence[eid].get('modes', [])}
+                    if not set(step['required_modes']) <= modes:
+                        raise ValueError(f'Step evidence modes do not meet declared requirement: {sid}')
+            seen.add(sid)
+    for finding in report['findings']:
+        linked = finding.get('step_ids', [])
+        if not set(linked) <= steps.keys():
+            raise ValueError(f'Dangling finding step: {finding["id"]}')
+        if any(finding['criterion_id'] not in steps[sid]['criterion_ids'] for sid in linked):
+            raise ValueError(f'Finding/step criterion mismatch: {finding["id"]}')
+        if report.get('report_format') != '1.1':
+            continue
+        if finding['status'] == 'pass':
+            required = {sid for sid, step in steps.items() if finding['criterion_id'] in step['criterion_ids']}
+            if not required or not required <= set(linked) or any(
+                steps[sid]['execution'] != 'completed' or steps[sid]['status'] != 'pass' for sid in linked
+            ):
+                raise ValueError(f'Pass requires every declared criterion step completed and passed: {finding["id"]}')
+        if finding['status'] == 'fail' and not any(
+            steps[sid]['execution'] == 'completed' and steps[sid]['status'] == 'fail' for sid in linked
+        ):
+            raise ValueError(f'Failure requires a completed failing step: {finding["id"]}')
+        if finding['status'] in ('pass', 'fail') and not {
+            eid for sid in linked for eid in steps[sid]['evidence_ids']
+        } <= set(finding['evidence_ids']):
+            raise ValueError(f'Finding must link its step evidence: {finding["id"]}')
+    combinations = set()
+    for case in report.get('coverage_cases', []):
+        key = tuple(case[field] for field in ('url', 'page_type', 'language', 'viewport'))
+        if key in combinations:
+            raise ValueError('Duplicate coverage combination')
+        combinations.add(key)
+        if not set(case['step_ids']) <= steps.keys():
+            raise ValueError('Dangling coverage step')
+
+
+def report_counts(report, catalog):
+    rows = report['findings']
+    selections = select(catalog, report['profile'], report['audit_level'], report.get('criterion_groups'))
+    outcomes = {}
+    for cid in selections:
+        statuses = {row['status'] for row in rows if row['criterion_id'] == cid}
+        outcomes[cid] = next((s for s in ('fail', 'unknown', 'pass', 'not_applicable') if s in statuses), 'deferred')
+    failures = [row for row in rows if row['status'] == 'fail']
+    steps = execution_steps(report)
+    cases = report.get('coverage_cases', [])
+    return {'finding_rows': dict(Counter(row['status'] for row in rows)),
+            'criterion_outcomes': outcomes, 'criteria': dict(Counter(outcomes.values())),
+            'failure_severity_rows': dict(Counter(row['severity'] for row in failures)),
+            'root_causes': len({row['root_cause_id'] for row in failures})
+                if all('root_cause_id' in row for row in failures) else None,
+            'test_combinations': len(cases), 'distinct_urls': len({case['url'] for case in cases}),
+            'completed_combinations': sum(all(steps[sid]['execution'] == 'completed'
+                for sid in case['step_ids']) for case in cases),
+            'verified_combinations': sum(all(steps[sid]['execution'] == 'completed' and steps[sid]['status'] == 'pass'
+                for sid in case['step_ids']) for case in cases)}
+
+
+BEGIN = '<!-- toy-to-tool:generated -->'
+END = '<!-- /toy-to-tool:generated -->'
+
+
+def markdown_region(markdown):
+    if markdown.count(BEGIN) != 1 or markdown.count(END) != 1:
+        raise ValueError('Missing/duplicate generated Markdown region; render explicitly to migrate')
+    start, stop = markdown.index(BEGIN), markdown.index(END) + len(END)
+    if stop <= start:
+        raise ValueError('Invalid generated Markdown region')
+    return start, stop
+
+
+def render_markdown(report, catalog, existing='', evidence_root=None, markdown_path=None):
+    """Deterministic generated facts; preserve agent narrative outside the region."""
+    digest = hashlib.sha256(json.dumps(report, sort_keys=True, ensure_ascii=True).encode()).hexdigest()
+    lines = [BEGIN, f'<!-- report.json sha256: {digest} -->', '## Recorded audit results', '',
+             'Generated facts; narrative/translations outside this region must preserve these results.', '',
+             '### Counts (units are separate)', '',
+             '```json', json.dumps(report_counts(report, catalog), indent=2, ensure_ascii=True), '```', '']
+    # Render every field, so new schema fields cannot silently disappear from the handover.
+    def fields(record):
+        for key, value in record.items():
+            encoded = json.dumps(value, ensure_ascii=True)
+            # HTML code avoids Markdown delimiters/pipes in untrusted artifact text.
+            lines.append(f'- {key}: <code>{html.escape(encoded)}</code>')
+        lines.append('')
+
+    lines += ['### Report context and report timestamps', '']
+    fields({key: value for key, value in report.items() if key not in ('findings', 'evidence', 'tasks', 'coverage_cases')})
+    lines += ['### Findings (severity and remediation priority are separate)', '']
+    order = {'blocker': 0, 'important': 1, 'improvement': 2, None: 3}
+    for row in sorted(report['findings'], key=lambda row: (order[row['severity']], row['id'])):
+        fields(row)
+    lines += ['### Tasks and executed steps', '']
+    for task in report.get('tasks', []):
+        fields({key: value for key, value in task.items() if key != 'steps'})
+        for step in task['steps']:
+            fields(step)
+    lines += ['### Coverage combinations (URL, page type, language, viewport)', '']
+    for case in report.get('coverage_cases', []):
+        fields(case)
+    lines += ['### Evidence (captured_at is observation time)', '']
+    for item in report['evidence']:
+        fields(item)
+        location = item['location']
+        if not urlparse(location).scheme and markdown_path is not None:
+            root = Path(evidence_root).resolve() if evidence_root is not None else ROOT
+            location = Path(os.path.relpath(root / location, Path(markdown_path).resolve().parent)).as_posix()
+        lines += [f'[Evidence artifact](<{quote(location, safe="/:#?=&%")}>).', '']
+    lines.append(END)
+    generated = '\n'.join(lines)
+    if existing:
+        start, stop = markdown_region(existing)
+        return existing[:start] + generated + existing[stop:]
+    return '# Application audit handover\n\n' + generated + '\n\n## Agent narrative\n\n'
+
+
+def check_markdown(report, catalog, markdown, **kwargs):
+    start, stop = markdown_region(markdown)
+    expected = render_markdown(report, catalog, **kwargs)
+    a, b = markdown_region(expected)
+    if markdown[start:stop] != expected[a:b]:
+        raise ValueError('Markdown is stale or generated facts were edited; render from report.json')
+
+
+def review_report(report, catalog, evidence_root=None):
+    """Read-only review of existing artifacts; deliberately has no runner or network API."""
+    validate_report(report, catalog, evidence_root)
+    notes = []
+    if report.get('report_format') != '1.1':
+        notes.append('Legacy report: step coverage is not enforced; no new assurance from validation.')
+    for step in execution_steps(report).values():
+        if step['execution'] != 'completed' or step['status'] == 'unknown':
+            notes.append(f'Unverified step {step["id"]}: {step["execution"]}; missing check: {step["action"]}')
+    for finding in report['findings']:
+        if finding['status'] == 'unknown':
+            notes.append(f'Unknown {finding["id"]}: {finding["verification_plan"]}')
+    notes.append('Manual review required: inspect linked artifact contents, criterion-specific evidence sufficiency, '
+                 'unrecorded subcases, interruption boundaries, claim scope, counting units and narrative/translation consistency. '
+                 'HTTP 200/title proves loading only. Record unknown and the exact missing check; do not rerun the system.')
+    return notes
+
+
 def validate_report(report, catalog, evidence_root=None):
     evidence_root = Path(evidence_root).resolve() if evidence_root is not None else ROOT
     check_schema(report, 'report')
     selections = select(catalog, report['profile'], report['audit_level'], report.get('criterion_groups'))
     evidence_ids = unique(report['evidence'], 'evidence')
+    validate_execution(report, selections, evidence_ids)
     for evidence in report['evidence']:
         if report['report_kind'] == 'audit' and evidence['synthetic']:
             raise ValueError('Synthetic evidence cannot support a real audit')
@@ -188,7 +371,9 @@ def validate_report(report, catalog, evidence_root=None):
     return report
 
 
-def template(catalog, profile, level, permission='read_only', groups=None):
+def template(catalog, profile, level, permission='read_only', groups=None, report_format='1.1'):
+    if report_format not in ('1.0', '1.1'):
+        raise ValueError('Unsupported report format')
     selections = select(catalog, profile, level, groups)
     findings = []
     for cid, item in selections.items():
@@ -208,8 +393,12 @@ def template(catalog, profile, level, permission='read_only', groups=None):
             'change_scope_cost_risk': 'No change authorized or evaluated for this row yet.',
             'verification_plan': 'Follow criterion test_steps and verification; link observations before concluding.',
             'observed_outside_level': False,
+            **({'step_ids': []} if report_format == '1.1' else {}),
         })
-    return {**({'criterion_groups': groups} if groups is not None else {}),
+    now = datetime.now(timezone.utc).isoformat()
+    return {**({'report_format': '1.1', 'created_at': now, 'updated_at': now,
+                'tasks': [], 'coverage_cases': []} if report_format == '1.1' else {}),
+            **({'criterion_groups': groups} if groups is not None else {}),
             'report_kind': 'template', 'catalog_version': catalog['version'], 'audit_level': level,
             'change_permission': permission, 'profile': profile,
             'scope_and_limitations': 'Unexecuted template; profile facts require confirmation. No application assurance claimed.',
@@ -218,20 +407,38 @@ def template(catalog, profile, level, permission='read_only', groups=None):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=['validate', 'select', 'template'])
+    parser.add_argument('command', choices=['validate', 'select', 'template', 'render', 'review'])
     parser.add_argument('--catalog', type=Path, default=ROOT / 'criteria/v1.json')
     parser.add_argument('--profile', type=Path, default=ROOT / 'examples/profile.json')
     parser.add_argument('--level', choices=LEVELS, default='Essential')
     parser.add_argument('--report', type=Path)
+    parser.add_argument('--markdown', type=Path, help='Markdown view; defaults to the report path with .md suffix.')
     parser.add_argument('--evidence-root', type=Path, default=ROOT, help='Explicit allowed root for local report artifacts; defaults to the engine root.')
     parser.add_argument('--group', dest='groups', action='append', choices=list('FUASPO'),
                         help='Limit selection/template to this group; repeat for several groups.')
     args = parser.parse_args()
     try:
         catalog = validate_catalog(load(args.catalog))
-        if args.command == 'validate':
+        if args.command in ('render', 'review'):
+            if args.report is None:
+                raise ValueError('--report is required for render/review')
+            report = load(args.report)
+            notes = review_report(report, catalog, args.evidence_root)
+            markdown = args.markdown or args.report.with_suffix('.md')
+            options = {'evidence_root': args.evidence_root, 'markdown_path': markdown}
+            if args.command == 'render':
+                existing = markdown.read_text() if markdown.exists() else ''
+                markdown.write_text(render_markdown(report, catalog, existing=existing, **options))
+                print(f'Rendered: {markdown}; observation/report timestamps unchanged.')
+            else:
+                check_markdown(report, catalog, markdown.read_text(), **options)
+                print('\n'.join(notes))
+        elif args.command == 'validate':
             if args.report:
                 validate_report(load(args.report), catalog, evidence_root=args.evidence_root)
+                if args.markdown:
+                    check_markdown(load(args.report), catalog, args.markdown.read_text(),
+                                   evidence_root=args.evidence_root, markdown_path=args.markdown)
             print('Valid: 36 unique criteria; structure, levels and references checked.' +
                   (' Report structure, coverage and decisions checked.' if args.report else ''))
         else:

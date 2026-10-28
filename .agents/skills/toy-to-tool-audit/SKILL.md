@@ -8,6 +8,8 @@ metadata:
 
 # Toy to Tool audit
 
+For read/review-only requests, inspect existing reports, source and evidence without starting the app or invoking application/system tests. Use the engine review command in stage 6; missing evidence stays unknown. A read-only audit may collect observations only within the requested inspection scope.
+
 Coordinate an evidence-based audit of an existing app through the six stages below. Use the user's language in conversation and English in saved artifacts. Preserve their product intent, existing work and authorization.
 
 ## Load the contract
@@ -68,6 +70,10 @@ Prioritize the three important tasks and high-impact risks, then cover the remai
 
 Use the existing report schema: status is `pass`, `fail`, `unknown` or `not_applicable`; severity is `blocker`, `important` or `improvement` for a demonstrated failure and null otherwise; decision is independent. A test that did not run is never pass. A failed test attempt caused by missing infrastructure is not automatically an app failure. Record collection attempts and access gaps as evidence of limitations, not evidence of correct app behavior. Unknown rows still link the context or attempt artifact explaining the gap. Not-applicable rows link evidence supporting feature absence.
 
+Record important tasks and criterion-specific subcases in report format 1.1 `tasks`: actor, starting state, expected outcome, requirement/context evidence, and ordered `steps` mapped to canonical criterion IDs. These are executions of the catalogue, not a replacement checklist. Each step records action, expected/actual result, dependencies, execution (`completed`, `interrupted`, `not_run`), result and evidence IDs. Split multi-assertion tests at the assertion boundary: after an interruption/failure, dependent steps remain `not_run`/`unknown`. Do not attach an earlier trace as result evidence for an unexecuted step. A runner error is an interrupted attempt, not an app failure. Link finding `step_ids` and the underlying evidence. Pass requires all declared criterion steps completed/passed; manually check that the declared steps cover every necessary part of the claimed scope.
+
+Tag evidence `modes` as `source_inspection`, `page_load`, `interaction`, and/or `independent_confirmation` only for what the artifact demonstrates. Set each step's `required_modes` from its criterion and expected result. These modes have no universal ranking or substitution rule. HTTP 200 and a visible title support page loading only. Independent confirmation means separately checking the promised result (for example persisted data readback), not merely seeing a success message. Use `description`, step `actual_result` and finding `reason` to state exact limits. For sampled matrices, record each URL/page-type/language/viewport tuple in `coverage_cases`, linked to its actual steps; distinguish declared, completed and verified combinations from distinct URLs. Three page types × three languages × four viewports are 36 combinations and nine distinct URLs when each type/language has one URL, not 36 pages.
+
 Source inspection and unit tests support only what they establish. Do not use them as substitutes for browser behavior, real users, field performance or restore execution. Redact secrets and personal data before saving evidence. Real audits cannot use synthetic observations as assurance.
 
 ## 5. Propose or perform proportionate fixes
@@ -81,21 +87,25 @@ Apply the decision procedure in the evaluation method and `scripts.audit.decide`
 
 For every fix/proposal record the requirement or goal, linked evidence, affected users/conditions, expected measurable benefit, scope/cost/risk and verification plan. Include preserve decisions when they prevent unnecessary redesign or infrastructure. Severity never decreases because the agent lacks permission: a blocker outside scope remains a blocker with a proposal.
 
+Keep trigger/configuration (including default-off flags), environment and affected roles together in `affected_users_and_conditions`, next to the finding. Default-off does not automatically lower severity; explain its effect on fix order in `remediation_priority`. Use a shared `root_cause_id` for failure rows from one demonstrated root cause across criteria; do not claim they are independent defects. Do not invent a common cause without evidence or introduce a priority score.
+
 When authorized, make the smallest supported correction and follow the target repository's applicable instructions. Stop dependent changes if a conflict rule, data-loss choice, new external service or other consequential product decision is missing; continue independent work. Do not redesign or add features just to raise audit coverage.
 
 ## 6. Verify and hand over
 
-Save the observed baseline report/evidence before changing the app. Rerun the affected criterion's verification steps and relevant regression checks. Capture post-change results separately and link both revisions. If a demonstrated failure was patched but not rechecked, keep the current outcome fail with its original severity and explicitly say “change made; verification pending.” If the original behavior was never observed, retain unknown. Writing a patch is not a pass.
+Only when verification is requested or part of the authorized fix: save the observed baseline report/evidence before changing the app. Rerun the affected criterion's verification steps and relevant regression checks. Capture post-change results separately and link both revisions. If a demonstrated failure was patched but not rechecked, keep the current outcome fail with its original severity and explicitly say “change made; verification pending.” If the original behavior was never observed, retain unknown. Writing a patch is not a pass.
 
 When rechecks actually pass, update the final report to the supported current outcome, link baseline and recheck evidence, and keep the earlier report as history. A now-passing row uses null severity and an appropriate current decision; the human report records the performed fix and original severity. Do not leave baseline failures mixed into current-outcome rows and then claim the aggregate passes.
 
-Create `report.md` from [the English handover template](assets/report.md), alongside the schema-compatible `report.json`, context/profile, selection and evidence. Every factual result, recommendation, preserve decision and coverage limitation in the handover must cite criterion and evidence IDs with resolvable links. The Markdown is a human view of the JSON, not a second source of outcomes.
+Use `report.json` as the sole result source. Generate the structured region of `report.md` with engine `render`; use [the handover template](assets/report.md) only for agent narrative outside that region. Keep JSON, context/profile, selection and evidence alongside it. Record `created_at`/`updated_at` as report times, distinct from evidence `captured_at`; update report time explicitly when results change. Rendering or translating does not create an audit observation. Preserve JSON results, IDs, paths and timestamps in translations; translate narrative outside the generated region. Every factual result, recommendation, preserve decision and coverage limitation in the handover must cite criterion and evidence IDs with resolvable links. The Markdown is a human view of the JSON, not a second source of outcomes.
 
 ```sh
 .venv/bin/python scripts/audit.py validate --report audits/<run-id>/report.json
+.venv/bin/python scripts/audit.py render --report audits/<run-id>/report.json
+.venv/bin/python scripts/audit.py review --report audits/<run-id>/report.json
 ```
 
-Report validation failures honestly; do not lower the schema or delete unknown rows to get a clean result. If the engine cannot run, record that validation is unexecuted. Manually review evidence sufficiency, source exceptions and consistency between JSON and Markdown even when validation passes.
+Report validation failures honestly; do not lower the schema or delete unknown rows to get a clean result. If the engine cannot run, record that validation is unexecuted. Before handover, review existing evidence for unsupported passes, interrupted tests, conclusions beyond tested scope, counting units and JSON/Markdown drift. Engine review checks executable invariants and exact generated content without runners/network; manually inspect artifact contents, missing subcases, criterion-specific sufficiency, source exceptions and narrative/translation consistency. Record unknown and the exact missing check in `verification_plan`; do not rerun the whole system to fill a report gap. See the method for legacy compatibility: never rewrite historical reports or invent step evidence to satisfy validation.
 
 Lead the handover with unresolved blockers, followed by important failures, verified changes, proposals/preserve decisions, unknowns and exclusions/deferred work. Use separate status counts only when helpful; never an overall score or a completion percentage that conceals a blocker. State what was verified, what remains untested, the exact missing resource/decision and the next useful action. Do not claim general security, WCAG AA or ASVS certification from this audit.
 

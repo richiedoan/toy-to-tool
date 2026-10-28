@@ -1,0 +1,248 @@
+{
+  "report_format": "1.1",
+  "created_at": "2026-10-28T00:00:00Z",
+  "updated_at": "2026-10-28T00:00:00Z",
+  "tasks": [
+    {
+      "id": "T-save",
+      "actor": "editor",
+      "starting_state": "draft",
+      "expected_outcome": "Saved value survives reopening",
+      "evidence_ids": [
+        "E-demo"
+      ],
+      "steps": [
+        {
+          "id": "load",
+          "criterion_ids": [
+            "F01"
+          ],
+          "action": "load",
+          "expected_result": "Verify load",
+          "actual_result": "Synthetic HTTP 200/title only",
+          "execution": "completed",
+          "status": "pass",
+          "depends_on": [],
+          "required_modes": [
+            "page_load"
+          ],
+          "evidence_ids": [
+            "E-demo"
+          ]
+        },
+        {
+          "id": "context",
+          "criterion_ids": [
+            "F01"
+          ],
+          "action": "context",
+          "expected_result": "Verify context",
+          "actual_result": "Synthetic runner interruption before context assertion",
+          "execution": "interrupted",
+          "status": "unknown",
+          "depends_on": [
+            "load"
+          ],
+          "required_modes": [
+            "interaction"
+          ],
+          "evidence_ids": [
+            "E-demo"
+          ]
+        },
+        {
+          "id": "readback",
+          "criterion_ids": [
+            "F01"
+          ],
+          "action": "readback",
+          "expected_result": "Verify readback",
+          "actual_result": "No readback executed",
+          "execution": "not_run",
+          "status": "unknown",
+          "depends_on": [
+            "context"
+          ],
+          "required_modes": [
+            "independent_confirmation"
+          ],
+          "evidence_ids": []
+        }
+      ]
+    }
+  ],
+  "coverage_cases": [],
+  "criterion_groups": [
+    "F"
+  ],
+  "report_kind": "synthetic",
+  "catalog_version": "1.0.0",
+  "audit_level": "Essential",
+  "change_permission": "read_only",
+  "profile": {
+    "name": "Synthetic single-editor record tool; replace with verified app facts",
+    "features": {
+      "ui": true,
+      "pointer_ui": true,
+      "operations": true,
+      "inputs": true,
+      "persistent_data": true,
+      "shared_writes": false,
+      "user_changes": true,
+      "protected_resources": null,
+      "untrusted_execution": null,
+      "authentication": null,
+      "csrf_surface": null,
+      "cors_surface": null,
+      "uploads": null,
+      "public_endpoints": null,
+      "abuse_surface": null,
+      "network": true,
+      "resource_lifecycle": true,
+      "load_requirements": false,
+      "realtime": false,
+      "offline_sync": false,
+      "background_sync": false,
+      "deployed": true,
+      "important_data": true,
+      "operated_service": true
+    },
+    "rationale": {
+      "ui": "Present in the hypothetical browser-based record editor.",
+      "pointer_ui": "Present in the hypothetical browser-based record editor.",
+      "operations": "Present in the hypothetical browser-based record editor.",
+      "inputs": "Present in the hypothetical browser-based record editor.",
+      "persistent_data": "Present in the hypothetical browser-based record editor.",
+      "shared_writes": "Absent from the hypothetical single-editor, non-synchronizing scope; no load contract requested.",
+      "user_changes": "Present in the hypothetical browser-based record editor.",
+      "protected_resources": "Not established; inspect the architecture before excluding.",
+      "untrusted_execution": "Not established; inspect the architecture before excluding.",
+      "authentication": "Not established; inspect the architecture before excluding.",
+      "csrf_surface": "Not established; inspect the architecture before excluding.",
+      "cors_surface": "Not established; inspect the architecture before excluding.",
+      "uploads": "Not established; inspect the architecture before excluding.",
+      "public_endpoints": "Not established; inspect the architecture before excluding.",
+      "abuse_surface": "Not established; inspect the architecture before excluding.",
+      "network": "Present in the hypothetical browser-based record editor.",
+      "resource_lifecycle": "Present in the hypothetical browser-based record editor.",
+      "load_requirements": "Absent from the hypothetical single-editor, non-synchronizing scope; no load contract requested.",
+      "realtime": "Absent from the hypothetical single-editor, non-synchronizing scope; no load contract requested.",
+      "offline_sync": "Absent from the hypothetical single-editor, non-synchronizing scope; no load contract requested.",
+      "background_sync": "Absent from the hypothetical single-editor, non-synchronizing scope; no load contract requested.",
+      "deployed": "Present in the hypothetical browser-based record editor.",
+      "important_data": "Present in the hypothetical browser-based record editor.",
+      "operated_service": "Present in the hypothetical browser-based record editor."
+    }
+  },
+  "scope_and_limitations": "Synthetic format example only; no real audit assurance. A runner interruption leaves later checks unverified.",
+  "evidence": [
+    {
+      "id": "E-demo",
+      "location": "examples/evidence.md",
+      "description": "Synthetic HTTP loading and interrupted attempt illustration; not a real observation.",
+      "environment": "Synthetic example",
+      "captured_at": "2026-10-28T00:00:00Z",
+      "kind": "artifact",
+      "synthetic": true,
+      "modes": [
+        "page_load"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "finding-F01",
+      "criterion_id": "F01",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Page load supports no task-completion conclusion.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [
+        "E-demo"
+      ],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Inspect context and independently read back persisted values; both remain unverified.",
+      "observed_outside_level": false,
+      "step_ids": [
+        "load",
+        "context",
+        "readback"
+      ]
+    },
+    {
+      "id": "finding-F02",
+      "criterion_id": "F02",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false,
+      "step_ids": []
+    },
+    {
+      "id": "finding-F03",
+      "criterion_id": "F03",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false,
+      "step_ids": []
+    },
+    {
+      "id": "finding-F04",
+      "criterion_id": "F04",
+      "status": "unknown",
+      "severity": null,
+      "decision": "investigate",
+      "reason": "Core criterion or at least one relevant feature is present. No test observations recorded yet.",
+      "requirement_or_goal": "Collect or link the agreed criterion-specific requirement.",
+      "affected_users_and_conditions": "Identify the audience and tested conditions.",
+      "evidence_ids": [],
+      "decision_inputs": {
+        "evidence_sufficient": false,
+        "violates_requirement": false,
+        "authorized": false,
+        "measurable_benefit": false,
+        "proportional": true
+      },
+      "change_scope_cost_risk": "No change authorized or evaluated for this row yet.",
+      "verification_plan": "Follow criterion test_steps and verification; link observations before concluding.",
+      "observed_outside_level": false,
+      "step_ids": []
+    }
+  ]
+}

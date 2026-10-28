@@ -63,7 +63,7 @@ def build(name, phase):
     catalog = validate_catalog(load(ROOT / 'criteria/v1.json'))
     protocols = {c['id']: c for c in catalog['criteria']}
     groups = ['S'] if name == 'owner-notes' else list('UAPO')
-    report = template(catalog, profile(name), 'Standard', 'fix_scoped', groups=groups)
+    report = template(catalog, profile(name), 'Standard', 'fix_scoped', groups=groups, report_format='1.0')
     report.update(report_kind='audit', scope_and_limitations=(
         'Evaluator-led real HTTP/Chrome checks on an isolated seeded fixture. Scope is limited to recorded cases; '
         'source/handler-only independent agent findings are archived separately. No skill-effectiveness, full WCAG, '

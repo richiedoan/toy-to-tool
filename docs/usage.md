@@ -35,6 +35,29 @@ From the application project, after installing dependencies:
 
 Use the real app profile. The report schema keeps status, severity and decision separate. Artifact links are checked against the explicit evidence root; remote evidence authenticity still needs reviewer judgment.
 
+## Review existing evidence without running the app
+
+```text
+$toy-to-tool-audit review audits/my-run/report.json and its existing evidence only.
+Do not start the app or rerun system tests. Identify unsupported conclusions and
+the exact missing checks; preserve historical observations.
+```
+
+For a new format 1.1 report, populate the task/step records from actual observations,
+then generate and review the human view from the engine root:
+
+```sh
+.venv/bin/python scripts/audit.py render --report audits/my-run/report.json
+.venv/bin/python scripts/audit.py review --report audits/my-run/report.json
+```
+
+Installed engines use the same commands and an explicit `--evidence-root "$PWD"`.
+Review reads local artifacts and checks Markdown freshness; it invokes no app
+runner. The generated region stays canonical when translating the surrounding
+narrative. See [format and migration rules](method.md#compatibility-and-migration)
+and the synthetic [step example](../examples/report-steps.json). Legacy reports
+remain readable and validate under the old contract without new assurance.
+
 ## Missing capabilities
 
 When a browser, runnable environment or credentials are missing:

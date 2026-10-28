@@ -407,6 +407,9 @@
           },
           "synthetic": {
             "type": "boolean"
+          },
+          "modes": {
+            "$ref": "#/$defs/modes"
           }
         },
         "required": [
@@ -524,6 +527,19 @@
           },
           "observed_outside_level": {
             "type": "boolean"
+          },
+          "step_ids": {
+            "$ref": "#/$defs/ids"
+          },
+          "root_cause_id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "remediation_priority": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
           }
         },
         "required": [
@@ -566,6 +582,201 @@
           "O"
         ]
       }
+    },
+    "report_format": {
+      "enum": [
+        "1.0",
+        "1.1"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "actor": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "starting_state": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "expected_outcome": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                "criterion_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^[FUASPO]0[1-6]$"
+                  },
+                  "minItems": 1,
+                  "uniqueItems": true
+                },
+                "action": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                "expected_result": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                "actual_result": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                "execution": {
+                  "enum": [
+                    "completed",
+                    "interrupted",
+                    "not_run"
+                  ]
+                },
+                "status": {
+                  "enum": [
+                    "pass",
+                    "fail",
+                    "unknown"
+                  ]
+                },
+                "depends_on": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  "minItems": 0,
+                  "uniqueItems": true
+                },
+                "required_modes": {
+                  "$ref": "#/$defs/modes"
+                },
+                "evidence_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  "minItems": 0,
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "id",
+                "criterion_ids",
+                "action",
+                "expected_result",
+                "actual_result",
+                "execution",
+                "status",
+                "depends_on",
+                "required_modes",
+                "evidence_ids"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "id",
+          "actor",
+          "starting_state",
+          "expected_outcome",
+          "evidence_ids",
+          "steps"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "coverage_cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "page_type": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "language": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "viewport": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "step_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "url",
+          "page_type",
+          "language",
+          "viewport",
+          "step_ids"
+        ],
+        "additionalProperties": false
+      }
     }
   },
   "required": [
@@ -578,5 +789,78 @@
     "findings",
     "report_kind"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "$defs": {
+    "ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "modes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "source_inspection",
+          "page_load",
+          "interaction",
+          "independent_confirmation"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "report_format": {
+            "const": "1.1"
+          }
+        },
+        "required": [
+          "report_format"
+        ]
+      },
+      "then": {
+        "required": [
+          "created_at",
+          "updated_at",
+          "tasks",
+          "coverage_cases"
+        ],
+        "properties": {
+          "findings": {
+            "items": {
+              "required": [
+                "step_ids"
+              ],
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "status": {
+                        "const": "fail"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "root_cause_id",
+                      "remediation_priority"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
 }
