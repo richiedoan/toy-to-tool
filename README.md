@@ -18,6 +18,12 @@ python3 -m venv .venv
 
 Edit a copy of the example profile to describe the actual app before selecting criteria. `null` means a feature is not yet established; `false` requires a reason. A report template deliberately starts with unknown results, with reasoned exclusions for absent features. It is not a completed audit. Validation exits nonzero for invalid input.
 
+## Audit orchestration skill
+
+Use `$toy-to-tool-audit` from this checkout, or ask the agent to read [SKILL.md](.agents/skills/toy-to-tool-audit/SKILL.md). The repository-local skill follows six stages: understand the priority tasks/users/data/environment, set level and authority, select criteria, collect evidence, propose or make scoped fixes, then verify and hand over.
+
+It defaults to Essential inspection and recommendations without target-code edits, reuses existing permissions, and asks only questions that change a decision. It includes an [English report template](.agents/skills/toy-to-tool-audit/assets/report.md) and [missing-browser/runtime/credentials guidance](.agents/skills/toy-to-tool-audit/references/missing-access.md). Keep this skill with its repository engine; copying the skill directory alone is insufficient. Audit artifacts go in ignored `audits/<run-id>/` directories and are not published automatically.
+
 ## Repository contract
 
 | Path | Purpose |

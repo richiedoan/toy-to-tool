@@ -35,3 +35,9 @@ The implementation at `b2615dc` was exported with `git archive HEAD` into a temp
 For the hypothetical profile, the cumulative planned scopes contain 19 Essential, 30 Standard and 36 Advanced criteria before feature exclusions. At Advanced, three criteria are not applicable and four have unresolved applicability. These counts describe the example profile only, not application results.
 
 A deliberate inversion of the evidence-sufficiency branch in the decision function caused the test suite to fail. The original implementation was restored and verified in the clean archived checkout. This demonstrates that the tests detect that decision regression; it is not a claim of comprehensive mutation coverage.
+
+## Audit orchestration skill (2026-10-28)
+
+Added the repository-local `toy-to-tool-audit` skill, its English human-report template and conditional missing-browser/runtime/credentials guide. It reuses the existing engine and criteria without changing their schema or decisions. Default depth is Essential; default authority permits inspection and recommendations without target-code edits. Existing user permissions take precedence. Audit artifacts use ignored per-run directories; the skill is maintained with this repository rather than installed globally or copied with a duplicate catalogue.
+
+The skill-creator quick validator accepted the skill frontmatter/body. Local links from the skill and README resolved. All 14 existing tests and catalogue/synthetic-report validation passed. Three synthetic report-contract scenarios for missing browser, runtime and test identities validated with evidence-linked unknown outcomes and no unexecuted pass claims. Those scenarios used the existing template/validator functions; they are not independent agent forward-testing or evidence of a real application audit. The English Markdown template requires manual consistency/evidence review alongside JSON validation.
