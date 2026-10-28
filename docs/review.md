@@ -27,3 +27,11 @@ No requested criterion was replaced or removed. No redesign, database requiremen
 Official WCAG 2.2 text and linked Understanding guidance were consulted for the used IDs, contrast thresholds/definitions, keyboard exception, focus minimum and notes, resize/reflow dimensions, and target-size exceptions. Google Web Vitals was checked for LCP/INP/CLS thresholds, p75 and field segmentation. OWASP's official site identifies ASVS 5.0.0; linked Authorization, Session Management, XSS Prevention and Threat Modeling Cheat Sheets were consulted as guidance. Exact ASVS control-by-control coverage is not claimed.
 
 Automated validation checks structure and cross-references, not the authenticity of a screenshot, a participant, an external artifact or a reviewer-entered boolean. Unknown facts remain unknown. No real application, user research, production security, field CWV, capacity or restore procedure has been audited by creating this repository. The synthetic example is only an executable demonstration of report and decision contracts.
+
+## Recorded checks (2026-10-28)
+
+The implementation at `b2615dc` was exported with `git archive HEAD` into a temporary directory, installed into a new virtual environment from the pinned `requirements.txt`, and checked using Python 3.9.6. All 14 unit tests passed. Catalogue validation, the synthetic example report, template generation/validation at all three levels, criterion selection, and the nonzero CLI exit for an invalid report passed.
+
+For the hypothetical profile, the cumulative planned scopes contain 19 Essential, 30 Standard and 36 Advanced criteria before feature exclusions. At Advanced, three criteria are not applicable and four have unresolved applicability. These counts describe the example profile only, not application results.
+
+A deliberate inversion of the evidence-sufficiency branch in the decision function caused the test suite to fail. The original implementation was restored and verified in the clean archived checkout. This demonstrates that the tests detect that decision regression; it is not a claim of comprehensive mutation coverage.
