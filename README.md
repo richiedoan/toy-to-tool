@@ -191,24 +191,24 @@ See the [specialist guide](docs/skills.md) and [limitations](docs/limitations.md
 
 ## Quick start
 
-Run the command for your agent from your project's directory. Each command installs all seven skills, including their supporting resources.
+Run the command for your agent from your project's directory, then choose which skills to install. Each skill includes its supporting resources.
 
 ### Codex
 
 ```sh
-npx skills add richiedoan/toy-to-tool --agent codex --skill '*' --copy --yes
+npx skills add richiedoan/toy-to-tool --agent codex
 ```
 
 ### Claude Code
 
 ```sh
-npx skills add richiedoan/toy-to-tool --agent claude-code --skill '*' --copy --yes
+npx skills add richiedoan/toy-to-tool --agent claude-code
 ```
 
 ### Gemini CLI
 
 ```sh
-npx skills add richiedoan/toy-to-tool --agent gemini-cli --skill '*' --copy --yes
+npx skills add richiedoan/toy-to-tool --agent gemini-cli
 ```
 
 ### Other agents
@@ -232,7 +232,7 @@ npx skills add richiedoan/toy-to-tool --list
 Or install just the audit coordinator for your agent (Codex shown):
 
 ```sh
-npx skills add richiedoan/toy-to-tool --agent codex --skill toy-to-tool-audit --copy --yes
+npx skills add richiedoan/toy-to-tool --agent codex --skill toy-to-tool-audit
 ```
 
 Each skill includes its supporting resources and can be installed separately. See the [installation guide](docs/installation.md) for local installation, validator setup, and troubleshooting. Python is needed to run the bundled validator.
